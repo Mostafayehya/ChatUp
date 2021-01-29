@@ -1,19 +1,14 @@
 package eg.gov.iti.jets.ui.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-//import javafx.scene.control.TextField;
-import javafx.scene.control.FocusModel;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
-import org.controlsfx.control.textfield.TextFields;
 import org.kordamp.ikonli.javafx.FontIcon;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,32 +16,66 @@ public class LoginPageController implements Initializable {
     @FXML
     CustomTextField emailTextField;
     @FXML
-    VBox formVBox;
-    @FXML
     CustomPasswordField passwordTextField;
+    @FXML
+    Button signUpButton;
+    @FXML
+    Button loginButton;
+    FontIcon lockIcon;
+    FontIcon emailIcon;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        FontIcon lock = new FontIcon("fas-lock");
-        FontIcon email = new FontIcon("mdi2e-email");
-        passwordTextField.setLeft(lock);
-        lock.setIconColor(Color.GRAY);
-        email.setIconColor(Color.GRAY);
-        emailTextField.setLeft(email);
+        lockIcon = new FontIcon("fas-lock");
+        emailIcon = new FontIcon("mdi2e-email");
+        passwordTextField.setLeft(lockIcon);
+        lockIcon.setIconColor(Color.GRAY);
+        emailIcon.setIconColor(Color.GRAY);
+        emailTextField.setLeft(emailIcon);
         emailTextField.focusedProperty().addListener((e,r,t)->{
-            if(emailTextField.isFocused()){
-                emailTextField.setLeft(null);
-            }
-            else {
-                emailTextField.setLeft(email);
-            }
+            handleTextField();
         });
         passwordTextField.focusedProperty().addListener((e,r,t)->{
-            if(passwordTextField.isFocused()){
-                passwordTextField.setLeft(null);
-            }
-            else {
-                passwordTextField.setLeft(lock);
-            }
+            handlePasswordTextField();
         });
+        loginButton.setOnAction(this::login);
+
+    }
+    public void login(Event e){
+        if(emailTextField.getText().equals("")){
+            emailTextField.setStyle("-fx-border-color: #D32F2F;");
+        }
+        if(passwordTextField.getText().equals("")){
+            passwordTextField.setStyle("-fx-border-color: #D32F2F;");
+        }
+
+    }
+    public void handlePasswordTextField(){
+        if(passwordTextField.isFocused()){
+            passwordTextField.setLeft(null);
+            passwordTextField.setStyle("-fx-border-color: transparent;");
+        }
+        else {
+            if(passwordTextField.getText().equals("")){
+                passwordTextField.setStyle("-fx-border-color: #D32F2F;");
+                passwordTextField.setLeft(lockIcon);
+            }
+
+        }
+    }
+    public void handleTextField(){
+        if(emailTextField.isFocused()){
+            emailTextField.setLeft(null);
+            emailTextField.setStyle("-fx-border-color: transparent;");
+        }
+        else {
+            if(emailTextField.getText().equals("")){
+                emailTextField.setStyle("-fx-border-color: #D32F2F;");
+                emailTextField.setLeft(emailIcon);
+            }
+
+        }
+    }
+    public void goToSignUp(){
+
     }
 }

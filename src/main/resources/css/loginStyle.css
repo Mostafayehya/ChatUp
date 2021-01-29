@@ -19,4 +19,5 @@
 .textField{
     -fx-border-color: transparent;
     -fx-background-color: white;
+    -fx-border-radius: 20;
 }
