@@ -4,7 +4,6 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
@@ -14,42 +13,43 @@ import java.util.ResourceBundle;
 
 public class LoginPageController implements Initializable {
     @FXML
-    CustomTextField emailTextField;
+    private CustomTextField phoneTextField;
     @FXML
-    CustomPasswordField passwordTextField;
+    private CustomPasswordField passwordTextField;
     @FXML
-    Button signUpButton;
+    private Button signUpButton;
     @FXML
-    Button loginButton;
-    FontIcon lockIcon;
-    FontIcon emailIcon;
+    private Button loginButton;
+    private FontIcon lockIcon;
+    private FontIcon phoneIcon;
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle){
         lockIcon = new FontIcon("fas-lock");
-        emailIcon = new FontIcon("mdi2e-email");
+        phoneIcon = new FontIcon("mdi2p-phone");
         passwordTextField.setLeft(lockIcon);
         lockIcon.setIconColor(Color.GRAY);
-        emailIcon.setIconColor(Color.GRAY);
-        emailTextField.setLeft(emailIcon);
-        emailTextField.focusedProperty().addListener((e,r,t)->{
-            handleTextField();
+        phoneIcon.setIconColor(Color.GRAY);
+        phoneTextField.setLeft(phoneIcon);
+        phoneTextField.focusedProperty().addListener((e, r, t)->{
+            handlePhoneTextField();
         });
         passwordTextField.focusedProperty().addListener((e,r,t)->{
             handlePasswordTextField();
         });
         loginButton.setOnAction(this::login);
+        signUpButton.setOnAction(this::goToSignUp);
 
     }
-    public void login(Event e){
-        if(emailTextField.getText().equals("")){
-            emailTextField.setStyle("-fx-border-color: #D32F2F;");
+    private void login(Event e){
+        if(phoneTextField.getText().equals("")){
+            phoneTextField.setStyle("-fx-border-color: #D32F2F;");
         }
         if(passwordTextField.getText().equals("")){
             passwordTextField.setStyle("-fx-border-color: #D32F2F;");
         }
 
     }
-    public void handlePasswordTextField(){
+    private void handlePasswordTextField(){
         if(passwordTextField.isFocused()){
             passwordTextField.setLeft(null);
             passwordTextField.setStyle("-fx-border-color: transparent;");
@@ -62,20 +62,22 @@ public class LoginPageController implements Initializable {
 
         }
     }
-    public void handleTextField(){
-        if(emailTextField.isFocused()){
-            emailTextField.setLeft(null);
-            emailTextField.setStyle("-fx-border-color: transparent;");
+    private void handlePhoneTextField(){
+        if(phoneTextField.isFocused()){
+            phoneTextField.setLeft(null);
+            phoneTextField.setStyle("-fx-border-color: transparent;");
         }
         else {
-            if(emailTextField.getText().equals("")){
-                emailTextField.setStyle("-fx-border-color: #D32F2F;");
-                emailTextField.setLeft(emailIcon);
+            if(phoneTextField.getText().equals("")){
+                phoneTextField.setStyle("-fx-border-color: #D32F2F;");
+                phoneTextField.setLeft(phoneIcon);
             }
 
         }
     }
-    public void goToSignUp(){
+    private void goToSignUp(Event e){
+        //StageCoordinator stageCoordinator = StageCoordinator.getInstance();
+        //stageCoordinator.goToSignUpPage();
 
     }
 }

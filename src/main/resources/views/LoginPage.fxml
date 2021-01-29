@@ -26,9 +26,9 @@
          </padding>
          <children>
             <Label style="-fx-font-size: 25; -fx-font-weight: bold; -fx-text-fill: #009688" text="Login to Chat up"/>
-            <CustomTextField styleClass="textField" fx:id="emailTextField">
+            <CustomTextField styleClass="textField" fx:id="phoneTextField">
                <promptText>
-                  Email
+                  Phone Number
                </promptText>
             </CustomTextField>
             <CustomPasswordField styleClass="textField" promptText="Password" fx:id="passwordTextField"/>
