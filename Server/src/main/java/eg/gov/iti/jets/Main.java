@@ -2,10 +2,8 @@ package eg.gov.iti.jets;
 
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import javafx.application.Application;
-<<<<<<< HEAD
 import javafx.scene.Scene;
-=======
->>>>>>> master
+
 import javafx.stage.Stage;
 
 public class Main extends Application {

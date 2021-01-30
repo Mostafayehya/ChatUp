@@ -3,3 +3,4 @@ eg\gov\iti\jets\ui\controllers\TestController.class
 eg\gov\iti\jets\ui\models\TestModel.class
 eg\gov\iti\jets\Main.class
 eg\gov\iti\jets\utilities\StageCoordinator.class
+eg\gov\iti\jets\ui\controllers\ChatPageController.class
