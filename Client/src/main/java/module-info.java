@@ -1,4 +1,4 @@
-module ChatUp.Client {
+module Client{
     requires javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
