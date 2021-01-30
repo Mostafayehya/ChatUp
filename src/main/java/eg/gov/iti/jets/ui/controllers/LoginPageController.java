@@ -30,18 +30,14 @@ public class LoginPageController implements Initializable {
         lockIcon.setIconColor(Color.GRAY);
         phoneIcon.setIconColor(Color.GRAY);
         phoneTextField.setLeft(phoneIcon);
-        phoneTextField.focusedProperty().addListener((e, r, t)->{
-            handlePhoneTextField();
-        });
-        passwordTextField.focusedProperty().addListener((e,r,t)->{
-            handlePasswordTextField();
-        });
+        phoneTextField.focusedProperty().addListener((e, r, t)-> handlePhoneTextField());
+        passwordTextField.focusedProperty().addListener((e,r,t)-> handlePasswordTextField());
         loginButton.setOnAction(this::login);
         signUpButton.setOnAction(this::goToSignUp);
 
     }
     private void login(Event e){
-        if(phoneTextField.getText().equals("")){
+        if(phoneTextField.getText().equals("") || phoneTextField.getText().length()!=11){
             phoneTextField.setStyle("-fx-border-color: #D32F2F;");
         }
         if(passwordTextField.getText().equals("")){
@@ -68,7 +64,7 @@ public class LoginPageController implements Initializable {
             phoneTextField.setStyle("-fx-border-color: transparent;");
         }
         else {
-            if(phoneTextField.getText().equals("")){
+            if(phoneTextField.getText().equals("") || phoneTextField.getText().length()!=11){
                 phoneTextField.setStyle("-fx-border-color: #D32F2F;");
                 phoneTextField.setLeft(phoneIcon);
             }
