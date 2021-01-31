@@ -17,7 +17,7 @@ public class LoginPageController implements Initializable {
     @FXML
     private CustomPasswordField passwordTextField;
     @FXML
-    private Button signUpButton;
+    private Button SignUpButton;
     @FXML
     private Button loginButton;
     private FontIcon lockIcon;
@@ -33,7 +33,7 @@ public class LoginPageController implements Initializable {
         phoneTextField.focusedProperty().addListener((e, r, t)-> handlePhoneTextField());
         passwordTextField.focusedProperty().addListener((e,r,t)-> handlePasswordTextField());
         loginButton.setOnAction(this::login);
-        signUpButton.setOnAction(this::goToSignUp);
+        SignUpButton.setOnAction(this::goToSignUp);
 
     }
     private void login(Event e){
