@@ -7,14 +7,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import org.controlsfx.control.cell.ImageGridCell?>
 <?import org.controlsfx.control.textfield.CustomPasswordField?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
 <?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.layout.StackPane?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0"
             prefWidth="759.0" stylesheets="@../css/loginStyle.css" xmlns="http://javafx.com/javafx/15.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.SignupPageController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.SignUpPageController">
     <right>
         <VBox alignment="CENTER" prefHeight="400.0" prefWidth="245.0" spacing="20" style="-fx-background-color: #009688"
               BorderPane.alignment="CENTER">
@@ -40,46 +40,49 @@
             <children>
                 <Label alignment="CENTER" prefHeight="36.0" prefWidth="202.0"
                        style="-fx-font-size: 25; -fx-font-weight: bold; -fx-text-fill: #009688" text="Join Us!"/>
-                <ImageGridCell prefHeight="63.0" prefWidth="90.0"/>
+                <StackPane>
+                    <FontIcon iconLiteral="far-user"/>
+                    <FontIcon iconLiteral="fas-plus-circle"/>
+                </StackPane>
                 <CustomTextField fx:id="phoneTextField" promptText="Phone Number" styleClass="textField">
                     <left>
-                        <FontIcon iconCode=""/>
+                        <FontIcon iconColor="gray" iconLiteral="mdi2p-phone"/>
                     </left>
                 </CustomTextField>
                 <CustomTextField fx:id="nameTextField" prefHeight="27.0" prefWidth="286.0" promptText="Display Name"
                                  styleClass="textField">
                     <left>
-                        <FontIcon iconCode=""/>
+                        <FontIcon iconColor="gray" iconLiteral="mdi2r-rename-box"/>
                     </left>
                 </CustomTextField>
                 <CustomTextField fx:id="emailTextField" prefHeight="27.0" prefWidth="286.0" promptText="Email"
                                  styleClass="textField">
                     <left>
-                        <FontIcon iconCode=""/>
+                        <FontIcon iconColor="gray" iconLiteral="mdi2e-email"/>
                     </left>
                 </CustomTextField>
                 <CustomPasswordField fx:id="passwordTextField" promptText="Password" styleClass="textField">
                     <left>
-                        <FontIcon iconCode=""/>
+                        <FontIcon iconColor="gray" iconLiteral="fas-lock"/>
                     </left>
                 </CustomPasswordField>
-                <CustomPasswordField promptText="Confirm Password" styleClass="textField">
+                <CustomPasswordField promptText="Confirm Password" styleClass="textField" fx:id="confirmPasswordField">
                     <left>
-                        <FontIcon iconCode=""/>
+                        <FontIcon iconColor="gray" iconLiteral="fas-lock"/>
                     </left>
                 </CustomPasswordField>
-                <ChoiceBox prefHeight="27.0" prefWidth="397.0" styleClass="textField"/>
-                <CustomTextField promptText="Bio" styleClass="textField">
+                <ChoiceBox prefHeight="27.0" prefWidth="397.0" styleClass="textField" fx:id="genderChoiceBox"/>
+                <CustomTextField promptText="Bio" styleClass="textField" fx:id="bioTextField">
                     <left>
-                        <FontIcon iconCode=""/>
+                        <FontIcon iconColor="gray" iconLiteral="mdi2b-bio"/>
                     </left>
                 </CustomTextField>
-                <CustomTextField promptText="Country" styleClass="textField">
+                <CustomTextField promptText="Country" styleClass="textField" fx:id="countryTextField">
                     <left>
-                        <FontIcon iconCode=""/>
+                        <FontIcon iconColor="gray" iconLiteral="fas-globe-africa"/>
                     </left>
                 </CustomTextField>
-                <DatePicker prefHeight="25.0" prefWidth="392.0" styleClass="textField"/>
+                <DatePicker prefHeight="25.0" prefWidth="392.0" styleClass="textField" fx:id="birthDatePicker"/>
                 <Button fx:id="SignUpButton" styleClass="cyanButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="SignUp"/>
             </children>
         </VBox>

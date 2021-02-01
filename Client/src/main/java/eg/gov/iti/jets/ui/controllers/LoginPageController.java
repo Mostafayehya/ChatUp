@@ -1,5 +1,6 @@
 package eg.gov.iti.jets.ui.controllers;
 
+import eg.gov.iti.jets.utilities.StageCoordinator;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,8 +31,6 @@ public class LoginPageController implements Initializable {
         lockIcon.setIconColor(Color.GRAY);
         phoneIcon.setIconColor(Color.GRAY);
         phoneTextField.setLeft(phoneIcon);
-        phoneTextField.focusedProperty().addListener((e, r, t)-> handlePhoneTextField());
-        passwordTextField.focusedProperty().addListener((e,r,t)-> handlePasswordTextField());
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
 
@@ -45,35 +44,9 @@ public class LoginPageController implements Initializable {
         }
 
     }
-    private void handlePasswordTextField(){
-        if(passwordTextField.isFocused()){
-            passwordTextField.setLeft(null);
-            passwordTextField.setStyle("-fx-border-color: transparent;");
-        }
-        else {
-            if(passwordTextField.getText().equals("")){
-                passwordTextField.setStyle("-fx-border-color: #D32F2F;");
-                passwordTextField.setLeft(lockIcon);
-            }
-
-        }
-    }
-    private void handlePhoneTextField(){
-        if(phoneTextField.isFocused()){
-            phoneTextField.setLeft(null);
-            phoneTextField.setStyle("-fx-border-color: transparent;");
-        }
-        else {
-            if(phoneTextField.getText().equals("") || phoneTextField.getText().length()!=11){
-                phoneTextField.setStyle("-fx-border-color: #D32F2F;");
-                phoneTextField.setLeft(phoneIcon);
-            }
-
-        }
-    }
     private void goToSignUp(Event e){
-        //StageCoordinator stageCoordinator = StageCoordinator.getInstance();
-        //stageCoordinator.goToSignUpPage();
+        StageCoordinator stageCoordinator = StageCoordinator.getInstance();
+        stageCoordinator.translateToSignUp();
 
     }
 }
