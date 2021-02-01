@@ -2,7 +2,6 @@ package eg.gov.iti.jets.ui.controllers;
 
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
