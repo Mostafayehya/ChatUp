@@ -48,7 +48,7 @@ public class SignUpPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         LoginButton.addEventHandler(ActionEvent.ACTION,e->{
             StageCoordinator stageCoordinator = StageCoordinator.getInstance();
-            stageCoordinator.traslateToLogin();
+            stageCoordinator.goToLoginPage();
         });
         ObservableList<String> genders = FXCollections.observableArrayList("Male","Female");
         genderChoiceBox.setItems(genders);

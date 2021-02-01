@@ -46,7 +46,7 @@ public class LoginPageController implements Initializable {
     }
     private void goToSignUp(Event e){
         StageCoordinator stageCoordinator = StageCoordinator.getInstance();
-        stageCoordinator.translateToSignUp();
+        stageCoordinator.goToSignupPage();
 
     }
 }
