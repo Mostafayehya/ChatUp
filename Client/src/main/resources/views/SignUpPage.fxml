@@ -22,7 +22,7 @@
                 <Insets bottom="20" left="20" right="20" top="20"/>
             </padding>
             <children>
-                <Label id="welcomeBackLabel" alignment="CENTER" prefHeight="36.0" prefWidth="195.0"
+                <Label styleClass="whiteHeader" alignment="CENTER" prefHeight="36.0" prefWidth="195.0"
                        text="Welcome Back!"/>
                 <Label prefHeight="34.0" prefWidth="193.0" style="-fx-text-fill: white"
                        text="To keep connected please login with your personal info" textAlignment="CENTER"

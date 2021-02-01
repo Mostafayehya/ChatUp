@@ -15,7 +15,7 @@
             <Insets bottom="20" left="20" right="20" top="20" />
          </padding>
          <children>
-            <Label id="welcomeBackLabel" text="Hey, Friend!"/>
+            <Label styleClass="whiteHeader" text="Hey, Friend!"/>
              <Label prefHeight="34.0" prefWidth="193.0" style="-fx-text-fill: white" text="Enter your personal details to get started" textAlignment="CENTER" wrapText="true" />
             <Button fx:id="SignUpButton" styleClass="transparentButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="SignUp" />
          </children></VBox>

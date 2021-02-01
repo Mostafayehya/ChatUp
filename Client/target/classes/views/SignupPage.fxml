@@ -71,7 +71,9 @@
                         <FontIcon iconColor="gray" iconLiteral="fas-lock"/>
                     </left>
                 </CustomPasswordField>
-                <ChoiceBox prefHeight="27.0" prefWidth="397.0" styleClass="textField" fx:id="genderChoiceBox"/>
+                <ChoiceBox prefHeight="27.0" prefWidth="397.0" styleClass="textField" fx:id="genderChoiceBox" value="Gender">
+
+                </ChoiceBox>
                 <CustomTextField promptText="Bio" styleClass="textField" fx:id="bioTextField">
                     <left>
                         <FontIcon iconColor="gray" iconLiteral="mdi2b-bio"/>
