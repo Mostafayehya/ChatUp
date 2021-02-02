@@ -2,6 +2,7 @@ package eg.gov.iti.jets;
 
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -15,6 +16,7 @@ public class Main extends Application {
         StageCoordinator stageCoordinator=StageCoordinator.getInstance();
         stageCoordinator.setStage(primaryStage);
         //Call first page function
+        primaryStage.setTitle("ChatUp - Client");
         primaryStage.show();
     }
 

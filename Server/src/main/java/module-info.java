@@ -1,4 +1,5 @@
-module Server{
+module Server {
+
     requires javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
