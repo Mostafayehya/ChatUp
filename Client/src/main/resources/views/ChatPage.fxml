@@ -1,12 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane fx:id="chatPageLable" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.ChatPageController">
-    <children>
-        <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat page" wrappingWidth="157.13671875" />
-      <FontIcon iconLiteral="fab-angular" layoutX="228.0" layoutY="111.0" wrappingWidth="107.0" />
-    </children>
-</AnchorPane>
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="730.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <BorderPane prefHeight="591.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <bottom>
+            <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <FontIcon iconLiteral="far-file" iconSize="20" />
+                  <TextField promptText="Send a Message" HBox.hgrow="ALWAYS" />
+                  <FontIcon fx:id="emojiIcon" iconLiteral="far-laugh" iconSize="20" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </bottom>
+         <top>
+            <HBox fx:id="chatBarHBox" alignment="CENTER" style="-fx-background-color: #d7d44a;" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" text="Save">
+                     <graphic>
+                        <FontIcon iconColor="#4a79d0" iconLiteral="far-save" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="253.0" layoutY="13.0" text="Video Call">
+                     <graphic>
+                        <FontIcon iconColor="#4a79d0" iconLiteral="fas-video" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="263.0" layoutY="14.0" text="Voice Call">
+                     <graphic>
+                        <FontIcon iconColor="#4a79d0" iconLiteral="fas-phone-alt" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="297.0" layoutY="14.0" text="Block ">
+                     <graphic>
+                        <FontIcon iconColor="#cf4a4a" iconLiteral="fas-user-times" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                     </graphic>
+                  </JFXButton>
+               </children></HBox>
+         </top>
+         <center>
+            <ListView fx:id="chatListView" prefHeight="500.0" prefWidth="530.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </center>
+   <left>
+      <ListView fx:id="contacts" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #8792a4;" BorderPane.alignment="CENTER" />
+   </left>
+   <stylesheets>
+      <URL value="@../css/loginStyle.css" />
+      <URL value="@../styles/bootstrapfx.css" />
+   </stylesheets>
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="81.0" prefWidth="730.0" style="-fx-background-color: #303743;" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton buttonType="RAISED" contentDisplay="TOP" text="Profile" textFill="#ebe5e5">
+               <graphic>
+                  <FontIcon iconColor="#c0c5cd" iconLiteral="far-user-circle" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+               </graphic>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="10.0" layoutY="26.0" text="Contacts" textFill="#ebe5e5">
+               <graphic>
+                  <FontIcon iconColor="#c0c5cd" iconLiteral="far-address-card" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+               </graphic>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="61.0" layoutY="26.0" text="Notifications" textFill="#ebe5e5">
+               <graphic>
+                  <FontIcon iconColor="#c0c5cd" iconLiteral="far-bell" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+               </graphic>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="112.0" layoutY="26.0" text="Invitations" textFill="#ebe5e5">
+               <graphic>
+                  <FontIcon iconColor="#c0c5cd" iconLiteral="far-envelope" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+               </graphic>
+            </JFXButton>
+            <Label alignment="BOTTOM_RIGHT" nodeOrientation="LEFT_TO_RIGHT" text="Sign out" textFill="#e1e1e1" />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>
