@@ -21,16 +21,8 @@ public class LoginPageController implements Initializable {
     private Button SignUpButton;
     @FXML
     private Button loginButton;
-    private FontIcon lockIcon;
-    private FontIcon phoneIcon;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        lockIcon = new FontIcon("fas-lock");
-        phoneIcon = new FontIcon("mdi2p-phone");
-        passwordTextField.setLeft(lockIcon);
-        lockIcon.setIconColor(Color.GRAY);
-        phoneIcon.setIconColor(Color.GRAY);
-        phoneTextField.setLeft(phoneIcon);
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
 

@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 <?import org.controlsfx.control.textfield.CustomPasswordField?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <BorderPane fx:controller="eg.gov.iti.jets.ui.controllers.LoginPageController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0"
             prefWidth="759.0" stylesheets="@../css/loginStyle.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <left>
@@ -15,7 +16,7 @@
             <Insets bottom="20" left="20" right="20" top="20" />
          </padding>
          <children>
-            <Label id="welcomeBackLabel" text="Hey, Friend!"/>
+            <Label styleClass="whiteHeader" text="Hey, Friend!"/>
              <Label prefHeight="34.0" prefWidth="193.0" style="-fx-text-fill: white" text="Enter your personal details to get started" textAlignment="CENTER" wrapText="true" />
             <Button fx:id="SignUpButton" styleClass="transparentButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="SignUp" />
          </children></VBox>
@@ -27,12 +28,16 @@
          </padding>
          <children>
             <Label style="-fx-font-size: 25; -fx-font-weight: bold; -fx-text-fill: #009688" text="Login to Chat up"/>
-            <CustomTextField styleClass="textField" fx:id="phoneTextField">
-               <promptText>
-                  Phone Number
-               </promptText>
+            <CustomTextField styleClass="textField" fx:id="phoneTextField" promptText="Phone Number">
+                <left>
+                    <FontIcon iconLiteral="mdi2p-phone" iconColor="gray"/>
+                </left>
             </CustomTextField>
-            <CustomPasswordField styleClass="textField" promptText="Password" fx:id="passwordTextField"/>
+             <CustomPasswordField styleClass="textField" promptText="Password" fx:id="passwordTextField">
+                 <left>
+                     <FontIcon iconLiteral="fas-lock" iconColor="gray"/>
+                 </left>
+             </CustomPasswordField>
             <Button fx:id="loginButton" styleClass="cyanButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Login" />
          </children></VBox>
    </center>
