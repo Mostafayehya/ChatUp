@@ -5,6 +5,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
@@ -25,6 +26,13 @@ public class LoginPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle){
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
+        phoneTextField.addEventFilter(KeyEvent.KEY_TYPED,(e)->{
+//            char ch = e.getCharacter().charAt(0);
+            if(!isNumber(e.getCharacter())){
+                System.out.println("kk");
+                e.consume();
+            }
+        });
 
     }
     private void login(Event e){
@@ -40,5 +48,15 @@ public class LoginPageController implements Initializable {
         StageCoordinator stageCoordinator = StageCoordinator.getInstance();
         stageCoordinator.goToSignupPage();
 
+    }
+
+    private boolean isNumber(String text){
+        try{
+            Integer.parseInt(text);
+            return true;
+        }
+        catch (NumberFormatException e){
+            return false;
+        }
     }
 }
