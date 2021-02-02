@@ -66,29 +66,47 @@
       <URL value="@../styles/bootstrapfx.css" />
    </stylesheets>
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="81.0" prefWidth="730.0" style="-fx-background-color: #303743;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="81.0" prefWidth="730.0" style="-fx-background-color: #303743;" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton buttonType="RAISED" contentDisplay="TOP" text="Profile" textFill="#ebe5e5">
-               <graphic>
-                  <FontIcon iconColor="#c0c5cd" iconLiteral="far-user-circle" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-               </graphic>
-            </JFXButton>
-            <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="10.0" layoutY="26.0" text="Contacts" textFill="#ebe5e5">
-               <graphic>
-                  <FontIcon iconColor="#c0c5cd" iconLiteral="far-address-card" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-               </graphic>
-            </JFXButton>
-            <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="61.0" layoutY="26.0" text="Notifications" textFill="#ebe5e5">
-               <graphic>
-                  <FontIcon iconColor="#c0c5cd" iconLiteral="far-bell" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-               </graphic>
-            </JFXButton>
-            <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="112.0" layoutY="26.0" text="Invitations" textFill="#ebe5e5">
-               <graphic>
-                  <FontIcon iconColor="#c0c5cd" iconLiteral="far-envelope" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-               </graphic>
-            </JFXButton>
-            <Label alignment="BOTTOM_RIGHT" nodeOrientation="LEFT_TO_RIGHT" text="Sign out" textFill="#e1e1e1" />
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" text="Profile" textFill="#ebe5e5">
+                     <graphic>
+                        <FontIcon iconColor="#c0c5cd" iconLiteral="far-user-circle" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" text="Contacts" textFill="#ebe5e5">
+                     <graphic>
+                        <FontIcon iconColor="#c0c5cd" iconLiteral="far-address-card" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" text="Notifications" textFill="#ebe5e5">
+                     <graphic>
+                        <FontIcon iconColor="#c0c5cd" iconLiteral="far-bell" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" text="Invitations" textFill="#ebe5e5">
+                     <graphic>
+                        <FontIcon iconColor="#c0c5cd" iconLiteral="far-envelope" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="LEFT_TO_RIGHT" text="Sign out" textFill="#e1e1e1" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </HBox>
          </children>
       </HBox>
    </top>
