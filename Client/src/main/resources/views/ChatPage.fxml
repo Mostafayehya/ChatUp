@@ -17,7 +17,7 @@
             <Insets />
          </BorderPane.margin>
          <bottom>
-            <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="10.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_LEFT" fillHeight="false" prefWidth="389.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
                   <FontIcon iconLiteral="far-file" iconSize="20" />
                   <TextField promptText="Send a Message" HBox.hgrow="ALWAYS" />
@@ -66,26 +66,31 @@
       <URL value="@../styles/bootstrapfx.css" />
    </stylesheets>
    <left>
-      <VBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="591.0" prefWidth="111.0" spacing="20.0" style="-fx-background-color: #303743;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="591.0" prefWidth="93.0" spacing="20.0" style="-fx-background-color: #303743;" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" spacing="20.0">
                <children>
-                  <JFXButton buttonType="RAISED" contentDisplay="TOP" minWidth="-Infinity" text="Profile" textFill="#ebe5e5">
+                  <JFXButton fx:id="profileButton" buttonType="RAISED" contentDisplay="TOP" minWidth="-Infinity" text="Profile" textFill="#ebe5e5">
                      <graphic>
-                        <FontIcon iconColor="#c0c5cd" iconLiteral="far-user-circle" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                        <FontIcon fx:id="profileButton" iconColor="#c0c5cd" iconLiteral="far-user-circle" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="TOP" text="Contacts" textFill="#ebe5e5">
+                  <JFXButton fx:id="profileButton" buttonType="RAISED" contentDisplay="TOP" layoutX="32.0" layoutY="10.0" minWidth="-Infinity" text="Chats" textFill="#ebe5e5">
+                     <graphic>
+                        <FontIcon fx:id="chatsButton" iconColor="#c0c5cd" iconLiteral="far-comments" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="contactsButton" buttonType="RAISED" contentDisplay="TOP" text="Contacts" textFill="#ebe5e5">
                      <graphic>
                         <FontIcon iconColor="#c0c5cd" iconLiteral="far-address-card" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="TOP" text="Notifications" textFill="#ebe5e5">
+                  <JFXButton fx:id="notificationButton" buttonType="RAISED" contentDisplay="TOP" text="Notifications" textFill="#ebe5e5">
                      <graphic>
                         <FontIcon iconColor="#c0c5cd" iconLiteral="far-bell" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="TOP" prefHeight="30.0" text="Invitations" textFill="#ebe5e5">
+                  <JFXButton fx:id="invitationsButton" buttonType="RAISED" contentDisplay="TOP" prefHeight="30.0" text="Invitations" textFill="#ebe5e5">
                      <graphic>
                         <FontIcon iconColor="#c0c5cd" iconLiteral="far-envelope" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
                      </graphic>
