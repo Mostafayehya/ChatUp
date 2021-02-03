@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
@@ -20,25 +22,36 @@
             <AnchorPane prefHeight="441.0" prefWidth="648.0" BorderPane.alignment="CENTER">
                <children>
                   <CustomTextField layoutX="213.0" layoutY="102.0" prefHeight="25.0" prefWidth="248.0" promptText="   Phone Number" />
-                  <FontIcon iconColor="gray" iconLiteral="mdi2p-phone" layoutX="219.0" layoutY="120.0" text="󰏲" wrappingWidth="12.0" />
+                  <FontIcon iconColor="gray" iconLiteral="mdi2p-phone" layoutX="215.0" layoutY="121.0" text="󰏲" wrappingWidth="12.0" />
                   <CustomTextField layoutX="213.0" layoutY="143.0" prefHeight="25.0" prefWidth="248.0" promptText="    Email" />
-                  <FontIcon iconColor="GREY" iconLiteral="mdi2e-email" layoutX="219.0" layoutY="160.0" wrappingWidth="12.0" />
-                  <CustomTextField layoutX="213.0" layoutY="192.0" prefHeight="25.0" prefWidth="248.0" promptText="   Bio" />
+                  <FontIcon iconColor="GREY" iconLiteral="mdi2e-email" layoutX="217.0" layoutY="162.0" wrappingWidth="12.0" />
+                  <CustomTextField layoutX="213.0" layoutY="192.0" prefHeight="25.0" prefWidth="248.0" promptText="    Bio" />
                   <FontIcon iconColor="gray" iconLiteral="mdi2b-bio" layoutX="219.0" layoutY="209.0" />
                   <CustomTextField layoutX="213.0" layoutY="233.0" prefHeight="25.0" prefWidth="248.0" promptText="    Country" />
                   <FontIcon iconColor="GREY" iconLiteral="fas-globe-africa" layoutX="219.0" layoutY="250.0" />
                   <Line endX="66.0" endY="144.0" layoutX="130.0" layoutY="127.0" startX="66.0" startY="-39.0" />
-                  <Button layoutX="439.0" layoutY="-25.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="134.0" style="-fx-background-radius: 50em;" text="Button" />
-                  <FontIcon iconColor="WHITE" iconLiteral="fas-robot" iconSize="20" layoutX="461.0" layoutY="7.0" wrappingWidth="19.0" />
+                  <Button layoutX="447.0" layoutY="-25.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="149.0" style="-fx-background-radius: 50em; -fx-font-weight: bold; -fx-font-size: 15;" text="ChatBot" textAlignment="JUSTIFY">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-robot" iconSize="20" layoutX="458.0" layoutY="5.0" wrappingWidth="19.0" />
+                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="347.0" layoutY="-17.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="81.0" style="-fx-background-radius: 5em;" />
+                  <FontIcon iconColor="WHITE" iconLiteral="far-edit" iconSize="20" layoutX="374.0" layoutY="7.0" />
                </children>
             </AnchorPane>
          </center>
          <top>
             <AnchorPane prefHeight="147.0" prefWidth="648.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="189.0" fitWidth="598.0" layoutX="1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="189.0" fitWidth="647.0" layoutX="1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
                   <Circle fill="#dcdee1" layoutX="96.0" layoutY="111.0" radius="56.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fill="DODGERBLUE" layoutX="159.0" layoutY="150.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#e5eaee" layoutX="165.0" layoutY="150.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label layoutX="159.0" layoutY="94.0" prefHeight="17.0" prefWidth="77.0" text="USER_Name" />
+                  <FontIcon iconColor="#dddddd" iconLiteral="fas-long-arrow-alt-left" iconSize="25" layoutX="10.0" layoutY="30.0" wrappingWidth="36.0" />
+                  <FontIcon iconColor="#9a9393" iconLiteral="fas-pen" iconSize="15" layoutX="236.0" layoutY="110.0" wrappingWidth="30.0" />
+                  <FontIcon iconColor="#b9adad" iconLiteral="mdi2t-tools" iconSize="20" layoutX="614.0" layoutY="24.0" wrappingWidth="30.0" />
+                  <Circle fill="WHITE" layoutX="133.0" layoutY="150.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #009688;" />
+                  <FontIcon iconColor="#fffdfd" iconLiteral="mdi2c-camera" iconSize="20" layoutX="124.0" layoutY="158.0" wrappingWidth="14.0" />
                </children>
             </AnchorPane>
          </top>
