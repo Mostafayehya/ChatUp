@@ -2,14 +2,19 @@ package eg.gov.iti.jets.ui.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class ChatPageController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ChatPageController implements Initializable {
 
     @FXML
     private ListView<?> contactsListView;
@@ -52,4 +57,12 @@ public class ChatPageController {
 
     @FXML
     private FontIcon chatsButton;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+    public void sendMessage(KeyEvent keyEvent) {
+    }
 }
