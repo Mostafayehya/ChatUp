@@ -8,6 +8,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="730.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -19,7 +24,7 @@
          <bottom>
             <HBox alignment="CENTER_LEFT" fillHeight="false" prefWidth="389.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <FontIcon iconLiteral="far-file" iconSize="20" />
+                  <FontIcon fx:id="attachButton" iconLiteral="far-file" iconSize="20" />
                   <TextField promptText="Send a Message" HBox.hgrow="ALWAYS" />
                   <FontIcon fx:id="emojiIcon" iconLiteral="far-laugh" iconSize="20" />
                </children>
@@ -31,26 +36,60 @@
          <top>
             <HBox fx:id="chatBarHBox" alignment="CENTER" style="-fx-background-color: #d7d44a;" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton buttonType="RAISED" contentDisplay="TOP" text="Save">
-                     <graphic>
-                        <FontIcon iconColor="#4a79d0" iconLiteral="far-save" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="253.0" layoutY="13.0" text="Video Call">
-                     <graphic>
-                        <FontIcon iconColor="#4a79d0" iconLiteral="fas-video" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="263.0" layoutY="14.0" text="Voice Call">
-                     <graphic>
-                        <FontIcon iconColor="#4a79d0" iconLiteral="fas-phone-alt" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="297.0" layoutY="14.0" text="Block ">
-                     <graphic>
-                        <FontIcon iconColor="#cf4a4a" iconLiteral="fas-user-times" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Circle fx:id="contactImage" radius="18.0" stroke="BLACK" strokeType="INSIDE">
+                           <fill>
+                              <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="1.0" green="1.0" blue="1.0" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </RadialGradient>
+                           </fill>
+                        </Circle>
+                        <Text fx:id="contactName" strokeType="OUTSIDE" strokeWidth="0.0" text="Mostafa Yehya">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <JFXButton fx:id="saveButton" buttonType="RAISED" contentDisplay="TOP" text="Save">
+                           <graphic>
+                              <FontIcon iconColor="#4a79d0" iconLiteral="far-save" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="videoCallButton" buttonType="RAISED" contentDisplay="TOP" text="Video Call">
+                           <graphic>
+                              <FontIcon iconColor="#4a79d0" iconLiteral="fas-video" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="voiceCallButton" buttonType="RAISED" contentDisplay="TOP" text="Voice Call">
+                           <graphic>
+                              <FontIcon iconColor="#4a79d0" iconLiteral="fas-phone-alt" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="blockButton" buttonType="RAISED" contentDisplay="TOP" text="Block ">
+                           <graphic>
+                              <FontIcon iconColor="#cf4a4a" iconLiteral="fas-user-times" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
                </children></HBox>
          </top>
          <center>

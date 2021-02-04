@@ -22,5 +22,5 @@ public class StageCoordinator {
         }
         return stageCoordinator;
     }
-    //add public function to load each page like public void goToLoginPage();
+    //add public function to load each age like public void goToLoginPage();
 }
