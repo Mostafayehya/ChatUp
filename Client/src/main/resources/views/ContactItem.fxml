@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.ContactItemController">
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+    <left>
+      <Circle fill="white" radius="44.0" stroke="BLACK" strokeType="INSIDE" />
+    </left>
+    <center>
+      <VBox alignment="CENTER_LEFT">
+         <children>
+            <Label text="Contact Name">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Here is my bio" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+    </center>
+    <right>
+      <HBox alignment="CENTER_RIGHT">
+         <children>
+            <FontIcon iconLiteral="mdi2m-message" iconSize="30" wrappingWidth="34.0" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="150.0" />
+         </BorderPane.margin>
+      </HBox>
+    </right>
+</BorderPane>
