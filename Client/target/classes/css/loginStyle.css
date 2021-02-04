@@ -1,16 +1,16 @@
-#welcomeBackLabel{
+.whiteHeader{
     -fx-font-size: 25;
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
-#signUpButton{
+.transparentButton{
     -fx-border-radius: 100;
     -fx-font-size: 12;
     -fx-background-color: transparent;
     -fx-border-color: white;
     -fx-text-fill: white;
 }
-#loginButton{
+.cyanButton{
     -fx-background-radius: 100;
     -fx-font-size: 12;
     -fx-background-color: #009688;
