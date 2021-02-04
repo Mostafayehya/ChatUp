@@ -13,9 +13,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        StageCoordinator stageCoordinator=StageCoordinator.getInstance();
+        StageCoordinator stageCoordinator = StageCoordinator.getInstance();
         stageCoordinator.setStage(primaryStage);
         //Call first page function
+        stageCoordinator.switchToChatScreen();
         primaryStage.setTitle("ChatUp - Client");
         primaryStage.show();
     }
