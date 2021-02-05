@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXListCell?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane fx:id="mycell" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <JFXListCell prefHeight="33.0" prefWidth="216.0">
+         <graphic>
+                  <BorderPane prefHeight="75.0" prefWidth="513.0">
+                     <right>
+                        <AnchorPane prefHeight="60.0" prefWidth="82.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Circle fill="#e8e8e8" radius="30.0" stroke="#b9aeae" strokeType="INSIDE" />
+                           </children>
+                        </AnchorPane>
+                     </right>
+                     <top>
+                        <AnchorPane minWidth="5.0" prefHeight="0.0" prefWidth="648.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="34.0" layoutY="20.0" prefHeight="18.0" prefWidth="62.0" text="Hagar">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </top>
+                     <center>
+                        <Label prefHeight="18.0" prefWidth="504.0" text="Tell me somethin', girl  Are you happy in this modern world?" textFill="#ababab" BorderPane.alignment="CENTER" />
+                     </center>
+                     <bottom>
+                        <Line endX="114.79290771484375" startX="-397.5" stroke="#ddd2d2" BorderPane.alignment="CENTER" />
+                     </bottom>
+                  </BorderPane>
+         </graphic>
+      </JFXListCell>
+   </center>
+</BorderPane>
