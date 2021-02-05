@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="759.0" stylesheets="@chatpage.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:Controller="ChatListController.fxml">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="759.0"  xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.ChatListController">
    <left>
-      <BorderPane prefHeight="626.0" prefWidth="111.0" style="-fx-background-color: #000000;" stylesheets="@chatpage.css" BorderPane.alignment="CENTER" />
+      <BorderPane prefHeight="626.0" prefWidth="111.0" style="-fx-background-color: #000000;"  BorderPane.alignment="CENTER" />
    </left>
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
