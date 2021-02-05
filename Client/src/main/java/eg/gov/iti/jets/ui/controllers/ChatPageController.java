@@ -10,6 +10,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -23,6 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -83,8 +85,7 @@ public class ChatPageController implements Initializable {
                 new Message("08:15 PM", "Good night"));
 
 
-
-       chatListView.setItems(FXCollections.observableList(messageList));
+        chatListView.setItems(FXCollections.observableList(messageList));
 
         chatListView.setCellFactory(new Callback<ListView<Message>, ListCell<Message>>() {
             @Override
@@ -98,7 +99,6 @@ public class ChatPageController implements Initializable {
                             super.updateItem(message, b);
 
                             HBox hBox = new HBox();
-
 
                             // Handling the image of the sender
 
@@ -122,7 +122,7 @@ public class ChatPageController implements Initializable {
                             Label messageContent = new Label();
                             messageContent.setText(message.getContent());
 
-                            vBox.getChildren().addAll(userName, new Label(" "), messageContent);
+                            vBox.getChildren().addAll(userName, messageContent);
 
                             hBox.getChildren().addAll(circle, new Label(" "), vBox);
                             setGraphic(hBox);
@@ -135,7 +135,6 @@ public class ChatPageController implements Initializable {
                             setGraphic(null);
                             System.out.println("Elements are null");
 
-
                         }
                     }
                 };
@@ -144,5 +143,11 @@ public class ChatPageController implements Initializable {
     }
 
     public void sendMessage(KeyEvent keyEvent) {
+
+        if (keyEvent.getCode() == KeyCode.ENTER){
+            chatListView.getItems().add(new Message(LocalDate.now().toString(),messgeTextField.getText() ));
+            messgeTextField.clear();
+
+        }
     }
 }
