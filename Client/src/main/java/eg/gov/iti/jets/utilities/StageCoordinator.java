@@ -50,6 +50,7 @@ public class StageCoordinator {
                 stage.setScene(chatScene);
             } catch (IOException e) {
                 System.out.println("IO Exception: Couldn't load 'Chat Page' FXML file");
+                e.printStackTrace();
             }
         } else {
             System.out.println("Loaded Existing Scene");
