@@ -14,17 +14,17 @@
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
     <left>
-      <Circle fill="white" radius="44.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="white" radius="44.0" stroke="BLACK" strokeType="INSIDE" fx:id="imageCircle"/>
     </left>
     <center>
       <VBox alignment="CENTER_LEFT">
          <children>
-            <Label text="Contact Name">
+            <Label text="Contact Name" fx:id="contactNameLabel">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label text="Here is my bio" />
+            <Label text="Here is my bio" fx:id="bioLabel"/>
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -34,7 +34,7 @@
     <right>
       <HBox alignment="CENTER_RIGHT">
          <children>
-            <FontIcon iconLiteral="mdi2m-message" iconSize="30" wrappingWidth="34.0" />
+            <FontIcon iconLiteral="mdi2m-message" iconSize="30" wrappingWidth="34.0" fx:id="messageIcon"/>
          </children>
          <BorderPane.margin>
             <Insets left="150.0" />
