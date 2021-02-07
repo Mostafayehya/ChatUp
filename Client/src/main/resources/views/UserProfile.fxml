@@ -17,7 +17,7 @@
 
 <BorderPane stylesheets="@../css/loginStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.UserProfileController">
    <left>
-      <VBox prefHeight="477.0" prefWidth="53.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="477.0" prefWidth="87.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER" />
    </left>
    <center>
       <BorderPane BorderPane.alignment="CENTER">
@@ -63,6 +63,7 @@
                               </HBox>
                            </children>
                         </Pane>
+                        <Region prefHeight="200.0" prefWidth="182.0" />
                         <HBox alignment="CENTER" fillHeight="false" prefHeight="172.0" prefWidth="172.0" spacing="10.0" HBox.hgrow="NEVER">
                            <children>
                               <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-radius: 5em; -fx-background-color: #009688;">
@@ -85,16 +86,16 @@
          <center>
             <HBox BorderPane.alignment="CENTER">
                <children>
-                  <HBox spacing="20.0">
+                  <HBox prefHeight="280.0" prefWidth="244.0" spacing="60.0">
                      <children>
                         <ImageView fitHeight="141.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true" />
-                        <Line endX="66.0" endY="144.0" startX="66.0" startY="-39.0" />
+                        <Line endX="66.0" endY="202.5" startX="66.0" startY="-39.0" />
                      </children>
                   </HBox>
-                  <Region prefHeight="280.0" prefWidth="115.0" />
+                  <Region prefHeight="280.0" prefWidth="46.0" />
                   <HBox>
                      <children>
-                        <VBox prefHeight="147.0" spacing="20.0">
+                        <VBox prefHeight="280.0" prefWidth="308.0" spacing="40.0">
                            <children>
                               <CustomTextField prefHeight="25.0" prefWidth="248.0" promptText="Phone Number" styleClass="textField">
                                  <left>
@@ -106,7 +107,7 @@
                                     <FontIcon iconColor="GREY" iconLiteral="mdi2e-email" />
                                  </left>
                               </CustomTextField>
-                              <CustomTextField prefHeight="25.0" prefWidth="248.0" promptText="Bio" styleClass="textField">
+                              <CustomTextField prefHeight="26.0" prefWidth="229.0" promptText="Bio" styleClass="textField">
                                  <left>
                                     <FontIcon iconColor="gray" iconLiteral="mdi2b-bio" />
                                  </left>
