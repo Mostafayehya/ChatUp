@@ -9,22 +9,22 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="81.0" prefWidth="471.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
-        <Insets bottom="10" left="10" right="10" top="10" />
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
     <left>
-      <Circle fill="white" radius="44.0" stroke="BLACK" strokeType="INSIDE" fx:id="imageCircle"/>
+      <Circle fx:id="imageCircle" fill="white" radius="36.0" stroke="BLACK" strokeType="INSIDE" BorderPane.alignment="CENTER" />
     </left>
     <center>
       <VBox alignment="CENTER_LEFT">
          <children>
-            <Label text="Contact Name" fx:id="contactNameLabel">
+            <Label fx:id="contactNameLabel" text="Contact Name">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label text="Here is my bio" fx:id="bioLabel"/>
+            <Label fx:id="bioLabel" text="Here is my bio" />
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -34,7 +34,7 @@
     <right>
       <HBox alignment="CENTER_RIGHT">
          <children>
-            <FontIcon iconLiteral="mdi2m-message" iconSize="30" wrappingWidth="34.0" fx:id="messageIcon"/>
+            <FontIcon fx:id="messageIcon" iconLiteral="mdi2m-message" iconSize="30" wrappingWidth="34.0" />
          </children>
          <BorderPane.margin>
             <Insets left="150.0" />
