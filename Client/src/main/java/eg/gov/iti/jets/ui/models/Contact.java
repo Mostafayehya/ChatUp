@@ -8,7 +8,7 @@ public class Contact {
     String image;
 
     public Contact() {
-        this.image = "/photos/user.jpg";
+        this.image = "src/main/resources/photos/user.jpg";
     }
 
     public Contact(String phoneNumber, String name, String bio, String email, String image) {
@@ -16,7 +16,7 @@ public class Contact {
         this.name = name;
         this.bio = bio;
         this.email = email;
-        this.image = image;
+        this.image = "src/main/resources/photos/user.jpg";
     }
 
     public String getPhoneNumber() {

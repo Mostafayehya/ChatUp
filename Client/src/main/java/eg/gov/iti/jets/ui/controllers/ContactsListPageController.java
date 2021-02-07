@@ -1,6 +1,7 @@
 package eg.gov.iti.jets.ui.controllers;
 
 import eg.gov.iti.jets.ui.models.Contact;
+import eg.gov.iti.jets.utilities.ContactListCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,11 +22,11 @@ public class ContactsListPageController implements Initializable {
                 new Contact("019922","hadeer","this is my bio","hadeer@gmail.com","/photos/user.jpg"),
                 new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg")
         );
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        contactsListView.setItems(contactObservableList);
+        contactsListView.setCellFactory(contactListView -> new ContactListCell());
     }
 }
