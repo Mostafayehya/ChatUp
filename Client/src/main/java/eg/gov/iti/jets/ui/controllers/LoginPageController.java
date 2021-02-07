@@ -27,7 +27,6 @@ public class LoginPageController implements Initializable {
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
         phoneTextField.addEventFilter(KeyEvent.KEY_TYPED,(e)->{
-//            char ch = e.getCharacter().charAt(0);
             if(!isNumber(e.getCharacter())){
                 System.out.println("kk");
                 e.consume();
