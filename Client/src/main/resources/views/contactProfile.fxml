@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <BorderPane prefHeight="626.0" prefWidth="759.0" BorderPane.alignment="CENTER">
+         <top>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="300.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Circle fill="#d9e2eb" radius="52.0" stroke="BLACK" strokeType="INSIDE" />
+
+               </children>
+            </HBox>
+         </top>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <center>
+            <HBox BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="224.0" prefWidth="449.0" spacing="10.0">
+                     <children>
+                        <HBox />
+                        <Line endX="100.0" startX="-100.0" stroke="#c9c3c3" />
+                        <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" promptText="First name" />
+                        <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="318.0" promptText="Last name" />
+                        <TextField blendMode="LIGHTEN" promptText="Phone number" />
+                        <TextField blendMode="LIGHTEN" promptText="Email" />
+                        <TextField blendMode="LIGHTEN" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="256.0" prefWidth="442.0" spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50;" text="+">
+                           <effect>
+                              <DropShadow />
+                           </effect></Button>
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50;" text="+">
+                           <effect>
+                              <DropShadow />
+                           </effect></Button>
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50;" text="+">
+                           <effect>
+                              <DropShadow />
+                           </effect></Button>
+                        <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50;" text="+">
+                           <effect>
+                              <DropShadow />
+                           </effect></Button>
+                        <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50;">
+                           <effect>
+                              <DropShadow />
+                           </effect></Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </HBox.margin></VBox>
+               </children>
+            </HBox>
+         </center></BorderPane>
+   </center>
+   <left>
+      <BorderPane prefHeight="626.0" prefWidth="111.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>
