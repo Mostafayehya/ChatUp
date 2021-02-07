@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -21,38 +21,6 @@
    </left>
    <center>
       <BorderPane BorderPane.alignment="CENTER">
-         <center>
-            <AnchorPane BorderPane.alignment="CENTER">
-               <children>
-                  <CustomTextField layoutX="213.0" layoutY="102.0" prefHeight="25.0" prefWidth="248.0" promptText="Phone Number" styleClass="textField">
-                  <left>
-                     <FontIcon iconColor="gray" iconLiteral="mdi2p-phone" />
-                  </left>
-                  </CustomTextField>
-
-                  <CustomTextField layoutX="213.0" layoutY="143.0" prefHeight="25.0" prefWidth="248.0" promptText="Email" styleClass="textField">
-                     <left>
-                        <FontIcon iconColor="GREY" iconLiteral="mdi2e-email" />
-                     </left>
-                  </CustomTextField>
-
-                  <CustomTextField layoutX="213.0" layoutY="192.0" prefHeight="25.0" prefWidth="248.0" promptText="Bio" styleClass="textField">
-                     <left>
-                        <FontIcon iconColor="gray" iconLiteral="mdi2b-bio" />
-                     </left>
-                  </CustomTextField>
-
-                  <CustomTextField layoutX="213.0" layoutY="233.0" prefHeight="25.0" prefWidth="248.0" promptText="Country" styleClass="textField">
-                     <left>
-                        <FontIcon iconColor="gray" iconLiteral="fas-globe-africa" />
-                     </left>
-                  </CustomTextField>
-
-                  <Line endX="66.0" endY="144.0" layoutX="130.0" layoutY="127.0" startX="66.0" startY="-39.0" />
-
-               </children>
-            </AnchorPane>
-         </center>
          <top>
             <VBox alignment="TOP_CENTER" BorderPane.alignment="BOTTOM_CENTER">
                <children>
@@ -67,7 +35,11 @@
                      <children>
                         <Pane>
                            <children>
-                              <Circle fx:id="profileCir" fill="#dcdee1" layoutX="78.0" layoutY="116.0" radius="56.0" stroke="BLACK" strokeType="INSIDE" />
+                              <HBox layoutX="22.0" layoutY="60.0">
+                                 <children>
+                                    <Circle fx:id="profileCir" fill="#dcdee1" radius="56.0" stroke="BLACK" strokeType="INSIDE" />
+                                 </children>
+                              </HBox>
                               <HBox alignment="CENTER" layoutX="93.0" layoutY="134.0" spacing="5.0">
                                  <children>
                                     <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0" style="-fx-background-radius: 100; -fx-background-color: #009688;">
@@ -91,14 +63,14 @@
                               </HBox>
                            </children>
                         </Pane>
-                        <HBox alignment="CENTER" fillHeight="false" prefHeight="101.0" prefWidth="145.0" spacing="10.0" HBox.hgrow="NEVER">
+                        <HBox alignment="CENTER" fillHeight="false" prefHeight="172.0" prefWidth="172.0" spacing="10.0" HBox.hgrow="NEVER">
                            <children>
                               <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-radius: 5em; -fx-background-color: #009688;">
                               <graphic>
                                  <FontIcon iconColor="WHITE" iconLiteral="far-edit" iconSize="20" layoutX="374.0" layoutY="82.0" text="" />
                               </graphic>
                               </Button>
-                              <Button mnemonicParsing="false" style="-fx-background-radius: 50em; -fx-font-weight: bold; -fx-background-color: #009688;" text="ChatBot" textAlignment="JUSTIFY">
+                              <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="104.0" style="-fx-background-radius: 50em; -fx-font-weight: bold; -fx-background-color: #009688;" text="ChatBot" textAlignment="JUSTIFY">
                                  <graphic>
                                     <FontIcon iconColor="WHITE" iconLiteral="fas-robot" iconSize="20" layoutX="490.0" layoutY="95.0" wrappingWidth="25.0" />
                                  </graphic>
@@ -110,6 +82,47 @@
                </children>
             </VBox>
          </top>
+         <center>
+            <HBox BorderPane.alignment="CENTER">
+               <children>
+                  <HBox spacing="20.0">
+                     <children>
+                        <ImageView fitHeight="141.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true" />
+                        <Line endX="66.0" endY="144.0" startX="66.0" startY="-39.0" />
+                     </children>
+                  </HBox>
+                  <Region prefHeight="280.0" prefWidth="115.0" />
+                  <HBox>
+                     <children>
+                        <VBox prefHeight="147.0" spacing="20.0">
+                           <children>
+                              <CustomTextField prefHeight="25.0" prefWidth="248.0" promptText="Phone Number" styleClass="textField">
+                                 <left>
+                                    <FontIcon iconColor="gray" iconLiteral="mdi2p-phone" />
+                                 </left>
+                              </CustomTextField>
+                              <CustomTextField prefHeight="25.0" prefWidth="248.0" promptText="Email" styleClass="textField">
+                                 <left>
+                                    <FontIcon iconColor="GREY" iconLiteral="mdi2e-email" />
+                                 </left>
+                              </CustomTextField>
+                              <CustomTextField prefHeight="25.0" prefWidth="248.0" promptText="Bio" styleClass="textField">
+                                 <left>
+                                    <FontIcon iconColor="gray" iconLiteral="mdi2b-bio" />
+                                 </left>
+                              </CustomTextField>
+                              <CustomTextField prefHeight="25.0" prefWidth="248.0" promptText="Country" styleClass="textField">
+                                 <left>
+                                    <FontIcon iconColor="gray" iconLiteral="fas-globe-africa" />
+                                 </left>
+                              </CustomTextField>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </center>
       </BorderPane>
    </center>
 </BorderPane>
