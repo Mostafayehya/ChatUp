@@ -1,6 +1,7 @@
 package eg.gov.iti.jets.ui.controllers;
 
 import eg.gov.iti.jets.ui.models.Contact;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,7 +29,6 @@ public class ContactItemController implements Initializable {
     Label bioLabel;
     @FXML
     FontIcon messageIcon;
-    FXMLLoader loader;
     Contact contact;
 
     public ContactItemController(Contact contact){
@@ -45,9 +45,13 @@ public class ContactItemController implements Initializable {
             e.printStackTrace();
         }
         imageCircle.setFill(new ImagePattern(image));
-        imageCircle.setRadius(20);
+        //imageCircle.setRadius(20);
         contactNameLabel.setText(contact.getName());
         bioLabel.setText(contact.getBio());
+
+        messageIcon.addEventHandler(ActionEvent.ACTION,(e)->{
+
+        });
     }
 
 

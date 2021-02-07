@@ -11,7 +11,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
-        <Insets bottom="20" left="20" right="20" top="20" />
+        <Insets bottom="10" left="10" right="10" top="10" />
     </padding>
     <left>
       <Circle fill="white" radius="44.0" stroke="BLACK" strokeType="INSIDE" fx:id="imageCircle"/>
