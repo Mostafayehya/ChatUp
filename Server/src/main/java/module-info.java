@@ -1,4 +1,5 @@
-module Server{
+module Server {
+
     requires javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
@@ -13,4 +14,8 @@ module Server{
 
     exports eg.gov.iti.jets;
     opens eg.gov.iti.jets.ui.controllers;
+
+    requires mysql.connector.java;
+    requires java.sql;
+    requires java.naming;
 }

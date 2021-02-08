@@ -2,6 +2,8 @@ package eg.gov.iti.jets;
 
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import javafx.application.Application;
+import javafx.scene.Scene;
+
 import javafx.stage.Stage;
 
 public class Main extends Application {
