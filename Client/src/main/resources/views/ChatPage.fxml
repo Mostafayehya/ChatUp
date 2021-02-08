@@ -72,12 +72,12 @@
                <children>
                   <JFXButton fx:id="profileButton" buttonType="RAISED" contentDisplay="TOP" minWidth="-Infinity" text="Profile" textFill="#ebe5e5">
                      <graphic>
-                        <FontIcon fx:id="profileButton" iconColor="#c0c5cd" iconLiteral="far-user-circle" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                        <FontIcon iconColor="#c0c5cd" iconLiteral="far-user-circle" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="profileButton" buttonType="RAISED" contentDisplay="TOP" layoutX="32.0" layoutY="10.0" minWidth="-Infinity" text="Chats" textFill="#ebe5e5">
+                  <JFXButton fx:id="chatsButton" buttonType="RAISED" contentDisplay="TOP" layoutX="32.0" layoutY="10.0" minWidth="-Infinity" text="Chats" textFill="#ebe5e5">
                      <graphic>
-                        <FontIcon fx:id="chatsButton" iconColor="#c0c5cd" iconLiteral="far-comments" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                        <FontIcon iconColor="#c0c5cd" iconLiteral="far-comments" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="contactsButton" buttonType="RAISED" contentDisplay="TOP" text="Contacts" textFill="#ebe5e5">
