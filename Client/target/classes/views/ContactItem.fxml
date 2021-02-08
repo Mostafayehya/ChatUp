@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
@@ -42,7 +41,4 @@
          </BorderPane.margin>
       </HBox>
     </right>
-   <bottom>
-      <Line endX="236.5" startX="-100.0" BorderPane.alignment="BOTTOM_CENTER" style="-fx-fill: gray;"/>
-   </bottom>
 </BorderPane>
