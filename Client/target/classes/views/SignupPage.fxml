@@ -27,7 +27,7 @@
                 <Label prefHeight="34.0" prefWidth="193.0" style="-fx-text-fill: white"
                        text="To keep connected please login with your personal info" textAlignment="CENTER"
                        wrapText="true"/>
-                <Button fx:id="LoginButton" styleClass="transparentButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Login"/>
+                <Button fx:id="loginButton" styleClass="transparentButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Login"/>
             </children>
         </VBox>
     </right>
@@ -85,7 +85,7 @@
                     </left>
                 </CustomTextField>
                 <DatePicker prefHeight="25.0" prefWidth="392.0" styleClass="textField" fx:id="birthDatePicker"/>
-                <Button fx:id="SignUpButton" styleClass="cyanButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="SignUp"/>
+                <Button fx:id="signUpButton" styleClass="cyanButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="SignUp"/>
             </children>
         </VBox>
     </center>

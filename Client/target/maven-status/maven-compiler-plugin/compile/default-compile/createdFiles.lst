@@ -1,7 +1,8 @@
+eg\gov\iti\jets\utilities\Validation.class
 eg\gov\iti\jets\ui\controllers\LoginPageController.class
 module-info.class
 eg\gov\iti\jets\ui\controllers\TestController.class
-eg\gov\iti\jets\ui\controllers\SignupPageController.class
 eg\gov\iti\jets\ui\models\TestModel.class
 eg\gov\iti\jets\Main.class
+eg\gov\iti\jets\ui\controllers\SignUpPageController.class
 eg\gov\iti\jets\utilities\StageCoordinator.class

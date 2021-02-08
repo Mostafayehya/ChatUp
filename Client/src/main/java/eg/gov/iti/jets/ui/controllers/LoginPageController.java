@@ -1,6 +1,7 @@
 package eg.gov.iti.jets.ui.controllers;
 
 import eg.gov.iti.jets.utilities.StageCoordinator;
+import eg.gov.iti.jets.utilities.Validation;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,8 +28,7 @@ public class LoginPageController implements Initializable {
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
         phoneTextField.addEventFilter(KeyEvent.KEY_TYPED,(e)->{
-            if(!isNumber(e.getCharacter())){
-                System.out.println("kk");
+            if(!new Validation().validatePhoneNumber(e.getCharacter()) || phoneTextField.getText().length()>11){
                 e.consume();
             }
         });
