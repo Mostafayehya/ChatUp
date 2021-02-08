@@ -16,7 +16,6 @@ public class Main extends Application {
         stageCoordinator.setStage(primaryStage);
         //Call first page function
         primaryStage.setTitle("ChatUp - Client");
-        stageCoordinator.gotoContactsListPage();
         primaryStage.show();
     }
 
