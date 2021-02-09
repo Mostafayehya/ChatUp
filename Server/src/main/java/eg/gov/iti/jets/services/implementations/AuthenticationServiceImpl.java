@@ -1,5 +1,7 @@
 package eg.gov.iti.jets.services.implementations;
 
+import eg.gov.iti.jets.data.dao.UserDao;
+import eg.gov.iti.jets.data.dao.UserDaoImpl;
 import eg.gov.iti.jets.domain.User;
 import eg.gov.iti.jets.services.interfaces.AuthenticationService;
 
@@ -7,7 +9,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class AuthenticationServiceImpl extends UnicastRemoteObject implements AuthenticationService {
-    protected AuthenticationServiceImpl() throws RemoteException {
+    UserDao userDao;
+    public AuthenticationServiceImpl() throws RemoteException {
+        userDao = new UserDaoImpl();
     }
 
     @Override
@@ -16,7 +20,7 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
     }
 
     @Override
-    public boolean signUp(User user) throws RemoteException {
-        return false;
+    public int signUp(User user) throws RemoteException {
+         return userDao.insertUser(user);
     }
 }
