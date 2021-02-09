@@ -13,3 +13,4 @@ module-info.class
 eg\gov\iti\jets\ui\models\Status.class
 eg\gov\iti\jets\services\interfaces\AuthenticationService.class
 eg\gov\iti\jets\utilities\StageCoordinator.class
+eg\gov\iti\jets\io\RMIManager.class
