@@ -15,4 +15,7 @@ module Client{
     exports eg.gov.iti.jets;
     opens eg.gov.iti.jets.ui.controllers;
 
+    requires java.rmi;
+
+
 }

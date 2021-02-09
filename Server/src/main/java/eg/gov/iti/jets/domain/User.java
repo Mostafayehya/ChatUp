@@ -1,7 +1,7 @@
 package eg.gov.iti.jets.domain;
 
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class User {
     String phoneNumber;
@@ -11,7 +11,7 @@ public class User {
     String picture;
     Gender gender;
     String country;
-    Date dateOfBirth;
+    LocalDate dateOfBirth;
     String bio;
     Status status;
     Mode mode;
@@ -26,7 +26,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String phoneNumber, String name, String email, String password, String picture, Gender gender, String country, Date dateOfBirth, String bio, Status status, Mode mode) {
+    public User(String phoneNumber, String name, String email, String password, String picture, Gender gender, String country, LocalDate dateOfBirth, String bio, Status status, Mode mode) {
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.email = email;
@@ -96,11 +96,11 @@ public class User {
         this.country = country;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

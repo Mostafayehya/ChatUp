@@ -2,8 +2,10 @@ package eg.gov.iti.jets.data.dao;
 
 import eg.gov.iti.jets.data.DataBaseConnection;
 import eg.gov.iti.jets.domain.User;
+import eg.gov.iti.jets.utilities.JavaSqlTimeConverter;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -24,7 +26,7 @@ public class UserDaoImpl implements UserDao{
             preparedStatement.setString(5,user.getPicture());
             preparedStatement.setString(6,user.getGender().name());
             preparedStatement.setString(7,user.getCountry());
-            preparedStatement.setDate(8,user.getDateOfBirth());
+            preparedStatement.setDate(8, JavaSqlTimeConverter.convertJavadateToSqlDate(user.getDateOfBirth()));
             preparedStatement.setString(9,user.getBio());
             preparedStatement.setString(10,user.getStatus().name());
             preparedStatement.setString(11,user.getMode().name());
