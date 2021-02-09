@@ -24,7 +24,8 @@ public class Main extends Application {
     @Override
     public void init() {
         // Initialize Database & Network Connections
-        //rmiManager.startRMIServices();
+        rmiManager=RMIManager.getInstance();
+        rmiManager.startRMIServices();
     }
 
     @Override

@@ -1,0 +1,16 @@
+eg\gov\iti\jets\domain\Mode.class
+eg\gov\iti\jets\ui\StageCoordinator.class
+eg\gov\iti\jets\io\Server.class
+eg\gov\iti\jets\ui\controllers\TestController.class
+eg\gov\iti\jets\data\DataBaseConnection.class
+eg\gov\iti\jets\domain\Status.class
+eg\gov\iti\jets\data\dao\UserDao.class
+eg\gov\iti\jets\Main.class
+eg\gov\iti\jets\domain\User.class
+eg\gov\iti\jets\ui\controllers\ChatPageController.class
+eg\gov\iti\jets\utilities\JavaSqlTimeConverter.class
+module-info.class
+eg\gov\iti\jets\domain\Gender.class
+eg\gov\iti\jets\services\interfaces\AuthenticationService.class
+eg\gov\iti\jets\data\dao\UserDaoImpl.class
+eg\gov\iti\jets\services\implementations\AuthenticationServiceImpl.class

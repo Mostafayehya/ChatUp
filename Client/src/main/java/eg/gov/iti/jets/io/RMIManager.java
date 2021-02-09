@@ -18,7 +18,7 @@ public class RMIManager {
     public void startRMIServices() {
         try {
             reg = LocateRegistry.getRegistry("localhost",8189);
-            authenticationService= (AuthenticationService) reg.lookup("ChatService");
+            authenticationService= (AuthenticationService) reg.lookup("AuthenticationService");
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
