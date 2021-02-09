@@ -4,3 +4,5 @@
 *.iml
 *.class
 *.properties
+/Client/target/
+/Server/target/
