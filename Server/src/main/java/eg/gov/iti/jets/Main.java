@@ -1,8 +1,7 @@
 package eg.gov.iti.jets;
 
-import eg.gov.iti.jets.utilities.StageCoordinator;
+import eg.gov.iti.jets.ui.StageCoordinator;
 import javafx.application.Application;
-import javafx.scene.Scene;
 
 import javafx.stage.Stage;
 

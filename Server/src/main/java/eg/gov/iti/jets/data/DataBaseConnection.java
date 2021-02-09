@@ -1,4 +1,4 @@
-package eg.gov.iti.jets.utilities;
+package eg.gov.iti.jets.data;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
