@@ -19,7 +19,7 @@ public class DataBaseConnection {
 
     private DataBaseConnection(){
         try {
-            inputStream=new FileInputStream(getClass().getResource("db.properties").getPath());
+            inputStream=new FileInputStream(getClass().getResource("/db.properties").getPath());
             MysqlDataSource mysqlDataSource = new MysqlDataSource();
             properties.load(inputStream);
             mysqlDataSource.setURL(properties.getProperty("MYSQL_DB_URL"));

@@ -19,4 +19,6 @@ module Server {
     requires java.sql;
     requires java.naming;
     requires java.rmi;
+
+    opens eg.gov.iti.jets.services.interfaces to java.rmi;
 }
