@@ -1,116 +1,224 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
-<?import org.kordamp.ikonli.javafx.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="626.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <BorderPane prefHeight="626.0" prefWidth="759.0" BorderPane.alignment="CENTER">
-         <top>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label prefHeight="70.0" prefWidth="227.0" text="Yasmina A. Mohamed">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Circle fill="#d9e2eb" radius="52.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" styleClass="Danger" text="Block">
-                     <HBox.margin>
-                        <Insets right="10.0" top="20.0" />
-                     </HBox.margin>
-                  </Button>
-
-               </children>
-            </HBox>
-         </top>
+      <BorderPane BorderPane.alignment="CENTER">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
-         <center>
-            <HBox spacing="20.0" BorderPane.alignment="CENTER">
+         <top>
+            <VBox alignment="CENTER" spacing="50.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="224.0" prefWidth="449.0" spacing="10.0">
+                  <VBox>
                      <children>
-                        <HBox prefHeight="0.0" prefWidth="201.0" />
-                        <Line endX="100.0" startX="-100.0" stroke="#c9c3c3" />
-                        <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" promptText="First name" />
-                        <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="318.0" promptText="Last name" />
-                        <TextField blendMode="LIGHTEN" promptText="Phone number" />
-                        <ListView prefHeight="25.0" prefWidth="318.0" />
-                        <TextField blendMode="LIGHTEN" promptText="Email" />
-                        <TextField blendMode="LIGHTEN" promptText="Category" />
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Pane prefHeight="223.0" prefWidth="136.0" />
+                              <Pane prefHeight="223.0" prefWidth="296.0">
+                                 <children>
+                                    <Circle fill="#d9e2eb" layoutX="158.0" layoutY="80.0" radius="52.0" stroke="BLACK" strokeType="INSIDE">
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color red="0.21052631735801697" green="0.20467835664749146" blue="0.20467835664749146" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </Circle>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="134.0" text="Hagar Abdelmoniem">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <effect>
+                                          <Glow />
+                                       </effect>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="52.0" layoutY="169.0" prefHeight="17.0" prefWidth="219.0" text="JETS - JWD" textFill="#9a9a9a" />
+                                    <Button layoutX="121.0" layoutY="197.0" mnemonicParsing="false" style="-fx-background-radius: 30; -fx-background-color: #009688;" text="Edit Photo" textFill="#ebe4e4">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                       <graphic>
+                                          <FontIcon iconColor="#d7cccc" iconLiteral="fas-camera" />
+                                       </graphic>
+                                    </Button>
+                                    <Circle fill="#1f52ff" layoutX="121.0" layoutY="112.0" radius="14.0" stroke="BLACK" strokeType="INSIDE">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </Circle>
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Button layoutX="86.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-radius: 50; -fx-background-color: transparent;">
+                                       <graphic>
+                                       </graphic></Button>
+                                    <Button layoutX="114.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-radius: 50; -fx-background-color: transparent;" />
+                                    <Button layoutX="144.0" layoutY="14.0" minHeight="18.0" minWidth="30.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: transparent;" />
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="256.0" prefWidth="442.0" spacing="10.0">
+                  <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" text="+" textFill="#6f6d6d">
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
-                                 </color></DropShadow>
-                           </effect>
-                           <graphic>
-                           </graphic></Button>
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" text="+" textFill="#6f6d6d">
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
-                                 </color></DropShadow>
-                           </effect></Button>
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" text="+" textFill="#6f6d6d">
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
-                                 </color></DropShadow>
-                           </effect></Button>
-                        <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" text="+" textFill="#6f6d6d">
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
-                                 </color></DropShadow>
-                           </effect></Button>
-                        <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" text="+" textFill="#6f6d6d">
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
-                                 </color></DropShadow>
-                           </effect></Button>
-                        <Button layoutX="10.0" layoutY="150.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" text="+" textFill="#6f6d6d">
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </Button>
+                        <VBox prefHeight="272.0" prefWidth="110.0" spacing="15.0">
+                           <children>
+                              <Label text="First Name:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Last Name:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="27.0" text="Phone Number:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="44.0" text="Extra Number:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="61.0" prefHeight="17.0" prefWidth="176.0" text="Email:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="78.0" text="Category:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </VBox>
+                        <Line endX="99.51309204101562" endY="-242.1597900390625" startX="99.51321411132812" startY="-390.45269775390625" stroke="#c9c3c3" />
+                        <VBox spacing="10.0">
+                           <children>
+                              <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" promptText="First name" style="-fx-background-color: #000000; -fx-border-width: 0 0 1 0; -fx-border-color: #ffffff;" />
+                              <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" promptText="Last name" style="-fx-background-color: #000000; -fx-border-width: 0 0 1 0; -fx-border-color: #ffffff;" />
+                              <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" promptText="Phone number" style="-fx-background-color: #000000; -fx-border-width: 0 0 1 0; -fx-border-color: #ffffff;" />
+                              <ListView blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" style="-fx-background-color: #000000; -fx-border-width: 0 0 1 0; -fx-border-color: #ffffff;" />
+                              <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" promptText="First name" style="-fx-background-color: #000000; -fx-border-width: 0 0 1 0; -fx-border-color: #ffffff;" />
+                              <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" promptText="Category" style="-fx-background-color: #000000; -fx-border-width: 0 0 1 0; -fx-border-color: #ffffff;" />
+                              <Pane prefHeight="36.0" prefWidth="194.0">
+                                 <children>
+                                    <Button layoutX="-31.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 30; -fx-background-color: #009688;" text="Save Changes" textFill="#ebe4e4">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </VBox>
+                        <VBox spacing="10.0">
+                           <children>
+                              <Button minWidth="29.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <graphic>
+                           </graphic>
+                                 <graphic>
+                                    <FontIcon />
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="10.0" layoutY="10.0" minWidth="4.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="4.0" style="-fx-background-radius: 50; -fx-background-color: #009688;"> <!--textFill="#6f6d6d"-->
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <graphic>
+                                    <FontIcon strokeType="OUTSIDE" strokeWidth="0.0" />
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Button>
+                              <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Button>
+                              <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Button>
+                              <Button layoutX="10.0" layoutY="150.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#6f6d6d">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Button>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="20.0" top="20.0" />
+                           </HBox.margin>
+                        </VBox>
                      </children>
-                     <HBox.margin>
-                        <Insets left="20.0" top="20.0" />
-                     </HBox.margin></VBox>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
                </children>
-               <HBox.margin>
-                  <Insets right="10.0" top="20.0" />
-               </HBox.margin>
-               <padding>
-                  <Insets left="70.0" />
-               </padding>
-            </HBox>
-         </center></BorderPane>
+            </VBox>
+         </top></BorderPane>
    </center>
    <left>
-      <BorderPane prefHeight="626.0" prefWidth="111.0" BorderPane.alignment="CENTER" />
+      <VBox alignment="CENTER" prefWidth="111.0" BorderPane.alignment="CENTER" />
    </left>
 </BorderPane>
