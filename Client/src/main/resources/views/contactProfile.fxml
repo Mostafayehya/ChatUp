@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -18,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane prefHeight="626.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="626.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.contactProfileController">
    <center>
       <BorderPane BorderPane.alignment="CENTER">
          <padding>
@@ -29,12 +28,38 @@
                <children>
                   <VBox>
                      <children>
-                        <HBox alignment="CENTER">
+                        <HBox alignment="CENTER" prefHeight="297.0" prefWidth="608.0">
                            <children>
-                              <Pane prefHeight="223.0" prefWidth="136.0" />
-                              <Pane prefHeight="223.0" prefWidth="296.0">
+                              <Pane prefHeight="297.0" prefWidth="150.0" />
+                              <Pane prefHeight="297.0" prefWidth="328.0">
                                  <children>
-                                    <Circle fill="#d9e2eb" layoutX="158.0" layoutY="80.0" radius="52.0" stroke="BLACK" strokeType="INSIDE">
+                                    <HBox layoutX="26.0" layoutY="281.0" prefHeight="32.0" prefWidth="253.0" spacing="20.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#videoCall" style="-fx-background-radius: 50; -fx-background-color: #eeebeb;" textFill="#eeebeb">
+                                             <graphic>
+                                       </graphic>
+                                             <graphic>
+                                                <FontIcon iconColor="#cbcad7" iconLiteral="fas-video" iconSize="25" />
+                                             </graphic>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onAction="#voiceCall" style="-fx-background-radius: 50; -fx-background-color: #eeebeb;" textFill="#eeebeb">
+                                             <graphic>
+                                                <FontIcon iconColor="#cbcad7" iconLiteral="fas-phone" iconSize="25" wrappingWidth="23.0" />
+                                             </graphic>
+                                          </Button>
+                                          <Button minHeight="18.0" minWidth="30.0" mnemonicParsing="false" onAction="#sendMsg" prefHeight="32.0" prefWidth="54.0" style="-fx-background-radius: 50; -fx-background-color: #eeebeb;" textFill="#eeebeb">
+                                             <graphic>
+                                                <FontIcon iconColor="#cbcad7" iconLiteral="fas-comment" iconSize="25" wrappingWidth="26.0" />
+                                             </graphic>
+                                          </Button>
+                                          <Button minHeight="18.0" minWidth="30.0" mnemonicParsing="false" onAction="#Block" prefHeight="35.0" prefWidth="54.0" style="-fx-background-radius: 50; -fx-background-color: #eeebeb;" textFill="#eeebeb">
+                                             <graphic>
+                                                <FontIcon iconColor="#da0f0f" iconLiteral="fas-ban" iconSize="25" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <Circle fx:id="photo" fill="#d9e2eb" layoutX="164.0" layoutY="90.0" radius="52.0" stroke="BLACK" strokeType="INSIDE">
                                        <effect>
                                           <DropShadow>
                                              <color>
@@ -43,7 +68,7 @@
                                           </DropShadow>
                                        </effect>
                                     </Circle>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="134.0" text="Hagar Abdelmoniem">
+                                    <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="167.0" prefHeight="35.0" prefWidth="292.0" text="      Reem ElKady">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -51,32 +76,31 @@
                                           <Glow />
                                        </effect>
                                     </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="52.0" layoutY="169.0" prefHeight="17.0" prefWidth="219.0" text="JETS - JWD" textFill="#9a9a9a" />
-                                    <Button layoutX="121.0" layoutY="197.0" mnemonicParsing="false" style="-fx-background-radius: 30; -fx-background-color: #009688;" text="Edit Photo" textFill="#ebe4e4">
+                                    <Label fx:id="Category" alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="212.0" prefHeight="17.0" prefWidth="219.0" text="JETS - EWD" textFill="#bcbbbb">
+                                       <font>
+                                          <Font size="11.5" />
+                                       </font></Label>
+                                    <Button layoutX="207.0" layoutY="118.0" mnemonicParsing="false" onAction="#changePhoto" style="-fx-background-radius: 30; -fx-background-color: #009688;" textFill="#ebe4e4">
                                        <effect>
                                           <DropShadow />
                                        </effect>
                                        <graphic>
-                                          <FontIcon iconColor="#d7cccc" iconLiteral="fas-camera" />
+                                          <FontIcon iconColor="#393740" iconLiteral="fas-camera" />
                                        </graphic>
                                     </Button>
-                                    <Circle fill="#1f52ff" layoutX="121.0" layoutY="112.0" radius="14.0" stroke="BLACK" strokeType="INSIDE">
+                                    <Circle fx:id="status" fill="#1f52ff" layoutX="123.0" layoutY="128.0" radius="14.0" stroke="BLACK" strokeType="INSIDE">
                                        <effect>
                                           <DropShadow />
                                        </effect>
                                     </Circle>
+                                    <Label fx:id="Bio" alignment="CENTER" layoutX="1.0" layoutY="244.0" prefHeight="18.0" prefWidth="309.0" text="This is my Bio , I'm using Chattup!" textFill="#bcbbbb">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </Pane>
-                              <Pane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <Button layoutX="86.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-radius: 50; -fx-background-color: transparent;">
-                                       <graphic>
-                                       </graphic></Button>
-                                    <Button layoutX="114.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-radius: 50; -fx-background-color: transparent;" />
-                                    <Button layoutX="144.0" layoutY="14.0" minHeight="18.0" minWidth="30.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: transparent;" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </Pane>
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
                            </children>
                         </HBox>
                      </children>
@@ -91,11 +115,6 @@
                                  </font>
                               </Label>
                               <Label text="Last Name:">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="27.0" text="Phone Number:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -120,29 +139,25 @@
                               <Insets top="5.0" />
                            </padding>
                         </VBox>
-                        <Line endX="99.51309204101562" endY="-242.1597900390625" startX="99.51321411132812" startY="-390.45269775390625" stroke="#c9c3c3" />
+                        <Line endX="99.39263916015625" endY="-305.029296875" startX="99.51251220703125" startY="-503.32220458984375" stroke="#c9c3c3" />
                         <VBox spacing="10.0">
                            <children>
-                              <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" promptText="First name" style="-fx-background-color: #000000; -fx-border-width: 0 0 1 0; -fx-border-color: #ffffff;" />
-                              <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" promptText="Last name" style="-fx-background-color: #000000; -fx-border-width: 0 0 1 0; -fx-border-color: #ffffff;" />
-                              <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" promptText="Phone number" style="-fx-background-color: #000000; -fx-border-width: 0 0 1 0; -fx-border-color: #ffffff;" />
-                              <ListView blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" style="-fx-background-color: #000000; -fx-border-width: 0 0 1 0; -fx-border-color: #ffffff;" />
-                              <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" promptText="First name" style="-fx-background-color: #000000; -fx-border-width: 0 0 1 0; -fx-border-color: #ffffff;" />
-                              <TextField blendMode="LIGHTEN" prefHeight="25.0" prefWidth="261.0" promptText="Category" style="-fx-background-color: #000000; -fx-border-width: 0 0 1 0; -fx-border-color: #ffffff;" />
-                              <Pane prefHeight="36.0" prefWidth="194.0">
-                                 <children>
-                                    <Button layoutX="-31.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 30; -fx-background-color: #009688;" text="Save Changes" textFill="#ebe4e4">
-                                       <effect>
-                                          <DropShadow />
-                                       </effect>
-                                    </Button>
-                                 </children>
-                              </Pane>
+                              <TextField prefHeight="25.0" prefWidth="261.0" promptText="First name" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
+                              <TextField prefHeight="25.0" prefWidth="261.0" promptText="Last name" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
+                              <ListView prefHeight="25.0" prefWidth="261.0" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
+                              <TextField prefHeight="25.0" prefWidth="261.0" promptText="Email" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
+                              <TextField prefHeight="25.0" prefWidth="261.0" promptText="Category" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
+                              <Pane prefHeight="36.0" prefWidth="194.0" />
+                              <Button mnemonicParsing="false" onAction="#save" style="-fx-background-radius: 30; -fx-background-color: #009688;" text="Save Changes" textFill="#ebe4e4">
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </Button>
                            </children>
                         </VBox>
-                        <VBox spacing="10.0">
+                        <VBox prefHeight="272.0" prefWidth="0.0" spacing="12.0">
                            <children>
-                              <Button minWidth="29.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
+                              <Button minWidth="7.0" mnemonicParsing="false" onAction="#changeFirstName" prefHeight="25.0" prefWidth="7.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
                                  <effect>
                                     <DropShadow>
                                        <color>
@@ -153,10 +168,10 @@
                                  <graphic>
                            </graphic>
                                  <graphic>
-                                    <FontIcon />
+                                    <FontIcon iconColor="#393740" iconLiteral="fas-pen" />
                                  </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="10.0" minWidth="4.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="4.0" style="-fx-background-radius: 50; -fx-background-color: #009688;"> <!--textFill="#6f6d6d"-->
+                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#changeLastName" prefHeight="25.0" style="-fx-background-radius: 50; -fx-background-color: #009688;"> <!--textFill="#6f6d6d"-->
                                  <effect>
                                     <DropShadow>
                                        <color>
@@ -165,10 +180,10 @@
                                     </DropShadow>
                                  </effect>
                                  <graphic>
-                                    <FontIcon strokeType="OUTSIDE" strokeWidth="0.0" />
+                                    <FontIcon iconColor="#393740" iconLiteral="fas-pen" strokeType="OUTSIDE" strokeWidth="0.0" />
                                  </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
+                              <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#addPhone" prefHeight="25.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
                                  <effect>
                                     <DropShadow>
                                        <color>
@@ -176,8 +191,11 @@
                                        </color>
                                     </DropShadow>
                                  </effect>
+                                 <graphic>
+                                    <FontIcon iconColor="#393740" iconLiteral="fas-pen" />
+                                 </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
+                              <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
                                  <effect>
                                     <DropShadow>
                                        <color>
@@ -185,8 +203,11 @@
                                        </color>
                                     </DropShadow>
                                  </effect>
+                                 <graphic>
+                                    <FontIcon iconColor="#393740" iconLiteral="fas-pen" onDragDetected="#changeEmail" />
+                                 </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
+                              <Button layoutX="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#changeCategory" prefHeight="25.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#6f6d6d">
                                  <effect>
                                     <DropShadow>
                                        <color>
@@ -194,19 +215,13 @@
                                        </color>
                                     </DropShadow>
                                  </effect>
-                              </Button>
-                              <Button layoutX="10.0" layoutY="150.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#6f6d6d">
-                                 <effect>
-                                    <DropShadow>
-                                       <color>
-                                          <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect>
+                                 <graphic>
+                                    <FontIcon iconColor="#393740" iconLiteral="fas-pen" onDragDetected="#changeCategory" />
+                                 </graphic>
                               </Button>
                            </children>
                            <HBox.margin>
-                              <Insets left="20.0" top="20.0" />
+                              <Insets left="20.0" />
                            </HBox.margin>
                         </VBox>
                      </children>
