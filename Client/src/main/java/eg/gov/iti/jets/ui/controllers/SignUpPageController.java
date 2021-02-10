@@ -19,7 +19,6 @@ import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
 import services.AuthenticationService;
-
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
@@ -44,7 +43,7 @@ public class SignUpPageController implements Initializable {
     @FXML
     CustomTextField countryTextField;
     @FXML
-    ChoiceBox<String> genderChoiceBox;
+    ChoiceBox<Gender> genderChoiceBox;
     @FXML
     DatePicker birthDatePicker;
     Validation validation;
@@ -67,22 +66,55 @@ public class SignUpPageController implements Initializable {
                 e.consume();
             }
         });
-        ObservableList<String> genders = FXCollections.observableArrayList("MALE", "FEMALE");
+        phoneTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
+            if (!isNowFocused) {
+                if (phoneTextField.getText().equals("") || phoneTextField.getText().length() < 11) {
+                    phoneTextField.setStyle("-fx-border-color: red;");
+                } else {
+                    phoneTextField.setStyle("-fx-border-color: transparent;");
+                }
+            }
+        }));
+        emailTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
+            if (!isNowFocused) {
+                if (emailTextField.getText().equals("") || validation.validateEmail(emailTextField.getText())) {
+                    emailTextField.setStyle("-fx-border-color: red;");
+                } else {
+                    emailTextField.setStyle("-fx-border-color: transparent;");
+                }
+            }
+        }));
+        nameTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
+            if (!isNowFocused) {
+                if (nameTextField.getText().equals("")) {
+                    nameTextField.setStyle("-fx-border-color: red;");
+                } else {
+                    nameTextField.setStyle("-fx-border-color: transparent;");
+                }
+            }
+        }));
+        passwordTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
+            if (!isNowFocused) {
+                if (passwordTextField.getText().equals("")) {
+                    passwordTextField.setStyle("-fx-border-color: red;");
+                } else {
+                    passwordTextField.setStyle("-fx-border-color: transparent;");
+                }
+            }
+        }));
+        confirmPasswordField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
+            if (!isNowFocused) {
+                if (confirmPasswordField.getText().equals("") || !confirmPasswordField.getText().equals(passwordTextField.getText())) {
+                    confirmPasswordField.setStyle("-fx-border-color: red;");
+                } else {
+                    confirmPasswordField.setStyle("-fx-border-color: transparent;");
+                }
+            }
+        }));
+        ObservableList<Gender> genders = FXCollections.observableArrayList(Gender.FEMALE,Gender.MALE);
         genderChoiceBox.setItems(genders);
-        genderChoiceBox.setValue("Gender");
+        genderChoiceBox.setValue(Gender.FEMALE);
         signUpButton.addEventHandler(ActionEvent.ACTION, (e) -> {
-            if (!validation.validateEmail(emailTextField.getText())) {
-                emailTextField.setStyle("-fx-border-color: red;");
-            }
-            if (validation.isempty(phoneTextField)) {
-                phoneTextField.setStyle("-fx-border-color: red;");
-            }
-            if (validation.isempty(emailTextField)) {
-                emailTextField.setStyle("-fx-border-color: red;");
-            }
-            if (validation.isempty(nameTextField)) {
-                nameTextField.setStyle("-fx-border-color: red;");
-            }
             if (validation.isempty(passwordTextField)) {
                 passwordTextField.setStyle("-fx-border-color: red;");
             }
@@ -90,9 +122,8 @@ public class SignUpPageController implements Initializable {
                 passwordTextField.setStyle("-fx-border-color: red;");
                 confirmPasswordField.setStyle("-fx-border-color: red;");
             }
-
             User user = null;
-            user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(),null, Gender.FEMALE,countryTextField.getText(),birthDatePicker.getValue(),bioTextField.getText(), Status.OFFLINE, Mode.AVAILABLE);
+            user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), null, genderChoiceBox.getValue(), countryTextField.getText(), birthDatePicker.getValue(), bioTextField.getText(), Status.ONLINE, Mode.AVAILABLE);
             try {
                 authenticationService.signUp(user);
             } catch (RemoteException ex) {
