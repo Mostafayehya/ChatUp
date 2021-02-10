@@ -19,7 +19,7 @@
                      </effect>
                   </Circle>
                         <Line endX="115.0" layoutX="345.0" layoutY="93.0" startX="-310.29290771484375" stroke="#ddd2d2" />
-                        <Label fx:id="name" layoutX="61.0" layoutY="19.0" prefHeight="35.0" prefWidth="102.0" text="Hagar">
+                        <Label fx:id="name" layoutX="61.0" layoutY="19.0" prefHeight="35.0" prefWidth="131.0" text="Mohamed">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
