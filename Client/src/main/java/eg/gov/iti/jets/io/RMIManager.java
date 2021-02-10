@@ -1,17 +1,18 @@
 package eg.gov.iti.jets.io;
 
-import eg.gov.iti.jets.services.interfaces.AuthenticationService;
+import services.AuthenticationService;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
-public class RMIManager {
+public class RMIManager extends UnicastRemoteObject {
     Registry reg;
-    AuthenticationService authenticationService;
+    private static AuthenticationService authenticationService;
     private static RMIManager rmiManager;
-    private RMIManager(){
+    private RMIManager() throws RemoteException{
         startRMIServices();
     }
     //todo: refactor looking up of services into individual methods
@@ -27,11 +28,16 @@ public class RMIManager {
     }
 
     public synchronized static RMIManager getInstance(){
-        if(rmiManager==null)
-            rmiManager = new RMIManager();
+        if(rmiManager==null) {
+            try {
+                rmiManager = new RMIManager();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
         return rmiManager;
     }
-    public AuthenticationService getAuthenticationService() {
+    public static AuthenticationService getAuthenticationService() {
         return authenticationService;
     }
 }

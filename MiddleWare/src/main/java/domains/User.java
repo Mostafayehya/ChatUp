@@ -1,9 +1,12 @@
-package eg.gov.iti.jets.domain;
+package domains;
 
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 
-public class User {
+public class User implements Serializable {
     String phoneNumber;
     String name;
     String email;
@@ -19,7 +22,7 @@ public class User {
     public User() {
     }
 
-    public User(String phoneNumber, String name, String email, String password) {
+    public User(String phoneNumber, String name, String email, String password){
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.email = email;

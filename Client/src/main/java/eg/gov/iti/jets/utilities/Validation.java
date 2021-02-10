@@ -1,5 +1,8 @@
 package eg.gov.iti.jets.utilities;
 
+import javafx.scene.Node;
+import javafx.scene.control.TextField;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,6 +22,10 @@ public class Validation {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(text);
         return matcher.matches();
+    }
+
+    public boolean isempty(TextField textField){
+        return textField.getText().equals("");
     }
 
     public boolean matchPasswords(String password,String confirmPassword){

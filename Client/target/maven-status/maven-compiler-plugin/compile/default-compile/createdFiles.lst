@@ -1,16 +1,11 @@
 eg\gov\iti\jets\utilities\Validation.class
 eg\gov\iti\jets\ui\controllers\navigationbarControlller.class
 eg\gov\iti\jets\ui\controllers\TestController.class
-eg\gov\iti\jets\ui\models\Gender.class
 eg\gov\iti\jets\ui\models\TestModel.class
 eg\gov\iti\jets\Main.class
-eg\gov\iti\jets\ui\models\User.class
 eg\gov\iti\jets\ui\controllers\SignUpPageController.class
 eg\gov\iti\jets\ui\controllers\ChatPageController.class
-eg\gov\iti\jets\ui\models\Mode.class
 eg\gov\iti\jets\ui\controllers\LoginPageController.class
 module-info.class
-eg\gov\iti\jets\ui\models\Status.class
-eg\gov\iti\jets\services\interfaces\AuthenticationService.class
 eg\gov\iti\jets\utilities\StageCoordinator.class
 eg\gov\iti\jets\io\RMIManager.class

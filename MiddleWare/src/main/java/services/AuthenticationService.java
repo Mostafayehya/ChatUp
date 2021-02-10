@@ -1,8 +1,6 @@
-package eg.gov.iti.jets.services.interfaces;
+package services;
 
-
-
-import eg.gov.iti.jets.ui.models.User;
+import domains.User;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

@@ -1,7 +1,8 @@
 package eg.gov.iti.jets.io;
 
 import eg.gov.iti.jets.services.implementations.AuthenticationServiceImpl;
-import eg.gov.iti.jets.services.interfaces.AuthenticationService;
+import services.AuthenticationService;
+
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;

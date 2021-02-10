@@ -1,11 +1,11 @@
 package eg.gov.iti.jets.data.dao;
 
+import domains.User;
 import eg.gov.iti.jets.data.DataBaseConnection;
-import eg.gov.iti.jets.domain.User;
+
 import eg.gov.iti.jets.utilities.JavaSqlTimeConverter;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 

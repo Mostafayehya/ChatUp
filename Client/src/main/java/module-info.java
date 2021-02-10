@@ -16,6 +16,8 @@ module Client{
     opens eg.gov.iti.jets.ui.controllers;
 
     requires java.rmi;
+    requires MiddleWare;
+
 
 
 }
