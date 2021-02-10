@@ -12,7 +12,9 @@
 
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.scene.layout.StackPane?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0"
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
             prefWidth="759.0" stylesheets="@../css/loginStyle.css" xmlns="http://javafx.com/javafx/15.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.SignUpPageController">
     <right>
@@ -40,10 +42,9 @@
             <children>
                 <Label alignment="CENTER" prefHeight="36.0" prefWidth="202.0"
                        style="-fx-font-size: 25; -fx-font-weight: bold; -fx-text-fill: #009688" text="Join Us!"/>
-                <StackPane>
-                    <FontIcon iconLiteral="far-user"/>
-                    <FontIcon iconLiteral="fas-plus-circle"/>
-                </StackPane>
+                <ImageView fx:id="userImageView" fitHeight="100.0" fitWidth="150.0">
+                    <Image url="@../images/adduser.jpg"/>
+                </ImageView>
                 <CustomTextField fx:id="phoneTextField" promptText="Phone Number" styleClass="textField">
                     <left>
                         <FontIcon iconColor="gray" iconLiteral="mdi2p-phone"/>

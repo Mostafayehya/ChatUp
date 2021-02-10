@@ -15,10 +15,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
 import services.AuthenticationService;
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
@@ -46,6 +52,9 @@ public class SignUpPageController implements Initializable {
     ChoiceBox<Gender> genderChoiceBox;
     @FXML
     DatePicker birthDatePicker;
+    @FXML
+    ImageView userImageView;
+    Image userImage;
     Validation validation;
     AuthenticationService authenticationService;
 
@@ -57,6 +66,7 @@ public class SignUpPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         authenticationService = RMIManager.getAuthenticationService();
+        userImage=userImageView.getImage();
         loginButton.addEventHandler(ActionEvent.ACTION, e -> {
             StageCoordinator stageCoordinator = StageCoordinator.getInstance();
             stageCoordinator.goToLoginPage();
@@ -64,6 +74,18 @@ public class SignUpPageController implements Initializable {
         phoneTextField.addEventFilter(KeyEvent.KEY_TYPED, (e) -> {
             if (!new Validation().validatePhoneNumber(e.getCharacter()) || phoneTextField.getText().length() >= 11) {
                 e.consume();
+            }
+        });
+        userImageView.addEventHandler(MouseEvent.MOUSE_CLICKED,(e)->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("image files","*.jpg","*.png"));
+            File userPhoto = fileChooser.showOpenDialog(userImageView.getScene().getWindow());
+            try {
+                URL photoUrl = userPhoto.toURI().toURL();
+                userImage = new Image(photoUrl.toExternalForm());
+                userImageView.setImage(userImage);
+            } catch (MalformedURLException ex) {
+                ex.printStackTrace();
             }
         });
         phoneTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
@@ -123,7 +145,7 @@ public class SignUpPageController implements Initializable {
                 confirmPasswordField.setStyle("-fx-border-color: red;");
             }
             User user = null;
-            user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), null, genderChoiceBox.getValue(), countryTextField.getText(), birthDatePicker.getValue(), bioTextField.getText(), Status.ONLINE, Mode.AVAILABLE);
+            user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), userImage.getUrl(), genderChoiceBox.getValue(), countryTextField.getText(), birthDatePicker.getValue(), bioTextField.getText(), Status.ONLINE, Mode.AVAILABLE);
             try {
                 authenticationService.signUp(user);
             } catch (RemoteException ex) {
