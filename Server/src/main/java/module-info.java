@@ -18,4 +18,9 @@ module Server {
     requires mysql.connector.java;
     requires java.sql;
     requires java.naming;
+    requires java.rmi;
+
+
+
+    requires MiddleWare;
 }
