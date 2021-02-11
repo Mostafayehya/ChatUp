@@ -1,24 +1,41 @@
-package eg.gov.iti.jets.ui.models;
+package domains;
 
-public class Contact {
+
+import java.io.Serializable;
+import java.util.List;
+
+public class Contact implements Serializable {
     String userPhoneNumber;
     String contactPhoneNumber;
     String name;
     String bio;
     String email;
     String image;
+    Status status;
+    Mode mode;
+    List<String> extraNumbers;
 
     public Contact() {
         this.image = "src/main/resources/photos/user.jpg";
     }
 
-    public Contact(String userPhoneNumber, String contactPhoneNumber, String name, String bio, String email, String image) {
+    public Contact(String userPhoneNumber, String contactPhoneNumber, String name, String bio, String email, String image,Status status,Mode mode) {
         this.userPhoneNumber = userPhoneNumber;
         this.contactPhoneNumber = contactPhoneNumber;
         this.name = name;
         this.bio = bio;
         this.email = email;
         this.image = "src/main/resources/photos/user.jpg";
+        this.status = status;
+        this.mode = mode;
+    }
+
+    public List<String> getExtraNumbers() {
+        return extraNumbers;
+    }
+
+    public void setExtraNumbers(List<String> extraNumbers) {
+        this.extraNumbers = extraNumbers;
     }
 
     public String getUserPhoneNumber() {
@@ -67,5 +84,21 @@ public class Contact {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Mode getMode() {
+        return mode;
+    }
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
     }
 }

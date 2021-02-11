@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class UserModel {
     StringProperty phoneNumber = new SimpleStringProperty();
@@ -23,6 +24,7 @@ public class UserModel {
     StringProperty bio = new SimpleStringProperty();
     ObjectProperty<Status> status = new SimpleObjectProperty<>();
     ObjectProperty<Mode> mode = new SimpleObjectProperty<>();
+    List<ContactModel> contacts;
 
     public UserModel(String phoneNumber, String name, String email, String password, String picture, Gender gender, String country, LocalDate dateOfBirth, String bio, Status status, Mode mode) {
         this.phoneNumber.setValue(phoneNumber);
