@@ -20,7 +20,5 @@ module Server {
     requires java.naming;
     requires java.rmi;
 
-
-
     requires MiddleWare;
 }
