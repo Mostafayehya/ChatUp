@@ -1,4 +1,4 @@
-package eg.gov.iti.jets.utilities;
+package eg.gov.iti.jets.ui;
 
 import javafx.stage.Stage;
 
