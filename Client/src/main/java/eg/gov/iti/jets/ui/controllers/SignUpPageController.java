@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -122,10 +123,20 @@ public class SignUpPageController implements Initializable {
                 passwordTextField.setStyle("-fx-border-color: red;");
                 confirmPasswordField.setStyle("-fx-border-color: red;");
             }
-            User user = null;
+            User user;
             user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), null, genderChoiceBox.getValue(), countryTextField.getText(), birthDatePicker.getValue(), bioTextField.getText(), Status.ONLINE, Mode.AVAILABLE);
             try {
-                authenticationService.signUp(user);
+                int result = authenticationService.signUp(user);
+                if(result==-2){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Duplicate user error");
+                    alert.setHeaderText("User already exists");
+                    alert.setContentText("please login or use another phone number");
+                    alert.showAndWait();
+                }
+                else{
+                    StageCoordinator stageCoordinator = StageCoordinator.getInstance();
+                }
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }

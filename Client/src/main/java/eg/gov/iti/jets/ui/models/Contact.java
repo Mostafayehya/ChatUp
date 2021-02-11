@@ -1,7 +1,8 @@
 package eg.gov.iti.jets.ui.models;
 
 public class Contact {
-    String phoneNumber;
+    String userPhoneNumber;
+    String contactPhoneNumber;
     String name;
     String bio;
     String email;
@@ -11,20 +12,29 @@ public class Contact {
         this.image = "src/main/resources/photos/user.jpg";
     }
 
-    public Contact(String phoneNumber, String name, String bio, String email, String image) {
-        this.phoneNumber = phoneNumber;
+    public Contact(String userPhoneNumber, String contactPhoneNumber, String name, String bio, String email, String image) {
+        this.userPhoneNumber = userPhoneNumber;
+        this.contactPhoneNumber = contactPhoneNumber;
         this.name = name;
         this.bio = bio;
         this.email = email;
         this.image = "src/main/resources/photos/user.jpg";
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getUserPhoneNumber() {
+        return userPhoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setUserPhoneNumber(String userPhoneNumber) {
+        this.userPhoneNumber = userPhoneNumber;
+    }
+
+    public String getContactPhoneNumber() {
+        return contactPhoneNumber;
+    }
+
+    public void setContactPhoneNumber(String contactPhoneNumber) {
+        this.contactPhoneNumber = contactPhoneNumber;
     }
 
     public String getName() {

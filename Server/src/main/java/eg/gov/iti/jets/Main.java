@@ -32,7 +32,7 @@ public class Main extends Application {
     @Override
     public void stop() {
         // Terminate Database & Network Connections
-        dataBaseConnection.closeConncetion();
+        dataBaseConnection.closeConnection();
         server.stopServer();
     }
 
