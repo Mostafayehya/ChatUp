@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -20,6 +21,7 @@ public class StageCoordinator {
     Stage stage;
     StackPane parentContainer;
     BorderPane visibleRoot;
+    Popup addNewContactPopup;
     private static StageCoordinator stageCoordinator;
 
     private StageCoordinator(){
@@ -135,5 +137,23 @@ public class StageCoordinator {
         }
         stage.setScene(new Scene(root));
 
+    }
+    public void getAddNewContactPopUp(){
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/views/AddNewContactPopup.fxml"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        addNewContactPopup = new Popup();
+        root.setStyle("-fx-background-color: white");
+        addNewContactPopup.getContent().add(root);
+        addNewContactPopup.show(stage);
+    }
+
+    public void hideNewContactPopup(){
+        if(addNewContactPopup!=null){
+            addNewContactPopup.hide();
+        }
     }
 }
