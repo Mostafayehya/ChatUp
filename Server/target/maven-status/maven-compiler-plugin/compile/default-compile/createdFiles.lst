@@ -4,7 +4,6 @@ eg\gov\iti\jets\ui\controllers\TestController.class
 eg\gov\iti\jets\data\DataBaseConnection.class
 eg\gov\iti\jets\data\dao\UserDao.class
 eg\gov\iti\jets\Main.class
-eg\gov\iti\jets\ui\controllers\ChatPageController.class
 eg\gov\iti\jets\utilities\JavaSqlTimeConverter.class
 module-info.class
 eg\gov\iti\jets\data\dao\UserDaoImpl.class
