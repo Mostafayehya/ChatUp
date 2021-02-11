@@ -22,7 +22,7 @@
     -fx-border-radius: 20;
 }
 .blackHeader{
-    -fx-font-size: 25;
+    -fx-font-size: 20;
     -fx-font-weight: bold;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
