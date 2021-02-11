@@ -4,14 +4,23 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.ContactsListPageController">
     <left>
         <fx:include source="NavigationBar.fxml"/>
     </left>
-    <center>
-
-    </center>
    <center>
-      <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" fx:id="contactsListView"/>
+       <VBox>
+           <HBox style="-fx-background-color: #009688" alignment="CENTER_RIGHT">
+               <padding>
+                   <Insets right="20" left="20" bottom="20" top="20"></Insets>
+               </padding>
+                <Button>Add new contact</Button>
+           </HBox>
+           <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" fx:id="contactsListView"/>
+       </VBox>
+
    </center>
 </BorderPane>
