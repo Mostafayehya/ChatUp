@@ -144,7 +144,7 @@ public class SignUpPageController implements Initializable {
                 passwordTextField.setStyle("-fx-border-color: red;");
                 confirmPasswordField.setStyle("-fx-border-color: red;");
             }
-            User user = null;
+            User user;
             user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), userImage.getUrl(), genderChoiceBox.getValue(), countryTextField.getText(), birthDatePicker.getValue(), bioTextField.getText(), Status.ONLINE, Mode.AVAILABLE);
             try {
                 authenticationService.signUp(user);
