@@ -57,16 +57,18 @@ public class UserDaoImpl implements UserDao {
         try {
             Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = statement.executeQuery("select * from user where phoneNumber = " + phone);
+            rs.next();
             if (rs.getString(4).equals(password)) {
                 user.setName(rs.getString(2));
+                System.out.println(rs.getString(2));
                 user.setEmail(rs.getString(3));
                 user.setPicture(rs.getString(5));
-                user.setGender((Gender) rs.getObject(6));
+                //user.setGender((Gender) rs.getObject(6));
                 user.setCountry(rs.getString(7));
-                user.setDateOfBirth((LocalDate) rs.getObject(8));
+                //user.setDateOfBirth((LocalDate) rs.getObject(8));
                 user.setBio(rs.getString(9));
-                user.setStatus((Status) rs.getObject(10));
-                user.setMode((Mode) rs.getObject(11));
+                //user.setStatus((Status) rs.getObject(10));
+                //user.setMode((Mode) rs.getObject(11));
             }
             statement.close();
             return user;
