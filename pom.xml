@@ -12,6 +12,7 @@
     <modules>
         <module>Client</module>
         <module>Server</module>
+        <module>MiddleWare</module>
     </modules>
 
     <properties>
@@ -107,6 +108,20 @@
             <artifactId>tilesfx</artifactId>
             <version>${tilesfx.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.23</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.23</version>
+        </dependency>
+
 
         <dependency>
             <groupId>com.jfoenix</groupId>
