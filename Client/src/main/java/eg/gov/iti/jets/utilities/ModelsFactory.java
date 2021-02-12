@@ -5,8 +5,6 @@ import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.ui.models.UserModel;
 import javafx.collections.FXCollections;
-
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +30,7 @@ public class ModelsFactory {
          ,user.getGender(),user.getCountry(),user.getDateOfBirth(),user.getBio(),user.getStatus(),user.getMode());
         try {
             List<Contact> contacts = RMIManager.getHandleContactsService().getUserContacts(user.getPhoneNumber());
+            System.out.println(contacts.size());
             currentUser.setContacts(FXCollections.observableList(getContactModelsList(contacts)));
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -44,6 +43,7 @@ public class ModelsFactory {
             Contact contact = contacts.get(i);
             contactModels.add(getContactModel(contact));
         }
+        System.out.println(contactModels.size());
         return contactModels;
     }
 

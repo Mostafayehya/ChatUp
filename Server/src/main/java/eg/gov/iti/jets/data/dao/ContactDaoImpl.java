@@ -64,22 +64,24 @@ public class ContactDaoImpl implements ContactDao {
     public List<Contact> getContacts(String userPhone){
         List<Contact> contacts = new ArrayList<>();
         PreparedStatement preparedStatement = null;
+        System.out.println(userPhone);
         try {
             preparedStatement = connection.prepareStatement("select phoneNumber,name,email,picture,bio,status,mode from user,contact " +
-                    "where phoneNumber=contactPhone and userPhone = ?");
+                    "where phoneNumber = contactPhone and contact.userPhone = ?");
             preparedStatement.setString(1,userPhone);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
+                System.out.println("has contact");
                 Contact contact = new Contact(userPhone,resultSet.getString(1),resultSet.getString("name")
                         ,resultSet.getString("bio"),resultSet.getString("email")
-                        ,resultSet.getString("picture"), Status.valueOf(resultSet.getString("status"))
-                        , Mode.valueOf(resultSet.getString("mode")));
+                        ,resultSet.getString("picture"), Status.valueOf(resultSet.getString("status").toUpperCase())
+                        , Mode.valueOf(resultSet.getString("mode").toUpperCase()));
                 contacts.add(contact);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        System.out.println(contacts.size());
         return contacts;
     }
 }
