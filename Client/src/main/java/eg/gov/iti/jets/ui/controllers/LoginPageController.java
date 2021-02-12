@@ -48,6 +48,7 @@ public class LoginPageController implements Initializable {
 
     private void login(Event e) {
         User user = null;
+        failed.setText("");
         if (phoneTextField.getText().equals("") || phoneTextField.getText().length() != 11) {
             phoneTextField.setStyle("-fx-border-color: #D32F2F;");
         }
