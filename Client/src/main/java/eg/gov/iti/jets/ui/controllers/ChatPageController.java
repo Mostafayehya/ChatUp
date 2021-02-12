@@ -92,22 +92,6 @@ public class ChatPageController implements Initializable {
 
         chatListView.setItems(messagesObservableList);
 
-        messagesObservableList.addAll(new Message(LocalDate.now().toString(), "After setting cellFactory 2"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory3"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory4"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory5"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory6"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory7"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory8"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory9"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory10"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory11"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory12"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory13"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory14"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory15"),
-                new Message(LocalDate.now().toString(), "After setting cellFactory16"));
-
         chatListView.setCellFactory(messageListView -> new MessageListCell());
 
     }
@@ -117,6 +101,7 @@ public class ChatPageController implements Initializable {
         if (keyEvent.getCode() == KeyCode.ENTER) {
 
             messagesObservableList.add(new Message(LocalDate.now().toString(), messgeTextField.getText()));
+            chatListView.scrollTo(chatListView.getItems().size()-1);
             // Use service to send it over RMI
             messgeTextField.clear();
 
