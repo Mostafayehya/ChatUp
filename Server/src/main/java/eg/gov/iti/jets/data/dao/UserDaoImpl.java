@@ -60,15 +60,16 @@ public class UserDaoImpl implements UserDao {
             rs.next();
             if (rs.getString(4).equals(password)) {
                 user.setName(rs.getString(2));
-                System.out.println(rs.getString(2));
                 user.setEmail(rs.getString(3));
                 user.setPicture(rs.getString(5));
-                //user.setGender((Gender) rs.getObject(6));
+                user.setGender(Gender.valueOf(rs.getObject(6).toString().toUpperCase()));
                 user.setCountry(rs.getString(7));
-                //user.setDateOfBirth((LocalDate) rs.getObject(8));
+                String s = rs.getObject(8).toString();
+                LocalDate today = LocalDate.parse(s);
+                user.setDateOfBirth(today);
                 user.setBio(rs.getString(9));
-                //user.setStatus((Status) rs.getObject(10));
-                //user.setMode((Mode) rs.getObject(11));
+                user.setStatus(Status.valueOf(rs.getObject(10).toString().toUpperCase()));
+                user.setMode(Mode.valueOf(rs.getObject(11).toString().toUpperCase()));
             }
             statement.close();
             return user;
