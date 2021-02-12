@@ -1,9 +1,12 @@
-package eg.gov.iti.jets.ui.models;
+package domains;
 
 public class Message {
 
+    String senderPhoneNumber;
     String time;
     String content;
+    String receiverPhoneNumber;
+
 
     public Message() {
     }

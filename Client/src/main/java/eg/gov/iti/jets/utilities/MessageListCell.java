@@ -1,9 +1,7 @@
 package eg.gov.iti.jets.utilities;
 
-import eg.gov.iti.jets.ui.controllers.ContactItemController;
+import domains.Message;
 import eg.gov.iti.jets.ui.controllers.MessageItemController;
-import eg.gov.iti.jets.ui.models.Contact;
-import eg.gov.iti.jets.ui.models.Message;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.ListCell;

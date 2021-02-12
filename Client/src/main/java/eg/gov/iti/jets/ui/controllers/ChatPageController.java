@@ -1,7 +1,7 @@
 package eg.gov.iti.jets.ui.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import eg.gov.iti.jets.ui.models.Message;
+import domains.Message;
 import eg.gov.iti.jets.utilities.MessageListCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

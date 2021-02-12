@@ -1,6 +1,5 @@
 package eg.gov.iti.jets.ui.controllers;
 
-import eg.gov.iti.jets.ui.models.Message;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
