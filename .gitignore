@@ -2,5 +2,5 @@
 /target/
 .idea
 *.iml
-/Client/target
-/Server/target
+*.class
+*.properties
