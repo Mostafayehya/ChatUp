@@ -23,18 +23,6 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    @Override
-    public void init() {
-        // Initialize Database & Network Connections
-        //dataBaseConnection = DataBaseConnection.getInstance();
-        //server = Server.getInstance();
-    }
 
-    @Override
-    public void stop() {
-        // Terminate Database & Network Connections
-        //dataBaseConnection.closeConncetion();
-        //server.stopServer();
-    }
 
 }

@@ -15,35 +15,56 @@ public class Server {
     private static Server server;
     Registry registry;
     AuthenticationService authenticationService;
-    private Server(){
+
+    public AuthenticationService getnewAuthService() {
         try {
-            authenticationService  = new AuthenticationServiceImpl();
-
-            registry = LocateRegistry.createRegistry(8189);
-            registry.bind("AuthenticationService",authenticationService);
-
-
-        } catch (RemoteException e) {
+            authenticationService = new AuthenticationServiceImpl();
+            return authenticationService;
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        catch(AlreadyBoundException e){
+        return null;
+    }
+
+    private Server() {
+        //startServer();
+        getnewAuthService();
+        try {
+            registry = LocateRegistry.createRegistry(8189);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public synchronized static Server getInstance(){
-        if(server==null)
-            server=new Server();
+
+    public synchronized static Server getInstance() {
+        if (server == null)
+            server = new Server();
         return server;
     }
 
-    public void stopServer(){
+    public void stopServer() {
         try {
+            //AuthenticationService authenticationService = getnewAuthService();
             registry.unbind("AuthenticationService");
-            UnicastRemoteObject.unexportObject(authenticationService,true);
+            UnicastRemoteObject.unexportObject(authenticationService, true);
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void startServer() {
+        try {
+            AuthenticationService authenticationService = getnewAuthService();
+            registry = LocateRegistry.getRegistry(8189);
+            registry.bind("AuthenticationService", authenticationService);
+
+
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (AlreadyBoundException e) {
             e.printStackTrace();
         }
     }
