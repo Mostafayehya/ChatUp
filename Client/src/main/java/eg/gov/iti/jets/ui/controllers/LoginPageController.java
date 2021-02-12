@@ -57,7 +57,7 @@ public class LoginPageController implements Initializable {
         String phone = phoneTextField.getText(); String password = passwordTextField.getText();
         try {
             user= authenticationService.login(phone ,password );
-            if(user == null){failed.setText("Either phone or password are incorrect");};
+            if(user == null){failed.setText("Either phone or password is incorrect");};
             //System.out.println(user.getName() + "hello");
         } catch (Exception ex) {
             ex.printStackTrace();
