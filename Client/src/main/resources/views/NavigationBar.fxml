@@ -9,31 +9,36 @@
     <children>
         <VBox alignment="CENTER" spacing="20.0">
             <children>
-                <JFXButton fx:id="profileButton" buttonType="RAISED" contentDisplay="TOP" minWidth="-Infinity" text="Profile" textFill="#ebe5e5">
+                <JFXButton fx:id="profileButton" buttonType="RAISED" contentDisplay="TOP" minWidth="-Infinity" onMouseClicked="#switchToUserProfilePage" text="Profile" textFill="#ebe5e5">
                     <graphic>
                         <FontIcon iconColor="#c0c5cd" iconLiteral="far-user-circle" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="chatsButton" buttonType="RAISED" contentDisplay="TOP" layoutX="32.0" layoutY="10.0" minWidth="-Infinity" text="Chats" textFill="#ebe5e5">
+                <JFXButton fx:id="chatsButton" buttonType="RAISED" contentDisplay="TOP" layoutX="32.0" layoutY="10.0" minWidth="-Infinity" onMouseClicked="#switchToChatPage" text="Chats" textFill="#ebe5e5">
                     <graphic>
                         <FontIcon iconColor="#c0c5cd" iconLiteral="far-comments" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="contactsButton" buttonType="RAISED" contentDisplay="TOP" text="Contacts" textFill="#ebe5e5">
+                <JFXButton fx:id="contactsButton" buttonType="RAISED" contentDisplay="TOP" onMouseClicked="#switchToContactsPage" text="Contacts" textFill="#ebe5e5">
                     <graphic>
                         <FontIcon iconColor="#c0c5cd" iconLiteral="far-address-card" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="notificationButton" buttonType="RAISED" contentDisplay="TOP" text="Notifications" textFill="#ebe5e5">
+                <JFXButton fx:id="notificationButton" buttonType="RAISED" contentDisplay="TOP" onMouseClicked="#switchToNotifications" text="Notifications" textFill="#ebe5e5">
                     <graphic>
                         <FontIcon iconColor="#c0c5cd" iconLiteral="far-bell" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="invitationsButton" buttonType="RAISED" contentDisplay="TOP" prefHeight="30.0" text="Invitations" textFill="#ebe5e5">
+                <JFXButton fx:id="invitationsButton" buttonType="RAISED" contentDisplay="TOP" onMouseClicked="#switchToInvitationsPage" prefHeight="30.0" text="Invitations" textFill="#ebe5e5">
                     <graphic>
                         <FontIcon iconColor="#c0c5cd" iconLiteral="far-envelope" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
                     </graphic>
                 </JFXButton>
+            <JFXButton fx:id="chatsButton1" buttonType="RAISED" contentDisplay="TOP" layoutX="34.0" layoutY="81.0" minWidth="-Infinity" onMouseClicked="#switchToChatPage" text="Group chat" textFill="#ebe5e5">
+               <graphic>
+                  <FontIcon iconColor="#c0c5cd" iconLiteral="fas-users" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#switchToGroupChat" />
+               </graphic>
+            </JFXButton>
             </children>
          <VBox.margin>
             <Insets top="5.0" />
@@ -41,7 +46,7 @@
         </VBox>
         <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
             <children>
-                <JFXButton fx:id="signoutButton" buttonType="RAISED" contentDisplay="TOP" prefHeight="30.0" prefWidth="129.0" text="Sign out" textFill="#ebe5e5">
+                <JFXButton fx:id="signoutButton" buttonType="RAISED" contentDisplay="TOP" onMouseClicked="#signout" prefHeight="30.0" prefWidth="129.0" text="Sign out" textFill="#ebe5e5">
                     <graphic>
                         <FontIcon iconColor="#c0c5cd" iconLiteral="fas-sign-out-alt" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" text="" />
                     </graphic>
