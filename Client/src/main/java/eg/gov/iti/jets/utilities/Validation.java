@@ -25,7 +25,7 @@ public class Validation {
     }
 
     public boolean isempty(TextField textField){
-        return textField.getText().equals("");
+        return textField.textProperty().getValue().equals("");
     }
 
     public boolean matchPasswords(String password,String confirmPassword){

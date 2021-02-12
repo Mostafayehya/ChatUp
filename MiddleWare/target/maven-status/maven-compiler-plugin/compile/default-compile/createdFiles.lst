@@ -1,6 +1,0 @@
-domains\Gender.class
-domains\Status.class
-services\AuthenticationService.class
-domains\Mode.class
-domains\User.class
-module-info.class

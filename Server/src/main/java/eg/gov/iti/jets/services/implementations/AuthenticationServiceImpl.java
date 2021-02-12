@@ -16,12 +16,15 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
     }
 
     @Override
-    public User login(User user) {
-        return null;
+    public User login(String phone , String password) {
+        return userDao.getUserByPhoneAndPassword(phone, password);
     }
 
     @Override
     public int signUp(User user) {
-         return userDao.insertUser(user);
+        if(userDao.getUserByPhone(user.getPhoneNumber())!=null){
+            return -2;
+        }
+        return userDao.insertUser(user);
     }
 }

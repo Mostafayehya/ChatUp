@@ -1,13 +1,19 @@
 package eg.gov.iti.jets.utilities;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.animation.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 import java.io.IOException;
 
@@ -15,6 +21,7 @@ public class StageCoordinator {
     Stage stage;
     StackPane parentContainer;
     BorderPane visibleRoot;
+    Popup addNewContactPopup;
     private static StageCoordinator stageCoordinator;
 
     private StageCoordinator(){
@@ -121,4 +128,32 @@ public class StageCoordinator {
 //        }
 //    }
     //add public function to load each page like public void goToLoginPage();
+    public void gotoContactsListPage(){
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/views/ContactsListPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setScene(new Scene(root));
+
+    }
+    public void getAddNewContactPopUp(){
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/views/AddNewContactPopup.fxml"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        addNewContactPopup = new Popup();
+        root.setStyle("-fx-background-color: white");
+        addNewContactPopup.getContent().add(root);
+        addNewContactPopup.show(stage);
+    }
+
+    public void hideNewContactPopup(){
+        if(addNewContactPopup!=null){
+            addNewContactPopup.hide();
+        }
+    }
 }
