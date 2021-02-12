@@ -24,7 +24,23 @@ public class ContactsListPageController implements Initializable {
     public ContactsListPageController(){
         contactObservableList = FXCollections.observableArrayList(
                 new Contact("019922","hadeer","this is my bio","hadeer@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
+                new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg"),
                 new Contact("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg")
+
         );
     }
 

@@ -33,11 +33,7 @@ public class MessageItemController implements Initializable {
     @FXML
     private Label messageContent;
 
-    Message message;
 
-    public MessageItemController(Message message) {
-        this.message = message;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,9 +44,27 @@ public class MessageItemController implements Initializable {
 
             senderCircleImage.setFill(new ImagePattern(image));
             senderNameText.setText("Mostafa yehya");
-            messageContent.setText(message.getContent());
-            timeText.setText(message.getTime());
 
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setSenderName(String senderName){
+        this.senderNameText.setText(senderName);
+    }
+
+    public void setMessageContent(String messageContent){
+        this.messageContent.setText(messageContent);
+    }
+
+    public void setTimeText(String timeText){
+        this.timeText.setText(timeText);
+    }
+
+    public void setSenderCircleImage(String path){
+        try {
+            this.senderCircleImage.setFill(new ImagePattern(new Image(new FileInputStream(new File(path)))));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

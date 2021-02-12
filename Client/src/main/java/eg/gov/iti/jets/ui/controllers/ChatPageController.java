@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import eg.gov.iti.jets.ui.models.Message;
 import eg.gov.iti.jets.utilities.MessageListCell;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -79,27 +80,43 @@ public class ChatPageController implements Initializable {
     @FXML
     private FontIcon chatsButton;
 
-    List<Message> messageList;
+    ObservableList<Message> messagesObservableList;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        messageList = new ArrayList<>();
-        Collections.addAll(messageList, new Message("10:00 AM", "Good morning"),
+
+        messagesObservableList = FXCollections.observableArrayList(new Message("10:00 AM", "Good morning"),
                 new Message("08:15 PM", "Good night"));
 
-        chatListView.setItems(FXCollections.observableList(messageList));
-        chatListView.setCellFactory(chatListView -> new MessageListCell());
+        chatListView.setItems(messagesObservableList);
+
+        messagesObservableList.addAll(new Message(LocalDate.now().toString(), "After setting cellFactory 2"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory3"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory4"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory5"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory6"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory7"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory8"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory9"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory10"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory11"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory12"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory13"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory14"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory15"),
+                new Message(LocalDate.now().toString(), "After setting cellFactory16"));
+
+        chatListView.setCellFactory(messageListView -> new MessageListCell());
 
     }
 
     public void sendMessage(KeyEvent keyEvent) {
 
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            chatListView.getItems().add(new Message(LocalDate.now().toString(), messgeTextField.getText()));
-            chatListView.scrollTo(chatListView.getItems().size() - 1);
 
+            messagesObservableList.add(new Message(LocalDate.now().toString(), messgeTextField.getText()));
             // Use service to send it over RMI
             messgeTextField.clear();
 

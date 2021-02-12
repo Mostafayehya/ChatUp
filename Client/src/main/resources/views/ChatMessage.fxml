@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<HBox fx:id="messageLayout" prefHeight="93.0" prefWidth="387.0" spacing="10.0" BorderPane.alignment="CENTER"
+<HBox  fx:controller="eg.gov.iti.jets.ui.controllers.MessageItemController" fx:id="messageLayout" prefHeight="93.0" prefWidth="387.0" spacing="10.0" BorderPane.alignment="CENTER"
       xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Circle fx:id="senderCircleImage" radius="37.0" stroke="BLACK" strokeType="INSIDE">
