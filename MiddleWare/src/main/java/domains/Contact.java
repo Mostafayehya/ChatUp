@@ -30,6 +30,11 @@ public class Contact implements Serializable {
         this.mode = mode;
     }
 
+    public Contact(String userPhoneNumber,String contactPhoneNumber){
+        this.contactPhoneNumber = contactPhoneNumber;
+        this.userPhoneNumber = userPhoneNumber;
+    }
+
     public List<String> getExtraNumbers() {
         return extraNumbers;
     }

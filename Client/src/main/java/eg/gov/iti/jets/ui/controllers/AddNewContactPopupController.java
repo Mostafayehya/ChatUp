@@ -19,7 +19,6 @@ import javafx.scene.paint.Color;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.kordamp.ikonli.javafx.FontIcon;
 import services.HandleContactsService;
-
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -112,6 +111,13 @@ public class AddNewContactPopupController implements Initializable {
                     alert.setTitle("User not Found");
                     alert.setHeaderText("User Not Found");
                     alert.setContentText("The contact you added has no user account");
+                    alert.showAndWait();
+                }
+                if(result == -3){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Contact already exists");
+                    alert.setHeaderText("Contact already exists");
+                    alert.setContentText("The contact you added already exists in your contacts list");
                     alert.showAndWait();
                 }
             } catch (RemoteException ex) {

@@ -5,6 +5,7 @@ import eg.gov.iti.jets.data.DataBaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ContactDaoImpl implements ContactDao {
@@ -32,5 +33,27 @@ public class ContactDaoImpl implements ContactDao {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public Contact getContact(String userPhone, String contactPhone) {
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement("select * from contact where contactPhone = ? and userPhone = ?");
+            preparedStatement.setString(1,contactPhone);
+            preparedStatement.setString(2,userPhone);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                String contactPhoneNumber = resultSet.getString(1);
+                String userPhoneNumber = resultSet.getString(2);
+                preparedStatement.close();
+                return new Contact(contactPhoneNumber,userPhoneNumber);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
