@@ -9,6 +9,7 @@ import services.HandleContactsService;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 public class HandleContactServiceImpl extends UnicastRemoteObject implements HandleContactsService {
     ContactDao contactDao;
@@ -19,7 +20,7 @@ public class HandleContactServiceImpl extends UnicastRemoteObject implements Han
     }
 
     @Override
-    public int addNewContact(Contact contact) throws RemoteException {
+    public int addNewContact(Contact contact) {
 //        if(userDao.getUserByPhone(user.getPhoneNumber())==null){
 //            return -2;
 //        }
@@ -27,5 +28,10 @@ public class HandleContactServiceImpl extends UnicastRemoteObject implements Han
 //            return -3;
 //        }
         return contactDao.insertContact(contact);
+    }
+
+    @Override
+    public List<Contact> getUserContacts(String userPhone) {
+        return contactDao.getContacts(userPhone);
     }
 }

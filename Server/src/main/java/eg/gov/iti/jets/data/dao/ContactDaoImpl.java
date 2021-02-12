@@ -4,7 +4,6 @@ import domains.Contact;
 import domains.Mode;
 import domains.Status;
 import eg.gov.iti.jets.data.DataBaseConnection;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
