@@ -19,21 +19,22 @@ public class Main extends Application {
         StageCoordinator stageCoordinator=StageCoordinator.getInstance();
         stageCoordinator.setStage(primaryStage);
         //Call first page function
+        stageCoordinator.goToDashBoard();
         primaryStage.show();
     }
 
     @Override
     public void init() {
         // Initialize Database & Network Connections
-        dataBaseConnection = DataBaseConnection.getInstance();
-        server = Server.getInstance();
+        //dataBaseConnection = DataBaseConnection.getInstance();
+        //server = Server.getInstance();
     }
 
     @Override
     public void stop() {
         // Terminate Database & Network Connections
-        dataBaseConnection.closeConncetion();
-        server.stopServer();
+        //dataBaseConnection.closeConncetion();
+        //server.stopServer();
     }
 
 }
