@@ -44,11 +44,13 @@ public class DataBaseConnection {
     public Connection getConnection(){
         return connection;
     }
-    public void closeConncetion(){
+    public void closeConnection(){
         try {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+
 }
