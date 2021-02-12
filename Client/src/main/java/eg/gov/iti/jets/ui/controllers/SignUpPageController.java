@@ -63,7 +63,7 @@ public class SignUpPageController implements Initializable {
             stageCoordinator.goToLoginPage();
         });
         phoneTextField.addEventFilter(KeyEvent.KEY_TYPED, (e) -> {
-            if (!new Validation().validatePhoneNumber(e.getCharacter()) || phoneTextField.getText().length(git commit) >= 11) {
+            if (!new Validation().validatePhoneNumber(e.getCharacter()) || phoneTextField.getText().length() >= 11) {
                 e.consume();
             }
         });
