@@ -11,6 +11,7 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
@@ -105,7 +106,14 @@ public class AddNewContactPopupController implements Initializable {
             try {
                 ModelsFactory modelsFactory = ModelsFactory.getInstance();
                 String phone = modelsFactory.getCurrentUser().getPhoneNumber();
-                handleContactsService.addNewContact(new Contact(phone,contactModel.getContactPhoneNumber(),contactModel.getName(),contactModel.getBio(),contactModel.getEmail(),contactModel.getImage(),contactModel.getStatus(),contactModel.getMode()));
+                int result = handleContactsService.addNewContact(new Contact(phone,contactModel.getContactPhoneNumber(),contactModel.getName(),contactModel.getBio(),contactModel.getEmail(),contactModel.getImage(),contactModel.getStatus(),contactModel.getMode()));
+                if(result == -2){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("User not Found");
+                    alert.setHeaderText("User Not Found");
+                    alert.setContentText("The contact you added has no user account");
+                    alert.showAndWait();
+                }
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }

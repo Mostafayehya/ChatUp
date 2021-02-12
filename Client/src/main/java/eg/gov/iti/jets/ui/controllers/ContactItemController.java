@@ -1,14 +1,15 @@
 package eg.gov.iti.jets.ui.controllers;
 
 import eg.gov.iti.jets.ui.models.ContactModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import org.kordamp.ikonli.javafx.FontIcon;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -44,8 +45,8 @@ public class ContactItemController implements Initializable {
         contactNameLabel.setText(contact.getName());
         bioLabel.setText(contact.getBio());
 
-        messageIcon.addEventHandler(ActionEvent.ACTION,(e)->{
-
+        messageIcon.addEventHandler(MouseEvent.MOUSE_CLICKED,(e)->{
+            System.out.println(contact.getName());
         });
     }
 
