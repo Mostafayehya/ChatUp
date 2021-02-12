@@ -23,9 +23,9 @@ public class HandleContactServiceImpl extends UnicastRemoteObject implements Han
 //        if(userDao.getUserByPhone(user.getPhoneNumber())==null){
 //            return -2;
 //        }
-        if(contactDao.getContact(contact.getUserPhoneNumber(),contact.getContactPhoneNumber())==null){
-            return -3;
-        }
+//        if(contactDao.getContact(contact.getUserPhoneNumber(),contact.getContactPhoneNumber())==null){
+//            return -3;
+//        }
         return contactDao.insertContact(contact);
     }
 }
