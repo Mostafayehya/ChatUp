@@ -6,11 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.io.IOException;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,15 +17,16 @@ public class StageCoordinator {
     Stage stage;
     StackPane parentContainer;
     BorderPane visibleRoot;
+    Popup addNewContactPopup;
     private static StageCoordinator stageCoordinator;
     private final Map<String, SceneData> scenes = new HashMap<>();
 
-    private StageCoordinator() {
-        stage = null;
+    private StageCoordinator(){
+        stage=null;
     }
 
-    public void setStage(Stage stage) {
-        if (this.stage != null) {
+    public void setStage(Stage stage){
+        if(this.stage!=null){
             throw new IllegalStateException("Stage is already assigned");
         }
         else{
