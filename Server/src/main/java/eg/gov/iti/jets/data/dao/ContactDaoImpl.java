@@ -1,12 +1,16 @@
 package eg.gov.iti.jets.data.dao;
 
 import domains.Contact;
+import domains.Mode;
+import domains.Status;
 import eg.gov.iti.jets.data.DataBaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactDaoImpl implements ContactDao {
     DataBaseConnection dataBaseConnection = DataBaseConnection.getInstance();
@@ -55,5 +59,28 @@ public class ContactDaoImpl implements ContactDao {
         }
 
         return null;
+    }
+
+    @Override
+    public List<Contact> getContacts(String userPhone){
+        List<Contact> contacts = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement("select phoneNumber,name,email,picture,bio,status,mode from user,contact " +
+                    "where phoneNumber=contactPhone and userPhone = ?");
+            preparedStatement.setString(1,userPhone);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                Contact contact = new Contact(userPhone,resultSet.getString(1),resultSet.getString("name")
+                        ,resultSet.getString("bio"),resultSet.getString("email")
+                        ,resultSet.getString("picture"), Status.valueOf(resultSet.getString("status"))
+                        , Mode.valueOf(resultSet.getString("mode")));
+                contacts.add(contact);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return contacts;
     }
 }

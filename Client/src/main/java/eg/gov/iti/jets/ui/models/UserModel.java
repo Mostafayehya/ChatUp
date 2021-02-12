@@ -9,9 +9,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
-
 import java.time.LocalDate;
-import java.util.List;
+
 
 public class UserModel {
     StringProperty phoneNumber = new SimpleStringProperty();
