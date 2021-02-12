@@ -51,14 +51,15 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserByPhoneAndPassword(String phone, String password) {
-
-        User user = new User();
+        System.out.println("hello");
+        User user = null;
 
         try {
             Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = statement.executeQuery("select * from user where phoneNumber = " + phone);
             rs.next();
             if (rs.getString(4).equals(password)) {
+                user = new User();
                 user.setName(rs.getString(2));
                 user.setEmail(rs.getString(3));
                 user.setPicture(rs.getString(5));

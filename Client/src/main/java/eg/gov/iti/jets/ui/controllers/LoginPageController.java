@@ -30,7 +30,7 @@ public class LoginPageController implements Initializable {
     @FXML
     private Button loginButton;
     @FXML
-            private Label failed;
+    private Label failed;
     AuthenticationService authenticationService;
 
     @Override
@@ -71,14 +71,7 @@ public class LoginPageController implements Initializable {
 
     }
 
-    private boolean isNumber(String text) {
-        try {
-            Integer.parseInt(text);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
+
 
 
 }
