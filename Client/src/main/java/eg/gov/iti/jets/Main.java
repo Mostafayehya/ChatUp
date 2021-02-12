@@ -19,7 +19,7 @@ public class Main extends Application {
         //Call first page function
         stageCoordinator.goToLoginPage();
         primaryStage.setTitle("ChatUp - Client");
-        stageCoordinator.gotoContactsListPage();
+        stageCoordinator.switchToChatScreen();
         primaryStage.show();
     }
 

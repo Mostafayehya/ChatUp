@@ -2,6 +2,7 @@ package eg.gov.iti.jets.ui.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import eg.gov.iti.jets.ui.models.Message;
+import eg.gov.iti.jets.utilities.MessageListCell;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -88,68 +89,18 @@ public class ChatPageController implements Initializable {
         Collections.addAll(messageList, new Message("10:00 AM", "Good morning"),
                 new Message("08:15 PM", "Good night"));
 
-
         chatListView.setItems(FXCollections.observableList(messageList));
+        chatListView.setCellFactory(chatListView -> new MessageListCell());
 
-        chatListView.setCellFactory(new Callback<ListView<Message>, ListCell<Message>>() {
-            @Override
-            public ListCell<Message> call(ListView<Message> messageListView) {
-                return new ListCell<Message>() {
-                    @Override
-                    protected void updateItem(Message message, boolean b) {
-
-                        if (message != null) {
-                            // Buidling the custom cell layout here
-                            super.updateItem(message, b);
-
-                            HBox hBox = new HBox();
-
-                            // Handling the image of the sender
-
-                            Circle circle = new Circle();
-                            File imgFile = new File("src/main/resources/images/img.png");
-                            try {
-                                Image image = new Image(new FileInputStream(imgFile.getAbsolutePath()));
-
-                                circle.setFill(new ImagePattern(image));
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            }
-
-                            circle.setRadius(20);
-
-                            // Creating user name and message content layout
-
-                            VBox vBox = new VBox();
-                            Text userName = new Text();
-                            userName.setText("Mostafa Yehya");
-                            Label messageContent = new Label();
-                            messageContent.setText(message.getContent());
-
-                            vBox.getChildren().addAll(userName, messageContent);
-
-                            hBox.getChildren().addAll(circle, new Label(" "), vBox);
-                            setGraphic(hBox);
-
-                            chatListView.scrollTo(chatListView.getItems().size() - 1);
-
-                            System.out.println("Done populating ");
-
-                        } else {
-                            setGraphic(null);
-                            System.out.println("Elements are null");
-
-                        }
-                    }
-                };
-            }
-        });
     }
 
     public void sendMessage(KeyEvent keyEvent) {
 
-        if (keyEvent.getCode() == KeyCode.ENTER){
-            chatListView.getItems().add(new Message(LocalDate.now().toString(),messgeTextField.getText() ));
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            chatListView.getItems().add(new Message(LocalDate.now().toString(), messgeTextField.getText()));
+            chatListView.scrollTo(chatListView.getItems().size() - 1);
+
+            // Use service to send it over RMI
             messgeTextField.clear();
 
         }

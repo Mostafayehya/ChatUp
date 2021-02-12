@@ -88,5 +88,33 @@ public class StageCoordinator {
         }
 
     }
-    //add public function to load each age like public void goToLoginPage();
+
+    public void gotoContactsListPage(){
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/views/ContactsListPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setScene(new Scene(root));
+
+    }
+    public void getAddNewContactPopUp(){
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/views/AddNewContactPopup.fxml"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        addNewContactPopup = new Popup();
+        root.setStyle("-fx-background-color: white");
+        addNewContactPopup.getContent().add(root);
+        addNewContactPopup.show(stage);
+    }
+
+    public void hideNewContactPopup(){
+        if(addNewContactPopup!=null){
+            addNewContactPopup.hide();
+        }
+    }
 }
