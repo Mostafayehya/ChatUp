@@ -45,15 +45,24 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserByPhone(String phone) {
-
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from user where phoneNumber = ?");
+            preparedStatement.setString(1,phone);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                User user  = new User(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),
+                        resultSet.getString(4));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public User getUserByPhoneAndPassword(String phone, String password) {
-        System.out.println("hello");
         User user = null;
-
         try {
             Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = statement.executeQuery("select * from user where phoneNumber = " + phone);

@@ -71,6 +71,7 @@ public class SignUpPageController implements Initializable {
             if (!isNowFocused) {
                 if (phoneTextField.getText().equals("") || phoneTextField.getText().length() < 11) {
                     phoneTextField.setStyle("-fx-border-color: red;");
+                    phoneTextField.requestFocus();
                 } else {
                     phoneTextField.setStyle("-fx-border-color: transparent;");
                 }
@@ -80,6 +81,7 @@ public class SignUpPageController implements Initializable {
             if (!isNowFocused) {
                 if (emailTextField.getText().equals("") || !validation.validateEmail(emailTextField.getText())) {
                     emailTextField.setStyle("-fx-border-color: red;");
+                    emailTextField.requestFocus();
                 } else {
                     emailTextField.setStyle("-fx-border-color: transparent;");
                 }
@@ -89,6 +91,7 @@ public class SignUpPageController implements Initializable {
             if (!isNowFocused) {
                 if (nameTextField.getText().equals("")) {
                     nameTextField.setStyle("-fx-border-color: red;");
+                    nameTextField.requestFocus();
                 } else {
                     nameTextField.setStyle("-fx-border-color: transparent;");
                 }
@@ -98,6 +101,7 @@ public class SignUpPageController implements Initializable {
             if (!isNowFocused) {
                 if (passwordTextField.getText().equals("")) {
                     passwordTextField.setStyle("-fx-border-color: red;");
+                    passwordTextField.requestFocus();
                 } else {
                     passwordTextField.setStyle("-fx-border-color: transparent;");
                 }
@@ -105,9 +109,14 @@ public class SignUpPageController implements Initializable {
         }));
         confirmPasswordField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
-                if (confirmPasswordField.getText().equals("") || !confirmPasswordField.getText().equals(passwordTextField.getText())) {
+                if (confirmPasswordField.getText().equals("")) {
                     confirmPasswordField.setStyle("-fx-border-color: red;");
-                } else {
+                    confirmPasswordField.requestFocus();
+                }
+                else if( !confirmPasswordField.getText().equals(passwordTextField.getText())){
+                    confirmPasswordField.requestFocus();
+                }
+                else {
                     confirmPasswordField.setStyle("-fx-border-color: transparent;");
                 }
             }
@@ -116,12 +125,9 @@ public class SignUpPageController implements Initializable {
         genderChoiceBox.setItems(genders);
         genderChoiceBox.setValue(Gender.FEMALE);
         signUpButton.addEventHandler(ActionEvent.ACTION, (e) -> {
-            if (validation.isempty(passwordTextField)) {
-                passwordTextField.setStyle("-fx-border-color: red;");
-            }
-            if (!validation.matchPasswords(passwordTextField.getText(), confirmPasswordField.getText())) {
-                passwordTextField.setStyle("-fx-border-color: red;");
-                confirmPasswordField.setStyle("-fx-border-color: red;");
+            if(validation.isempty(phoneTextField) || validation.isempty(emailTextField) || validation.isempty(nameTextField)
+            || validation.isempty(passwordTextField) || validation.isempty(confirmPasswordField)){
+
             }
             User user;
             user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), null, genderChoiceBox.getValue(), countryTextField.getText(), birthDatePicker.getValue(), bioTextField.getText(), Status.ONLINE, Mode.AVAILABLE);

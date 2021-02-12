@@ -111,6 +111,7 @@ public class AddNewContactPopupController implements Initializable {
                     alert.setTitle("User not Found");
                     alert.setHeaderText("User Not Found");
                     alert.setContentText("The contact you added has no user account");
+                    StageCoordinator.getInstance().hideNewContactPopup();
                     alert.showAndWait();
                 }
                 if(result == -3){
@@ -118,6 +119,7 @@ public class AddNewContactPopupController implements Initializable {
                     alert.setTitle("Contact already exists");
                     alert.setHeaderText("Contact already exists");
                     alert.setContentText("The contact you added already exists in your contacts list");
+                    StageCoordinator.getInstance().hideNewContactPopup();
                     alert.showAndWait();
                 }
             } catch (RemoteException ex) {

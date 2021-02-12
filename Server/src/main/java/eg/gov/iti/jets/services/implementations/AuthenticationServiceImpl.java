@@ -22,10 +22,9 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
 
     @Override
     public int signUp(User user) {
-//        if(userDao.getUserByPhone(user.getPhoneNumber())==null){
-//            return -2;
-//        }
-
+        if(userDao.getUserByPhone(user.getPhoneNumber())!=null){
+            return -2;
+        }
         return userDao.insertUser(user);
     }
 }

@@ -21,12 +21,12 @@ public class HandleContactServiceImpl extends UnicastRemoteObject implements Han
 
     @Override
     public int addNewContact(Contact contact) {
-//        if(userDao.getUserByPhone(user.getPhoneNumber())==null){
-//            return -2;
-//        }
-//        if(contactDao.getContact(contact.getUserPhoneNumber(),contact.getContactPhoneNumber())==null){
-//            return -3;
-//        }
+        if(userDao.getUserByPhone(contact.getContactPhoneNumber())==null){
+            return -2;
+        }
+        if(contactDao.getContact(contact.getUserPhoneNumber(),contact.getContactPhoneNumber())!=null){
+            return -3;
+        }
         return contactDao.insertContact(contact);
     }
 
