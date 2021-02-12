@@ -2,6 +2,7 @@ package eg.gov.iti.jets.ui.controllers;
 
 import domains.User;
 import eg.gov.iti.jets.io.RMIManager;
+import eg.gov.iti.jets.utilities.ModelsFactory;
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import eg.gov.iti.jets.utilities.Validation;
 import javafx.event.Event;
@@ -32,9 +33,11 @@ public class LoginPageController implements Initializable {
     @FXML
     private Label failed;
     AuthenticationService authenticationService;
+    ModelsFactory modelsFactory;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        modelsFactory = ModelsFactory.getInstance();
         authenticationService = RMIManager.getAuthenticationService();
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
@@ -55,10 +58,15 @@ public class LoginPageController implements Initializable {
         if (passwordTextField.getText().equals("")) {
             passwordTextField.setStyle("-fx-border-color: #d32f2f;");
         }
-        String phone = phoneTextField.getText(); String password = passwordTextField.getText();
+        String phone = phoneTextField.getText();
+        String password = passwordTextField.getText();
         try {
-            user= authenticationService.login(phone ,password );
-            if(user == null){failed.setText("Either phone or password is incorrect");};
+            user = authenticationService.login(phone, password);
+            if (user == null) {
+                failed.setText("Either phone or password is incorrect");
+                return;
+            }
+            modelsFactory.setCurrentUser(user);
             //System.out.println(user.getName() + "hello");
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -70,8 +78,6 @@ public class LoginPageController implements Initializable {
         stageCoordinator.goToSignupPage();
 
     }
-
-
 
 
 }
