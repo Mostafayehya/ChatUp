@@ -1,7 +1,9 @@
 package eg.gov.iti.jets.ui.controllers;
 
-import eg.gov.iti.jets.ui.models.Contact;
+import domains.Contact;
+import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.utilities.ContactListCell;
+import eg.gov.iti.jets.utilities.ModelsFactory;
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,8 +18,8 @@ import java.util.ResourceBundle;
 
 public class ContactsListPageController implements Initializable {
     @FXML
-    ListView<Contact> contactsListView;
-    ObservableList<Contact> contactObservableList;
+    ListView<ContactModel> contactsListView;
+    ObservableList<ContactModel> contactObservableList;
     @FXML
     Button addNewContact;
 

@@ -42,22 +42,57 @@ public class StageCoordinator {
     }
 
     public void goToLoginPage(){
-        try {
-            Parent root=FXMLLoader.load(getClass().getResource("/views/LoginPage.fxml"));
-            parentContainer = new StackPane(root);
-            stage.setScene(new Scene(parentContainer,759.0,626.0));
-            visibleRoot=(BorderPane)root;
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if (stage ==null){
+            throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
+        }
+
+        if (!scenes.containsKey("login")) {
+            try {
+                System.out.println("Created New Scene");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/LoginPage.fxml"));
+                Parent loginView = fxmlLoader.load();
+                parentContainer = new StackPane(loginView);
+                Scene loginScene = new Scene(parentContainer,759.0,626.0);
+                SceneData loginSceneData = new SceneData(fxmlLoader, parentContainer, loginScene);
+                scenes.put("login", loginSceneData);
+                stage.setScene(loginScene);
+            } catch (IOException e) {
+                System.out.println("IO Exception: Couldn't load 'Chat Page' FXML file");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Loaded Existing Scene");
+            SceneData loginSceneData = scenes.get("login");
+            Scene loginScene = loginSceneData.getScene();
+            stage.setScene(loginScene);
         }
     }
 
     public void goToSignupPage(){
-        try{
-            Parent root = FXMLLoader.load(getClass().getResource("/views/SignUpPage.fxml"));
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if (stage ==null){
+            throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
+        }
+
+        if (!scenes.containsKey("signup")) {
+            try {
+                System.out.println("Created New Scene");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/SignUpPage.fxml"));
+                Parent signupView = fxmlLoader.load();
+                Scene chatScene = new Scene(signupView);
+                SceneData signupSceneData = new SceneData(fxmlLoader, signupView, chatScene);
+                scenes.put("signup", signupSceneData);
+                stage.setScene(chatScene);
+            } catch (IOException e) {
+                System.out.println("IO Exception: Couldn't load 'signUP Page' FXML file");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Loaded Existing Scene");
+            SceneData loginSceneData = scenes.get("signup");
+            Scene signUpScene = loginSceneData.getScene();
+            stage.setScene(signUpScene);
         }
     }
 
@@ -90,14 +125,31 @@ public class StageCoordinator {
     }
 
     public void gotoContactsListPage(){
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/views/ContactsListPage.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        stage.setScene(new Scene(root));
 
+
+        if (stage ==null){
+            throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
+        }
+
+        if (!scenes.containsKey("contacts")) {
+            try {
+                System.out.println("Created New Scene");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ContactsListPage.fxml"));
+                Parent contactsView = fxmlLoader.load();
+                Scene contactsScene = new Scene(contactsView);
+                SceneData loginSceneData = new SceneData(fxmlLoader, contactsView, contactsScene);
+                scenes.put("contacts", loginSceneData);
+                stage.setScene(contactsScene);
+            } catch (IOException e) {
+                System.out.println("IO Exception: Couldn't load 'Chat Page' FXML file");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Loaded Existing Scene");
+            SceneData contactsSceneData = scenes.get("contacts");
+            Scene contactsScene = contactsSceneData.getScene();
+            stage.setScene(contactsScene);
+        }
     }
     public void getAddNewContactPopUp(){
         Parent root = null;
