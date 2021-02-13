@@ -1,8 +1,10 @@
 package eg.gov.iti.jets.services.implementations;
 
+import clientInterface.ChatUpClientInt;
 import domains.User;
 import eg.gov.iti.jets.data.dao.UserDao;
 import eg.gov.iti.jets.data.dao.UserDaoImpl;
+import eg.gov.iti.jets.io.Server;
 import services.AuthenticationService;
 
 
@@ -16,8 +18,14 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
     }
 
     @Override
-    public User login(String phone , String password) {
-        return userDao.getUserByPhoneAndPassword(phone, password);
+    public User login(String phone , String password, ChatUpClientInt chatUpClient) {
+        User user =  userDao.getUserByPhoneAndPassword(phone, password);
+        if(user!=null){
+            //add chatUpClient to the clients map in server
+            Server.getInstance().addClient(phone,chatUpClient);
+        }
+
+        return user;
     }
 
     @Override
@@ -27,4 +35,6 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
         }
         return userDao.insertUser(user);
     }
+
+
 }

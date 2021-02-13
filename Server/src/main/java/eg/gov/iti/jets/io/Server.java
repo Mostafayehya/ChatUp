@@ -1,5 +1,6 @@
 package eg.gov.iti.jets.io;
 
+import clientInterface.ChatUpClientInt;
 import eg.gov.iti.jets.services.implementations.AuthenticationServiceImpl;
 import eg.gov.iti.jets.services.implementations.HandleContactServiceImpl;
 import services.AuthenticationService;
@@ -12,13 +13,18 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Server {
     private static Server server;
     Registry registry;
     AuthenticationService authenticationService;
     HandleContactsService handleContactsService;
+    //list of clients
+    Map<String, ChatUpClientInt> clients;
     private Server(){
+        clients = new HashMap<>();
         try {
             authenticationService  = new AuthenticationServiceImpl();
             handleContactsService = new HandleContactServiceImpl();
@@ -39,6 +45,16 @@ public class Server {
         if(server==null)
             server=new Server();
         return server;
+    }
+
+    //use in login
+    public void addClient(String phoneNumber,ChatUpClientInt clientImpl){
+        clients.put(phoneNumber,clientImpl);
+    }
+
+    //use in signOut or exit
+    public void removeClient(String phoneNumber){
+        clients.remove(phoneNumber);
     }
 
     public void stopServer(){

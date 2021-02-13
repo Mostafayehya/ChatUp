@@ -1,6 +1,7 @@
 package eg.gov.iti.jets.ui.controllers;
 
 import domains.User;
+import eg.gov.iti.jets.io.ChatUpClientImpl;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.utilities.ModelsFactory;
 import eg.gov.iti.jets.utilities.StageCoordinator;
@@ -61,7 +62,7 @@ public class LoginPageController implements Initializable {
         String phone = phoneTextField.getText();
         String password = passwordTextField.getText();
         try {
-            user = authenticationService.login(phone, password);
+            user = authenticationService.login(phone, password,new ChatUpClientImpl());
             if (user == null) {
                 failed.setText("Either phone or password is incorrect");
                 return;
