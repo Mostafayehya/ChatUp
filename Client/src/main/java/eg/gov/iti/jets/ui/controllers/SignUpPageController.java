@@ -20,6 +20,7 @@ import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
 import services.AuthenticationService;
+
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
@@ -112,40 +113,73 @@ public class SignUpPageController implements Initializable {
                 if (confirmPasswordField.getText().equals("")) {
                     confirmPasswordField.setStyle("-fx-border-color: red;");
                     confirmPasswordField.requestFocus();
-                }
-                else if( !confirmPasswordField.getText().equals(passwordTextField.getText())){
+                } else if (!confirmPasswordField.getText().equals(passwordTextField.getText())) {
                     confirmPasswordField.requestFocus();
-                }
-                else {
+                } else {
                     confirmPasswordField.setStyle("-fx-border-color: transparent;");
                 }
             }
         }));
-        ObservableList<Gender> genders = FXCollections.observableArrayList(Gender.FEMALE,Gender.MALE);
+        ObservableList<Gender> genders = FXCollections.observableArrayList(Gender.FEMALE, Gender.MALE);
         genderChoiceBox.setItems(genders);
         genderChoiceBox.setValue(Gender.FEMALE);
         signUpButton.addEventHandler(ActionEvent.ACTION, (e) -> {
-            if(validation.isempty(phoneTextField) || validation.isempty(emailTextField) || validation.isempty(nameTextField)
-            || validation.isempty(passwordTextField) || validation.isempty(confirmPasswordField)){
-
-            }
-            User user;
-            user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), null, genderChoiceBox.getValue(), countryTextField.getText(), birthDatePicker.getValue(), bioTextField.getText(), Status.ONLINE, Mode.AVAILABLE);
-            try {
-                int result = authenticationService.signUp(user);
-                if(result==-2){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Duplicate user error");
-                    alert.setHeaderText("User already exists");
-                    alert.setContentText("please login or use another phone number");
-                    alert.showAndWait();
+            if (validateFields()) {
+                User user;
+                user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), null, genderChoiceBox.getValue(), countryTextField.getText(), birthDatePicker.getValue(), bioTextField.getText(), Status.ONLINE, Mode.AVAILABLE);
+                try {
+                    int result = authenticationService.signUp(user);
+                    if (result == -2) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Duplicate user error");
+                        alert.setHeaderText("User already exists");
+                        alert.setContentText("please login or use another phone number");
+                        alert.showAndWait();
+                    } else {
+                        StageCoordinator stageCoordinator = StageCoordinator.getInstance();
+                    }
+                } catch (RemoteException ex) {
+                    ex.printStackTrace();
                 }
-                else{
-                    StageCoordinator stageCoordinator = StageCoordinator.getInstance();
-                }
-            } catch (RemoteException ex) {
-                ex.printStackTrace();
             }
         });
+
+    }
+
+    private boolean validateFields() {
+        boolean validated = true;
+        if (phoneTextField.getText().equals("") || phoneTextField.getText().length() < 11) {
+            phoneTextField.setStyle("-fx-border-color: red;");
+            validated = false;
+        } else {
+            phoneTextField.setStyle("-fx-border-color: transparent;");
+        }
+        if (emailTextField.getText().equals("") || !validation.validateEmail(emailTextField.getText())) {
+            emailTextField.setStyle("-fx-border-color: red;");
+            validated = false;
+        } else {
+            emailTextField.setStyle("-fx-border-color: transparent;");
+        }
+        if (nameTextField.getText().equals("")) {
+            nameTextField.setStyle("-fx-border-color: red;");
+            validated = false;
+        } else {
+            nameTextField.setStyle("-fx-border-color: transparent;");
+        }
+        if (passwordTextField.getText().equals("")) {
+            passwordTextField.setStyle("-fx-border-color: red;");
+            validated = false;
+        } else {
+            passwordTextField.setStyle("-fx-border-color: transparent;");
+        }
+        if (confirmPasswordField.getText().equals("")) {
+            confirmPasswordField.setStyle("-fx-border-color: red;");
+            validated = false;
+        } else if (!confirmPasswordField.getText().equals(passwordTextField.getText())) {
+            validated = false;
+        } else {
+            confirmPasswordField.setStyle("-fx-border-color: transparent;");
+        }
+        return validated;
     }
 }
