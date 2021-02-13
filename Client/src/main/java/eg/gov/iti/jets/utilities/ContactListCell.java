@@ -1,16 +1,16 @@
 package eg.gov.iti.jets.utilities;
 
 import eg.gov.iti.jets.ui.controllers.ContactItemController;
-import eg.gov.iti.jets.ui.models.Contact;
+import eg.gov.iti.jets.ui.models.ContactModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
 
 import java.io.IOException;
 
-public class ContactListCell extends ListCell<Contact> {
+public class ContactListCell extends ListCell<ContactModel> {
     FXMLLoader loader;
     @Override
-    protected void updateItem(Contact contact, boolean empty) {
+    protected void updateItem(ContactModel contact, boolean empty) {
         super.updateItem(contact, empty);
         if(empty || contact == null){
             setText(null);

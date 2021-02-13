@@ -4,6 +4,7 @@ package domains;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class User implements Serializable {

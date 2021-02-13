@@ -8,8 +8,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
+import javafx.collections.ObservableList;
 import java.time.LocalDate;
+
 
 public class UserModel {
     StringProperty phoneNumber = new SimpleStringProperty();
@@ -23,6 +24,15 @@ public class UserModel {
     StringProperty bio = new SimpleStringProperty();
     ObjectProperty<Status> status = new SimpleObjectProperty<>();
     ObjectProperty<Mode> mode = new SimpleObjectProperty<>();
+    ObservableList<ContactModel> contacts;
+
+    public ObservableList<ContactModel> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(ObservableList<ContactModel> contacts) {
+        this.contacts = contacts;
+    }
 
     public UserModel(String phoneNumber, String name, String email, String password, String picture, Gender gender, String country, LocalDate dateOfBirth, String bio, Status status, Mode mode) {
         this.phoneNumber.setValue(phoneNumber);

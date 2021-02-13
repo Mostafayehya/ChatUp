@@ -19,7 +19,8 @@ public class DataBaseConnection {
 
     private DataBaseConnection(){
         try {
-            inputStream=new FileInputStream("src/main/resources/db.properties");
+            inputStream=new FileInputStream(getClass().getResource("/db.properties").getPath());
+            //System.out.println(getClass().getResource("/db.properties").getPath());
             MysqlDataSource mysqlDataSource = new MysqlDataSource();
             properties.load(inputStream);
             mysqlDataSource.setURL(properties.getProperty("MYSQL_DB_URL"));
@@ -43,11 +44,13 @@ public class DataBaseConnection {
     public Connection getConnection(){
         return connection;
     }
-    public void closeConncetion(){
+    public void closeConnection(){
         try {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+
 }
