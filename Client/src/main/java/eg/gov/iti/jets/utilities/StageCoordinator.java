@@ -1,8 +1,5 @@
 package eg.gov.iti.jets.utilities;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.animation.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,10 +9,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.IOException;
-
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StageCoordinator {
     Stage stage;
@@ -23,6 +19,7 @@ public class StageCoordinator {
     BorderPane visibleRoot;
     Popup addNewContactPopup;
     private static StageCoordinator stageCoordinator;
+    private final Map<String, SceneData> scenes = new HashMap<>();
 
     private StageCoordinator(){
         stage=null;
@@ -45,98 +42,114 @@ public class StageCoordinator {
     }
 
     public void goToLoginPage(){
-        try {
-            Parent root=FXMLLoader.load(getClass().getResource("/views/LoginPage.fxml"));
-            parentContainer = new StackPane(root);
-            stage.setScene(new Scene(parentContainer,759.0,626.0));
-            visibleRoot=(BorderPane)root;
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if (stage ==null){
+            throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
+        }
+
+        if (!scenes.containsKey("login")) {
+            try {
+                System.out.println("Created New Scene");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/LoginPage.fxml"));
+                Parent loginView = fxmlLoader.load();
+                parentContainer = new StackPane(loginView);
+                Scene loginScene = new Scene(parentContainer,759.0,626.0);
+                SceneData loginSceneData = new SceneData(fxmlLoader, parentContainer, loginScene);
+                scenes.put("login", loginSceneData);
+                stage.setScene(loginScene);
+            } catch (IOException e) {
+                System.out.println("IO Exception: Couldn't load 'Chat Page' FXML file");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Loaded Existing Scene");
+            SceneData loginSceneData = scenes.get("login");
+            Scene loginScene = loginSceneData.getScene();
+            stage.setScene(loginScene);
         }
     }
 
     public void goToSignupPage(){
-        try{
-            Parent root = FXMLLoader.load(getClass().getResource("/views/SignUpPage.fxml"));
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if (stage ==null){
+            throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
+        }
+
+        if (!scenes.containsKey("signup")) {
+            try {
+                System.out.println("Created New Scene");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/SignUpPage.fxml"));
+                Parent signupView = fxmlLoader.load();
+                Scene chatScene = new Scene(signupView);
+                SceneData signupSceneData = new SceneData(fxmlLoader, signupView, chatScene);
+                scenes.put("signup", signupSceneData);
+                stage.setScene(chatScene);
+            } catch (IOException e) {
+                System.out.println("IO Exception: Couldn't load 'signUP Page' FXML file");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Loaded Existing Scene");
+            SceneData loginSceneData = scenes.get("signup");
+            Scene signUpScene = loginSceneData.getScene();
+            stage.setScene(signUpScene);
         }
     }
 
-//    public void translateToSignUp(){
-//        try{
-//            Parent root = FXMLLoader.load(getClass().getResource("/views/SignUpPage.fxml"));
-//            root.translateXProperty().set(-stage.getScene().getWidth());
-//
-//            visibleRoot.translateXProperty().set(-(stage.getScene().getWidth()));
-//            parentContainer.getChildren().add(root);
-//
-//            Timeline leftTimeLine = new Timeline();
-//            KeyValue leftkv = new KeyValue(visibleRoot.translateXProperty(),stage.getScene().getWidth(),Interpolator.LINEAR);
-//            KeyFrame leftkf = new KeyFrame(Duration.seconds(2),leftkv);
-//            leftTimeLine.getKeyFrames().add(leftkf);
-//
-//
-//            Timeline timeline = new Timeline();
-//            KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
-//            KeyFrame kf = new KeyFrame(Duration.seconds(2),kv);
-//            timeline.getKeyFrames().add(kf);
-//            timeline.setOnFinished(t->{
-//                parentContainer.getChildren().remove(visibleRoot);
-//                visibleRoot=(BorderPane)root;
-//            });
-//
-//            ParallelTransition parallelTransition = new ParallelTransition();
-//            parallelTransition.getChildren().addAll(leftTimeLine,timeline);
-//            //parallelTransition.setOnFinished(t->parentContainer.getChildren().remove(visibleRoot));
-//            parallelTransition.play();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    public void traslateToLogin(){
-//        try{
-//            Parent root = FXMLLoader.load(getClass().getResource("/views/LoginPage.fxml"));
-//            root.translateXProperty().set(stage.getScene().getWidth());
-//
-//            visibleRoot.translateXProperty().set(-stage.getScene().getWidth());
-//            parentContainer.getChildren().add(root);
-//
-//            Timeline rightTimeLine = new Timeline();
-//            KeyValue rightkv = new KeyValue(visibleRoot.translateXProperty(),0,Interpolator.EASE_OUT);
-//            KeyFrame rightkf = new KeyFrame(Duration.seconds(2),rightkv);
-//            rightTimeLine.getKeyFrames().add(rightkf);
-//
-//
-//            Timeline timeline = new Timeline();
-//            KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
-//            KeyFrame kf = new KeyFrame(Duration.seconds(2),kv);
-//            timeline.getKeyFrames().add(kf);
-//            timeline.setOnFinished(t->{
-//                parentContainer.getChildren().remove(visibleRoot);
-//                visibleRoot=(BorderPane)root;
-//            });
-//
-//            ParallelTransition parallelTransition = new ParallelTransition();
-//            parallelTransition.getChildren().addAll(rightTimeLine,timeline);
-//            parallelTransition.play();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-    //add public function to load each page like public void goToLoginPage();
-    public void gotoContactsListPage(){
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/views/ContactsListPage.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        stage.setScene(new Scene(root));
+    public void switchToChatScreen() {
 
+        if (stage ==null){
+            throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
+        }
+
+        if (!scenes.containsKey("chat")) {
+            try {
+                System.out.println("Created New Scene");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ChatPage.fxml"));
+                Parent chatView = fxmlLoader.load();
+                Scene chatScene = new Scene(chatView);
+                SceneData loginSceneData = new SceneData(fxmlLoader, chatView, chatScene);
+                scenes.put("chat", loginSceneData);
+                stage.setScene(chatScene);
+            } catch (IOException e) {
+                System.out.println("IO Exception: Couldn't load 'Chat Page' FXML file");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Loaded Existing Scene");
+            SceneData loginSceneData = scenes.get("chat");
+            Scene loginScene = loginSceneData.getScene();
+            stage.setScene(loginScene);
+        }
+
+    }
+
+    public void gotoContactsListPage(){
+
+
+        if (stage ==null){
+            throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
+        }
+
+        if (!scenes.containsKey("contacts")) {
+            try {
+                System.out.println("Created New Scene");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ContactsListPage.fxml"));
+                Parent contactsView = fxmlLoader.load();
+                Scene contactsScene = new Scene(contactsView);
+                SceneData loginSceneData = new SceneData(fxmlLoader, contactsView, contactsScene);
+                scenes.put("contacts", loginSceneData);
+                stage.setScene(contactsScene);
+            } catch (IOException e) {
+                System.out.println("IO Exception: Couldn't load 'Chat Page' FXML file");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Loaded Existing Scene");
+            SceneData contactsSceneData = scenes.get("contacts");
+            Scene contactsScene = contactsSceneData.getScene();
+            stage.setScene(contactsScene);
+        }
     }
     public void getAddNewContactPopUp(){
         Parent root = null;

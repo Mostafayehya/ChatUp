@@ -1,6 +1,9 @@
 # Project exclude paths
-/target/
 .idea
 *.iml
 *.class
 *.properties
+/target/
+Server/target
+Client/target/
+

@@ -26,3 +26,11 @@
     -fx-font-weight: bold;
     -fx-text-fill: black;
 }
+
+.menu-bar{
+    -fx-background-color:#009688;
+}
+
+.button{
+
+}

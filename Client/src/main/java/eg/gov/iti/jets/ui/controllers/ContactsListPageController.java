@@ -1,11 +1,11 @@
 package eg.gov.iti.jets.ui.controllers;
 
-import domains.Mode;
-import domains.Status;
+import domains.Contact;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.utilities.ContactListCell;
 import eg.gov.iti.jets.utilities.ModelsFactory;
 import eg.gov.iti.jets.utilities.StageCoordinator;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
