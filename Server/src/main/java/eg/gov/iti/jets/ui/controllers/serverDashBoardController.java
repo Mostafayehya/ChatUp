@@ -119,8 +119,8 @@ public class serverDashBoardController implements Initializable { //
             mychartpane.getChildren().clear();
         } catch (Exception e) {}
 
-        mypiechart2.setPrefWidth(199);
-        mypiechart2.setPrefHeight(300);
+        mypiechart2.setPrefWidth(300);
+        mypiechart2.setPrefHeight(400);
         mychartpane.getChildren().add(mypiechart2);
     }
 
@@ -130,8 +130,8 @@ public class serverDashBoardController implements Initializable { //
             mychartpane.getChildren().clear();
         } catch (Exception e) {
         }
-        mychart.setPrefWidth(199);
-        mychart.setPrefHeight(300);
+        mychart.setPrefWidth(300);
+        mychart.setPrefHeight(400);
         mychartpane.getChildren().add(mychart);
     }
 
@@ -140,8 +140,8 @@ public class serverDashBoardController implements Initializable { //
             mychartpane.getChildren().clear();
         } catch (Exception e) {
         }
-        mypiechart.setPrefWidth(199);
-        mypiechart.setPrefHeight(300);
+        mypiechart.setPrefWidth(300);
+        mypiechart.setPrefHeight(400);
         mychartpane.getChildren().add(mypiechart);
     }
 
