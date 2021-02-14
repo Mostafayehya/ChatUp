@@ -1,7 +1,7 @@
 package eg.gov.iti.jets.ui.controllers;
 
 import domains.User;
-import eg.gov.iti.jets.io.ChatUpClientImpl;
+import eg.gov.iti.jets.io.ClientCallbacksImpl;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.utilities.ModelsFactory;
 import eg.gov.iti.jets.utilities.StageCoordinator;
@@ -12,10 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
-import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -62,7 +60,7 @@ public class LoginPageController implements Initializable {
         String phone = phoneTextField.getText();
         String password = passwordTextField.getText();
         try {
-            user = authenticationService.login(phone, password,new ChatUpClientImpl());
+            user = authenticationService.login(phone, password,new ClientCallbacksImpl());
             if (user == null) {
                 failed.setText("Either phone or password is incorrect");
                 return;

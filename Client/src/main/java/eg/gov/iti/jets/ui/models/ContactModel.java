@@ -114,4 +114,6 @@ public class ContactModel {
     public void setMode(Mode mode) {
         this.mode.set(mode);
     }
+
+
 }

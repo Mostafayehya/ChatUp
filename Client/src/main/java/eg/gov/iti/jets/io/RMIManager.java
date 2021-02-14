@@ -2,6 +2,7 @@ package eg.gov.iti.jets.io;
 
 import services.AuthenticationService;
 import services.HandleContactsService;
+import services.SingleChatService;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -14,16 +15,20 @@ public class RMIManager extends UnicastRemoteObject {
     Registry reg;
     private static AuthenticationService authenticationService;
     private static HandleContactsService handleContactsService;
+    private static SingleChatService singleChatService;
     private static RMIManager rmiManager;
-    private RMIManager() throws RemoteException{
+
+    private RMIManager() throws RemoteException {
         startRMIServices();
     }
+
     //todo: refactor looking up of services into individual methods
     public void startRMIServices() {
         try {
-            reg = LocateRegistry.getRegistry("localhost",8189);
-            authenticationService= (AuthenticationService) reg.lookup("AuthenticationService");
+            reg = LocateRegistry.getRegistry("localhost", 8189);
+            authenticationService = (AuthenticationService) reg.lookup("AuthenticationService");
             handleContactsService = (HandleContactsService) reg.lookup("HandleContactService");
+            singleChatService = (SingleChatService) reg.lookup("SingleChatService");
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
@@ -31,8 +36,8 @@ public class RMIManager extends UnicastRemoteObject {
         }
     }
 
-    public synchronized static RMIManager getInstance(){
-        if(rmiManager==null) {
+    public synchronized static RMIManager getInstance() {
+        if (rmiManager == null) {
             try {
                 rmiManager = new RMIManager();
             } catch (RemoteException e) {
@@ -41,10 +46,12 @@ public class RMIManager extends UnicastRemoteObject {
         }
         return rmiManager;
     }
+
     public static AuthenticationService getAuthenticationService() {
         return authenticationService;
     }
-    public static HandleContactsService getHandleContactsService() {
-        return handleContactsService;
-    }
+
+    public static HandleContactsService getHandleContactsService() { return handleContactsService; }
+
+    public static SingleChatService getSingleChatService() { return singleChatService; }
 }

@@ -1,10 +1,12 @@
 package eg.gov.iti.jets.io;
 
-import clientInterface.ChatUpClientInt;
+import clientInterface.ClientCallbacks;
 import eg.gov.iti.jets.services.implementations.AuthenticationServiceImpl;
 import eg.gov.iti.jets.services.implementations.HandleContactServiceImpl;
+import eg.gov.iti.jets.services.implementations.SingleChatServiceImpl;
 import services.AuthenticationService;
 import services.HandleContactsService;
+import services.SingleChatService;
 
 
 import java.rmi.AlreadyBoundException;
@@ -21,52 +23,62 @@ public class Server {
     Registry registry;
     AuthenticationService authenticationService;
     HandleContactsService handleContactsService;
+    SingleChatService singleChatService;
     //list of clients
-    Map<String, ChatUpClientInt> clients;
-    private Server(){
-        clients = new HashMap<>();
+    static Map<String, ClientCallbacks> onlineClients;
+
+    private Server() {
+        onlineClients = new HashMap<>();
         try {
-            authenticationService  = new AuthenticationServiceImpl();
+            authenticationService = new AuthenticationServiceImpl();
             handleContactsService = new HandleContactServiceImpl();
+            singleChatService = new SingleChatServiceImpl();
 
             registry = LocateRegistry.createRegistry(8189);
-            registry.bind("AuthenticationService",authenticationService);
-            registry.bind("HandleContactService",handleContactsService);
+            registry.bind("AuthenticationService", authenticationService);
+            registry.bind("HandleContactService", handleContactsService);
+            registry.bind("SingleChatService", singleChatService);
 
         } catch (RemoteException e) {
             e.printStackTrace();
-        }
-        catch(AlreadyBoundException e){
+        } catch (AlreadyBoundException e) {
             e.printStackTrace();
         }
     }
 
-    public synchronized static Server getInstance(){
-        if(server==null)
-            server=new Server();
+    public synchronized static Server getInstance() {
+        if (server == null)
+            server = new Server();
         return server;
     }
 
     //use in login
-    public void addClient(String phoneNumber,ChatUpClientInt clientImpl){
-        clients.put(phoneNumber,clientImpl);
+    public void addClient(String phoneNumber, ClientCallbacks clientImpl) {
+        onlineClients.put(phoneNumber, clientImpl);
+        System.out.println("User: " +phoneNumber+" was added to online ");
     }
 
     //use in signOut or exit
-    public void removeClient(String phoneNumber){
-        clients.remove(phoneNumber);
+    public void removeClient(String phoneNumber) {
+        onlineClients.remove(phoneNumber);
     }
 
-    public void stopServer(){
+    public void stopServer() {
         try {
             registry.unbind("AuthenticationService");
             registry.unbind("HandleContactService");
-            UnicastRemoteObject.unexportObject(authenticationService,true);
-            UnicastRemoteObject.unexportObject(handleContactsService,true);
+            registry.unbind("SingleChatService");
+            UnicastRemoteObject.unexportObject(authenticationService, true);
+            UnicastRemoteObject.unexportObject(handleContactsService, true);
+            UnicastRemoteObject.unexportObject(singleChatService, true);
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Map<String, ClientCallbacks> getOnlineClients() {
+        return onlineClients;
     }
 }
