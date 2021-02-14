@@ -77,7 +77,7 @@ public class SignUpPageController implements Initializable {
         }));
         emailTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
-                if (emailTextField.getText().equals("") || validation.validateEmail(emailTextField.getText())) {
+                if (emailTextField.getText().equals("") || !validation.validateEmail(emailTextField.getText())) {
                     emailTextField.setStyle("-fx-border-color: red;");
                 } else {
                     emailTextField.setStyle("-fx-border-color: transparent;");

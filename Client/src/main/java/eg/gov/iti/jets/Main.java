@@ -16,7 +16,7 @@ public class Main extends Application {
         StageCoordinator stageCoordinator=StageCoordinator.getInstance();
         stageCoordinator.setStage(primaryStage);
         //Call first page function
-        stageCoordinator.goToLoginPage();
+        stageCoordinator.goToUserProfilePage();
         primaryStage.setTitle("ChatUp - Client");
         primaryStage.show();
     }

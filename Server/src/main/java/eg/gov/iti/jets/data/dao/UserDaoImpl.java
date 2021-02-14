@@ -41,6 +41,46 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public User getUserByPhone(String phone) {
+
         return null;
     }
+
+    @Override
+    public int updateUserData(User user) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set name=?, country=?,email=?,bio=?   where phoneNumber=?");
+            preparedStatement.setString(1,user.getName());
+            preparedStatement.setString(2,user.getCountry());
+            preparedStatement.setString(3,user.getEmail());
+            preparedStatement.setString(4,user.getBio());
+            preparedStatement.setString(5,user.getPhoneNumber());
+            int result =  preparedStatement.executeUpdate();
+            preparedStatement.close();
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+
+
+    @Override
+    public int updateUserMode(User user) {
+        try {
+        PreparedStatement preparedStatement = connection.prepareStatement("update user set mode=?   where phone=?");
+        preparedStatement.setString(1,user.getMode().name());
+        preparedStatement.setString(2,user.getPhoneNumber());
+            int result =  preparedStatement.executeUpdate();
+            preparedStatement.close();
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+
+
+
 }

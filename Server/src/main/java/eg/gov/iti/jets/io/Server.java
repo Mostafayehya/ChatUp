@@ -1,7 +1,9 @@
 package eg.gov.iti.jets.io;
 
 import eg.gov.iti.jets.services.implementations.AuthenticationServiceImpl;
+import eg.gov.iti.jets.services.implementations.UpdateServiceImpl;
 import services.AuthenticationService;
+import services.UpdateService;
 
 
 import java.rmi.AlreadyBoundException;
@@ -15,12 +17,14 @@ public class Server {
     private static Server server;
     Registry registry;
     AuthenticationService authenticationService;
+    UpdateService updateService;
     private Server(){
         try {
             authenticationService  = new AuthenticationServiceImpl();
-
+            updateService=new UpdateServiceImpl();
             registry = LocateRegistry.createRegistry(8189);
             registry.bind("AuthenticationService",authenticationService);
+            registry.bind("UpdateService",updateService);
 
 
         } catch (RemoteException e) {
@@ -41,6 +45,9 @@ public class Server {
         try {
             registry.unbind("AuthenticationService");
             UnicastRemoteObject.unexportObject(authenticationService,true);
+            registry.unbind("UpdateService");
+            UnicastRemoteObject.unexportObject(updateService,true);
+
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {

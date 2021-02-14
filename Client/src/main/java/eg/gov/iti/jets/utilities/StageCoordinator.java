@@ -56,7 +56,17 @@ public class StageCoordinator {
             e.printStackTrace();
         }
     }
+    public void goToUserProfilePage() {
+        try {
+            Parent root=FXMLLoader.load(getClass().getResource("/views/UProfile.fxml"));
+            parentContainer = new StackPane(root);
+            stage.setScene(new Scene(parentContainer,759.0,626.0));
+            visibleRoot=(BorderPane)root;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
 //    public void translateToSignUp(){
 //        try{
 //            Parent root = FXMLLoader.load(getClass().getResource("/views/SignUpPage.fxml"));
