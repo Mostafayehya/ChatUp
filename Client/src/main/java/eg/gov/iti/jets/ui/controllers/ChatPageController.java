@@ -103,14 +103,14 @@ public class ChatPageController implements Initializable {
             // I need to store the currentContact inside models factory in order to specify the
             // receiver of the message
             Message newMessage = new Message(LocalDate.now().toString(),messgeTextField.getText(),
-                  selectedContact.getContactPhoneNumber()  ,"01068867848");
+                  selectedContact.getContactPhoneNumber()  ,modelsFactory.getCurrentUser().getPhoneNumber());
 
             try {
                 RMIManager.getSingleChatService().sendMessage(newMessage);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
-            messagesObservableList.add(new Message(LocalDate.now().toString(), messgeTextField.getText()));
+            messagesObservableList.add(newMessage);
             chatListView.scrollTo(chatListView.getItems().size() - 1);
             // Use service to send it over RMI
             messgeTextField.clear();

@@ -28,6 +28,12 @@ public class ContactModel {
         this.mode.setValue(mode);
     }
 
+    public ContactModel(String contactPhoneNumber, String name, String image) {
+        this.contactPhoneNumber.setValue( contactPhoneNumber);
+        this.name.set(name);
+        this.image.setValue(image);
+    }
+
     public ContactModel() {
     }
 

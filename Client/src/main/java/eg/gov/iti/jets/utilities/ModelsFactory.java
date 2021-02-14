@@ -17,7 +17,8 @@ public class ModelsFactory {
     // todo) refactor this to have a public method to get it as the MVC demo
     UserModel currentUser = null;
 
-    ContactModel selectedContact;
+    ContactModel selectedContact = new ContactModel("01068867847",
+            "Stranger","src/main/resources/photos/user.jpg");
     ObservableList<Message> messagesObservableList = FXCollections.observableArrayList(new Message());
 
 
@@ -37,8 +38,9 @@ public class ModelsFactory {
         if (currentUser != null) {
             throw new RuntimeException("current user already set");
         }
-        currentUser = new UserModel(user.getPhoneNumber(), user.getName(), user.getEmail(), user.getPassword(), user.getPicture()
-                , user.getGender(), user.getCountry(), user.getDateOfBirth(), user.getBio(), user.getStatus(), user.getMode());
+        currentUser = new UserModel("01068867848","MostafaYehya",
+                "src/main/resources/images/img.png");/* new UserModel(user.getPhoneNumber(), user.getName(), user.getEmail(), user.getPassword(), user.getPicture()
+                , user.getGender(), user.getCountry(), user.getDateOfBirth(), user.getBio(), user.getStatus(), user.getMode());*/
         try {
             List<Contact> contacts = RMIManager.getHandleContactsService().getUserContacts(user.getPhoneNumber());
             System.out.println(contacts.size());
