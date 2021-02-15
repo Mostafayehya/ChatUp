@@ -5,7 +5,11 @@ import domains.Mode;
 import domains.Status;
 import domains.User;
 import eg.gov.iti.jets.io.RMIManager;
+import eg.gov.iti.jets.ui.models.ContactModel;
+import eg.gov.iti.jets.ui.models.UserModel;
 import eg.gov.iti.jets.utilities.Validation;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,19 +50,22 @@ public class UProfileController implements Initializable {
     Button awayBtn;
     UpdateService updateService;
     Validation validation;
+    UserModel userModel;
     User user=new User("01116058917","hagar","hagar@gmail.com","1234",null, Gender.FEMALE,"egypt",null,"hii", Status.ONLINE,Mode.AVAILABLE);
-
-    public UProfileController(){validation = new Validation();}
+    public UProfileController(){validation = new Validation();
+    userModel=new UserModel();
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        updateService= RMIManager.getUpdateService();
-        System.out.println(user.getName());
-        userName.setText(user.getName());
-        nameTextField.setText(user.getName());
-        phoneTextField.setText(user.getPhoneNumber());
-        countryTextField.setText(user.getCountry());
-        emailTextField.setText(user.getEmail());
-        bioTextField.setText(user.getBio());
+        bind();
+
+//        userName.setText(user.getName());
+//        nameTextField.setText(user.getName());
+//        phoneTextField.setText(user.getPhoneNumber());
+//        countryTextField.setText(user.getCountry());
+//        emailTextField.setText(user.getEmail());
+//        bioTextField.setText(user.getBio());
+//        updateService= RMIManager.getUpdateService();
         emailTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
                 if (emailTextField.getText().equals("") ||! validation.validateEmail(emailTextField.getText())) {
@@ -101,11 +108,11 @@ public class UProfileController implements Initializable {
            else  if (validation.isempty(nameTextField)) {
                 nameTextField.setStyle("-fx-border-color: red;");
             }
-            user.setCountry(countryTextField.getText());
-            user.setBio(bioTextField.getText());
-            user.setEmail(emailTextField.getText());
-            user.setName(nameTextField.getText());
-            userName.setText(nameTextField.getText());
+//            user.setCountry(countryTextField.getText());
+//            user.setBio(bioTextField.getText());
+//            user.setEmail(emailTextField.getText());
+//            user.setName(nameTextField.getText());
+//            userName.setText(nameTextField.getText());
             try {
                 updateService.EditUserData(user);
             } catch (RemoteException ex) {
@@ -138,6 +145,14 @@ public class UProfileController implements Initializable {
                 ex.printStackTrace();
             }
         });
+
+    }
+    private void bind(){
+        phoneTextField.textProperty().bindBidirectional(userModel.phoneNumberProperty());
+        nameTextField.textProperty().bindBidirectional(userModel.nameProperty());
+        countryTextField.textProperty().bindBidirectional(userModel.countryProperty());
+        emailTextField.textProperty().bindBidirectional(userModel.emailProperty());
+        bioTextField.textProperty().bindBidirectional(userModel.bioProperty());
 
     }
 }

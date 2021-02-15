@@ -1,5 +1,7 @@
+domains\Message.class
 domains\User.class
 module-info.class
+clientInterface\ChatUpClientInt.class
 domains\Gender.class
 domains\Status.class
 services\AuthenticationService.class
