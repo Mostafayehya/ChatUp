@@ -2,6 +2,7 @@ module MiddleWare {
     exports services;
     exports domains;
     exports clientInterface;
+    exports utilities;
     requires java.rmi;
     requires java.sql;
     requires java.desktop;

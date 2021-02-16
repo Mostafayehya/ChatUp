@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import javafx.scene.image.Image;
 
-public class FilesConverter {
+public class FilesUtilities {
     public static byte[] convertImageFileToByteArray(File file, String extension) {
         byte[] bytes = null;
         BufferedImage bi = null;
@@ -37,5 +37,14 @@ public class FilesConverter {
     public static Image convertByteArrayToImage(byte[]imageBytes){
         InputStream is =new ByteArrayInputStream(imageBytes);
         return new Image(is);
+    }
+
+    public static String getFileExtension(File file){
+        String extension="";
+        int i = file.getName().lastIndexOf('.');
+        if (i > 0) {
+            extension = file.getName().substring(i+1);
+        }
+        return extension;
     }
 }

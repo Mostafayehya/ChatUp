@@ -1,9 +1,6 @@
 package eg.gov.iti.jets.ui.controllers;
 
-import domains.Gender;
-import domains.Mode;
-import domains.Status;
-import domains.User;
+import domains.*;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import eg.gov.iti.jets.utilities.Validation;
@@ -17,10 +14,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
 import services.AuthenticationService;
+import utilities.FilesUtilities;
 
+import java.io.File;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
@@ -48,8 +48,11 @@ public class SignUpPageController implements Initializable {
     ChoiceBox<Gender> genderChoiceBox;
     @FXML
     DatePicker birthDatePicker;
+    @FXML
+    Button choosePhoto;
     Validation validation;
     AuthenticationService authenticationService;
+    FileDomain userImageFile = null;
 
     public SignUpPageController() {
         validation = new Validation();
@@ -126,7 +129,8 @@ public class SignUpPageController implements Initializable {
         signUpButton.addEventHandler(ActionEvent.ACTION, (e) -> {
             if (validateFields()) {
                 User user;
-                user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), null, genderChoiceBox.getValue(), countryTextField.getText(), birthDatePicker.getValue(), bioTextField.getText(), Status.ONLINE, Mode.AVAILABLE);
+                userImageFile.setFilename(phoneTextField.getText());
+                user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), userImageFile, genderChoiceBox.getValue(), countryTextField.getText(), birthDatePicker.getValue(), bioTextField.getText(), Status.ONLINE, Mode.AVAILABLE);
                 try {
                     int result = authenticationService.signUp(user);
                     if (result == -2) {
@@ -142,6 +146,15 @@ public class SignUpPageController implements Initializable {
                     ex.printStackTrace();
                 }
             }
+        });
+        choosePhoto.addEventHandler(ActionEvent.ACTION,(e)->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("image files","*.png"));
+            File userPhoto = fileChooser.showOpenDialog(choosePhoto.getScene().getWindow());
+            String extension = FilesUtilities.getFileExtension(userPhoto);
+            userImageFile = new FileDomain();
+            userImageFile.setFileBytes(FilesUtilities.convertImageFileToByteArray(userPhoto,extension));
+            userImageFile.setFileExtension(extension);
         });
 
     }

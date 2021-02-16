@@ -1,6 +1,8 @@
 package domains;
 
-public class FileDomain {
+import java.io.Serializable;
+
+public class FileDomain implements Serializable {
     byte[] fileBytes;
     String fileExtension;
     String filename;

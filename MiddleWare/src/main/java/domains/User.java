@@ -19,6 +19,7 @@ public class User implements Serializable {
     String bio;
     Status status;
     Mode mode;
+    FileDomain userPhoto;
 
     public User() {
         gender = Gender.FEMALE;
@@ -38,6 +39,24 @@ public class User implements Serializable {
         this.email = email;
         this.password = password;
         this.picture = picture;
+        this.gender = gender;
+        this.country = country;
+        if(dateOfBirth==null){
+            this.dateOfBirth = LocalDate.now();
+        }
+        else
+            this.dateOfBirth = dateOfBirth;
+        this.bio = bio;
+        this.status = status;
+        this.mode = mode;
+    }
+
+    public User(String phoneNumber, String name, String email, String password, FileDomain userPhoto, Gender gender, String country, LocalDate dateOfBirth, String bio, Status status, Mode mode) {
+        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.userPhoto = userPhoto;
         this.gender = gender;
         this.country = country;
         if(dateOfBirth==null){
