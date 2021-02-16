@@ -14,6 +14,7 @@ public class Contact implements Serializable {
     Status status;
     Mode mode;
     List<String> extraNumbers;
+    byte[] contactImage;
 
     public Contact() {
         this.image = "src/main/resources/photos/user.jpg";
@@ -25,7 +26,7 @@ public class Contact implements Serializable {
         this.name = name;
         this.bio = bio;
         this.email = email;
-        this.image = "src/main/resources/photos/user.jpg";
+        this.image = image;
         this.status = status;
         this.mode = mode;
     }
@@ -33,6 +34,18 @@ public class Contact implements Serializable {
     public Contact(String userPhoneNumber,String contactPhoneNumber){
         this.contactPhoneNumber = contactPhoneNumber;
         this.userPhoneNumber = userPhoneNumber;
+    }
+
+    public Contact(String userPhoneNumber, String contactPhoneNumber, String name, String bio, String email, Status status, Mode mode, List<String> extraNumbers, byte[] contactImage) {
+        this.userPhoneNumber = userPhoneNumber;
+        this.contactPhoneNumber = contactPhoneNumber;
+        this.name = name;
+        this.bio = bio;
+        this.email = email;
+        this.status = status;
+        this.mode = mode;
+        this.extraNumbers = extraNumbers;
+        this.contactImage = contactImage;
     }
 
     public List<String> getExtraNumbers() {
@@ -105,5 +118,13 @@ public class Contact implements Serializable {
 
     public void setMode(Mode mode) {
         this.mode = mode;
+    }
+
+    public byte[] getContactImage() {
+        return contactImage;
+    }
+
+    public void setContactImage(byte[] contactImage) {
+        this.contactImage = contactImage;
     }
 }

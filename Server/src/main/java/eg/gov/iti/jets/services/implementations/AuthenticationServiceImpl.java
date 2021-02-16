@@ -11,9 +11,8 @@ import utilities.FilesUtilities;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-
-
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -32,6 +31,15 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
         User user =  userDao.getUserByPhoneAndPassword(phone, password);
         if(user!=null){
             //add chatUpClient to the clients map in server
+            String userPhotoPath = user.getUserPhotoPath();
+            if(!userPhotoPath.equals("")){
+                System.out.println("User has photo");
+                File file = new File(userPhotoPath);
+                String extension = FilesUtilities.getFileExtension(file);
+                byte[]imageBytes = FilesUtilities.convertImageFileToByteArray(file,extension);
+                FileDomain imageFileDomain = new FileDomain(imageBytes,extension,file.getName());
+                user.setUserPhoto(imageFileDomain);
+            }
             Server.getInstance().addClient(phone,chatUpClient);
         }
 
@@ -44,17 +52,21 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
             return -2;
         }
         FileDomain userProfilePhoto = user.getUserPhoto();
-        Path target = Paths.get("C:\\Users\\Hadeer\\Desktop\\javaProject\\ChatUp\\Server\\src\\main\\resources\\UserPhotos\\"+userProfilePhoto.getFilename()+"."+userProfilePhoto.getFileExtension());
+        if(userProfilePhoto!=null) {
+            Path target = Paths.get("C:\\Users\\Hadeer\\Desktop\\javaProject\\ChatUp\\Server\\src\\main\\resources\\UserPhotos\\" + userProfilePhoto.getFilename() + "." + userProfilePhoto.getFileExtension());
 
-        InputStream is = new ByteArrayInputStream(userProfilePhoto.getFileBytes());
-        try {
-            BufferedImage bufferedImage = ImageIO.read(is);
-            ImageIO.write(bufferedImage, userProfilePhoto.getFileExtension(), target.toFile());
-            //Image image = new Image(is);
-        } catch (IOException e) {
-            e.printStackTrace();
+            InputStream is = new ByteArrayInputStream(userProfilePhoto.getFileBytes());
+            try {
+                BufferedImage bufferedImage = ImageIO.read(is);
+                ImageIO.write(bufferedImage, userProfilePhoto.getFileExtension(), target.toFile());
+                //Image image = new Image(is);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            user.setUserPhotoPath(target.toFile().getPath());
         }
-        user.setUserPhotoPath(target.toFile().getPath());
+        else
+            user.setUserPhotoPath("");
         return userDao.insertUser(user);
     }
 

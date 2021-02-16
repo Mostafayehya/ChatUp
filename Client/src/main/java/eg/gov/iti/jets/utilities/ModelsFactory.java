@@ -5,6 +5,10 @@ import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.ui.models.UserModel;
 import javafx.collections.FXCollections;
+import javafx.scene.image.Image;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +30,17 @@ public class ModelsFactory {
         if (currentUser != null){
             throw new RuntimeException("current user already set");
         }
-        currentUser = new UserModel(user.getPhoneNumber(),user.getName(),user.getEmail(),user.getPassword(),user.getUserPhotoPath()
-         ,user.getGender(),user.getCountry(),user.getDateOfBirth(),user.getBio(),user.getStatus(),user.getMode());
+        if(user.getUserPhoto()!=null){
+            InputStream inputStream = new ByteArrayInputStream(user.getUserPhoto().getFileBytes());
+            currentUser = new UserModel(user.getPhoneNumber(),user.getName(),user.getEmail(),user.getPassword(),
+                    user.getGender(),user.getCountry(),user.getDateOfBirth(),user.getBio(),user.getStatus()
+                    ,user.getMode(),new Image(inputStream));
+
+        }
+        else {
+            currentUser = new UserModel(user.getPhoneNumber(), user.getName(), user.getEmail(), user.getPassword(), user.getUserPhotoPath()
+                    , user.getGender(), user.getCountry(), user.getDateOfBirth(), user.getBio(), user.getStatus(), user.getMode());
+        }
         try {
             List<Contact> contacts = RMIManager.getHandleContactsService().getUserContacts(user.getPhoneNumber());
             System.out.println(contacts.size());
@@ -48,8 +61,20 @@ public class ModelsFactory {
     }
 
     public ContactModel getContactModel(Contact contact){
-        ContactModel contactModel = new ContactModel(contact.getContactPhoneNumber(),contact.getName(),contact.getBio(),
-                contact.getEmail(),contact.getImage(),contact.getStatus(),contact.getMode());
+        ContactModel contactModel;
+        if(contact.getContactImage()!=null){
+            System.out.println("has image");
+            InputStream inputStream = new ByteArrayInputStream(contact.getContactImage());
+            contactModel = new ContactModel(contact.getContactPhoneNumber(),contact.getName(),contact.getBio(),
+                    contact.getEmail(),contact.getStatus(),contact.getMode(),new Image(inputStream));
+
+        }
+        else {
+            System.out.println("no have image");
+            contactModel = new ContactModel(contact.getContactPhoneNumber(),contact.getName(),contact.getBio(),
+                    contact.getEmail(),contact.getImage(),contact.getStatus(),contact.getMode());
+        }
+
         return contactModel;
     }
 
