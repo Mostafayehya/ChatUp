@@ -4,6 +4,7 @@ package domains;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class User implements Serializable {
@@ -20,6 +21,8 @@ public class User implements Serializable {
     Mode mode;
 
     public User() {
+        gender = Gender.FEMALE;
+        dateOfBirth = LocalDate.now();
     }
 
     public User(String phoneNumber, String name, String email, String password){
@@ -37,7 +40,11 @@ public class User implements Serializable {
         this.picture = picture;
         this.gender = gender;
         this.country = country;
-        this.dateOfBirth = dateOfBirth;
+        if(dateOfBirth==null){
+            this.dateOfBirth = LocalDate.now();
+        }
+        else
+            this.dateOfBirth = dateOfBirth;
         this.bio = bio;
         this.status = status;
         this.mode = mode;

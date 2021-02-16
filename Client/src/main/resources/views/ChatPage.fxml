@@ -7,106 +7,116 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="730.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <BorderPane prefHeight="591.0" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-         <bottom>
-            <HBox alignment="CENTER_LEFT" fillHeight="false" prefWidth="389.0" spacing="10.0" BorderPane.alignment="CENTER">
-               <children>
-                  <FontIcon iconLiteral="far-file" iconSize="20" />
-                  <TextField promptText="Send a Message" HBox.hgrow="ALWAYS" />
-                  <FontIcon fx:id="emojiIcon" iconLiteral="far-laugh" iconSize="20" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </HBox>
-         </bottom>
-         <top>
-            <HBox fx:id="chatBarHBox" alignment="CENTER" style="-fx-background-color: #d7d44a;" BorderPane.alignment="CENTER">
-               <children>
-                  <JFXButton buttonType="RAISED" contentDisplay="TOP" text="Save">
-                     <graphic>
-                        <FontIcon iconColor="#4a79d0" iconLiteral="far-save" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="253.0" layoutY="13.0" text="Video Call">
-                     <graphic>
-                        <FontIcon iconColor="#4a79d0" iconLiteral="fas-video" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="263.0" layoutY="14.0" text="Voice Call">
-                     <graphic>
-                        <FontIcon iconColor="#4a79d0" iconLiteral="fas-phone-alt" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="297.0" layoutY="14.0" text="Block ">
-                     <graphic>
-                        <FontIcon iconColor="#cf4a4a" iconLiteral="fas-user-times" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
-               </children></HBox>
-         </top>
-         <center>
-            <ListView fx:id="chatListView" prefHeight="500.0" prefWidth="530.0" BorderPane.alignment="CENTER" />
-         </center>
-         <left>
-            <ListView fx:id="contacts" prefHeight="499.0" prefWidth="183.0" style="-fx-background-color: #8792a4;" BorderPane.alignment="CENTER" />
-         </left>
-      </BorderPane>
-   </center>
-   <stylesheets>
-      <URL value="@../css/loginStyle.css" />
-      <URL value="@../styles/bootstrapfx.css" />
-   </stylesheets>
-   <left>
-      <VBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="591.0" prefWidth="93.0" spacing="20.0" style="-fx-background-color: #303743;" BorderPane.alignment="CENTER">
-         <children>
-            <VBox alignment="CENTER" spacing="20.0">
-               <children>
-                  <JFXButton fx:id="profileButton" buttonType="RAISED" contentDisplay="TOP" minWidth="-Infinity" text="Profile" textFill="#ebe5e5">
-                     <graphic>
-                        <FontIcon iconColor="#c0c5cd" iconLiteral="far-user-circle" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="chatsButton" buttonType="RAISED" contentDisplay="TOP" layoutX="32.0" layoutY="10.0" minWidth="-Infinity" text="Chats" textFill="#ebe5e5">
-                     <graphic>
-                        <FontIcon iconColor="#c0c5cd" iconLiteral="far-comments" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="contactsButton" buttonType="RAISED" contentDisplay="TOP" text="Contacts" textFill="#ebe5e5">
-                     <graphic>
-                        <FontIcon iconColor="#c0c5cd" iconLiteral="far-address-card" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="notificationButton" buttonType="RAISED" contentDisplay="TOP" text="Notifications" textFill="#ebe5e5">
-                     <graphic>
-                        <FontIcon iconColor="#c0c5cd" iconLiteral="far-bell" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="invitationsButton" buttonType="RAISED" contentDisplay="TOP" prefHeight="30.0" text="Invitations" textFill="#ebe5e5">
-                     <graphic>
-                        <FontIcon iconColor="#c0c5cd" iconLiteral="far-envelope" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
-               </children>
-            </VBox>
-            <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
-               <children>
-                  <JFXButton buttonType="RAISED" contentDisplay="TOP" prefHeight="30.0" prefWidth="129.0" text="Sign out" textFill="#ebe5e5">
-                     <graphic>
-                        <FontIcon iconColor="#c0c5cd" iconLiteral="fas-sign-out-alt" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
-                     </graphic>
-                  </JFXButton>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
-   </left>
+<BorderPane fx:id="chatBoarderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="730.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.ChatPageController">
+    <left>
+        <fx:include source="NavigationBar.fxml" />
+    </left>
+    <center>
+        <BorderPane prefHeight="591.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+            <left>
+                <ListView fx:id="contactsListView" prefHeight="591.0" prefWidth="164.0" style="-fx-background-color: #8792a4;" BorderPane.alignment="CENTER" />
+            </left>
+            <center>
+                <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <center>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <bottom>
+                                <HBox alignment="CENTER_LEFT" fillHeight="false" prefWidth="389.0" spacing="10.0" BorderPane.alignment="CENTER">
+                                    <children>
+                                        <FontIcon fx:id="emojiIcon" iconLiteral="far-laugh" iconSize="20" />
+                                        <FontIcon fx:id="attachButton" iconLiteral="fas-paperclip" iconSize="20" />
+                                        <TextField fx:id="messgeTextField" onKeyPressed="#sendMessage" prefHeight="42.0" prefWidth="408.0" promptText="Send a Message" HBox.hgrow="ALWAYS" />
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </padding>
+                                </HBox>
+                            </bottom>
+                            <center>
+                                <ListView fx:id="chatListView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                            </center>
+                        </BorderPane>
+                    </center>
+                    <top>
+                        <HBox fx:id="chatBarHBox" alignment="CENTER" styleClass="menu-bar" BorderPane.alignment="CENTER">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <Circle fx:id="contactImage" radius="18.0" stroke="BLACK" strokeType="INSIDE">
+                                            <fill>
+                                                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                                    <stops>
+                                                        <Stop>
+                                                            <color>
+                                                                <Color />
+                                                            </color>
+                                                        </Stop>
+                                                        <Stop offset="1.0">
+                                                            <color>
+                                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                                            </color>
+                                                        </Stop>
+                                                    </stops>
+                                                </RadialGradient>
+                                            </fill>
+                                        </Circle>
+                                        <Text fx:id="contactNameText" fill="#fcfcfc" strokeType="OUTSIDE" strokeWidth="0.0" text="Mostafa Yehya">
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                    <padding>
+                                        <Insets left="10.0" />
+                                    </padding>
+                                </HBox>
+                                <HBox>
+                                    <children>
+                                        <JFXButton fx:id="saveButton" buttonType="RAISED" contentDisplay="TOP" text="Save" textFill="WHITE">
+                                            <graphic>
+                                                <FontIcon iconColor="WHITE" iconLiteral="far-save" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                                            </graphic>
+                                        </JFXButton>
+                                        <JFXButton fx:id="videoCallButton" buttonType="RAISED" contentDisplay="TOP" text="Video Call" textFill="WHITE">
+                                            <graphic>
+                                                <FontIcon iconColor="WHITE" iconLiteral="fas-video" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                                            </graphic>
+                                        </JFXButton>
+                                        <JFXButton fx:id="voiceCallButton" buttonType="RAISED" contentDisplay="TOP" text="Voice Call" textFill="WHITE">
+                                            <graphic>
+                                                <FontIcon iconColor="WHITE" iconLiteral="fas-phone-alt" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                                            </graphic>
+                                        </JFXButton>
+                                        <JFXButton fx:id="blockButton" buttonType="RAISED" contentDisplay="TOP" text="Block " textFill="WHITE">
+                                            <graphic>
+                                                <FontIcon iconColor="WHITE" iconLiteral="fas-user-times" iconSize="22" nodeOrientation="RIGHT_TO_LEFT" />
+                                            </graphic>
+                                        </JFXButton>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                    </top>
+                </BorderPane>
+            </center>
+        </BorderPane>
+    </center>
+    <stylesheets>
+        <URL value="@../css/loginStyle.css" />
+        <URL value="@../styles/bootstrapfx.css" />
+    </stylesheets>
 </BorderPane>
