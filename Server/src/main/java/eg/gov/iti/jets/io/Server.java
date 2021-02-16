@@ -1,5 +1,7 @@
 package eg.gov.iti.jets.io;
 
+import clientInterface.ChatUpClientInt;
+import domains.User;
 import eg.gov.iti.jets.services.implementations.AuthenticationServiceImpl;
 import services.AuthenticationService;
 
@@ -68,4 +70,6 @@ public class Server {
             e.printStackTrace();
         }
     }
+
+    public void addClient(String phone, ChatUpClientInt chatUpClient){}
 }

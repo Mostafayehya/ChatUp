@@ -10,6 +10,8 @@ import eg.gov.iti.jets.utilities.JavaSqlTimeConverter;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
     Connection connection;
@@ -47,10 +49,10 @@ public class UserDaoImpl implements UserDao {
     public User getUserByPhone(String phone) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where phoneNumber = ?");
-            preparedStatement.setString(1,phone);
+            preparedStatement.setString(1, phone);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
-                User user  = new User(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),
+            if (resultSet.next()) {
+                User user = new User(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
                         resultSet.getString(4));
                 return user;
             }
@@ -88,5 +90,43 @@ public class UserDaoImpl implements UserDao {
         }
 
         return null;
+    }
+
+    public ResultSet getAllByCountry() {
+        ResultSet rs = null;
+        try {
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            rs = statement.executeQuery("SELECT country, COUNT(*) AS Number FROM User GROUP BY country");
+            //statement.close();
+            return rs;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet getAllByGender(){
+        ResultSet rs = null;
+        try {
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            rs = statement.executeQuery("SELECT gender, COUNT(*) AS Number FROM User GROUP BY gender");
+            //statement.close();
+            return rs;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+    public ResultSet getAllOnOff(){
+        ResultSet rs = null;
+        try {
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            rs = statement.executeQuery("SELECT status, COUNT(*) AS Number FROM User GROUP BY status");
+            //statement.close();
+            return rs;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 }

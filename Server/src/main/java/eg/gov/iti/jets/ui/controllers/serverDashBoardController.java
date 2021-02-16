@@ -2,6 +2,8 @@ package eg.gov.iti.jets.ui.controllers;
 
 import eg.gov.iti.jets.Main;
 import eg.gov.iti.jets.data.DataBaseConnection;
+import eg.gov.iti.jets.data.dao.UserDao;
+import eg.gov.iti.jets.data.dao.UserDaoImpl;
 import eg.gov.iti.jets.io.Server;
 import eg.gov.iti.jets.services.implementations.AuthenticationServiceImpl;
 import javafx.application.Application;
@@ -22,67 +24,37 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.sql.ResultSet;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
 public class serverDashBoardController implements Initializable { //
     DataBaseConnection dataBaseConnection;
     Server server;
-    Main m;
-    ResourceBundle resourceBundle;
-    URL url;
-    //RMIManager w = new RMIManager();
+    UserDao d = new UserDaoImpl();
     @FXML
     private Button startbutton, stopbutton;
     private PieChart mypiechart = new PieChart();
     private PieChart mypiechart2 = new PieChart();
     XYChart.Series dataSeries1 = new XYChart.Series();
-    XYChart.Series dataSeries2 = new XYChart.Series();
     CategoryAxis xAxis = new CategoryAxis();
     NumberAxis yAxis = new NumberAxis();
+    ObservableList<PieChart.Data> gender;
+    ObservableList<PieChart.Data> onoff;
     private BarChart mychart = new BarChart(xAxis, yAxis);
     @FXML
     private Pane mychartpane;
-    //Dummy data
-    int Countereg = 100000;
-    int CounterTun = 5000;
-    int CountSA = 30000;
-    int CountSudan = 7000;
 
+    ResultSet rs1 = d.getAllByCountry();
+    ResultSet rs2 = d.getAllByGender();
+    ResultSet rs3 = d.getAllOnOff();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataBaseConnection = DataBaseConnection.getInstance();
         server = Server.getInstance();
-
-        //Dummy data
-        dataSeries1.getData().add(new XYChart.Data<>("Egypt", Countereg));
-        dataSeries1.getData().add(new XYChart.Data<>("Tunisia", CounterTun));
-        dataSeries1.getData().add(new XYChart.Data<>("Saudi Arabia", CountSA));
-        dataSeries1.getData().add(new XYChart.Data<>("Sudan", CountSudan));
-
-        dataSeries2.getData().add(new XYChart.Data<>("Egypt", Countereg + 100000));
-        dataSeries2.getData().add(new XYChart.Data<>("Tunisia", CounterTun + 2000));
-        dataSeries2.getData().add(new XYChart.Data<>("Saudi Arabia", CountSA - 100));
-        dataSeries2.getData().add(new XYChart.Data<>("Sudan", CountSudan + 500));
-
-        mychart.getData().addAll(dataSeries1, dataSeries2);
-
-        ObservableList<PieChart.Data> data = FXCollections.observableArrayList(
-                new PieChart.Data("Female", 100000),
-                new PieChart.Data("Male", 500000)
-
-        );
-
-        mypiechart.setData(data);
-
-
-        ObservableList<PieChart.Data> onoff = FXCollections.observableArrayList(
-                new PieChart.Data("Online", 100000),
-                new PieChart.Data("Offline", 500000)
-
-        );
-
-        mypiechart2.setData(onoff);
+        getcountrydata();
+        getgenderdata();
+        getstatusdata();
 
 
     }
@@ -96,7 +68,7 @@ public class serverDashBoardController implements Initializable { //
         } catch (Exception e) {
         }
         server.startServer();
-        dataBaseConnection.closeConncetion();
+        dataBaseConnection.closeConnection();
         System.out.println("server started");
     }
 
@@ -108,7 +80,7 @@ public class serverDashBoardController implements Initializable { //
         } catch (Exception e) {
         }
         server.stopServer();
-        dataBaseConnection.closeConncetion();
+        dataBaseConnection.closeConnection();
         //server.stopServer();
         System.out.println("server has stopped");
     }
@@ -117,11 +89,12 @@ public class serverDashBoardController implements Initializable { //
 
         try {
             mychartpane.getChildren().clear();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
 
-        mypiechart2.setPrefWidth(300);
-        mypiechart2.setPrefHeight(400);
-        mychartpane.getChildren().add(mypiechart2);
+        mypiechart.setPrefWidth(300);
+        mypiechart.setPrefHeight(400);
+        mychartpane.getChildren().add(mypiechart);
     }
 
     public void showCountries() {
@@ -140,9 +113,63 @@ public class serverDashBoardController implements Initializable { //
             mychartpane.getChildren().clear();
         } catch (Exception e) {
         }
-        mypiechart.setPrefWidth(300);
-        mypiechart.setPrefHeight(400);
-        mychartpane.getChildren().add(mypiechart);
+        mypiechart2.setPrefWidth(300);
+        mypiechart2.setPrefHeight(400);
+        mychartpane.getChildren().add(mypiechart2);
+    }
+
+    private void getcountrydata() {
+        try {
+            while (rs1.next()) {
+                dataSeries1.getData().add(new XYChart.Data<>(rs1.getString("country"), rs1.getInt("Number")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mychart.getData().add(dataSeries1);
+    }
+
+    private void getgenderdata() {
+        int countmale = 0;
+        int countfemale = 0;
+        try {
+            rs2.next();
+            countmale = rs2.getInt("Number");
+            rs2.next();
+            countfemale = rs2.getInt("Number");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        gender = FXCollections.observableArrayList(
+
+                new PieChart.Data("Female", countmale),
+                new PieChart.Data("Male", countfemale));
+
+        mypiechart.setData(gender);
+
+    }
+
+    private void getstatusdata() {
+
+        int counton = 0;
+        int countoff = 0;
+        try {
+            rs3.next();
+            countoff = rs3.getInt("Number");
+            rs3.next();
+            counton = rs3.getInt("Number");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        onoff = FXCollections.observableArrayList(
+
+                new PieChart.Data("Offline", countoff),
+                new PieChart.Data("Online", counton));
+
+        mypiechart2.setData(onoff);
+
     }
 
 }
