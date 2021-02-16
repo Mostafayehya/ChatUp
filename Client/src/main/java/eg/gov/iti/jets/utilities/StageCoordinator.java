@@ -42,7 +42,6 @@ public class StageCoordinator {
     }
 
     public void goToLoginPage(){
-
         if (stage ==null){
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
         }
@@ -168,5 +167,13 @@ public class StageCoordinator {
         if(addNewContactPopup!=null){
             addNewContactPopup.hide();
         }
+    }
+
+    public void closeApp(){
+        if(stage==null){
+            throw new RuntimeException("Stage must be initialized before trying to close");
+        }
+        stage.close();
+
     }
 }

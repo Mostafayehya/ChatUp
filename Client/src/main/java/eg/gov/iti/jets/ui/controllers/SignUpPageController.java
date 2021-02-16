@@ -13,7 +13,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
@@ -21,6 +24,8 @@ import services.AuthenticationService;
 import utilities.FilesUtilities;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
@@ -50,6 +55,8 @@ public class SignUpPageController implements Initializable {
     DatePicker birthDatePicker;
     @FXML
     Button choosePhoto;
+    @FXML
+    Circle imageCircle;
     Validation validation;
     AuthenticationService authenticationService;
     FileDomain userImageFile = null;
@@ -156,6 +163,11 @@ public class SignUpPageController implements Initializable {
             userImageFile = new FileDomain();
             userImageFile.setFileBytes(FilesUtilities.convertImageFileToByteArray(userPhoto,extension));
             userImageFile.setFileExtension(extension);
+            try {
+                imageCircle.setFill(new ImagePattern(new Image(new FileInputStream(userPhoto.getAbsoluteFile()))));
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
         });
 
     }
