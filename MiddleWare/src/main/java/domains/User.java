@@ -2,9 +2,6 @@ package domains;
 
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class User implements Serializable {
@@ -12,7 +9,7 @@ public class User implements Serializable {
     String name;
     String email;
     String password;
-    String picture;
+    String userPhotoPath;
     Gender gender;
     String country;
     LocalDate dateOfBirth;
@@ -33,12 +30,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(String phoneNumber, String name, String email, String password, String picture, Gender gender, String country, LocalDate dateOfBirth, String bio, Status status, Mode mode) {
+    public User(String phoneNumber, String name, String email, String password, String userPhotoPath, Gender gender, String country, LocalDate dateOfBirth, String bio, Status status, Mode mode) {
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.picture = picture;
+        this.userPhotoPath = userPhotoPath;
         this.gender = gender;
         this.country = country;
         if(dateOfBirth==null){
@@ -101,12 +98,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getUserPhotoPath() {
+        return userPhotoPath;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setUserPhotoPath(String userPhotoPath) {
+        this.userPhotoPath = userPhotoPath;
     }
 
     public Gender getGender() {
@@ -157,6 +154,14 @@ public class User implements Serializable {
         this.mode = mode;
     }
 
+    public FileDomain getUserPhoto() {
+        return userPhoto;
+    }
+
+    public void setUserPhoto(FileDomain userPhoto) {
+        this.userPhoto = userPhoto;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -164,7 +169,7 @@ public class User implements Serializable {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", picture='" + picture + '\'' +
+                ", picture='" + userPhotoPath + '\'' +
                 ", gender=" + gender +
                 ", country='" + country + '\'' +
                 ", dateOfBirth=" + dateOfBirth +

@@ -26,7 +26,7 @@ public class ModelsFactory {
         if (currentUser != null){
             throw new RuntimeException("current user already set");
         }
-        currentUser = new UserModel(user.getPhoneNumber(),user.getName(),user.getEmail(),user.getPassword(),user.getPicture()
+        currentUser = new UserModel(user.getPhoneNumber(),user.getName(),user.getEmail(),user.getPassword(),user.getUserPhotoPath()
          ,user.getGender(),user.getCountry(),user.getDateOfBirth(),user.getBio(),user.getStatus(),user.getMode());
         try {
             List<Contact> contacts = RMIManager.getHandleContactsService().getUserContacts(user.getPhoneNumber());

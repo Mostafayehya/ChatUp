@@ -27,7 +27,7 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setString(5, user.getPicture());
+            preparedStatement.setString(5, user.getUserPhotoPath());
             preparedStatement.setString(6, user.getGender().name());
             preparedStatement.setString(7, user.getCountry());
             preparedStatement.setDate(8, JavaSqlTimeConverter.convertJavadateToSqlDate(user.getDateOfBirth()));
@@ -71,7 +71,7 @@ public class UserDaoImpl implements UserDao {
                 user.setPhoneNumber(phone);
                 user.setName(rs.getString(2));
                 user.setEmail(rs.getString(3));
-                user.setPicture(rs.getString(5));
+                user.setUserPhotoPath(rs.getString(5));
                 user.setGender(Gender.valueOf(rs.getObject(6).toString().toUpperCase()));
                 user.setCountry(rs.getString(7));
                 String s = rs.getObject(8).toString();

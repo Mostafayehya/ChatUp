@@ -141,6 +141,7 @@ public class SignUpPageController implements Initializable {
                         alert.showAndWait();
                     } else {
                         StageCoordinator stageCoordinator = StageCoordinator.getInstance();
+                        stageCoordinator.goToLoginPage();
                     }
                 } catch (RemoteException ex) {
                     ex.printStackTrace();

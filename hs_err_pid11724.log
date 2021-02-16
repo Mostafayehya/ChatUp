@@ -1,0 +1,196 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 134217728 bytes for Failed to commit area from 0x0000000081800000 to 0x0000000089800000 of length 134217728.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (./open/src/hotspot/os/windows/os_windows.cpp:3275), pid=11724, tid=2780
+#
+# JRE version:  (11.0.9+7) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (11.0.9+7-LTS, mixed mode, sharing, tiered, compressed oops, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: eg.gov.iti.jets.Main
+
+Host: Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz, 4 cores, 7G,  Windows 10 , 64 bit Build 18362 (10.0.18362.1110)
+Time: Tue Feb 16 20:08:57 2021 Egypt Standard Time elapsed time: 0.093797 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001a429f1f800):  JavaThread "Unknown thread" [_thread_in_vm, id=2780, stack(0x0000002e0d200000,0x0000002e0d300000)]
+
+Stack: [0x0000002e0d200000,0x0000002e0d300000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x611a3a]
+V  [jvm.dll+0x748aaf]
+V  [jvm.dll+0x74a135]
+V  [jvm.dll+0x74a7b3]
+V  [jvm.dll+0x2439f8]
+V  [jvm.dll+0x60eeda]
+V  [jvm.dll+0x603de5]
+V  [jvm.dll+0x2f785c]
+V  [jvm.dll+0x2f76e2]
+V  [jvm.dll+0x2fc396]
+V  [jvm.dll+0x33e1df]
+V  [jvm.dll+0x33dc10]
+V  [jvm.dll+0x2d5aa8]
+V  [jvm.dll+0x2d6c06]
+V  [jvm.dll+0x724927]
+V  [jvm.dll+0x7261cf]
+V  [jvm.dll+0x34af59]
+V  [jvm.dll+0x70a4a0]
+V  [jvm.dll+0x3b415f]
+V  [jvm.dll+0x3b6201]
+C  [jli.dll+0x520b]
+C  [ucrtbase.dll+0x210b2]
+C  [KERNEL32.DLL+0x17c24]
+C  [ntdll.dll+0x6d4d1]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x000001a427d86390, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x000001a429f35800 GCTaskThread "GC Thread#0" [stack: 0x0000002e0d300000,0x0000002e0d400000] [id=1188]
+  0x000001a429f69000 ConcurrentGCThread "G1 Main Marker" [stack: 0x0000002e0d400000,0x0000002e0d500000] [id=2976]
+  0x000001a429f6a800 ConcurrentGCThread "G1 Conc#0" [stack: 0x0000002e0d500000,0x0000002e0d600000] [id=7552]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffb822942a7]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x000001a429f1ec30] Heap_lock - owner thread: 0x000001a429f1f800
+
+Heap address: 0x0000000081800000, size: 2024 MB, Compressed Oops mode: Non-zero based: 0x0000000081800000
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff6e3fd0000 - 0x00007ff6e3fdf000 	C:\Program Files\Java\jdk-11.0.9\bin\java.exe
+0x00007ffc0da80000 - 0x00007ffc0dc70000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffc04be0000 - 0x00007ffc04bf2000 	C:\Program Files\AVAST Software\Avast\aswhook.dll
+0x00007ffc0c860000 - 0x00007ffc0c912000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffc0a9f0000 - 0x00007ffc0ac95000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffc0ad50000 - 0x00007ffc0ae4a000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffbf4290000 - 0x00007ffbf42a8000 	C:\Program Files\Java\jdk-11.0.9\bin\jli.dll
+0x00007ffc0c350000 - 0x00007ffc0c3f3000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffc0d850000 - 0x00007ffc0d8ee000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffc0bdd0000 - 0x00007ffc0be67000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffc0c560000 - 0x00007ffc0c680000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffc0bb30000 - 0x00007ffc0bcc4000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffc0af60000 - 0x00007ffc0af81000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffc0d020000 - 0x00007ffc0d046000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffc0b750000 - 0x00007ffc0b8e6000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffc0b8f0000 - 0x00007ffc0b98e000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffbf2280000 - 0x00007ffbf2295000 	C:\Program Files\Java\jdk-11.0.9\bin\VCRUNTIME140.dll
+0x00007ffbf92f0000 - 0x00007ffbf9574000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.18362.1256_none_9e7e379be45e40e2\COMCTL32.dll
+0x00007ffc0bf40000 - 0x00007ffc0c276000 	C:\WINDOWS\System32\combase.dll
+0x00007ffc0acc0000 - 0x00007ffc0ad41000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffbfb7f0000 - 0x00007ffbfb7fa000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffc0c680000 - 0x00007ffc0c6ae000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ffbbf670000 - 0x00007ffbbf70b000 	C:\Program Files\Java\jdk-11.0.9\bin\msvcp140.dll
+0x00007ffb81fb0000 - 0x00007ffb82aa7000 	C:\Program Files\Java\jdk-11.0.9\bin\server\jvm.dll
+0x00007ffc0bcd0000 - 0x00007ffc0bcd8000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ffbf6d40000 - 0x00007ffbf6d49000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffc0d200000 - 0x00007ffc0d26f000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffc08860000 - 0x00007ffc08884000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffc08830000 - 0x00007ffc0885d000 	C:\WINDOWS\SYSTEM32\WINMMBASE.dll
+0x00007ffc0b990000 - 0x00007ffc0b9da000 	C:\WINDOWS\System32\cfgmgr32.dll
+0x00007ffc0a930000 - 0x00007ffc0a941000 	C:\WINDOWS\System32\kernel.appcore.dll
+0x00007ffbf8010000 - 0x00007ffbf8020000 	C:\Program Files\Java\jdk-11.0.9\bin\verify.dll
+0x00007ffbfb3b0000 - 0x00007ffbfb5a4000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007ffbfb240000 - 0x00007ffbfb26a000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007ffbf2210000 - 0x00007ffbf2238000 	C:\Program Files\Java\jdk-11.0.9\bin\java.dll
+0x00007ffbf2330000 - 0x00007ffbf233a000 	C:\Program Files\Java\jdk-11.0.9\bin\jimage.dll
+0x00007ffbf1da0000 - 0x00007ffbf1db6000 	C:\Program Files\Java\jdk-11.0.9\bin\zip.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\Java\jdk-11.0.9\bin;C:\WINDOWS\SYSTEM32;C:\Program Files\AVAST Software\Avast;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.18362.1256_none_9e7e379be45e40e2;C:\Program Files\Java\jdk-11.0.9\bin\server
+
+VM Arguments:
+java_command: eg.gov.iti.jets.Main
+java_class_path (initial): C:\Users\Hadeer\Desktop\javaProject\ChatUp\Client\target\classes;C:\Users\Hadeer\.m2\repository\eg\gov\iti\jets\MiddleWare\1.0-SNAPSHOT\MiddleWare-1.0-SNAPSHOT.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-controls\15.0.1\javafx-controls-15.0.1.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-controls\15.0.1\javafx-controls-15.0.1-win.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-fxml\15.0.1\javafx-fxml-15.0.1.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-fxml\15.0.1\javafx-fxml-15.0.1-win.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-graphics\15.0.1\javafx-graphics-15.0.1.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-graphics\15.0.1\javafx-graphics-15.0.1-win.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-base\15.0.1\javafx-base-15.0.1.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-base\15.0.1\javafx-base-15.0.1-win.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-swing\15.0.1\javafx-swing-15.0.1.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-swing\15.0.1\javafx-swing-15.0.1-win.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-web\15.0.1\javafx-web-15.0.1.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-web\15.0.1\javafx-web-15.0.1-win.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-media\15.0.1\javafx-media-15.0.1.jar;C:\Users\Hadeer\.m2\repository\org\openjfx\javafx-media\15.0.1\javafx-media-15.0.1-win.jar;C:\Users\Hadeer\.m2\repository\org\controlsfx\controlsfx\11.0.3\controlsfx-11.0.3.jar;C:\Users\Hadeer\.m2\repository\org\kordamp\ikonli\ikonli-javafx\12.1.0\ikonli-javafx-12.1.0.jar;C:\Users\Hadeer\.m2\repository\org\kordamp\ikonli\ikonli-core\12.1.0\ikonli-core-12.1.0.jar;C:\Users\Hadeer\.m2\repository\org\kordamp\ikonli\ikonli-materialdesign2-pack\12.1.0\ikonli-materialdesign2-pack-12.1.0.jar;C:\Users\Hadeer\.m2\repository\org\kordamp\ikonli\ikonli-fontawesome5-pack\12.1.0\ikonli-fontawesome5-pack-12.1.0.jar;C:\Users\Hadeer\.m2\repository\org\ko
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 3                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 1                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 4                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 134217728                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 2122317824                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5830732                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122913754                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122913754                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-11.0.9
+PATH=C:\Program Files\Java\jdk-11.0.9\bin;C:\DevTools\programs\JAXB\jaxb-ri\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\oraclexe\app\oracle\product\11.2.0\server\bin;C:\Program Files (x86)\VMware\VMware Workstation\bin\;";C:\Program Files (x86)\Common Files\Oracle\Java\javapath";C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\DTS\Binn\;C:\Users\Hadeer\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\ManagementStudio\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Brackets\command;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files\nodejs\;C:\Users\Hadeer\Desktop\deeplearning\venv\Scripts;C:\Program Files\Dart\dart-sdk\bin;C:\WINDOWS\System32\OpenSSH\;C:\DevTools\programs\apache-maven-3.6.3\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Hadeer\AppData\Local\Microsoft\WindowsApps;C:\Users\Hadeer\AppData\Local\GitHubDesktop\bin;C:\Users\Hadeer\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Hadeer\AppData\Roaming\npm;C:\src\flutter\bin;C:\Program Files\heroku\bin;C:\Users\Hadeer\AppData\Local\Microsoft\WindowsApps;C:\DevTools\programs\JAXB\jaxb-ri\bin;
+USERNAME=Hadeer
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 142 Stepping 9, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10 , 64 bit Build 18362 (10.0.18362.1110)
+
+CPU:total 4 (initial active 4) (2 cores per cpu, 2 threads per core) family 6 model 142 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx, fma
+
+Memory: 4k page, system-wide physical 8092M (660M free)
+TotalPageFile size 13092M (AvailPageFile size 43M)
+current process WorkingSet (physical memory assigned to process): 9M, peak: 9M
+current process commit charge ("private bytes"): 51M, peak: 179M
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (11.0.9+7-LTS) for windows-amd64 JRE (11.0.9+7-LTS), built on Sep 15 2020 16:47:03 by "mach5one" with MS VC++ 15.9 (VS2017)
+
+END.

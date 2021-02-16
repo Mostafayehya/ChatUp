@@ -39,7 +39,7 @@
                   <Pane prefHeight="112.0" prefWidth="150.0">
                      <children>
                         <Circle fill="WHITE" layoutX="73.0" layoutY="57.0" radius="57.0" stroke="BLACK" strokeType="INSIDE" />
-                         <Button layoutX="96.0" layoutY="75.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="28.0" style="-fx-background-radius: 100; -fx-background-color: #009688;">
+                         <Button fx:id="choosePhoto" layoutX="96.0" layoutY="75.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="28.0" style="-fx-background-radius: 100; -fx-background-color: #009688;">
                              <graphic>
                                  <FontIcon iconColor="#fffdfd" iconLiteral="mdi2c-camera" iconSize="20" wrappingWidth="20.0" />
                              </graphic>
