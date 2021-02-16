@@ -18,6 +18,7 @@ public class StageCoordinator {
     StackPane parentContainer;
     BorderPane visibleRoot;
     Popup addNewContactPopup;
+    Popup changUserPassPopup;
     private static StageCoordinator stageCoordinator;
     private final Map<String, SceneData> scenes = new HashMap<>();
 
@@ -163,6 +164,19 @@ public class StageCoordinator {
         addNewContactPopup.show(stage);
     }
 
+    public void ChangeUserPassword() {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/views/passwordDialog.fxml"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        changUserPassPopup = new Popup();
+        root.setStyle("-fx-background-color: white");
+        changUserPassPopup.getContent().add(root);
+        changUserPassPopup.show(stage);
+    }
+
     public void goToUserProfilePage() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/views/UProfile.fxml"));
@@ -174,9 +188,15 @@ public class StageCoordinator {
         }
     }
         public void hideNewContactPopup()
-    {
+        {
             if (addNewContactPopup != null) {
                 addNewContactPopup.hide();
             }
         }
+    public void hidePasswordPopup()
+    {
+        if (changUserPassPopup != null) {
+            changUserPassPopup.hide();
+        }
+    }
     }

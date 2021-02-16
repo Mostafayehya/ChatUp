@@ -123,7 +123,20 @@ public class UserDaoImpl implements UserDao {
         return -1;
     }
 
-
+    @Override
+    public int updateUserPass(User user) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set password=?   where phone=?");
+            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setString(2,user.getPhoneNumber());
+            int result =  preparedStatement.executeUpdate();
+            preparedStatement.close();
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 
 
 }

@@ -4,10 +4,7 @@ import domains.Gender;
 import domains.Mode;
 import domains.Status;
 import domains.User;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import java.time.LocalDate;
 

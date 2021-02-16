@@ -12,15 +12,20 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.UProfileController">
-   <left>
+  <!-- <left>
        <fx:include source="NavigationBar.fxml"></fx:include>
-   </left>
+   </left> -->
     <center>
         <VBox fx:id="formVBox" alignment="CENTER" prefHeight="621.0" prefWidth="441.0" spacing="20" BorderPane.alignment="TOP_CENTER">
             <children>
                 <HBox alignment="TOP_RIGHT" prefHeight="5.0" prefWidth="679.0">
                     <children>
-                        <FontIcon iconColor="gray" iconLiteral="mdi2t-tools" iconSize="20" />
+                  <Button fx:id="setting" focusTraversable="false" mnemonicParsing="false" opacity="0.56" style="-fx-background-radius: 50;">
+                     <graphic>
+                              
+                              <FontIcon iconColor="gray" iconLiteral="mdi2t-tools" iconSize="20" wrappingWidth="23.0" />
+                     </graphic>
+                  </Button>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="117.0" prefWidth="679.0" spacing="10.0">
@@ -84,7 +89,7 @@
                 </CustomTextField>
             <HBox alignment="CENTER" prefHeight="35.0" prefWidth="679.0">
                <children>
-                  <Button fx:id="saveBtn"  mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-radius: 50em; -fx-font-weight: bold; -fx-background-color: #009688; -fx-font-size: 14;" text="Save" visible="false" />
+                  <Button fx:id="saveBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-radius: 50em; -fx-font-weight: bold; -fx-background-color: #009688; -fx-font-size: 14;" text="Save" visible="false" />
                </children>
             </HBox>
                 <HBox alignment="CENTER" prefHeight="19.0" prefWidth="679.0" spacing="20.0">

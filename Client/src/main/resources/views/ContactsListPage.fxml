@@ -13,9 +13,9 @@
         <URL value="@../css/loginStyle.css" />
         <URL value="@../styles/bootstrapfx.css" />
     </stylesheets>
-    <left>
+  <!--  <left>
         <fx:include source="NavigationBar.fxml"/>
-    </left>
+    </left> -->
    <center>
        <VBox>
            <HBox style="-fx-background-color: #009688" alignment="CENTER_RIGHT">

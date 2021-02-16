@@ -8,6 +8,7 @@ public interface UserDao {
     User getUserByPhone(String phone);
     int updateUserData(User user);
     int updateUserMode(User user);
+    int updateUserPass(User user);
     User getUserByPhoneAndPassword(String phone, String password);
 
 }

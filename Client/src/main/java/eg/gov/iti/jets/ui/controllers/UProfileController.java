@@ -7,6 +7,7 @@ import domains.User;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.ui.models.UserModel;
+import eg.gov.iti.jets.utilities.StageCoordinator;
 import eg.gov.iti.jets.utilities.Validation;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -48,10 +49,12 @@ public class UProfileController implements Initializable {
     Button busyBtn;
     @FXML
     Button awayBtn;
+    @FXML
+    Button setting;
     UpdateService updateService;
     Validation validation;
     UserModel userModel;
-    User user=new User("01116058917","hagar","hagar@gmail.com","1234",null, Gender.FEMALE,"egypt",null,"hii", Status.ONLINE,Mode.AVAILABLE);
+   // User user=new User("01116058917","hagar","hagar@gmail.com","1234",null, Gender.FEMALE,"egypt",null,"hii", Status.ONLINE,Mode.AVAILABLE);
     public UProfileController(){validation = new Validation();
     userModel=new UserModel();
     }
@@ -75,17 +78,17 @@ public class UProfileController implements Initializable {
                 }
             }
         }));
-        if(user.getMode().equals("BUSY"))
-        {
-            busyBtn.pressedProperty();
-        }
-        else if(user.getMode().equals("AWAY"))
-        {
-            awayBtn.pressedProperty();
-        }
-        else {
-            availableBtn.pressedProperty();
-        }
+//        if(userModel.getMode().equals("BUSY"))
+//        {
+//            busyBtn.pressedProperty();
+//        }
+//        else if(userModel.getMode().equals("AWAY"))
+//        {
+//            awayBtn.pressedProperty();
+//        }
+//        else {
+//            availableBtn.pressedProperty();
+//        }
 
         editBtn.addEventHandler(ActionEvent.ACTION, (e) -> {
         nameTextField.setEditable(true);
@@ -114,7 +117,7 @@ public class UProfileController implements Initializable {
 //            user.setName(nameTextField.getText());
 //            userName.setText(nameTextField.getText());
             try {
-                updateService.EditUserData(user);
+                updateService.EditUserData(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userModel.getPicture(),userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }
@@ -122,28 +125,32 @@ public class UProfileController implements Initializable {
         });
 
         availableBtn.addEventHandler(ActionEvent.ACTION, (e) -> {
-            user.setMode(Mode.AVAILABLE);
+            userModel.setMode(Mode.AVAILABLE);
             try {
-                updateService.EditUserMode(user);
+                updateService.EditUserMode(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userModel.getPicture(),userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }
         });
         busyBtn.addEventHandler(ActionEvent.ACTION, (e) -> {
-            user.setMode(Mode.BUSY);
+            userModel.setMode(Mode.BUSY);
             try {
-                updateService.EditUserMode(user);
+                updateService.EditUserMode(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userModel.getPicture(),userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }
         });
         awayBtn.addEventHandler(ActionEvent.ACTION, (e) -> {
-            user.setMode(Mode.AWAY);
+            userModel.setMode(Mode.AWAY);
             try {
-                updateService.EditUserMode(user);
+                updateService.EditUserMode(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userModel.getPicture(),userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }
+        });
+        setting.addEventHandler(ActionEvent.ACTION,(e)->{
+            StageCoordinator stageCoordinator = StageCoordinator.getInstance();
+            stageCoordinator.ChangeUserPassword();
         });
 
     }
@@ -154,6 +161,7 @@ public class UProfileController implements Initializable {
         emailTextField.textProperty().bindBidirectional(userModel.emailProperty());
         bioTextField.textProperty().bindBidirectional(userModel.bioProperty());
 
-    }
+
+        }
 }
 
