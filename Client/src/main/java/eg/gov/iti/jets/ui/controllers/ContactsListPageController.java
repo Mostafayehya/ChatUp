@@ -41,5 +41,7 @@ public class ContactsListPageController implements Initializable {
             StageCoordinator stageCoordinator = StageCoordinator.getInstance();
             stageCoordinator.getAddNewContactPopUp();
         });
+
+        contactsListView.onMouseClickedProperty();
     }
 }
