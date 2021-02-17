@@ -75,6 +75,11 @@ public class AddNewContactPopupController implements Initializable {
                 e.consume();
             }
         });
+        extraPhoneTextField.addEventFilter(KeyEvent.KEY_TYPED, (e) -> {
+            if (!validation.validatePhoneNumber(e.getCharacter()) || extraPhoneTextField.getText().length() >= 11) {
+                e.consume();
+            }
+        });
         contactNumberTextField.focusedProperty().addListener((observable,wasFocused,isFocused)->{
             if(!isFocused){
                 if(validation.isempty(contactNumberTextField)){
@@ -89,11 +94,17 @@ public class AddNewContactPopupController implements Initializable {
             CustomTextField extraPhone = new CustomTextField();
             FontIcon phoneIcon = new FontIcon("mdi2p-phone");
             phoneIcon.setIconColor(Color.GRAY);
+            extraPhone.setText("");
             extraPhone.setLeft(phoneIcon);
             extraPhone.setPromptText("Extra phone number");
             extraPhone.setStyle(extraPhoneTextField.getStyle());
-            StringProperty newExtraPhone = new SimpleStringProperty();
+            StringProperty newExtraPhone = new SimpleStringProperty("");
             extraPhone.textProperty().bindBidirectional(newExtraPhone);
+            extraPhone.addEventFilter(KeyEvent.KEY_TYPED, (keyEvent) -> {
+                if (!validation.validatePhoneNumber(keyEvent.getCharacter()) || extraPhone.getText().length() >= 11) {
+                    keyEvent.consume();
+                }
+            });
             extraPhones.add(newExtraPhone);
             extraPhoneVBox.getChildren().add(extraPhone);
         });
