@@ -7,6 +7,5 @@
 Server/target
 Client/target/
 MiddleWare/target
-Server/src/resources/UserPhotos
 *.log
-*.jpg
+Server/src/main/resources/UserPhotos
