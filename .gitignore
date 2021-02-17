@@ -8,4 +8,4 @@ Server/target
 Client/target/
 MiddleWare/target
 *.log
-Server/src/main/resources/UserPhotos
+*.JPG
