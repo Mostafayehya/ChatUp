@@ -105,7 +105,11 @@ public class AddNewContactPopupController implements Initializable {
             try {
                 ModelsFactory modelsFactory = ModelsFactory.getInstance();
                 String phone = modelsFactory.getCurrentUser().getPhoneNumber();
-                int result = handleContactsService.addNewContact(new Contact(phone,contactModel.getContactPhoneNumber(),contactModel.getName(),contactModel.getBio(),contactModel.getEmail(),contactModel.getImage(),contactModel.getStatus(),contactModel.getMode()));
+                Contact contact = new Contact(phone,contactModel.getContactPhoneNumber());
+                for (int i=0;i<extraPhones.size();i++){
+                    contact.getExtraNumbers().add(extraPhones.get(i).getValue());
+                }
+                int result = handleContactsService.addNewContact(contact);
                 if(result == -2){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("User not Found");
@@ -122,6 +126,9 @@ public class AddNewContactPopupController implements Initializable {
                     StageCoordinator.getInstance().hideNewContactPopup();
                     alert.showAndWait();
                 }
+                else
+                    ModelsFactory.getInstance().retrieveContacts();
+                StageCoordinator.getInstance().hideNewContactPopup();
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }

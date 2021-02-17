@@ -34,17 +34,18 @@ public class ContactItemController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image = null;
-        if (contact.getContactImage() == null) {
-            System.out.println("no image");
-            File imageFile = new File(getClass().getResource("/photos/user.jpg").getPath());
-            try {
-                image = new Image(new FileInputStream(imageFile.getAbsoluteFile()));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        } else {
+//        if (contact.getContactImage() == null) {
+//            System.out.println("no image");
+//            File imageFile = new File(getClass().getResource("/photos/user.jpg").getPath());
+//            try {
+//                image = new Image(new FileInputStream(imageFile.getAbsoluteFile()));
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        else {
             image = contact.getContactImage();
-        }
+//        }
         imageCircle.setFill(new ImagePattern(image));
         contactNameLabel.setText(contact.getName());
         bioLabel.setText(contact.getBio());

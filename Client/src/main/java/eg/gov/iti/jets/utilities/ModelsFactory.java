@@ -6,7 +6,6 @@ import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.ui.models.UserModel;
 import javafx.collections.FXCollections;
 import javafx.scene.image.Image;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.rmi.RemoteException;
@@ -37,17 +36,7 @@ public class ModelsFactory {
                     ,user.getMode(),new Image(inputStream));
 
         }
-        else {
-            currentUser = new UserModel(user.getPhoneNumber(), user.getName(), user.getEmail(), user.getPassword(), user.getUserPhotoPath()
-                    , user.getGender(), user.getCountry(), user.getDateOfBirth(), user.getBio(), user.getStatus(), user.getMode());
-        }
-        try {
-            List<Contact> contacts = RMIManager.getHandleContactsService().getUserContacts(user.getPhoneNumber());
-            System.out.println(contacts.size());
-            currentUser.setContacts(FXCollections.observableList(getContactModelsList(contacts)));
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+        retrieveContacts();
     }
 
     public List<ContactModel> getContactModelsList(List<Contact> contacts){
@@ -61,7 +50,7 @@ public class ModelsFactory {
     }
 
     public ContactModel getContactModel(Contact contact){
-        ContactModel contactModel;
+        ContactModel contactModel = null;
         if(contact.getContactImage()!=null){
             System.out.println("has image");
             InputStream inputStream = new ByteArrayInputStream(contact.getContactImage());
@@ -69,17 +58,26 @@ public class ModelsFactory {
                     contact.getEmail(),contact.getStatus(),contact.getMode(),new Image(inputStream));
 
         }
-        else {
-            System.out.println("no have image");
-            contactModel = new ContactModel(contact.getContactPhoneNumber(),contact.getName(),contact.getBio(),
-                    contact.getEmail(),contact.getImage(),contact.getStatus(),contact.getMode());
-        }
+//        else {
+//            contactModel = new ContactModel(contact.getContactPhoneNumber(),contact.getName(),contact.getBio(),
+//                    contact.getEmail(),contact.getImage(),contact.getStatus(),contact.getMode());
+//        }
 
         return contactModel;
     }
 
     public UserModel getCurrentUser(){
         return currentUser;
+    }
+
+    public void retrieveContacts(){
+        List<Contact> contacts = null;
+        try {
+            contacts = RMIManager.getHandleContactsService().getUserContacts(currentUser.getPhoneNumber());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        currentUser.setContacts(FXCollections.observableList(getContactModelsList(contacts)));
     }
 
 

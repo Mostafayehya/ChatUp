@@ -2,6 +2,7 @@ package domains;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Contact implements Serializable {
@@ -18,6 +19,7 @@ public class Contact implements Serializable {
 
     public Contact() {
         this.image = "src/main/resources/photos/user.jpg";
+        extraNumbers = new ArrayList<>();
     }
 
     public Contact(String userPhoneNumber, String contactPhoneNumber, String name, String bio, String email, String image,Status status,Mode mode) {
@@ -29,11 +31,13 @@ public class Contact implements Serializable {
         this.image = image;
         this.status = status;
         this.mode = mode;
+        extraNumbers = new ArrayList<>();
     }
 
     public Contact(String userPhoneNumber,String contactPhoneNumber){
         this.contactPhoneNumber = contactPhoneNumber;
         this.userPhoneNumber = userPhoneNumber;
+        extraNumbers = new ArrayList<>();
     }
 
     public Contact(String userPhoneNumber, String contactPhoneNumber, String name, String bio, String email, Status status, Mode mode, List<String> extraNumbers, byte[] contactImage) {
