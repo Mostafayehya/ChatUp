@@ -25,14 +25,6 @@ public class ContactsListPageController implements Initializable {
     @FXML
     Button addNewContact;
 
-    public ContactsListPageController(){
-//        contactObservableList = FXCollections.observableArrayList(
-//                new ContactModel("019922","hadeer","this is my bio","hadeer@gmail.com","/photos/user.jpg", Status.OFFLINE, Mode.AVAILABLE),
-//                new ContactModel("8473992","yasmina","this is yasmina's bio","yasmina@gmail.com","/photos/user.jpg",Status.OFFLINE,Mode.AVAILABLE)
-//        );
-        contactObservableList = ModelsFactory.getInstance().getCurrentUser().getContacts();
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         contactObservableList = ModelsFactory.getInstance().getCurrentUser().getContacts();

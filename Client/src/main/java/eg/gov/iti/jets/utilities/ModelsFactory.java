@@ -20,8 +20,7 @@ public class ModelsFactory {
 
     ContactModel selectedContact = new ContactModel("01068867847",
             "Stranger", "src/main/resources/photos/user.jpg");
-    ObservableList<Message> messagesObservableList = FXCollections.observableArrayList(new Message());
-
+    ObservableList<Message> messagesObservableList;
     ContactModel selectedOnlineContactModel = new ContactModel();
 
     List<ContactModel> contactModelList;
@@ -71,7 +70,7 @@ public class ModelsFactory {
 
     public ObservableList<Message> getMessagesObservableList() {
         if (messagesObservableList == null) {
-            return FXCollections.observableArrayList(new Message());
+            return FXCollections.observableArrayList();
         }
         return messagesObservableList;
     }

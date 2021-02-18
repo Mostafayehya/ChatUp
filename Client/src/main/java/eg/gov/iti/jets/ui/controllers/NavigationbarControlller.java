@@ -11,7 +11,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class navigationbarControlller implements Initializable {
+public class NavigationbarControlller implements Initializable {
 
     @FXML
     private JFXButton profileButton;
