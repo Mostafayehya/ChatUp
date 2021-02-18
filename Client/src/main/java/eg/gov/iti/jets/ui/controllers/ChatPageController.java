@@ -93,7 +93,7 @@ public class ChatPageController implements Initializable {
         // Todo 1 I should bind the messagelistView to the messages Map inside ModelsFactory Map<contactId,List<message>
         // Todo 2 Binding the chat Image to the contact image, waiting to merge with Hadeer
 
-        messagesObservableList =modelsFactory.getMessagesObservableList();
+        messagesObservableList = modelsFactory.getMessagesObservableList();
         chatListView.setItems(messagesObservableList);
 
         chatListView.setCellFactory(messageListView -> new MessageListCell());
@@ -106,8 +106,8 @@ public class ChatPageController implements Initializable {
 
             // I need to store the currentContact inside models factory in order to specify the
             // receiver of the message
-            Message newMessage = new Message(LocalDate.now().toString(),messgeTextField.getText(),
-                  selectedOnlineContact.getContactPhoneNumber()  ,modelsFactory.getCurrentUser().getPhoneNumber());
+            Message newMessage = new Message(LocalDate.now().toString(), messgeTextField.getText(),
+                    selectedOnlineContact.getContactPhoneNumber(), modelsFactory.getCurrentUser().getPhoneNumber());
 
             try {
                 RMIManager.getSingleChatService().sendMessage(newMessage);

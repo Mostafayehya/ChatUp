@@ -18,8 +18,7 @@ public class ModelsFactory {
     // todo) refactor this to have a public method to get it as the MVC demo
     UserModel currentUser;
 
-    ContactModel selectedContact = new ContactModel("01068867847",
-            "Stranger", "src/main/resources/photos/user.jpg");
+    ContactModel selectedContact;
     ObservableList<Message> messagesObservableList;
     ContactModel selectedOnlineContactModel = new ContactModel();
 
@@ -43,7 +42,7 @@ public class ModelsFactory {
         }
 
         // We need to save current user's data in DB or external file .
-        currentUser =new UserModel(user.getPhoneNumber(), user.getName(), user.getEmail(), user.getPassword(),
+        currentUser = new UserModel(user.getPhoneNumber(), user.getName(), user.getEmail(), user.getPassword(),
                 "src/main/resources/images/img.png"
                 , user.getGender(), user.getCountry(), user.getDateOfBirth(), user.getBio(), user.getStatus(), user.getMode());
         try {
@@ -70,7 +69,8 @@ public class ModelsFactory {
 
     public ObservableList<Message> getMessagesObservableList() {
         if (messagesObservableList == null) {
-            return FXCollections.observableArrayList();
+            messagesObservableList = FXCollections.observableArrayList();
+            return messagesObservableList;
         }
         return messagesObservableList;
     }
@@ -80,11 +80,9 @@ public class ModelsFactory {
 
         if (selectedContact == null) {
             selectedContact = new ContactModel();
-
+            return selectedContact;
         }
-        // This should be replaced by updating the selected contact
-        selectedContact.setContactPhoneNumber("01068867847");
-        selectedContact.setName("the Contact");
+
         return selectedContact;
     }
 
@@ -98,7 +96,11 @@ public class ModelsFactory {
     */
     public void receiveMessage(Message message) {
 
-        messagesObservableList.add(message);
+        if (message != null) {
+            System.out.println("Message received :" + message.getContent());
+            messagesObservableList.add(message);
+
+        }
     }
 
 

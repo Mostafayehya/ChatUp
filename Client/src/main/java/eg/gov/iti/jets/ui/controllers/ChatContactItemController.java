@@ -49,7 +49,7 @@ public class ChatContactItemController implements Initializable {
         }
 
         contactNameLabel.setText(contact.getName());
-        bioLabel.setText(contact.getBio());
+        bioLabel.setText(contact.getContactPhoneNumber());
 
     }
 

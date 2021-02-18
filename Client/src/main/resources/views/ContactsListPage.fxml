@@ -8,24 +8,26 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefWidth="730.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.ContactsListPageController">
+<BorderPane prefWidth="730.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="eg.gov.iti.jets.ui.controllers.ContactsListPageController">
     <stylesheets>
-        <URL value="@../css/loginStyle.css" />
-        <URL value="@../styles/bootstrapfx.css" />
+        <URL value="@../css/loginStyle.css"/>
+        <URL value="@../styles/bootstrapfx.css"/>
     </stylesheets>
     <left>
-        <fx:include source="NavigationBar.fxml" />
+        <fx:include source="NavigationBar.fxml"/>
     </left>
-   <center>
-       <VBox>
-           <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #009688">
-               <padding>
-                   <Insets bottom="10" left="10" right="10" top="10" />
-               </padding>
+    <center>
+        <VBox>
+            <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #009688">
+                <padding>
+                    <Insets bottom="10" left="10" right="10" top="10"/>
+                </padding>
                 <Button fx:id="addNewContact" styleClass="transparentButton">Add new contact</Button>
-           </HBox>
-           <ListView fx:id="contactsListView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS" />
-       </VBox>
+            </HBox>
+            <ListView fx:id="contactsListView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"
+                      VBox.vgrow="ALWAYS"/>
+        </VBox>
 
-   </center>
+    </center>
 </BorderPane>
