@@ -65,9 +65,9 @@ public class LoginPageController implements Initializable {
                 failed.setText("Either phone or password is incorrect");
                 return;
             }
-            modelsFactory.setCurrentUser(user);
+            modelsFactory.setUpUserInfoForFirstTime(user);
             StageCoordinator.getInstance().gotoContactsListPage();
-            //System.out.println(user.getName() + "hello");
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -44,7 +44,7 @@ public class MessageListCell extends ListCell<Message> {
 
 
             }else{
-                messageItemController.setSenderName(ModelsFactory.getInstance().selectedContact.getName());
+                messageItemController.setSenderName(message.getSenderPhoneNumber());
                 messageItemController.setMessageContent(message.getContent());
                 messageItemController.setTimeText(message.getTime());
                 messageItemController.setMessageOrientation(NodeOrientation.RIGHT_TO_LEFT);

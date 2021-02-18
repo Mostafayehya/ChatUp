@@ -12,14 +12,16 @@ import java.util.Map;
 public class SingleChatServiceImpl extends UnicastRemoteObject implements SingleChatService {
 
     Map<String, ClientCallbacks> onlineUsers;
+
     public SingleChatServiceImpl() throws RemoteException {
         onlineUsers = Server.getOnlineClients();
     }
 
     @Override
     public void sendMessage(Message message) throws RemoteException {
-        System.out.println("Message deliverd to chatService from " +message.getSenderPhoneNumber() );
+        System.out.println("Message deliverd to chatService from " + message.getSenderPhoneNumber());
         ClientCallbacks client = onlineUsers.get(message.getReceiverPhoneNumber());
-        client.receiveMessage(message);
+        if (client != null)
+            client.receiveMessage(message);
     }
 }

@@ -26,11 +26,17 @@ public class UserModel {
     ObjectProperty<Mode> mode = new SimpleObjectProperty<>();
     ObservableList<ContactModel> contacts;
 
+
+    public UserModel(){
+
+    }
     public UserModel(String phoneNumber, String name, String email) {
         this.phoneNumber.setValue(phoneNumber);
         this.name.setValue(name);
         this.email.setValue(email);
     }
+
+
 
     public ObservableList<ContactModel> getContacts() {
         return contacts;

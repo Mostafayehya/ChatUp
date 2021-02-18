@@ -15,7 +15,7 @@ public class DomainModelConverter {
     }
 
 
-    public static List<ContactModel> getContactModelsList(List<Contact> contacts) {
+    public static List<ContactModel> contactListToContactModelList(List<Contact> contacts) {
         List<ContactModel> contactModels = new ArrayList<>();
         for (int i = 0; i < contacts.size(); i++) {
             Contact contact = contacts.get(i);

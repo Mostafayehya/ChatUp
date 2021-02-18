@@ -10,19 +10,19 @@ import javafx.collections.ObservableList;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import static eg.gov.iti.jets.utilities.DomainModelConverter.getContactModelsList;
+import static eg.gov.iti.jets.utilities.DomainModelConverter.contactListToContactModelList;
 
 public class ModelsFactory {
     private static ModelsFactory modelsFactory;
     //has reference from all models
     // todo) refactor this to have a public method to get it as the MVC demo
-    UserModel currentUser = null;
+    UserModel currentUser;
 
     ContactModel selectedContact = new ContactModel("01068867847",
             "Stranger", "src/main/resources/photos/user.jpg");
     ObservableList<Message> messagesObservableList = FXCollections.observableArrayList(new Message());
 
-    ContactModel selectedOnlineContactModel;
+    ContactModel selectedOnlineContactModel = new ContactModel();
 
     List<ContactModel> contactModelList;
 
@@ -38,19 +38,21 @@ public class ModelsFactory {
     }
 
 
-    public void setCurrentUser(User user) {
+    public void setUpUserInfoForFirstTime(User user) {
         if (currentUser != null) {
             throw new RuntimeException("current user already set");
         }
-        currentUser = /*new UserModel("01068867848", "MostafaYehya",
-                "src/main/resources/images/img.png");*/ new UserModel(user.getPhoneNumber(), user.getName(), user.getEmail(), user.getPassword(),
+
+        // We need to save current user's data in DB or external file .
+        currentUser =new UserModel(user.getPhoneNumber(), user.getName(), user.getEmail(), user.getPassword(),
                 "src/main/resources/images/img.png"
                 , user.getGender(), user.getCountry(), user.getDateOfBirth(), user.getBio(), user.getStatus(), user.getMode());
         try {
             List<Contact> contacts = RMIManager.getHandleContactsService().getUserContacts(user.getPhoneNumber());
             System.out.println("Current user's all contacts loaded successfully with size = " + contacts.size());
-            contactModelList = getContactModelsList(contacts);
-            setSelectedOnlineContactModel(contactModelList.get(0));
+            contactModelList = contactListToContactModelList(contacts);
+            if (!contactModelList.isEmpty())
+                setSelectedOnlineContactModel(contactModelList.get(0));
             currentUser.setContacts(FXCollections.observableList(contactModelList));
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -58,7 +60,13 @@ public class ModelsFactory {
     }
 
     public UserModel getCurrentUser() {
-        return currentUser;
+
+        if (currentUser == null) {
+            currentUser = new UserModel();
+            return currentUser;
+        } else {
+            return currentUser;
+        }
     }
 
     public ObservableList<Message> getMessagesObservableList() {
@@ -100,7 +108,7 @@ public class ModelsFactory {
      * *///////////////////////////////////
     public void setSelectedOnlineContactModel(ContactModel contactModel) {
 
-        if (selectedOnlineContactModel == null){
+        if (selectedOnlineContactModel == null) {
             selectedOnlineContactModel = contactModel;
         }
         selectedOnlineContactModel.setContactModel(contactModel);
@@ -111,6 +119,13 @@ public class ModelsFactory {
 
     public ContactModel getCurrentSelectedOnlineContact() {
 
-        return selectedOnlineContactModel;
+        if (selectedOnlineContactModel == null) {
+            selectedOnlineContactModel = new ContactModel();
+            return selectedOnlineContactModel;
+        } else {
+            return selectedOnlineContactModel;
+
+        }
+
     }
 }
