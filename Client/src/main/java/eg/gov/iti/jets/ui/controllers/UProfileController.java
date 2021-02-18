@@ -17,7 +17,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.kordamp.ikonli.javafx.FontIcon;
 import services.UpdateService;
@@ -52,6 +54,8 @@ public class UProfileController implements Initializable {
     Button awayBtn;
     @FXML
     Button setting;
+    @FXML
+    Circle userImage;
     UpdateService updateService;
     Validation validation;
     UserModel userModel;
@@ -65,13 +69,7 @@ public class UProfileController implements Initializable {
         userModel=modelsFactory.getInstance().getCurrentUser();
         System.out.println("user "+userModel.getName());
         bind();
-
-//        userName.setText(user.getName());
-//        nameTextField.setText(user.getName());
-//        phoneTextField.setText(user.getPhoneNumber());
-//        countryTextField.setText(user.getCountry());
-//        emailTextField.setText(user.getEmail());
-//        bioTextField.setText(user.getBio());
+        userImage.setFill(new ImagePattern(userModel.getUserImage()));
         updateService= RMIManager.getUpdateService();
         emailTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {

@@ -3,14 +3,12 @@ package eg.gov.iti.jets.ui.controllers;
 import domains.User;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.UserModel;
+import eg.gov.iti.jets.utilities.ModelsFactory;
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import eg.gov.iti.jets.utilities.Validation;
-
-
-import eg.gov.iti.jets.utilities.ModelsFactory;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import org.controlsfx.control.textfield.CustomPasswordField;
 
@@ -20,9 +18,9 @@ import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
-public class passwodDialogController {
+public class PasswordDialogController implements Initializable {
     @FXML
-    CustomPasswordField CurrentpassTextField;
+    CustomPasswordField CurrentPassTextField;
     @FXML
     CustomPasswordField newPassTextField;
     @FXML
@@ -34,22 +32,24 @@ public class passwodDialogController {
     Validation validation;
     UserModel userModel;
     UpdateService updateService;
-    public passwodDialogController(){
-        userModel=new UserModel();
+    public PasswordDialogController(){
+        userModel= ModelsFactory.getInstance().getCurrentUser();
         validation = new Validation();
     }
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("password change controller");
         updateService= RMIManager.getUpdateService();
-        System.out.println("hi");
-        CurrentpassTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
+        CurrentPassTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
-                if (CurrentpassTextField.getText().equals("")) {
-                    CurrentpassTextField.setStyle("-fx-border-color: red;");
-                    CurrentpassTextField.requestFocus();
-                } else if (!CurrentpassTextField.getText().equals(userModel.getPassword())) {
-                    CurrentpassTextField.requestFocus();
+                if (CurrentPassTextField.getText().equals("")) {
+                    CurrentPassTextField.setStyle("-fx-border-color: red;");
+                    CurrentPassTextField.requestFocus();
+                } else if (!CurrentPassTextField.getText().equals(userModel.getPassword())) {
+                    CurrentPassTextField.setStyle("-fx-border-color: red;");
+                    CurrentPassTextField.requestFocus();
                 } else {
-                    CurrentpassTextField.setStyle("-fx-border-color: transparent;");
+                    CurrentPassTextField.setStyle("-fx-border-color: transparent;");
                 }
             }
         }));
@@ -84,7 +84,8 @@ public class passwodDialogController {
         changeBtn.addEventHandler(ActionEvent.ACTION,(e)->{
             try {
                 System.out.println("change");
-                updateService.EditUserPass(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userModel.getPicture(),userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
+                System.out.println(updateService.EditUserPass(new User(userModel.getPhoneNumber(), userModel.getName(), userModel.getEmail(), newPassTextField.getText(), userModel.getPicture(), userModel.getGender(), userModel.getCountry(), userModel.getDateOfBirth(), userModel.getBio(), userModel.getStatus(), userModel.getMode())));
+                StageCoordinator.getInstance().hidePasswordPopup();
 
             } catch (RemoteException ex) {
                 ex.printStackTrace();
