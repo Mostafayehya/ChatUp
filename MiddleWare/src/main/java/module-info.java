@@ -10,5 +10,6 @@ module MiddleWare {
     opens domains to java.rmi;
     opens clientInterface to java.rmi;
     requires javafx.controls;
+    requires org.apache.commons.io;
 
 }

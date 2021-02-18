@@ -37,7 +37,7 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
                 System.out.println("User has photo");
                 File file = new File(userPhotoPath);
                 String extension = FilesUtilities.getFileExtension(file);
-                byte[] imageBytes = FilesUtilities.convertImageFileToByteArray(file, extension);
+                byte[] imageBytes = FilesUtilities.convertFileToByteArray(file, extension);
                 FileDomain imageFileDomain = new FileDomain(imageBytes, extension, file.getName());
                 user.setUserPhoto(imageFileDomain);
             }

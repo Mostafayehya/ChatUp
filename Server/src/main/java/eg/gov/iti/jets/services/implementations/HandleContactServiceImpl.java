@@ -42,7 +42,7 @@ public class HandleContactServiceImpl extends UnicastRemoteObject implements Han
                 System.out.println(contacts.get(i).getImage());
                 System.out.println(getClass().getResource(contacts.get(i).getImage()));
                 File file = new File(contacts.get(i).getImage());
-                byte[] contactImageBytes = FilesUtilities.convertImageFileToByteArray(file,FilesUtilities.getFileExtension(file));
+                byte[] contactImageBytes = FilesUtilities.convertFileToByteArray(file,FilesUtilities.getFileExtension(file));
                 contacts.get(i).setContactImage(contactImageBytes);
             }
         }

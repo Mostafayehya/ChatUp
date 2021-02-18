@@ -4,23 +4,15 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import javafx.scene.image.Image;
+import org.apache.commons.io.FileUtils;
 
 public class FilesUtilities {
-    public static byte[] convertImageFileToByteArray(File file, String extension) {
+    public static byte[] convertFileToByteArray(File file, String extension) {
         byte[] bytes = null;
-        BufferedImage bi = null;
-        ByteArrayOutputStream baos = null;
         try {
-            //read image from file system
-            bi = ImageIO.read(file);
-            baos = new ByteArrayOutputStream();
-            ImageIO.write(bi, extension, baos);
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-        // convert BufferedImage to byte[]
-        if (baos != null) {
-            bytes = baos.toByteArray();
+            bytes = FileUtils.readFileToByteArray(file);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return bytes;
     }

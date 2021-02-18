@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -165,7 +164,7 @@ public class SignUpPageController implements Initializable {
             File userPhoto = fileChooser.showOpenDialog(choosePhoto.getScene().getWindow());
             String extension = FilesUtilities.getFileExtension(userPhoto);
             userImageFile = new FileDomain();
-            userImageFile.setFileBytes(FilesUtilities.convertImageFileToByteArray(userPhoto,extension));
+            userImageFile.setFileBytes(FilesUtilities.convertFileToByteArray(userPhoto,extension));
             userImageFile.setFileExtension(extension);
             try {
                 imageCircle.setFill(new ImagePattern(new Image(new FileInputStream(userPhoto.getAbsoluteFile()))));
