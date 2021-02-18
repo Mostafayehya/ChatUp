@@ -67,6 +67,7 @@ public class UserDaoImpl implements UserDao {
             if (rs.next() && rs.getString(4).equals(password)) {
                 user = new User();
                 user.setPhoneNumber(phone);
+                user.setPassword(rs.getString(4));
                 user.setName(rs.getString(2));
                 user.setEmail(rs.getString(3));
                 user.setPicture(rs.getString(5));
