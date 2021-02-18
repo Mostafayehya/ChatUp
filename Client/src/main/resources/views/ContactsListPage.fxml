@@ -8,7 +8,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.ContactsListPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.ContactsListPageController">
     <stylesheets>
         <URL value="@../css/loginStyle.css" />
         <URL value="@../styles/bootstrapfx.css" />
@@ -24,7 +24,7 @@
                </padding>
                 <Button styleClass="transparentButton" fx:id="addNewContact">Add new contact</Button>
            </HBox>
-           <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" fx:id="contactsListView"/>
+           <ListView prefHeight="626.0" BorderPane.alignment="CENTER" fx:id="contactsListView"/>
        </VBox>
 
    </center>

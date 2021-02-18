@@ -41,9 +41,8 @@ public class StageCoordinator {
         return stageCoordinator;
     }
 
-    public void goToLoginPage() {
-
-        if (stage == null) {
+    public void goToLoginPage(){
+        if (stage ==null){
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
         }
 
@@ -53,7 +52,7 @@ public class StageCoordinator {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/LoginPage.fxml"));
                 Parent loginView = fxmlLoader.load();
                 parentContainer = new StackPane(loginView);
-                Scene loginScene = new Scene(parentContainer, 759.0, 626.0);
+                Scene loginScene = new Scene(parentContainer,759.0,626.0);
                 SceneData loginSceneData = new SceneData(fxmlLoader, parentContainer, loginScene);
                 scenes.put("login", loginSceneData);
                 stage.setScene(loginScene);
@@ -69,9 +68,9 @@ public class StageCoordinator {
         }
     }
 
-    public void goToSignupPage() {
+    public void goToSignupPage(){
 
-        if (stage == null) {
+        if (stage ==null){
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
         }
 
@@ -98,7 +97,7 @@ public class StageCoordinator {
 
     public void switchToChatScreen() {
 
-        if (stage == null) {
+        if (stage ==null){
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
         }
 
@@ -121,12 +120,13 @@ public class StageCoordinator {
             Scene loginScene = loginSceneData.getScene();
             stage.setScene(loginScene);
         }
+
     }
 
-    public void gotoContactsListPage() {
+    public void gotoContactsListPage(){
 
 
-        if (stage == null) {
+        if (stage ==null){
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
         }
 
@@ -150,8 +150,7 @@ public class StageCoordinator {
             stage.setScene(contactsScene);
         }
     }
-
-    public void getAddNewContactPopUp() {
+    public void getAddNewContactPopUp(){
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("/views/AddNewContactPopup.fxml"));
@@ -199,4 +198,12 @@ public class StageCoordinator {
             changUserPassPopup.hide();
         }
     }
+
+    public void closeApp(){
+        if(stage==null){
+            throw new RuntimeException("Stage must be initialized before trying to close");
+        }
+        stage.close();
+
     }
+}

@@ -6,6 +6,8 @@ import domains.Status;
 import domains.User;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+
 import java.time.LocalDate;
 
 
@@ -22,6 +24,21 @@ public class UserModel {
     ObjectProperty<Status> status = new SimpleObjectProperty<>();
     ObjectProperty<Mode> mode = new SimpleObjectProperty<>();
     ObservableList<ContactModel> contacts;
+    ObjectProperty<Image> userImage = new SimpleObjectProperty<>();
+
+    public UserModel(String phoneNumber, String name, String email, String password, Gender gender, String country, LocalDate dateOfBirth, String bio, Status status, Mode mode, Image image) {
+        this.phoneNumber.setValue(phoneNumber);
+        this.name.setValue(name);
+        this.email.setValue(email);
+        this.password.setValue(password);
+        this.gender.setValue(gender);
+        this.country.setValue(country);
+        this.dateOfBirth.setValue(dateOfBirth);
+        this.bio.setValue(bio);
+        this.status.setValue(status);
+        this.mode.setValue(mode);
+        this.userImage.setValue(image);
+    }
 
     public ObservableList<ContactModel> getContacts() {
         return contacts;

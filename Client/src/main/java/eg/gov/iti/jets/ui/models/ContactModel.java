@@ -6,9 +6,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.Image;
 
 public class ContactModel {
-    //StringProperty userPhoneNumber = new SimpleStringProperty();
     StringProperty contactPhoneNumber = new SimpleStringProperty();
     StringProperty name = new SimpleStringProperty();
     StringProperty bio = new SimpleStringProperty();
@@ -16,9 +16,9 @@ public class ContactModel {
     StringProperty image = new SimpleStringProperty();
     ObjectProperty<Status> status = new SimpleObjectProperty<>();
     ObjectProperty<Mode> mode = new SimpleObjectProperty<>();
+    ObjectProperty<Image> contactImage = new SimpleObjectProperty<>();
 
     public ContactModel(String contactPhoneNumber,String name,String bio,String email,String image,Status status,Mode mode){
-        //this.userPhoneNumber.setValue(userPhoneNumber);
         this.contactPhoneNumber.setValue(contactPhoneNumber);
         this.name.setValue(name);
         this.bio.setValue(bio);
@@ -27,6 +27,19 @@ public class ContactModel {
         this.status.setValue(status);
         this.mode.setValue(mode);
     }
+
+    public ContactModel(String contactPhoneNumber,String name,String bio,String email,Status status,Mode mode,Image image){
+        this.contactPhoneNumber.setValue(contactPhoneNumber);
+        this.name.setValue(name);
+        this.bio.setValue(bio);
+        this.email.setValue(email);
+        this.contactImage.setValue(image);
+        this.status.setValue(status);
+        this.mode.setValue(mode);
+        this.image.setValue("");
+    }
+
+
 
     public ContactModel() {
     }
@@ -113,5 +126,17 @@ public class ContactModel {
 
     public void setMode(Mode mode) {
         this.mode.set(mode);
+    }
+
+    public Image getContactImage() {
+        return contactImage.get();
+    }
+
+    public ObjectProperty<Image> contactImageProperty() {
+        return contactImage;
+    }
+
+    public void setContactImage(Image contactImage) {
+        this.contactImage.set(contactImage);
     }
 }

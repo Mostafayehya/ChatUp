@@ -75,6 +75,11 @@ public class AddNewContactPopupController implements Initializable {
                 e.consume();
             }
         });
+        extraPhoneTextField.addEventFilter(KeyEvent.KEY_TYPED, (e) -> {
+            if (!validation.validatePhoneNumber(e.getCharacter()) || extraPhoneTextField.getText().length() >= 11) {
+                e.consume();
+            }
+        });
         contactNumberTextField.focusedProperty().addListener((observable,wasFocused,isFocused)->{
             if(!isFocused){
                 if(validation.isempty(contactNumberTextField)){
@@ -89,11 +94,17 @@ public class AddNewContactPopupController implements Initializable {
             CustomTextField extraPhone = new CustomTextField();
             FontIcon phoneIcon = new FontIcon("mdi2p-phone");
             phoneIcon.setIconColor(Color.GRAY);
+            extraPhone.setText("");
             extraPhone.setLeft(phoneIcon);
             extraPhone.setPromptText("Extra phone number");
             extraPhone.setStyle(extraPhoneTextField.getStyle());
-            StringProperty newExtraPhone = new SimpleStringProperty();
+            StringProperty newExtraPhone = new SimpleStringProperty("");
             extraPhone.textProperty().bindBidirectional(newExtraPhone);
+            extraPhone.addEventFilter(KeyEvent.KEY_TYPED, (keyEvent) -> {
+                if (!validation.validatePhoneNumber(keyEvent.getCharacter()) || extraPhone.getText().length() >= 11) {
+                    keyEvent.consume();
+                }
+            });
             extraPhones.add(newExtraPhone);
             extraPhoneVBox.getChildren().add(extraPhone);
         });
@@ -105,7 +116,11 @@ public class AddNewContactPopupController implements Initializable {
             try {
                 ModelsFactory modelsFactory = ModelsFactory.getInstance();
                 String phone = modelsFactory.getCurrentUser().getPhoneNumber();
-                int result = handleContactsService.addNewContact(new Contact(phone,contactModel.getContactPhoneNumber(),contactModel.getName(),contactModel.getBio(),contactModel.getEmail(),contactModel.getImage(),contactModel.getStatus(),contactModel.getMode()));
+                Contact contact = new Contact(phone,contactModel.getContactPhoneNumber());
+                for (int i=0;i<extraPhones.size();i++){
+                    contact.getExtraNumbers().add(extraPhones.get(i).getValue());
+                }
+                int result = handleContactsService.addNewContact(contact);
                 if(result == -2){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("User not Found");
@@ -122,6 +137,9 @@ public class AddNewContactPopupController implements Initializable {
                     StageCoordinator.getInstance().hideNewContactPopup();
                     alert.showAndWait();
                 }
+                else
+                    ModelsFactory.getInstance().retrieveContacts();
+                StageCoordinator.getInstance().hideNewContactPopup();
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }
