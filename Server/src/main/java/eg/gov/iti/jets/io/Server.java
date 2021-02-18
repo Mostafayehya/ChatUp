@@ -57,6 +57,10 @@ public class Server {
         }
     }
 
+
+
+    public void addClient(String phone, ChatUpClientInt chatUpClient){}
+
     public void startServer() {
         try {
             AuthenticationService authenticationService = getnewAuthService();
@@ -70,6 +74,4 @@ public class Server {
             e.printStackTrace();
         }
     }
-
-    public void addClient(String phone, ChatUpClientInt chatUpClient){}
 }
