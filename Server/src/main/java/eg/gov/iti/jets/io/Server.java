@@ -26,6 +26,7 @@ public class Server {
     Map<String, ChatUpClientInt> clients;
     DataBaseConnection databaseConnection ;
     private Server(){
+        clients = new HashMap<>();
 
     }
 
@@ -56,6 +57,13 @@ public class Server {
     }
 
     public void stopServer(){
+        for (Map.Entry<String,ChatUpClientInt> entry : clients.entrySet()) {
+            try {
+                entry.getValue().closeApp();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
         databaseConnection.closeConnection();
         try {
             //AuthenticationService authenticationService = getnewAuthService();
@@ -63,6 +71,7 @@ public class Server {
             registry.unbind("HandleContactService");
             UnicastRemoteObject.unexportObject(authenticationService,true);
             UnicastRemoteObject.unexportObject(handleContactsService,true);
+
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
