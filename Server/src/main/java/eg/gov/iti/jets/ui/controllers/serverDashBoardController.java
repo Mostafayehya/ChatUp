@@ -86,6 +86,7 @@ public class serverDashBoardController implements Initializable { //
     }
 
     public void showGender() {
+       // getgenderdata();
 
         try {
             mychartpane.getChildren().clear();
@@ -98,7 +99,7 @@ public class serverDashBoardController implements Initializable { //
     }
 
     public void showCountries() {
-
+       // getcountrydata();
         try {
             mychartpane.getChildren().clear();
         } catch (Exception e) {
@@ -109,6 +110,7 @@ public class serverDashBoardController implements Initializable { //
     }
 
     public void showOnOff() {
+        //getstatusdata();
         try {
             mychartpane.getChildren().clear();
         } catch (Exception e) {
@@ -119,6 +121,7 @@ public class serverDashBoardController implements Initializable { //
     }
 
     private void getcountrydata() {
+
         try {
             while (rs1.next()) {
                 dataSeries1.getData().add(new XYChart.Data<>(rs1.getString("country"), rs1.getInt("Number")));
@@ -130,6 +133,7 @@ public class serverDashBoardController implements Initializable { //
     }
 
     private void getgenderdata() {
+
         int countmale = 0;
         int countfemale = 0;
         try {
