@@ -44,6 +44,7 @@ public class DataBaseConnection {
     public Connection getConnection(){
         return connection;
     }
+
     public void closeConnection(){
         try {
             connection.close();
