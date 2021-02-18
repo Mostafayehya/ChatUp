@@ -8,8 +8,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
+
+import static eg.gov.iti.jets.utilities.DomainModelConverter.getContactModelsList;
 
 public class ModelsFactory {
     private static ModelsFactory modelsFactory;
@@ -18,9 +19,12 @@ public class ModelsFactory {
     UserModel currentUser = null;
 
     ContactModel selectedContact = new ContactModel("01068867847",
-            "Stranger","src/main/resources/photos/user.jpg");
+            "Stranger", "src/main/resources/photos/user.jpg");
     ObservableList<Message> messagesObservableList = FXCollections.observableArrayList(new Message());
 
+    ContactModel selectedOnlineContactModel;
+
+    List<ContactModel> contactModelList;
 
     // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact
     private ModelsFactory() {
@@ -38,32 +42,19 @@ public class ModelsFactory {
         if (currentUser != null) {
             throw new RuntimeException("current user already set");
         }
-        currentUser = new UserModel("01068867848","MostafaYehya",
-                "src/main/resources/images/img.png");/* new UserModel(user.getPhoneNumber(), user.getName(), user.getEmail(), user.getPassword(), user.getPicture()
-                , user.getGender(), user.getCountry(), user.getDateOfBirth(), user.getBio(), user.getStatus(), user.getMode());*/
+        currentUser = /*new UserModel("01068867848", "MostafaYehya",
+                "src/main/resources/images/img.png");*/ new UserModel(user.getPhoneNumber(), user.getName(), user.getEmail(), user.getPassword(),
+                "src/main/resources/images/img.png"
+                , user.getGender(), user.getCountry(), user.getDateOfBirth(), user.getBio(), user.getStatus(), user.getMode());
         try {
             List<Contact> contacts = RMIManager.getHandleContactsService().getUserContacts(user.getPhoneNumber());
-            System.out.println(contacts.size());
-            currentUser.setContacts(FXCollections.observableList(getContactModelsList(contacts)));
+            System.out.println("Current user's all contacts loaded successfully with size = " + contacts.size());
+            contactModelList = getContactModelsList(contacts);
+            setSelectedOnlineContactModel(contactModelList.get(0));
+            currentUser.setContacts(FXCollections.observableList(contactModelList));
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-    }
-
-    public List<ContactModel> getContactModelsList(List<Contact> contacts) {
-        List<ContactModel> contactModels = new ArrayList<>();
-        for (int i = 0; i < contacts.size(); i++) {
-            Contact contact = contacts.get(i);
-            contactModels.add(getContactModel(contact));
-        }
-        System.out.println(contactModels.size());
-        return contactModels;
-    }
-
-    public ContactModel getContactModel(Contact contact) {
-        ContactModel contactModel = new ContactModel(contact.getContactPhoneNumber(), contact.getName(), contact.getBio(),
-                contact.getEmail(), contact.getImage(), contact.getStatus(), contact.getMode());
-        return contactModel;
     }
 
     public UserModel getCurrentUser() {
@@ -77,6 +68,7 @@ public class ModelsFactory {
         return messagesObservableList;
     }
 
+    // This will be used only in contact -> contact profile flow
     public ContactModel getSelectedContact() {
 
         if (selectedContact == null) {
@@ -100,5 +92,25 @@ public class ModelsFactory {
     public void receiveMessage(Message message) {
 
         messagesObservableList.add(message);
+    }
+
+
+    /*/////////////////////////////////////
+     *   Contacts inside chat Page Handling
+     * *///////////////////////////////////
+    public void setSelectedOnlineContactModel(ContactModel contactModel) {
+
+        if (selectedOnlineContactModel == null){
+            selectedOnlineContactModel = contactModel;
+        }
+        selectedOnlineContactModel.setContactModel(contactModel);
+
+        System.out.println(contactModel.nameProperty().get() + " was set inside models factory");
+    }
+
+
+    public ContactModel getCurrentSelectedOnlineContact() {
+
+        return selectedOnlineContactModel;
     }
 }

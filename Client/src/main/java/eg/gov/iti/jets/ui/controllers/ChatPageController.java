@@ -6,7 +6,6 @@ import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.utilities.MessageListCell;
 import eg.gov.iti.jets.utilities.ModelsFactory;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -79,7 +78,7 @@ public class ChatPageController implements Initializable {
 
     SingleChatService singleChatService;
 
-    ContactModel selectedContact;
+    ContactModel selectedOnlineContact;
 
 
     @Override
@@ -87,7 +86,12 @@ public class ChatPageController implements Initializable {
 
         modelsFactory = ModelsFactory.getInstance();
 
-        selectedContact = modelsFactory.getSelectedContact();
+        selectedOnlineContact = modelsFactory.getCurrentSelectedOnlineContact();
+
+        contactNameText.textProperty().bindBidirectional(modelsFactory.getCurrentSelectedOnlineContact().nameProperty());
+
+        // Todo 1 I should bind the messagelistView to the messages Map inside ModelsFactory Map<contactId,List<message>
+        // Todo 2 Binding the chat Image to the contact image, waiting to merge with Hadeer
 
         messagesObservableList =modelsFactory.getMessagesObservableList();
         chatListView.setItems(messagesObservableList);
@@ -103,7 +107,7 @@ public class ChatPageController implements Initializable {
             // I need to store the currentContact inside models factory in order to specify the
             // receiver of the message
             Message newMessage = new Message(LocalDate.now().toString(),messgeTextField.getText(),
-                  selectedContact.getContactPhoneNumber()  ,modelsFactory.getCurrentUser().getPhoneNumber());
+                  selectedOnlineContact.getContactPhoneNumber()  ,modelsFactory.getCurrentUser().getPhoneNumber());
 
             try {
                 RMIManager.getSingleChatService().sendMessage(newMessage);

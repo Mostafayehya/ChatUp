@@ -121,5 +121,14 @@ public class ContactModel {
         this.mode.set(mode);
     }
 
+    public void setContactModel(ContactModel cm){
+        this.name.set(cm.name.get());
+        this.bio.set(cm.getBio());
+        this.email.set(cm.getEmail());
+        this.image.set(cm.getImage());
+        this.status.set(cm.getStatus());
+        this.mode.set(cm.getMode());
+        this.contactPhoneNumber.set(cm.getContactPhoneNumber());
+    }
 
 }
