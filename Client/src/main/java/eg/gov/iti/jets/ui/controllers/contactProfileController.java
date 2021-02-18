@@ -19,8 +19,6 @@ public class contactProfileController {
     public void changeFirstName() {
     }
 
-    public void changeLastName() {
-    }
 
     public void changeEmail() {
     }
