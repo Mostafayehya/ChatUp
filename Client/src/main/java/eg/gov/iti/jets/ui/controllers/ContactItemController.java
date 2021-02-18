@@ -23,8 +23,6 @@ public class ContactItemController implements Initializable {
     Label contactNameLabel;
     @FXML
     Label bioLabel;
-    @FXML
-    FontIcon messageIcon;
     ContactModel contact;
 
     public ContactItemController(ContactModel contact) {
@@ -34,25 +32,11 @@ public class ContactItemController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image = null;
-//        if (contact.getContactImage() == null) {
-//            System.out.println("no image");
-//            File imageFile = new File(getClass().getResource("/photos/user.jpg").getPath());
-//            try {
-//                image = new Image(new FileInputStream(imageFile.getAbsoluteFile()));
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        else {
-            image = contact.getContactImage();
-//        }
+        image = contact.getContactImage();
         imageCircle.setFill(new ImagePattern(image));
         contactNameLabel.setText(contact.getName());
         bioLabel.setText(contact.getBio());
 
-        messageIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-            System.out.println(contact.getName());
-        });
     }
 
 

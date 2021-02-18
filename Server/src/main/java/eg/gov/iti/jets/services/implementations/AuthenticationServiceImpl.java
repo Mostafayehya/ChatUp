@@ -60,7 +60,7 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
         FileDomain userProfilePhoto = user.getUserPhoto();
         String photoPath;
         if (userProfilePhoto != null) {
-            Path target = Paths.get("C:\\Users\\Hadeer\\Desktop\\javaProject\\ChatUp\\Server\\src\\main\\resources\\UserPhotos\\" + userProfilePhoto.getFilename() + "." + userProfilePhoto.getFileExtension());
+            Path target = Paths.get(getClass().getResource("/UserPhotos/"+userProfilePhoto.getFilename() + "." + userProfilePhoto.getFileExtension()) .getPath());
 
             InputStream is = new ByteArrayInputStream(userProfilePhoto.getFileBytes());
             try {
@@ -71,10 +71,9 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
             }
             photoPath = target.toFile().getPath();
         } else {
+            //default photo
             photoPath = "C:\\Users\\Hadeer\\Desktop\\javaProject\\ChatUp\\Server\\src\\main\\resources\\photos\\user.jpg";
         }
         return photoPath;
     }
-
-
 }

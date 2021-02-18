@@ -201,4 +201,16 @@ public UserModel()
     public void setMode(Mode mode) {
         this.mode.set(mode);
     }
+
+    public Image getUserImage() {
+        return userImage.get();
+    }
+
+    public ObjectProperty<Image> userImageProperty() {
+        return userImage;
+    }
+
+    public void setUserImage(Image userImage) {
+        this.userImage.set(userImage);
+    }
 }
