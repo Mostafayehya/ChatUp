@@ -3,6 +3,7 @@ package eg.gov.iti.jets.ui.controllers;
 import domains.User;
 import eg.gov.iti.jets.io.ChatUpClientImpl;
 import eg.gov.iti.jets.io.RMIManager;
+import eg.gov.iti.jets.io.UserProperties;
 import eg.gov.iti.jets.utilities.ModelsFactory;
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import eg.gov.iti.jets.utilities.Validation;
@@ -17,6 +18,7 @@ import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -35,6 +37,8 @@ public class LoginPageController implements Initializable {
     private Label failed;
     AuthenticationService authenticationService;
     ModelsFactory modelsFactory;
+    UserProperties userProperties;
+    String phoneNum;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -42,6 +46,13 @@ public class LoginPageController implements Initializable {
         authenticationService = RMIManager.getAuthenticationService();
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
+        userProperties= new UserProperties();
+        try {
+           phoneNum= userProperties.ReadUserPhone();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        phoneTextField.setText(phoneNum);
         phoneTextField.addEventFilter(KeyEvent.KEY_TYPED, (e) -> {
             if (!new Validation().validatePhoneNumber(e.getCharacter()) || phoneTextField.getText().length() > 11) {
                 e.consume();
@@ -68,8 +79,12 @@ public class LoginPageController implements Initializable {
                 return;
             }
             modelsFactory.setCurrentUser(user);
-            StageCoordinator.getInstance().gotoContactsListPage();
-            //System.out.println(user.getName() + "hello");
+            System.out.println(phone);
+            System.out.println(password);
+            userProperties.saveUserProperties(phone,password);
+
+            StageCoordinator.getInstance().goToUserProfilePage();
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }

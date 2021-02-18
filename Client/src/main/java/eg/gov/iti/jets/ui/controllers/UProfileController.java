@@ -7,6 +7,7 @@ import domains.User;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.ui.models.UserModel;
+import eg.gov.iti.jets.utilities.ModelsFactory;
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import eg.gov.iti.jets.utilities.Validation;
 import javafx.beans.property.SimpleStringProperty;
@@ -54,12 +55,15 @@ public class UProfileController implements Initializable {
     UpdateService updateService;
     Validation validation;
     UserModel userModel;
+    ModelsFactory modelsFactory;
    // User user=new User("01116058917","hagar","hagar@gmail.com","1234",null, Gender.FEMALE,"egypt",null,"hii", Status.ONLINE,Mode.AVAILABLE);
     public UProfileController(){validation = new Validation();
-    userModel=new UserModel();
+
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        userModel=modelsFactory.getInstance().getCurrentUser();
+        System.out.println("user "+userModel.getName());
         bind();
 
 //        userName.setText(user.getName());
@@ -68,7 +72,7 @@ public class UProfileController implements Initializable {
 //        countryTextField.setText(user.getCountry());
 //        emailTextField.setText(user.getEmail());
 //        bioTextField.setText(user.getBio());
-//        updateService= RMIManager.getUpdateService();
+        updateService= RMIManager.getUpdateService();
         emailTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
                 if (emailTextField.getText().equals("") ||! validation.validateEmail(emailTextField.getText())) {
@@ -117,7 +121,12 @@ public class UProfileController implements Initializable {
 //            user.setName(nameTextField.getText());
 //            userName.setText(nameTextField.getText());
             try {
-                updateService.EditUserData(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userModel.getPicture(),userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
+
+                String s=userModel.getBio()+" "+userModel.getEmail()+" "+userModel.getPhoneNumber()+userModel.getCountry();
+                System.out.println(s);
+                System.out.println(updateService);
+               updateService.EditUserData(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userModel.getPicture(),userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
+
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }

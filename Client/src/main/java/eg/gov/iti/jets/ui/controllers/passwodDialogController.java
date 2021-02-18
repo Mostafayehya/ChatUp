@@ -1,6 +1,7 @@
 package eg.gov.iti.jets.ui.controllers;
 
 import domains.User;
+import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.UserModel;
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import eg.gov.iti.jets.utilities.Validation;
@@ -8,7 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import org.controlsfx.control.textfield.CustomPasswordField;
-import org.controlsfx.control.textfield.CustomTextField;
+
 import services.UpdateService;
 
 import java.net.URL;
@@ -34,7 +35,7 @@ public class passwodDialogController {
         validation = new Validation();
     }
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        updateService= RMIManager.getUpdateService();
         CurrentpassTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
                 if (CurrentpassTextField.getText().equals("")) {
@@ -70,12 +71,16 @@ public class passwodDialogController {
             }
         }));
         cancelBtn.addEventHandler(ActionEvent.ACTION,(e)->{
+            System.out.println("cancel");
             StageCoordinator stageCoordinator = StageCoordinator.getInstance();
             stageCoordinator.hidePasswordPopup();
+
         });
         changeBtn.addEventHandler(ActionEvent.ACTION,(e)->{
             try {
+                System.out.println("change");
                 updateService.EditUserPass(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userModel.getPicture(),userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
+
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }

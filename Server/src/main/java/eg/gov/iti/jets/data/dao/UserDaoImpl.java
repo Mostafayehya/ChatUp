@@ -111,7 +111,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public int updateUserMode(User user) {
         try {
-        PreparedStatement preparedStatement = connection.prepareStatement("update user set mode=?   where phone=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("update user set mode=?   where phoneNumber=?");
         preparedStatement.setString(1,user.getMode().name());
         preparedStatement.setString(2,user.getPhoneNumber());
             int result =  preparedStatement.executeUpdate();
@@ -126,7 +126,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public int updateUserPass(User user) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("update user set password=?   where phone=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set password=?   where phoneNumber=?");
             preparedStatement.setString(1, user.getPassword());
             preparedStatement.setString(2,user.getPhoneNumber());
             int result =  preparedStatement.executeUpdate();
