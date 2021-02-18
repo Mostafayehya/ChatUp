@@ -26,6 +26,7 @@ public class UpdateServiceImpl extends UnicastRemoteObject implements UpdateServ
 
     @Override
     public int EditUserPass(User user) throws RemoteException {
+        System.out.println("EditUserPass");
         return  userDao.updateUserPass(user);
     }
 }

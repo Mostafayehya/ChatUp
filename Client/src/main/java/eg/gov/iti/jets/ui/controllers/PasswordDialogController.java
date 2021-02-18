@@ -84,7 +84,8 @@ public class PasswordDialogController implements Initializable {
         changeBtn.addEventHandler(ActionEvent.ACTION,(e)->{
             try {
                 System.out.println("change");
-                updateService.EditUserPass(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userModel.getPicture(),userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
+                System.out.println(updateService.EditUserPass(new User(userModel.getPhoneNumber(), userModel.getName(), userModel.getEmail(), newPassTextField.getText(), userModel.getPicture(), userModel.getGender(), userModel.getCountry(), userModel.getDateOfBirth(), userModel.getBio(), userModel.getStatus(), userModel.getMode())));
+                StageCoordinator.getInstance().hidePasswordPopup();
 
             } catch (RemoteException ex) {
                 ex.printStackTrace();

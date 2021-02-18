@@ -127,7 +127,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public int updateUserPass(User user) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("update user set password=?   where phoneNumber=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set password = ? where phoneNumber = ?");
             preparedStatement.setString(1, user.getPassword());
             preparedStatement.setString(2,user.getPhoneNumber());
             int result =  preparedStatement.executeUpdate();
