@@ -50,6 +50,7 @@ public class Server {
     //use in login
     public void addClient(String phoneNumber,ChatUpClientInt clientImpl){
         clients.put(phoneNumber,clientImpl);
+
     }
 
     //use in signOut or exit
