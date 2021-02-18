@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.ChatContactsController">
+    <stylesheets>
+        <URL value="@../css/loginStyle.css" />
+        <URL value="@../styles/bootstrapfx.css" />
+    </stylesheets>
+    <center>
+        <VBox>
+            <ListView fx:id="contactsListView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS" />
+        </VBox>
+
+    </center>
+</BorderPane>

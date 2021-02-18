@@ -19,6 +19,9 @@
             <BorderPane.margin>
                 <Insets />
             </BorderPane.margin>
+            <left>
+                <fx:include source="ChatContacts.fxml" />
+            </left>
             <center>
                 <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <center>

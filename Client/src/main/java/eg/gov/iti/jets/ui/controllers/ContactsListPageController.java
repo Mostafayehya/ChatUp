@@ -16,6 +16,8 @@ import javafx.scene.control.ListView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
+
 public class ContactsListPageController implements Initializable {
     @FXML
     ListView<ContactModel> contactsListView;
