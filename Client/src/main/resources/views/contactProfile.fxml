@@ -106,11 +106,6 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label text="Last Name:">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
                               <Label layoutX="10.0" layoutY="44.0" text="Extra Number:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
@@ -135,7 +130,6 @@
                         <VBox spacing="10.0">
                            <children>
                               <TextField prefHeight="25.0" prefWidth="261.0" promptText="First name" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
-                              <TextField prefHeight="25.0" prefWidth="261.0" promptText="Last name" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
                               <ListView prefHeight="25.0" prefWidth="261.0" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
                               <TextField prefHeight="25.0" prefWidth="261.0" promptText="Email" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
                               <TextField prefHeight="25.0" prefWidth="261.0" promptText="Category" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
@@ -161,18 +155,6 @@
                            </graphic>
                                  <graphic>
                                     <FontIcon iconColor="#393740" iconLiteral="fas-pen" wrappingWidth="13.0" />
-                                 </graphic>
-                              </Button>
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#changeLastName" prefHeight="25.0" style="-fx-background-radius: 50; -fx-background-color: #009688;"> <!--textFill="#6f6d6d"-->
-                                 <effect>
-                                    <DropShadow>
-                                       <color>
-                                          <Color red="0.6052631735801697" green="0.5155945420265198" blue="0.5155945420265198" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect>
-                                 <graphic>
-                                    <FontIcon iconColor="#393740" iconLiteral="fas-pen" strokeType="OUTSIDE" strokeWidth="0.0" />
                                  </graphic>
                               </Button>
                               <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#addPhone" prefHeight="25.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
