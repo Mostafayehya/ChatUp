@@ -5,6 +5,10 @@ import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.UserModel;
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import eg.gov.iti.jets.utilities.Validation;
+
+
+import eg.gov.iti.jets.utilities.ModelsFactory;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,6 +40,7 @@ public class passwodDialogController {
     }
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateService= RMIManager.getUpdateService();
+        System.out.println("hi");
         CurrentpassTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
                 if (CurrentpassTextField.getText().equals("")) {
