@@ -47,6 +47,16 @@ public class Server {
         return server;
     }
 
+    public AuthenticationService getnewAuthService() {
+        try {
+            authenticationService = new AuthenticationServiceImpl();
+            return authenticationService;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     //use in login
     public void addClient(String phoneNumber,ChatUpClientInt clientImpl){
         clients.put(phoneNumber,clientImpl);
@@ -59,6 +69,7 @@ public class Server {
 
     public void stopServer(){
         try {
+            //AuthenticationService authenticationService = getnewAuthService();
             registry.unbind("AuthenticationService");
             registry.unbind("HandleContactService");
             UnicastRemoteObject.unexportObject(authenticationService,true);
@@ -66,6 +77,20 @@ public class Server {
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void startServer() {
+        try {
+            AuthenticationService authenticationService = getnewAuthService();
+            registry = LocateRegistry.getRegistry(8189);
+            registry.bind("AuthenticationService", authenticationService);
+
+
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (AlreadyBoundException e) {
             e.printStackTrace();
         }
     }
