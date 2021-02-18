@@ -24,21 +24,7 @@ public class Server {
     //list of clients
     Map<String, ChatUpClientInt> clients;
     private Server(){
-        clients = new HashMap<>();
-        try {
-            authenticationService  = new AuthenticationServiceImpl();
-            handleContactsService = new HandleContactServiceImpl();
 
-            registry = LocateRegistry.createRegistry(8189);
-            registry.bind("AuthenticationService",authenticationService);
-            registry.bind("HandleContactService",handleContactsService);
-
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        catch(AlreadyBoundException e){
-            e.printStackTrace();
-        }
     }
 
     public synchronized static Server getInstance(){
@@ -82,15 +68,19 @@ public class Server {
     }
 
     public void startServer() {
+        clients = new HashMap<>();
         try {
-            AuthenticationService authenticationService = getnewAuthService();
-            registry = LocateRegistry.getRegistry(8189);
-            registry.bind("AuthenticationService", authenticationService);
+            authenticationService  = new AuthenticationServiceImpl();
+            handleContactsService = new HandleContactServiceImpl();
 
+            registry = LocateRegistry.createRegistry(8189);
+            registry.bind("AuthenticationService",authenticationService);
+            registry.bind("HandleContactService",handleContactsService);
 
         } catch (RemoteException e) {
             e.printStackTrace();
-        } catch (AlreadyBoundException e) {
+        }
+        catch(AlreadyBoundException e){
             e.printStackTrace();
         }
     }
