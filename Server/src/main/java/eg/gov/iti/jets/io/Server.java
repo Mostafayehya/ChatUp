@@ -1,6 +1,7 @@
 package eg.gov.iti.jets.io;
 
 import clientInterface.ChatUpClientInt;
+import eg.gov.iti.jets.data.DataBaseConnection;
 import eg.gov.iti.jets.services.implementations.AuthenticationServiceImpl;
 import eg.gov.iti.jets.services.implementations.HandleContactServiceImpl;
 import services.AuthenticationService;
@@ -23,6 +24,7 @@ public class Server {
     HandleContactsService handleContactsService;
     //list of clients
     Map<String, ChatUpClientInt> clients;
+    DataBaseConnection databaseConnection ;
     private Server(){
 
     }
@@ -54,6 +56,7 @@ public class Server {
     }
 
     public void stopServer(){
+        databaseConnection.closeConnection();
         try {
             //AuthenticationService authenticationService = getnewAuthService();
             registry.unbind("AuthenticationService");
@@ -69,6 +72,7 @@ public class Server {
 
     public void startServer() {
         clients = new HashMap<>();
+        databaseConnection = DataBaseConnection.getInstance();
         try {
             authenticationService  = new AuthenticationServiceImpl();
             handleContactsService = new HandleContactServiceImpl();

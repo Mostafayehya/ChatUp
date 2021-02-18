@@ -68,7 +68,7 @@ public class serverDashBoardController implements Initializable { //
         } catch (Exception e) {
         }
         server.startServer();
-        dataBaseConnection.closeConnection();
+        //dataBaseConnection.closeConnection();
         System.out.println("server started");
     }
 
@@ -80,7 +80,7 @@ public class serverDashBoardController implements Initializable { //
         } catch (Exception e) {
         }
         server.stopServer();
-        dataBaseConnection.closeConnection();
+        //dataBaseConnection.closeConnection();
         //server.stopServer();
         System.out.println("server has stopped");
     }
