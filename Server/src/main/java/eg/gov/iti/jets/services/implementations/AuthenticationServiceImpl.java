@@ -72,7 +72,7 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
             photoPath = target.toFile().getPath();
         } else {
             //default photo
-            photoPath = "C:\\Users\\Hadeer\\Desktop\\javaProject\\ChatUp\\Server\\src\\main\\resources\\photos\\user.jpg";
+            photoPath = "src/main/resources/UserPhotos/user.jpg";
         }
         return photoPath;
     }
