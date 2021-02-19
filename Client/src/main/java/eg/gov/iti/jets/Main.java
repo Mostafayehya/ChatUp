@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+// todo) make the merge
 public class Main extends Application {
     RMIManager rmiManager;
     public static void main(String[] args) {
