@@ -18,31 +18,30 @@ public class StageCoordinator {
     StackPane parentContainer;
     BorderPane visibleRoot;
     Popup addNewContactPopup;
+    Popup changUserPassPopup;
     private static StageCoordinator stageCoordinator;
     private final Map<String, SceneData> scenes = new HashMap<>();
 
-    private StageCoordinator(){
-        stage=null;
+    private StageCoordinator() {
+        stage = null;
     }
 
-    public void setStage(Stage stage){
-        if(this.stage!=null){
+    public void setStage(Stage stage) {
+        if (this.stage != null) {
             throw new IllegalStateException("Stage is already assigned");
-        }
-        else{
-            this.stage=stage;
+        } else {
+            this.stage = stage;
         }
     }
 
-    public static synchronized StageCoordinator getInstance(){
-        if(stageCoordinator==null){
-            stageCoordinator=new StageCoordinator();
+    public static synchronized StageCoordinator getInstance() {
+        if (stageCoordinator == null) {
+            stageCoordinator = new StageCoordinator();
         }
         return stageCoordinator;
     }
 
     public void goToLoginPage(){
-
         if (stage ==null){
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
         }
@@ -164,9 +163,47 @@ public class StageCoordinator {
         addNewContactPopup.show(stage);
     }
 
-    public void hideNewContactPopup(){
-        if(addNewContactPopup!=null){
-            addNewContactPopup.hide();
+    public void ChangeUserPassword() {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/views/passwordDialog.fxml"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
+        changUserPassPopup = new Popup();
+        root.setStyle("-fx-background-color: white");
+        changUserPassPopup.getContent().add(root);
+        changUserPassPopup.show(stage);
+    }
+
+    public void goToUserProfilePage() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/views/UProfile.fxml"));
+            parentContainer = new StackPane(root);
+            stage.setScene(new Scene(parentContainer, 759.0, 626.0));
+            visibleRoot = (BorderPane) root;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+        public void hideNewContactPopup()
+        {
+            if (addNewContactPopup != null) {
+                addNewContactPopup.hide();
+            }
+        }
+    public void hidePasswordPopup()
+    {
+        if (changUserPassPopup != null) {
+            changUserPassPopup.hide();
+        }
+    }
+
+    public void closeApp(){
+        if(stage==null){
+            throw new RuntimeException("Stage must be initialized before trying to close");
+        }
+        stage.close();
+
     }
 }

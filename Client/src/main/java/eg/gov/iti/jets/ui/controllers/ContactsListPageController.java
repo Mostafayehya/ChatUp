@@ -16,8 +16,6 @@ import javafx.scene.control.ListView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
-
 public class ContactsListPageController implements Initializable {
     @FXML
     ListView<ContactModel> contactsListView;
@@ -35,7 +33,5 @@ public class ContactsListPageController implements Initializable {
             StageCoordinator stageCoordinator = StageCoordinator.getInstance();
             stageCoordinator.getAddNewContactPopUp();
         });
-
-        contactsListView.onMouseClickedProperty();
     }
 }

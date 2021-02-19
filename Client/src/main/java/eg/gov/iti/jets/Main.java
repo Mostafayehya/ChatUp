@@ -3,7 +3,6 @@ package eg.gov.iti.jets;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 // todo) make the merge
@@ -18,8 +17,8 @@ public class Main extends Application {
         StageCoordinator stageCoordinator=StageCoordinator.getInstance();
         stageCoordinator.setStage(primaryStage);
         //Call first page function
-        primaryStage.setTitle("ChatUp - Client");
         stageCoordinator.goToLoginPage();
+        primaryStage.setTitle("ChatUp - Client");
         primaryStage.show();
     }
 

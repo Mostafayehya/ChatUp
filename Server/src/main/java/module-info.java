@@ -21,4 +21,6 @@ module Server {
     requires java.rmi;
 
     requires MiddleWare;
+
+    requires java.desktop;
 }

@@ -1,9 +1,6 @@
 package eg.gov.iti.jets.ui.controllers;
 
-import domains.Gender;
-import domains.Mode;
-import domains.Status;
-import domains.User;
+import domains.*;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import eg.gov.iti.jets.utilities.Validation;
@@ -16,10 +13,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
 import services.AuthenticationService;
+import utilities.FilesUtilities;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
@@ -47,11 +52,17 @@ public class SignUpPageController implements Initializable {
     ChoiceBox<Gender> genderChoiceBox;
     @FXML
     DatePicker birthDatePicker;
+    @FXML
+    Button choosePhoto;
+    @FXML
+    Circle imageCircle;
     Validation validation;
     AuthenticationService authenticationService;
+    FileDomain userImageFile = null;
 
     public SignUpPageController() {
         validation = new Validation();
+        File defaultUserImage = new File(getClass().getResource("/photos/user.jpg").getPath());
     }
 
 
@@ -112,40 +123,92 @@ public class SignUpPageController implements Initializable {
                 if (confirmPasswordField.getText().equals("")) {
                     confirmPasswordField.setStyle("-fx-border-color: red;");
                     confirmPasswordField.requestFocus();
-                }
-                else if( !confirmPasswordField.getText().equals(passwordTextField.getText())){
+                } else if (!confirmPasswordField.getText().equals(passwordTextField.getText())) {
                     confirmPasswordField.requestFocus();
-                }
-                else {
+                } else {
                     confirmPasswordField.setStyle("-fx-border-color: transparent;");
                 }
             }
         }));
-        ObservableList<Gender> genders = FXCollections.observableArrayList(Gender.FEMALE,Gender.MALE);
+        ObservableList<Gender> genders = FXCollections.observableArrayList(Gender.FEMALE, Gender.MALE);
         genderChoiceBox.setItems(genders);
         genderChoiceBox.setValue(Gender.FEMALE);
         signUpButton.addEventHandler(ActionEvent.ACTION, (e) -> {
-            if(validation.isempty(phoneTextField) || validation.isempty(emailTextField) || validation.isempty(nameTextField)
-            || validation.isempty(passwordTextField) || validation.isempty(confirmPasswordField)){
-
-            }
-            User user;
-            user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), null, genderChoiceBox.getValue(), countryTextField.getText(), birthDatePicker.getValue(), bioTextField.getText(), Status.ONLINE, Mode.AVAILABLE);
-            try {
-                int result = authenticationService.signUp(user);
-                if(result==-2){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Duplicate user error");
-                    alert.setHeaderText("User already exists");
-                    alert.setContentText("please login or use another phone number");
-                    alert.showAndWait();
+            if (validateFields()) {
+                User user;
+                if(userImageFile != null){
+                    //user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), "", genderChoiceBox.getValue(), countryTextField.getText(), birthDatePicker.getValue(), bioTextField.getText(), Status.ONLINE, Mode.AVAILABLE);
+                    userImageFile.setFilename(phoneTextField.getText());
                 }
-                else{
-                    StageCoordinator stageCoordinator = StageCoordinator.getInstance();
+                user = new User(phoneTextField.getText(), nameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), userImageFile, genderChoiceBox.getValue(), countryTextField.getText(), birthDatePicker.getValue(), bioTextField.getText(), Status.ONLINE, Mode.AVAILABLE);
+                try {
+                    int result = authenticationService.signUp(user);
+                    if (result == -2) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Duplicate user error");
+                        alert.setHeaderText("User already exists");
+                        alert.setContentText("please login or use another phone number");
+                        alert.showAndWait();
+                    } else {
+                        StageCoordinator stageCoordinator = StageCoordinator.getInstance();
+                        stageCoordinator.goToLoginPage();
+                    }
+                } catch (RemoteException ex) {
+                    ex.printStackTrace();
                 }
-            } catch (RemoteException ex) {
-                ex.printStackTrace();
             }
         });
+        choosePhoto.addEventHandler(ActionEvent.ACTION,(e)->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("image files","*.png"));
+            File userPhoto = fileChooser.showOpenDialog(choosePhoto.getScene().getWindow());
+            String extension = FilesUtilities.getFileExtension(userPhoto);
+            userImageFile = new FileDomain();
+            userImageFile.setFileBytes(FilesUtilities.convertFileToByteArray(userPhoto,extension));
+            userImageFile.setFileExtension(extension);
+            try {
+                imageCircle.setFill(new ImagePattern(new Image(new FileInputStream(userPhoto.getAbsoluteFile()))));
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+        });
+
+    }
+
+    private boolean validateFields() {
+        boolean validated = true;
+        if (phoneTextField.getText().equals("") || phoneTextField.getText().length() < 11) {
+            phoneTextField.setStyle("-fx-border-color: red;");
+            validated = false;
+        } else {
+            phoneTextField.setStyle("-fx-border-color: transparent;");
+        }
+        if (emailTextField.getText().equals("") || !validation.validateEmail(emailTextField.getText())) {
+            emailTextField.setStyle("-fx-border-color: red;");
+            validated = false;
+        } else {
+            emailTextField.setStyle("-fx-border-color: transparent;");
+        }
+        if (nameTextField.getText().equals("")) {
+            nameTextField.setStyle("-fx-border-color: red;");
+            validated = false;
+        } else {
+            nameTextField.setStyle("-fx-border-color: transparent;");
+        }
+        if (passwordTextField.getText().equals("")) {
+            passwordTextField.setStyle("-fx-border-color: red;");
+            validated = false;
+        } else {
+            passwordTextField.setStyle("-fx-border-color: transparent;");
+        }
+        if (confirmPasswordField.getText().equals("")) {
+            confirmPasswordField.setStyle("-fx-border-color: red;");
+            validated = false;
+        } else if (!confirmPasswordField.getText().equals(passwordTextField.getText())) {
+            validated = false;
+        } else {
+            confirmPasswordField.setStyle("-fx-border-color: transparent;");
+        }
+        return validated;
     }
 }

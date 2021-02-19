@@ -1,8 +1,9 @@
 package eg.gov.iti.jets.ui.controllers;
 
 import domains.User;
-import eg.gov.iti.jets.io.ClientCallbacksImpl;
+import eg.gov.iti.jets.io.ChatUpClientImpl;
 import eg.gov.iti.jets.io.RMIManager;
+import eg.gov.iti.jets.io.UserProperties;
 import eg.gov.iti.jets.utilities.ModelsFactory;
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import eg.gov.iti.jets.utilities.Validation;
@@ -15,6 +16,7 @@ import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,6 +35,8 @@ public class LoginPageController implements Initializable {
     private Label failed;
     AuthenticationService authenticationService;
     ModelsFactory modelsFactory;
+    UserProperties userProperties;
+    String phoneNum;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -40,6 +44,13 @@ public class LoginPageController implements Initializable {
         authenticationService = RMIManager.getAuthenticationService();
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
+        userProperties= new UserProperties();
+//        try {
+//           phoneNum= userProperties.ReadUserPhone();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        phoneTextField.setText(phoneNum);
         phoneTextField.addEventFilter(KeyEvent.KEY_TYPED, (e) -> {
             if (!new Validation().validatePhoneNumber(e.getCharacter()) || phoneTextField.getText().length() > 11) {
                 e.consume();
@@ -60,11 +71,18 @@ public class LoginPageController implements Initializable {
         String phone = phoneTextField.getText();
         String password = passwordTextField.getText();
         try {
-            user = authenticationService.login(phone, password,new ClientCallbacksImpl());
+            user = authenticationService.login(phone, password,new ChatUpClientImpl());
             if (user == null) {
                 failed.setText("Either phone or password is incorrect");
                 return;
             }
+            modelsFactory.setCurrentUser(user);
+            System.out.println(phone);
+            System.out.println(password);
+            userProperties.saveUserProperties(phone,password);
+
+            StageCoordinator.getInstance().goToUserProfilePage();
+
             modelsFactory.setUpUserInfoForFirstTime(user);
             StageCoordinator.getInstance().gotoContactsListPage();
 
