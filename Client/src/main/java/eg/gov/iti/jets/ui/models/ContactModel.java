@@ -6,6 +6,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.Image;
 
 public class ContactModel {
     //StringProperty userPhoneNumber = new SimpleStringProperty();
@@ -29,7 +30,7 @@ public class ContactModel {
         this.mode.setValue(mode);
     }
 
-    public ContactModel(String contactPhoneNumber,String name,String bio,String email,Status status,Mode mode,Image image){
+    public ContactModel(String contactPhoneNumber, String name, String bio, String email, Status status, Mode mode, Image image){
         this.contactPhoneNumber.setValue(contactPhoneNumber);
         this.name.setValue(name);
         this.bio.setValue(bio);

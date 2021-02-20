@@ -1,7 +1,7 @@
 package eg.gov.iti.jets.ui.controllers;
 
 import domains.User;
-import eg.gov.iti.jets.io.ChatUpClientImpl;
+import eg.gov.iti.jets.io.ClientCallbacksImpl;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.io.UserProperties;
 import eg.gov.iti.jets.utilities.ModelsFactory;
@@ -16,7 +16,6 @@ import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -44,7 +43,7 @@ public class LoginPageController implements Initializable {
         authenticationService = RMIManager.getAuthenticationService();
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
-        userProperties= new UserProperties();
+        userProperties = new UserProperties();
 //        try {
 //           phoneNum= userProperties.ReadUserPhone();
 //        } catch (IOException e) {
@@ -71,7 +70,7 @@ public class LoginPageController implements Initializable {
         String phone = phoneTextField.getText();
         String password = passwordTextField.getText();
         try {
-            user = authenticationService.login(phone, password,new ChatUpClientImpl());
+            user = authenticationService.login(phone, password, new ClientCallbacksImpl());
             if (user == null) {
                 failed.setText("Either phone or password is incorrect");
                 return;
@@ -79,11 +78,11 @@ public class LoginPageController implements Initializable {
             modelsFactory.setCurrentUser(user);
             System.out.println(phone);
             System.out.println(password);
-            userProperties.saveUserProperties(phone,password);
+            userProperties.saveUserProperties(phone, password);
 
             StageCoordinator.getInstance().goToUserProfilePage();
 
-            modelsFactory.setUpUserInfoForFirstTime(user);
+            modelsFactory.setCurrentUser(user);
             StageCoordinator.getInstance().gotoContactsListPage();
 
         } catch (Exception ex) {

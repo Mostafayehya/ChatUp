@@ -57,7 +57,7 @@ public class StageCoordinator {
                 scenes.put("login", loginSceneData);
                 stage.setScene(loginScene);
             } catch (IOException e) {
-                System.out.println("IO Exception: Couldn't load 'Chat Page' FXML file");
+                System.out.println("IO Exception: Couldn't load 'login Page' FXML file");
                 e.printStackTrace();
             }
         } else {
@@ -84,7 +84,7 @@ public class StageCoordinator {
                 scenes.put("signup", signupSceneData);
                 stage.setScene(chatScene);
             } catch (IOException e) {
-                System.out.println("IO Exception: Couldn't load 'signUP Page' FXML file");
+                System.out.println("IO Exception: Couldn't load 'signup Page' FXML file");
                 e.printStackTrace();
             }
         } else {
@@ -140,7 +140,7 @@ public class StageCoordinator {
                 scenes.put("contacts", loginSceneData);
                 stage.setScene(contactsScene);
             } catch (IOException e) {
-                System.out.println("IO Exception: Couldn't load 'Chat Page' FXML file");
+                System.out.println("IO Exception: Couldn't load 'contacts Page' FXML file");
                 e.printStackTrace();
             }
         } else {

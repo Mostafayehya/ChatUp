@@ -14,7 +14,7 @@ public class SingleChatServiceImpl extends UnicastRemoteObject implements Single
     Map<String, ClientCallbacks> onlineUsers;
 
     public SingleChatServiceImpl() throws RemoteException {
-        onlineUsers = Server.getOnlineClients();
+        onlineUsers = Server.getInstance().getOnlineClients();
     }
 
     @Override

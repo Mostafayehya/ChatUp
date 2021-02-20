@@ -2,6 +2,8 @@ package eg.gov.iti.jets.io;
 
 import services.AuthenticationService;
 import services.HandleContactsService;
+import services.SingleChatService;
+import services.UpdateService;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;

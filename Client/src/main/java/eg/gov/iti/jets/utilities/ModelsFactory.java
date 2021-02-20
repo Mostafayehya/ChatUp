@@ -5,9 +5,16 @@ import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.ui.models.UserModel;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static eg.gov.iti.jets.utilities.DomainModelConverter.contactListToContactModelList;
 
 public class ModelsFactory {
     private static ModelsFactory modelsFactory;
@@ -22,22 +29,17 @@ public class ModelsFactory {
     List<ContactModel> contactModelList;
 
     // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact
-    private ModelsFactory() {
-    UserModel currentUser = null;
 
     private ModelsFactory() {
-
     }
 
-    public synchronized static ModelsFactory getInstance() {
+    public synchronized static ModelsFactory getInstance(){
         if (modelsFactory == null)
             modelsFactory = new ModelsFactory();
         return modelsFactory;
     }
 
 
-    public void setUpUserInfoForFirstTime(User user) {
-        if (currentUser != null) {
     public void setCurrentUser(User user) {
         if (currentUser != null) {
             throw new RuntimeException("current user already set");
@@ -48,48 +50,29 @@ public class ModelsFactory {
                     user.getGender(), user.getCountry(), user.getDateOfBirth(), user.getBio(), user.getStatus()
                     , user.getMode(), new Image(inputStream));
 
-
-        // We need to save current user's data in DB or external file .
-        currentUser = new UserModel(user.getPhoneNumber(), user.getName(), user.getEmail(), user.getPassword(),
-                "src/main/resources/images/img.png"
-                , user.getGender(), user.getCountry(), user.getDateOfBirth(), user.getBio(), user.getStatus(), user.getMode());
-        try {
-            List<Contact> contacts = RMIManager.getHandleContactsService().getUserContacts(user.getPhoneNumber());
-            System.out.println("Current user's all contacts loaded successfully with size = " + contacts.size());
-            contactModelList = contactListToContactModelList(contacts);
-            if (!contactModelList.isEmpty())
-                setSelectedOnlineContactModel(contactModelList.get(0));
-            currentUser.setContacts(FXCollections.observableList(contactModelList));
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
         retrieveContacts();
     }
 
-    public List<ContactModel> getContactModelsList(List<Contact> contacts) {
-        List<ContactModel> contactModels = new ArrayList<>();
-        for (int i = 0; i < contacts.size(); i++) {
-            Contact contact = contacts.get(i);
-            contactModels.add(getContactModel(contact));
-        }
-        System.out.println(contactModels.size());
-        return contactModels;
-    }
+    public void retrieveContacts() {
+        List<Contact> contacts = null;
+        try { // Todo) move the if inside the try, no point having it out side
+            contacts = RMIManager.getHandleContactsService().getUserContacts(currentUser.getPhoneNumber());
+            System.out.println("Current user's all contacts loaded successfully with size = " + contacts.size());
+            contactModelList = contactListToContactModelList(contacts);
 
-    public ContactModel getContactModel(Contact contact) {
-        ContactModel contactModel = null;
-        if (contact.getContactImage() != null) {
-            System.out.println("has image");
-            InputStream inputStream = new ByteArrayInputStream(contact.getContactImage());
-            contactModel = new ContactModel(contact.getContactPhoneNumber(), contact.getName(), contact.getBio(),
-                    contact.getEmail(), contact.getStatus(), contact.getMode(), new Image(inputStream));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        if (currentUser.getContacts() == null) {
+            currentUser.setContacts(FXCollections.observableList(contactListToContactModelList(contacts)));
+        } else { // todo This looks really ugly, use temp references to simplify this
+            currentUser.getContacts().add(contactListToContactModelList(contacts).get(contacts.size()-1));
+
 
         }
-        return contactModel;
     }
 
-    public UserModel getCurrentUser() {
-        return currentUser;
     public UserModel getCurrentUser() {
 
         if (currentUser == null) {
@@ -136,21 +119,6 @@ public class ModelsFactory {
         }
     }
 
-    public void retrieveContacts() {
-        List<Contact> contacts = null;
-        try {
-            contacts = RMIManager.getHandleContactsService().getUserContacts(currentUser.getPhoneNumber());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        if (currentUser.getContacts() == null) {
-            currentUser.setContacts(FXCollections.observableList(getContactModelsList(contacts)));
-        } else {
-            currentUser.getContacts().add(getContactModelsList(contacts).get(contacts.size()-1));
-
-
-        }
-    }
 
 
     /*/////////////////////////////////////

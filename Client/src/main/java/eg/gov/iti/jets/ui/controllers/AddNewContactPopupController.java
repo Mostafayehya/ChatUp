@@ -19,6 +19,7 @@ import javafx.scene.paint.Color;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.kordamp.ikonli.javafx.FontIcon;
 import services.HandleContactsService;
+
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class AddNewContactPopupController implements Initializable {
     List<StringProperty> extraPhones;
     ContactModel contactModel;
     HandleContactsService handleContactsService;
+
     public AddNewContactPopupController() {
         validation = new Validation();
         extraPhones = new ArrayList<>();
@@ -58,14 +60,13 @@ public class AddNewContactPopupController implements Initializable {
         contactNumberTextField.setText("");
         extraPhoneTextField.setText("");
         handleContactsService = RMIManager.getHandleContactsService();
-        contactNameTextField.focusedProperty().addListener((observable,wasFocused,isFocused)->{
-            if(!isFocused){
+        contactNameTextField.focusedProperty().addListener((observable, wasFocused, isFocused) -> {
+            if (!isFocused) {
                 System.out.println(contactModel);
                 System.out.println(contactModel.getName());
-                if(contactModel.getName().equals("")){
+                if (contactModel.getName().equals("")) {
                     contactNameTextField.setStyle("-fx-border-color: red");
-                }
-                else {
+                } else {
                     contactNameTextField.setStyle("-fx-border-color: transparent;");
                 }
             }
@@ -80,17 +81,16 @@ public class AddNewContactPopupController implements Initializable {
                 e.consume();
             }
         });
-        contactNumberTextField.focusedProperty().addListener((observable,wasFocused,isFocused)->{
-            if(!isFocused){
-                if(validation.isempty(contactNumberTextField)){
+        contactNumberTextField.focusedProperty().addListener((observable, wasFocused, isFocused) -> {
+            if (!isFocused) {
+                if (validation.isempty(contactNumberTextField)) {
                     contactNumberTextField.setStyle("-fx-border-color: red");
-                }
-                else {
+                } else {
                     contactNumberTextField.setStyle("-fx-border-color: transparent;");
                 }
             }
         });
-        addExtraPhone.addEventHandler(ActionEvent.ACTION,(e)->{
+        addExtraPhone.addEventHandler(ActionEvent.ACTION, (e) -> {
             CustomTextField extraPhone = new CustomTextField();
             FontIcon phoneIcon = new FontIcon("mdi2p-phone");
             phoneIcon.setIconColor(Color.GRAY);
@@ -108,20 +108,20 @@ public class AddNewContactPopupController implements Initializable {
             extraPhones.add(newExtraPhone);
             extraPhoneVBox.getChildren().add(extraPhone);
         });
-        cancelButton.addEventHandler(ActionEvent.ACTION,(e)->{
+        cancelButton.addEventHandler(ActionEvent.ACTION, (e) -> {
             StageCoordinator stageCoordinator = StageCoordinator.getInstance();
             stageCoordinator.hideNewContactPopup();
         });
-        addNewContactButton.addEventHandler(ActionEvent.ACTION,(e)->{
+        addNewContactButton.addEventHandler(ActionEvent.ACTION, (e) -> {
             try {
                 ModelsFactory modelsFactory = ModelsFactory.getInstance();
                 String phone = modelsFactory.getCurrentUser().getPhoneNumber();
-                Contact contact = new Contact(phone,contactModel.getContactPhoneNumber());
-                for (int i=0;i<extraPhones.size();i++){
+                Contact contact = new Contact(phone, contactModel.getContactPhoneNumber());
+                for (int i = 0; i < extraPhones.size(); i++) {
                     contact.getExtraNumbers().add(extraPhones.get(i).getValue());
                 }
                 int result = handleContactsService.addNewContact(contact);
-                if(result == -2){
+                if (result == -2) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("User not Found");
                     alert.setHeaderText("User Not Found");
@@ -129,15 +129,14 @@ public class AddNewContactPopupController implements Initializable {
                     StageCoordinator.getInstance().hideNewContactPopup();
                     alert.showAndWait();
                 }
-                if(result == -3){
+                if (result == -3) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Contact already exists");
                     alert.setHeaderText("Contact already exists");
                     alert.setContentText("The contact you added already exists in your contacts list");
                     StageCoordinator.getInstance().hideNewContactPopup();
                     alert.showAndWait();
-                }
-                else
+                } else
                     ModelsFactory.getInstance().retrieveContacts();
                 StageCoordinator.getInstance().hideNewContactPopup();
             } catch (RemoteException ex) {
@@ -146,7 +145,7 @@ public class AddNewContactPopupController implements Initializable {
         });
     }
 
-    private void bind(){
+    private void bind() {
         contactNumberTextField.textProperty().bindBidirectional(contactModel.contactPhoneNumberProperty());
         contactNameTextField.textProperty().bindBidirectional(contactModel.nameProperty());
         StringProperty newExtraPhone = new SimpleStringProperty();
