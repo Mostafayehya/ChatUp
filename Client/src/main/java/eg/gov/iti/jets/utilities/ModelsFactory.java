@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static eg.gov.iti.jets.utilities.DomainModelConverter.contactListToContactModelList;
@@ -59,7 +58,7 @@ public class ModelsFactory {
         try { // Todo) move the if inside the try, no point having it out side
             contacts = RMIManager.getHandleContactsService().getUserContacts(currentUser.getPhoneNumber());
             System.out.println("Current user's all contacts loaded successfully with size = " + contacts.size());
-            contactModelList = contactListToContactModelList(contacts);
+            contactModelList=contactListToContactModelList(contacts);
 
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -68,7 +67,6 @@ public class ModelsFactory {
             currentUser.setContacts(FXCollections.observableList(contactListToContactModelList(contacts)));
         } else { // todo This looks really ugly, use temp references to simplify this
             currentUser.getContacts().add(contactListToContactModelList(contacts).get(contacts.size()-1));
-
 
         }
     }
@@ -91,25 +89,6 @@ public class ModelsFactory {
         return messagesObservableList;
     }
 
-    // This will be used only in contact -> contact profile flow
-    public ContactModel getSelectedContact() {
-
-        if (selectedContact == null) {
-            selectedContact = new ContactModel();
-            return selectedContact;
-        }
-
-        return selectedContact;
-    }
-
-    /*
-         After receiving the message I need to update the ObserverList of messages and I can do this by different ways
-            1) have the observer list here and then add the message to it and since observed the chatpage controller
-               would be notified
-            2) have a method called receiveMEssage() inside the controller and call it from here ( bad no use of properties)
-            3) Make oberverlist public and setting it here from the modelsFactory ( terrible )
-
-    */
     public void receiveMessage(Message message) {
 
         if (message != null) {

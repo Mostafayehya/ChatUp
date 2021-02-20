@@ -22,6 +22,7 @@
                <padding>
                    <Insets right="10" left="10" bottom="10" top="10"></Insets>
                </padding>
+               <Button styleClass="transparentButton" fx:id="addNewContact">Add new contact</Button>
            </HBox>
            <ListView prefHeight="626.0" BorderPane.alignment="CENTER" fx:id="contactsListView"/>
        </VBox>

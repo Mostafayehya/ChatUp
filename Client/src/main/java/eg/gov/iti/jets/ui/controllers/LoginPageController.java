@@ -82,9 +82,6 @@ public class LoginPageController implements Initializable {
 
             StageCoordinator.getInstance().goToUserProfilePage();
 
-            modelsFactory.setCurrentUser(user);
-            StageCoordinator.getInstance().gotoContactsListPage();
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
