@@ -30,7 +30,14 @@ public class UserProperties {
         fr.close();
     }
     public String ReadUserPhone() throws IOException {
-        FileReader fr = new FileReader("userProperties.txt");
+        FileReader fr = null;
+        try {
+             fr = new FileReader("userProperties.txt");
+        }
+        catch (FileNotFoundException e){
+            System.out.println("not found");
+            return null;
+        }
         char [] a = new char[50];
         fr.read(a);
         String string = new String(a);

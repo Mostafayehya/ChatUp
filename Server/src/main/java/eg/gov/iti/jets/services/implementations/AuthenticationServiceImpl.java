@@ -23,6 +23,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class AuthenticationServiceImpl extends UnicastRemoteObject implements AuthenticationService {
     UserDao userDao;
+
     public AuthenticationServiceImpl() throws RemoteException {
         userDao = new UserDaoImpl();
     }
@@ -49,7 +50,7 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
 
     @Override
     public int signUp(User user) {
-        if(userDao.getUserByPhone(user.getPhoneNumber())!=null){
+        if (userDao.getUserByPhone(user.getPhoneNumber()) != null) {
             return -2;
         }
         user.setUserPhotoPath(saveUserprofilePhoto(user));
@@ -72,7 +73,7 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
             photoPath = file.getPath();
         } else {
             //default photo
-            photoPath = "src/main/resources/UserPhotos/user.jpg";
+            photoPath = "D:\\yaraaab\\ChatUp\\Server\\src\\main\\resources\\UserPhotos\\user.jpg";
         }
         return photoPath;
     }
