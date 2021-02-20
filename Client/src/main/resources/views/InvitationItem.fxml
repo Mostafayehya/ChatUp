@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="81.0" prefWidth="471.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.InvitationItemController">
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <left>
+      <Circle fx:id="imageCircle" fill="white" radius="36.0" stroke="BLACK" strokeType="INSIDE" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <VBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="166.0">
+         <children>
+            <Label fx:id="contactNameLabel" text="Contact">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="phoneLabel" text="Here is my bio" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </center>
+   <right>
+      <HBox alignment="CENTER" prefHeight="72.0" prefWidth="139.0" spacing="10.0">
+         <Button fx:id="accBtn" mnemonicParsing="false" style=" -fx-background-color: #009688; -fx-font-weight: bold;" text="Accept" textFill="WHITE" />
+
+         <Button fx:id="rejBtn" mnemonicParsing="false" style=" -fx-background-color: #d32020; -fx-font-weight: bold;" text="Reject" textFill="WHITE" />
+      </HBox>
+   </right>
+</BorderPane>
