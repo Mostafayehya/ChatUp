@@ -16,6 +16,7 @@ import java.util.List;
 public class HandleContactServiceImpl extends UnicastRemoteObject implements HandleContactsService {
     ContactDao contactDao;
     UserDao userDao;
+   // InvitationDao invitationDao;
     public HandleContactServiceImpl() throws RemoteException {
         contactDao = new ContactDaoImpl();
         userDao = new UserDaoImpl();
@@ -29,6 +30,7 @@ public class HandleContactServiceImpl extends UnicastRemoteObject implements Han
         if(contactDao.getContact(contact.getUserPhoneNumber(),contact.getContactPhoneNumber())!=null){
             return -3;
         }
+        //invitationDao.add()
         return contactDao.insertContact(contact);
     }
 

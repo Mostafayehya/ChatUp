@@ -14,7 +14,7 @@
         <URL value="@../styles/bootstrapfx.css" />
     </stylesheets>
     <left>
-        <fx:include source="NavigationBar.fxml"/>
+<!--        <fx:include source="NavigationBar.fxml"/>-->
     </left>
    <center>
        <VBox>
