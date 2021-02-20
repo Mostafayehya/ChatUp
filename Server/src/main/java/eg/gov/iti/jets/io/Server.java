@@ -1,13 +1,15 @@
 package eg.gov.iti.jets.io;
 
-import clientInterface.ChatUpClientInt;
+import clientInterface.ClientCallbacks;
 import eg.gov.iti.jets.data.DataBaseConnection;
 import eg.gov.iti.jets.services.implementations.AuthenticationServiceImpl;
+import eg.gov.iti.jets.services.implementations.SingleChatServiceImpl;
 import eg.gov.iti.jets.services.implementations.UpdateServiceImpl;
 import eg.gov.iti.jets.services.implementations.HandleContactServiceImpl;
 import services.AuthenticationService;
 import services.UpdateService;
 import services.HandleContactsService;
+import services.SingleChatService;
 
 
 import java.rmi.AlreadyBoundException;
@@ -25,17 +27,25 @@ public class Server {
     AuthenticationService authenticationService;
     UpdateService updateService;
     HandleContactsService handleContactsService;
-    //list of clients
-    Map<String, ChatUpClientInt> clients;
-    DataBaseConnection databaseConnection ;
-    private Server(){
-        clients = new HashMap<>();
+    SingleChatService singleChatService;
+    //list of onlineClients
+    Map<String, ClientCallbacks> onlineClients;
+    DataBaseConnection databaseConnection;
 
+    private Server() {
+        onlineClients = new HashMap<>();
+        try {
+
+            registry = LocateRegistry.createRegistry(8189);
+
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
-    public synchronized static Server getInstance(){
-        if(server==null)
-            server=new Server();
+    public synchronized static Server getInstance() {
+        if (server == null)
+            server = new Server();
         return server;
     }
 
@@ -50,17 +60,19 @@ public class Server {
     }
 
     //use in login
-    public void addClient(String phoneNumber,ChatUpClientInt clientImpl){
-        clients.put(phoneNumber,clientImpl);
+    public void addClient(String phoneNumber, ClientCallbacks clientImpl) {
+        onlineClients.put(phoneNumber, clientImpl);
+        System.out.println("User: " + phoneNumber + " was added to online ");
+
     }
 
     //use in signOut or exit
-    public void removeClient(String phoneNumber){
-        clients.remove(phoneNumber);
+    public void removeClient(String phoneNumber) {
+        onlineClients.remove(phoneNumber);
     }
 
-    public void stopServer(){
-        for (Map.Entry<String,ChatUpClientInt> entry : clients.entrySet()) {
+    public void stopServer() {
+        for (Map.Entry<String, ClientCallbacks> entry : onlineClients.entrySet()) {
             try {
                 entry.getValue().closeApp();
             } catch (RemoteException e) {
@@ -71,11 +83,12 @@ public class Server {
         try {
             registry.unbind("AuthenticationService");
             registry.unbind("HandleContactService");
-            UnicastRemoteObject.unexportObject(authenticationService,true);
-            UnicastRemoteObject.unexportObject(handleContactsService,true);
+            registry.unbind("SingleChatService");
             registry.unbind("UpdateService");
-            UnicastRemoteObject.unexportObject(updateService,true);
-
+            UnicastRemoteObject.unexportObject(updateService, true);
+            UnicastRemoteObject.unexportObject(authenticationService, true);
+            UnicastRemoteObject.unexportObject(handleContactsService, true);
+            UnicastRemoteObject.unexportObject(singleChatService, true);
 
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -84,21 +97,26 @@ public class Server {
         }
     }
 
+    public Map<String, ClientCallbacks> getOnlineClients() {
+        return onlineClients;
+    }
+
     public void startServer() {
-        clients = new HashMap<>();
+        onlineClients = new HashMap<>();
         databaseConnection = DataBaseConnection.getInstance();
         try {
-            authenticationService  = new AuthenticationServiceImpl();
+            authenticationService = new AuthenticationServiceImpl();
             handleContactsService = new HandleContactServiceImpl();
-            updateService=new UpdateServiceImpl();
-            registry = LocateRegistry.createRegistry(8189);
-            registry.bind("AuthenticationService",authenticationService);
-            registry.bind("HandleContactService",handleContactsService);
-            registry.bind("UpdateService",updateService);
+            singleChatService = new SingleChatServiceImpl();
+            updateService = new UpdateServiceImpl();
+            registry = LocateRegistry.getRegistry(8189);
+            registry.bind("SingleChatService", singleChatService);
+            registry.bind("AuthenticationService", authenticationService);
+            registry.bind("HandleContactService", handleContactsService);
+            registry.bind("UpdateService", updateService);
         } catch (RemoteException e) {
             e.printStackTrace();
-        }
-        catch(AlreadyBoundException e){
+        } catch (AlreadyBoundException e) {
             e.printStackTrace();
         }
     }

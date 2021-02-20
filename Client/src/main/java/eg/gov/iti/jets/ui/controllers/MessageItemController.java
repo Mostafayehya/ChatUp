@@ -2,6 +2,7 @@ package eg.gov.iti.jets.ui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -67,5 +68,9 @@ public class MessageItemController implements Initializable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setMessageOrientation(NodeOrientation orientation) {
+        messageLayout.setNodeOrientation(orientation);
     }
 }

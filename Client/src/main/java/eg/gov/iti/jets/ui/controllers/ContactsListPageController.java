@@ -5,7 +5,6 @@ import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.utilities.ContactListCell;
 import eg.gov.iti.jets.utilities.ModelsFactory;
 import eg.gov.iti.jets.utilities.StageCoordinator;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,10 +21,6 @@ public class ContactsListPageController implements Initializable {
     ObservableList<ContactModel> contactObservableList;
     @FXML
     Button addNewContact;
-
-    public ContactsListPageController(){
-        contactObservableList = ModelsFactory.getInstance().getCurrentUser().getContacts();
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

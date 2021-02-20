@@ -33,4 +33,6 @@ public class ContactListCell extends ListCell<ContactModel> {
         }
 
     }
+
+
 }

@@ -2,35 +2,27 @@ package eg.gov.iti.jets.ui.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import domains.Message;
+import eg.gov.iti.jets.io.RMIManager;
+import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.utilities.MessageListCell;
-import javafx.collections.FXCollections;
+import eg.gov.iti.jets.utilities.ModelsFactory;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.util.Callback;
 import org.kordamp.ikonli.javafx.FontIcon;
+import services.SingleChatService;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class ChatPageController implements Initializable {
@@ -82,14 +74,26 @@ public class ChatPageController implements Initializable {
 
     ObservableList<Message> messagesObservableList;
 
+    ModelsFactory modelsFactory;
+
+    SingleChatService singleChatService;
+
+    ContactModel selectedOnlineContact;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        modelsFactory = ModelsFactory.getInstance();
 
-        messagesObservableList = FXCollections.observableArrayList(new Message("10:00 AM", "Good morning"),
-                new Message("08:15 PM", "Good night"));
+        selectedOnlineContact = modelsFactory.getCurrentSelectedOnlineContact();
 
+        contactNameText.textProperty().bindBidirectional(modelsFactory.getCurrentSelectedOnlineContact().nameProperty());
+
+        // Todo 1 I should bind the messagelistView to the messages Map inside ModelsFactory Map<contactId,List<message>
+        // Todo 2 Binding the chat Image to the contact image, waiting to merge with Hadeer
+
+        messagesObservableList = modelsFactory.getMessagesObservableList();
         chatListView.setItems(messagesObservableList);
 
         chatListView.setCellFactory(messageListView -> new MessageListCell());
@@ -100,8 +104,18 @@ public class ChatPageController implements Initializable {
 
         if (keyEvent.getCode() == KeyCode.ENTER) {
 
-            messagesObservableList.add(new Message(LocalDate.now().toString(), messgeTextField.getText()));
-            chatListView.scrollTo(chatListView.getItems().size()-1);
+            // I need to store the currentContact inside models factory in order to specify the
+            // receiver of the message
+            Message newMessage = new Message(LocalDate.now().toString(), messgeTextField.getText(),
+                    selectedOnlineContact.getContactPhoneNumber(), modelsFactory.getCurrentUser().getPhoneNumber());
+
+            try {
+                RMIManager.getSingleChatService().sendMessage(newMessage);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            messagesObservableList.add(newMessage);
+            chatListView.scrollTo(chatListView.getItems().size() - 1);
             // Use service to send it over RMI
             messgeTextField.clear();
 

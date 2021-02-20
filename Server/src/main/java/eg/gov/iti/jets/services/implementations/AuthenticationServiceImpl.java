@@ -1,6 +1,6 @@
 package eg.gov.iti.jets.services.implementations;
 
-import clientInterface.ChatUpClientInt;
+import clientInterface.ClientCallbacks;
 import domains.FileDomain;
 import domains.User;
 import eg.gov.iti.jets.data.dao.UserDao;
@@ -8,6 +8,7 @@ import eg.gov.iti.jets.data.dao.UserDaoImpl;
 import eg.gov.iti.jets.io.Server;
 import services.AuthenticationService;
 import utilities.FilesUtilities;
+
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -22,15 +23,14 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class AuthenticationServiceImpl extends UnicastRemoteObject implements AuthenticationService {
     UserDao userDao;
-
     public AuthenticationServiceImpl() throws RemoteException {
         userDao = new UserDaoImpl();
     }
 
     @Override
-    public User login(String phone, String password, ChatUpClientInt chatUpClient) {
-        User user = userDao.getUserByPhoneAndPassword(phone, password);
-        if (user != null) {
+    public User login(String phone , String password, ClientCallbacks chatUpClient) {
+        User user =  userDao.getUserByPhoneAndPassword(phone, password);
+        if(user!=null){
             //add chatUpClient to the clients map in server
             String userPhotoPath = user.getUserPhotoPath();
             if (!userPhotoPath.equals("")) {
@@ -49,7 +49,7 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
 
     @Override
     public int signUp(User user) {
-        if (userDao.getUserByPhone(user.getPhoneNumber()) != null) {
+        if(userDao.getUserByPhone(user.getPhoneNumber())!=null){
             return -2;
         }
         user.setUserPhotoPath(saveUserprofilePhoto(user));
@@ -60,19 +60,19 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
         FileDomain userProfilePhoto = user.getUserPhoto();
         String photoPath;
         if (userProfilePhoto != null) {
-            Path target = Paths.get(getClass().getResource("/UserPhotos/"+userProfilePhoto.getFilename() + "." + userProfilePhoto.getFileExtension()) .getPath());
+            File file = new File(getClass().getResource("/UserPhotos/").getPath()+userProfilePhoto.getFilename() + "." + userProfilePhoto.getFileExtension());
 
             InputStream is = new ByteArrayInputStream(userProfilePhoto.getFileBytes());
             try {
                 BufferedImage bufferedImage = ImageIO.read(is);
-                ImageIO.write(bufferedImage, userProfilePhoto.getFileExtension(), target.toFile());
+                ImageIO.write(bufferedImage, userProfilePhoto.getFileExtension(), file);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            photoPath = target.toFile().getPath();
+            photoPath = file.getPath();
         } else {
             //default photo
-            photoPath = "C:\\Users\\Hadeer\\Desktop\\javaProject\\ChatUp\\Server\\src\\main\\resources\\photos\\user.jpg";
+            photoPath = "src/main/resources/UserPhotos/user.jpg";
         }
         return photoPath;
     }

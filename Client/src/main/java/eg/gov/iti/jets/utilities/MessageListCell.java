@@ -2,7 +2,9 @@ package eg.gov.iti.jets.utilities;
 
 import domains.Message;
 import eg.gov.iti.jets.ui.controllers.MessageItemController;
+import eg.gov.iti.jets.ui.models.UserModel;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.control.ListCell;
 
@@ -11,6 +13,7 @@ import java.io.IOException;
 public class MessageListCell extends ListCell<Message> {
 
     private  Node graphic;
+    private final UserModel currentUser = ModelsFactory.getInstance().getCurrentUser();
     private final MessageItemController messageItemController;
 
     public MessageListCell()   {
@@ -31,10 +34,24 @@ public class MessageListCell extends ListCell<Message> {
             setGraphic(null);
         } else {
 
-            // todo Fix message model and update here
-            messageItemController.setSenderName("Mostafa Yehya");
-            messageItemController.setMessageContent(message.getContent());
-            messageItemController.setTimeText(message.getTime());
+            // Client Message
+
+            if (currentUser.getPhoneNumber().equals(message.getSenderPhoneNumber())){
+                messageItemController.setSenderName(currentUser.getName());
+                messageItemController.setMessageContent(message.getContent());
+                messageItemController.setTimeText(message.getTime());
+                messageItemController.setMessageOrientation(NodeOrientation.LEFT_TO_RIGHT);
+
+
+            }else{
+                messageItemController.setSenderName(message.getSenderPhoneNumber());
+                messageItemController.setMessageContent(message.getContent());
+                messageItemController.setTimeText(message.getTime());
+                messageItemController.setMessageOrientation(NodeOrientation.RIGHT_TO_LEFT);
+
+            }
+
+            //received Message
 
             setText(null);
             setGraphic(graphic);

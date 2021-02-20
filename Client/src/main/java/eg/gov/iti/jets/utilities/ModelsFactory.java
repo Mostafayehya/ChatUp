@@ -11,23 +11,33 @@ import javafx.scene.image.Image;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
+
+import static eg.gov.iti.jets.utilities.DomainModelConverter.contactListToContactModelList;
 
 public class ModelsFactory {
     private static ModelsFactory modelsFactory;
     //has reference from all models
-    UserModel currentUser = null;
+    // todo) refactor this to have a public method to get it as the MVC demo
+    UserModel currentUser;
+
+    ContactModel selectedContact;
+    ObservableList<Message> messagesObservableList;
+    ContactModel selectedOnlineContactModel = new ContactModel();
+
+    List<ContactModel> contactModelList;
+
+    // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact
 
     private ModelsFactory() {
-
     }
 
-    public synchronized static ModelsFactory getInstance() {
+    public synchronized static ModelsFactory getInstance(){
         if (modelsFactory == null)
             modelsFactory = new ModelsFactory();
         return modelsFactory;
     }
+
 
     public void setCurrentUser(User user) {
         if (currentUser != null) {
@@ -43,47 +53,76 @@ public class ModelsFactory {
         retrieveContacts();
     }
 
-    public List<ContactModel> getContactModelsList(List<Contact> contacts) {
-        List<ContactModel> contactModels = new ArrayList<>();
-        for (int i = 0; i < contacts.size(); i++) {
-            Contact contact = contacts.get(i);
-            contactModels.add(getContactModel(contact));
-        }
-        System.out.println(contactModels.size());
-        return contactModels;
-    }
-
-    public ContactModel getContactModel(Contact contact) {
-        ContactModel contactModel = null;
-        if (contact.getContactImage() != null) {
-            System.out.println("has image");
-            InputStream inputStream = new ByteArrayInputStream(contact.getContactImage());
-            contactModel = new ContactModel(contact.getContactPhoneNumber(), contact.getName(), contact.getBio(),
-                    contact.getEmail(), contact.getStatus(), contact.getMode(), new Image(inputStream));
-
-        }
-        return contactModel;
-    }
-
-    public UserModel getCurrentUser() {
-        return currentUser;
-    }
-
     public void retrieveContacts() {
         List<Contact> contacts = null;
-        try {
+        try { // Todo) move the if inside the try, no point having it out side
             contacts = RMIManager.getHandleContactsService().getUserContacts(currentUser.getPhoneNumber());
+            System.out.println("Current user's all contacts loaded successfully with size = " + contacts.size());
+            contactModelList=contactListToContactModelList(contacts);
+
         } catch (RemoteException e) {
             e.printStackTrace();
         }
         if (currentUser.getContacts() == null) {
-            currentUser.setContacts(FXCollections.observableList(getContactModelsList(contacts)));
-        } else {
-            currentUser.getContacts().add(getContactModelsList(contacts).get(contacts.size()-1));
+            currentUser.setContacts(FXCollections.observableList(contactListToContactModelList(contacts)));
+        } else { // todo This looks really ugly, use temp references to simplify this
+            currentUser.getContacts().add(contactListToContactModelList(contacts).get(contacts.size()-1));
 
+        }
+    }
+
+    public UserModel getCurrentUser() {
+
+        if (currentUser == null) {
+            currentUser = new UserModel();
+            return currentUser;
+        } else {
+            return currentUser;
+        }
+    }
+
+    public ObservableList<Message> getMessagesObservableList() {
+        if (messagesObservableList == null) {
+            messagesObservableList = FXCollections.observableArrayList();
+            return messagesObservableList;
+        }
+        return messagesObservableList;
+    }
+
+    public void receiveMessage(Message message) {
+
+        if (message != null) {
+            System.out.println("Message received :" + message.getContent());
+            messagesObservableList.add(message);
 
         }
     }
 
 
+
+    /*/////////////////////////////////////
+     *   Contacts inside chat Page Handling
+     * *///////////////////////////////////
+    public void setSelectedOnlineContactModel(ContactModel contactModel) {
+
+        if (selectedOnlineContactModel == null) {
+            selectedOnlineContactModel = contactModel;
+        }
+        selectedOnlineContactModel.setContactModel(contactModel);
+
+        System.out.println(contactModel.nameProperty().get() + " was set inside models factory");
+    }
+
+
+    public ContactModel getCurrentSelectedOnlineContact() {
+
+        if (selectedOnlineContactModel == null) {
+            selectedOnlineContactModel = new ContactModel();
+            return selectedOnlineContactModel;
+        } else {
+            return selectedOnlineContactModel;
+
+        }
+
+    }
 }

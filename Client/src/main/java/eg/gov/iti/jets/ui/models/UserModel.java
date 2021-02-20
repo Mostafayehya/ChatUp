@@ -40,6 +40,16 @@ public class UserModel {
         this.userImage.setValue(image);
     }
 
+
+    public UserModel(){
+
+    }
+    public UserModel(String phoneNumber, String name, String email) {
+        this.phoneNumber.setValue(phoneNumber);
+        this.name.setValue(name);
+        this.email.setValue(email);
+    }
+
     public ObservableList<ContactModel> getContacts() {
         return contacts;
     }
@@ -47,10 +57,7 @@ public class UserModel {
     public void setContacts(ObservableList<ContactModel> contacts) {
         this.contacts = contacts;
     }
-public UserModel()
-{
 
-}
     public UserModel(String phoneNumber, String name, String email, String password, String picture, Gender gender, String country, LocalDate dateOfBirth, String bio, Status status, Mode mode) {
         this.phoneNumber.setValue(phoneNumber);
         this.name.setValue(name);

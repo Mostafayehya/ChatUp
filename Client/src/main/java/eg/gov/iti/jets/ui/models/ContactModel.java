@@ -9,6 +9,7 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 
 public class ContactModel {
+    //StringProperty userPhoneNumber = new SimpleStringProperty();
     StringProperty contactPhoneNumber = new SimpleStringProperty();
     StringProperty name = new SimpleStringProperty();
     StringProperty bio = new SimpleStringProperty();
@@ -19,6 +20,7 @@ public class ContactModel {
     ObjectProperty<Image> contactImage = new SimpleObjectProperty<>();
 
     public ContactModel(String contactPhoneNumber,String name,String bio,String email,String image,Status status,Mode mode){
+        //this.userPhoneNumber.setValue(userPhoneNumber);
         this.contactPhoneNumber.setValue(contactPhoneNumber);
         this.name.setValue(name);
         this.bio.setValue(bio);
@@ -28,7 +30,7 @@ public class ContactModel {
         this.mode.setValue(mode);
     }
 
-    public ContactModel(String contactPhoneNumber,String name,String bio,String email,Status status,Mode mode,Image image){
+    public ContactModel(String contactPhoneNumber, String name, String bio, String email, Status status, Mode mode, Image image){
         this.contactPhoneNumber.setValue(contactPhoneNumber);
         this.name.setValue(name);
         this.bio.setValue(bio);
@@ -40,6 +42,12 @@ public class ContactModel {
     }
 
 
+
+    public ContactModel(String contactPhoneNumber, String name, String image) {
+        this.contactPhoneNumber.setValue( contactPhoneNumber);
+        this.name.set(name);
+        this.image.setValue(image);
+    }
 
     public ContactModel() {
     }
@@ -127,6 +135,17 @@ public class ContactModel {
     public void setMode(Mode mode) {
         this.mode.set(mode);
     }
+
+    public void setContactModel(ContactModel cm){
+        this.name.set(cm.name.get());
+        this.bio.set(cm.getBio());
+        this.email.set(cm.getEmail());
+        this.image.set(cm.getImage());
+        this.status.set(cm.getStatus());
+        this.mode.set(cm.getMode());
+        this.contactPhoneNumber.set(cm.getContactPhoneNumber());
+    }
+
 
     public Image getContactImage() {
         return contactImage.get();
