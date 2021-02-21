@@ -21,7 +21,6 @@ public class ModelsFactory {
     // todo) refactor this to have a public method to get it as the MVC demo
     UserModel currentUser;
 
-    ContactModel selectedContact;
     ObservableList<Message> messagesObservableList;
     ContactModel selectedOnlineContactModel = new ContactModel();
 
@@ -32,7 +31,7 @@ public class ModelsFactory {
     private ModelsFactory() {
     }
 
-    public synchronized static ModelsFactory getInstance(){
+    public synchronized static ModelsFactory getInstance() {
         if (modelsFactory == null)
             modelsFactory = new ModelsFactory();
         return modelsFactory;
@@ -58,15 +57,15 @@ public class ModelsFactory {
         try { // Todo) move the if inside the try, no point having it out side
             contacts = RMIManager.getHandleContactsService().getUserContacts(currentUser.getPhoneNumber());
             System.out.println("Current user's all contacts loaded successfully with size = " + contacts.size());
-            contactModelList=contactListToContactModelList(contacts);
+            contactModelList = contactListToContactModelList(contacts);
 
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        if (currentUser.getContacts() == null) {
+        if (currentUser.getContacts() == null || contacts.size() == 0) {
             currentUser.setContacts(FXCollections.observableList(contactListToContactModelList(contacts)));
         } else { // todo This looks really ugly, use temp references to simplify this
-            currentUser.getContacts().add(contactListToContactModelList(contacts).get(contacts.size()-1));
+            currentUser.getContacts().add(contactListToContactModelList(contacts).get(contacts.size() - 1));
 
         }
     }
@@ -97,7 +96,6 @@ public class ModelsFactory {
 
         }
     }
-
 
 
     /*/////////////////////////////////////
