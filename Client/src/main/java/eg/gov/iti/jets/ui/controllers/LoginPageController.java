@@ -51,7 +51,7 @@ public class LoginPageController implements Initializable {
 //        }
 //        phoneTextField.setText(phoneNum);
         phoneTextField.addEventFilter(KeyEvent.KEY_TYPED, (e) -> {
-            if (!new Validation().validatePhoneNumber(e.getCharacter()) || phoneTextField.getText().length() > 11) {
+            if (!new Validation().validatePhoneNumber(e.getCharacter()) || phoneTextField.getText().length() >= 11) {
                 e.consume();
             }
         });

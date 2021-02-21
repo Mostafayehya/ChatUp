@@ -10,23 +10,41 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.scene.text.Text?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Circle?>
 <HBox fx:id="messageLayout" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" spacing="10.0"
       BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="eg.gov.iti.jets.ui.controllers.FileMessageController">
-    <children>
+      >
+        <Circle fx:id="senderCircleImage" radius="37.0" stroke="BLACK" strokeType="INSIDE">
+        </Circle>
         <VBox alignment="CENTER_LEFT" HBox.hgrow="NEVER">
             <children>
-                <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER" spacing="10">
-                    <padding>
-                        <Insets bottom="10" top="10" left="10" right="10"></Insets>
-                    </padding>
+                <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
                     <children>
-                        <Text>File name</Text>
-                        <FontIcon iconSize="30" iconLiteral="mdi2d-download" iconColor="darkcyan" fx:id="downloadIcon"></FontIcon>
+                        <Text fx:id="senderNameText" lineSpacing="10.0" nodeOrientation="RIGHT_TO_LEFT" strokeType="OUTSIDE" strokeWidth="0.0" text="Mostafa Yehya">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="timeText" fill="#977a7a" strokeType="OUTSIDE" strokeWidth="0.0" text="10:20 PM">
+                            <HBox.margin>
+                                <Insets left="5.0" top="5.0" />
+                            </HBox.margin>
+                        </Text>
                     </children>
                 </HBox>
-
+                <HBox spacing="30">
+                <Label fx:id="fileName" contentDisplay="CENTER" text="File Name" textFill="#220b0b" wrapText="true" VBox.vgrow="ALWAYS">
+                    <VBox.margin>
+                        <Insets top="3.0" bottom="10"/>
+                    </VBox.margin>
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                </HBox>
             </children>
         </VBox>
-    </children>
+    <FontIcon iconSize="30" iconLiteral="mdi2d-download" iconColor="darkcyan" fx:id="downloadIcon"></FontIcon>
 </HBox>
+

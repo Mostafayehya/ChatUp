@@ -1,6 +1,7 @@
 package eg.gov.iti.jets.services.implementations;
 
 import clientInterface.ClientCallbacks;
+import domains.FileMessage;
 import domains.Message;
 import eg.gov.iti.jets.io.Server;
 import services.SingleChatService;
@@ -23,5 +24,12 @@ public class SingleChatServiceImpl extends UnicastRemoteObject implements Single
         ClientCallbacks client = onlineUsers.get(message.getReceiverPhoneNumber());
         if (client != null)
             client.receiveMessage(message);
+    }
+
+    @Override
+    public void sendFileMessage(FileMessage fileMessage) throws RemoteException {
+        ClientCallbacks client = onlineUsers.get(fileMessage.getReceiverPhoneNumber());
+        if (client != null)
+            client.receiveMessage(fileMessage);
     }
 }

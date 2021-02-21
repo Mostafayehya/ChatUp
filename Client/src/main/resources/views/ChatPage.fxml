@@ -30,7 +30,7 @@
                                 <HBox alignment="CENTER_LEFT" fillHeight="false" prefWidth="389.0" spacing="10.0" BorderPane.alignment="CENTER">
                                     <children>
                                         <FontIcon fx:id="emojiIcon" iconLiteral="far-laugh" iconSize="20" />
-                                        <FontIcon fx:id="attachButton" iconLiteral="fas-paperclip" iconSize="20" />
+                                        <FontIcon fx:id="attachButton" iconLiteral="fas-paperclip" iconSize="20"/>
                                         <TextField fx:id="messgeTextField" onKeyPressed="#sendMessage" prefHeight="42.0" prefWidth="408.0" promptText="Send a Message" HBox.hgrow="ALWAYS" />
                                     </children>
                                     <padding>

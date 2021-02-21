@@ -33,9 +33,6 @@
     </center>
     <right>
       <HBox alignment="CENTER_RIGHT">
-         <children>
-            <FontIcon fx:id="messageIcon" iconLiteral="mdi2m-message" iconSize="30" wrappingWidth="34.0" />
-         </children>
          <BorderPane.margin>
             <Insets left="150.0" />
          </BorderPane.margin>

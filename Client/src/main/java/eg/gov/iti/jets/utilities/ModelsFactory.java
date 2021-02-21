@@ -94,8 +94,8 @@ public class ModelsFactory {
         if (message != null) {
             System.out.println("Message received :" + message.getContent());
             messagesObservableList.add(message);
-
         }
+
     }
 
 
