@@ -41,17 +41,22 @@ public class MessageListCell extends ListCell<Message> {
                 messageItemController.setMessageContent(message.getContent());
                 messageItemController.setTimeText(message.getTime());
                 messageItemController.setMessageOrientation(NodeOrientation.LEFT_TO_RIGHT);
-
-
+                messageItemController.setSenderCircleImage(currentUser.getUserImage());
+                //received Message
             }else{
                 messageItemController.setSenderName(message.getSenderPhoneNumber());
                 messageItemController.setMessageContent(message.getContent());
                 messageItemController.setTimeText(message.getTime());
                 messageItemController.setMessageOrientation(NodeOrientation.RIGHT_TO_LEFT);
 
+                // handling sender image
+                messageItemController.setSenderCircleImage(
+                        ModelsFactory.getInstance().selectedOnlineContactModel.getContactImage()
+                );
+
             }
 
-            //received Message
+
 
             setText(null);
             setGraphic(graphic);
