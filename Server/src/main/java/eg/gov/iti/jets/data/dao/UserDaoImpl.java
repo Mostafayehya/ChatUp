@@ -65,7 +65,7 @@ public class UserDaoImpl implements UserDao {
     public int updateUserPhoto(User user) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("update user set picture = ? where phoneNumber = ?");
-            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setString(1,user.getUserPhotoPath());
             preparedStatement.setString(2,user.getPhoneNumber());
             int result =  preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -96,6 +96,8 @@ public class UserDaoImpl implements UserDao {
                 user.setDateOfBirth(today);
                 user.setBio(rs.getString(9));
                 user.setStatus(Status.valueOf(rs.getObject(10).toString().toUpperCase()));
+                System.out.println(Mode.valueOf(rs.getObject(11).toString().toUpperCase()));
+                System.out.println(rs.getObject(11).toString());
                 user.setMode(Mode.valueOf(rs.getObject(11).toString().toUpperCase()));
             }
             statement.close();
@@ -169,7 +171,7 @@ public class UserDaoImpl implements UserDao {
     public int updateUserMode(User user) {
         try {
         PreparedStatement preparedStatement = connection.prepareStatement("update user set mode=?   where phoneNumber=?");
-        preparedStatement.setString(1,user.getUserPhotoPath());
+        preparedStatement.setString(1,user.getMode().name());
         preparedStatement.setString(2,user.getPhoneNumber());
             int result =  preparedStatement.executeUpdate();
             preparedStatement.close();
