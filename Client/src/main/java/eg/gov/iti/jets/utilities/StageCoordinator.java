@@ -108,7 +108,7 @@ public class StageCoordinator {
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
         }
 
-        if(!modelsFactory.contactModelList.isEmpty()) {
+        if(!modelsFactory.getCurrentUser().getContacts().isEmpty()) {
             if (!scenes.containsKey("chat")) {
                 try {
                     System.out.println("Created New Scene");

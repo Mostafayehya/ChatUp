@@ -14,6 +14,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import static eg.gov.iti.jets.utilities.DomainModelConverter.contactListToContactModelList;
+import static eg.gov.iti.jets.utilities.DomainModelConverter.getContactModel;
 
 public class ModelsFactory {
     private static ModelsFactory modelsFactory;
@@ -22,9 +23,9 @@ public class ModelsFactory {
     UserModel currentUser;
 
     ObservableList<Message> messagesObservableList;
-    ContactModel selectedOnlineContactModel = new ContactModel();
 
-    List<ContactModel> contactModelList;
+    ContactModel selectedOnlineContactModel;
+
 
     // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact
 
@@ -57,7 +58,6 @@ public class ModelsFactory {
         try { // Todo) move the if inside the try, no point having it out side
             contacts = RMIManager.getHandleContactsService().getUserContacts(currentUser.getPhoneNumber());
             System.out.println("Current user's all contacts loaded successfully with size = " + contacts.size());
-            contactModelList = contactListToContactModelList(contacts);
 
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -66,8 +66,9 @@ public class ModelsFactory {
             currentUser.setContacts(FXCollections.observableList(contactListToContactModelList(contacts)));
         } else { // todo This looks really ugly, use temp references to simplify this
             currentUser.getContacts().add(contactListToContactModelList(contacts).get(contacts.size() - 1));
-
         }
+
+        getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
     }
 
     public UserModel getCurrentUser() {

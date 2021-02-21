@@ -17,12 +17,6 @@ public class ChatContactsController implements Initializable {
     ObservableList<ContactModel> contactObservableList;
     ModelsFactory modelsFactory;
 
-    public ChatContactsController() {
-
-        // Todo) Refactor this to introduce a list of online contacts
-        contactObservableList = ModelsFactory.getInstance().getCurrentUser().getContacts();
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         modelsFactory = ModelsFactory.getInstance();

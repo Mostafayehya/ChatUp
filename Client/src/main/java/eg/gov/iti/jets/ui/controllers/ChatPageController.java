@@ -6,16 +6,20 @@ import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.utilities.MessageListCell;
 import eg.gov.iti.jets.utilities.ModelsFactory;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import org.kordamp.ikonli.javafx.FontIcon;
 import services.SingleChatService;
@@ -49,7 +53,7 @@ public class ChatPageController implements Initializable {
     private HBox chatBarHBox;
 
     @FXML
-    private Circle contactImage;
+    private ImageView contactImage;
 
     @FXML
     private Text contactNameText;
@@ -84,14 +88,20 @@ public class ChatPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        modelsFactory = ModelsFactory.getInstance();
+        final Rectangle clip = new Rectangle(50, 50);
+        clip.setArcWidth(180);
+        clip.setArcHeight(180);
+        contactImage.setClip(clip);
 
+        modelsFactory = ModelsFactory.getInstance();
         selectedOnlineContact = modelsFactory.getCurrentSelectedOnlineContact();
 
-        contactNameText.textProperty().bindBidirectional(modelsFactory.getCurrentSelectedOnlineContact().nameProperty());
+        contactNameText.textProperty().bindBidirectional(selectedOnlineContact.nameProperty());
+
 
         // Todo 1 I should bind the messagelistView to the messages Map inside ModelsFactory Map<contactId,List<message>
-        // Todo 2 Binding the chat Image to the contact image, waiting to merge with Hadeer
+
+        contactImage.imageProperty().bindBidirectional(selectedOnlineContact.contactImageProperty());
 
         messagesObservableList = modelsFactory.getMessagesObservableList();
         chatListView.setItems(messagesObservableList);

@@ -42,6 +42,7 @@ public class MessageItemController implements Initializable {
         try {
             Image image = new Image(new FileInputStream(imgFile.getAbsolutePath()));
 
+
             senderCircleImage.setFill(new ImagePattern(image));
             senderNameText.setText("Mostafa yehya");
 
