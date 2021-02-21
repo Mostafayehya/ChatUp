@@ -1,9 +1,6 @@
 package utilities;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
-import javafx.scene.image.Image;
 import org.apache.commons.io.FileUtils;
 
 public class FilesUtilities {
@@ -23,20 +20,6 @@ public class FilesUtilities {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static BufferedImage convertImageByteArrayToBufferedImage(byte[] imageBytes) {
-        InputStream is = new ByteArrayInputStream(imageBytes);
-        try {
-            return ImageIO.read(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    public static Image convertByteArrayToImage(byte[]imageBytes){
-        InputStream is =new ByteArrayInputStream(imageBytes);
-        return new Image(is);
     }
 
     public static String getFileExtension(File file){
