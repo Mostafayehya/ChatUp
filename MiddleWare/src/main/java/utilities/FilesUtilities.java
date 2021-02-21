@@ -17,6 +17,14 @@ public class FilesUtilities {
         return bytes;
     }
 
+    public static void writeByteArrayToFile(File file,byte[]fileBytes){
+        try {
+            FileUtils.writeByteArrayToFile(file,fileBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static BufferedImage convertImageByteArrayToBufferedImage(byte[] imageBytes) {
         InputStream is = new ByteArrayInputStream(imageBytes);
         try {
