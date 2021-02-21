@@ -1,9 +1,6 @@
 package eg.gov.iti.jets.ui.controllers;
 
-import domains.Gender;
-import domains.Mode;
-import domains.Status;
-import domains.User;
+import domains.*;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.ui.models.UserModel;
@@ -17,14 +14,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.kordamp.ikonli.javafx.FontIcon;
 import services.UpdateService;
+import utilities.FilesUtilities;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
@@ -56,11 +59,13 @@ public class UProfileController implements Initializable {
     Button setting;
     @FXML
     Circle userImage;
+    @FXML
+    Button choosePhoto;
     UpdateService updateService;
     Validation validation;
     UserModel userModel;
     ModelsFactory modelsFactory;
-   // User user=new User("01116058917","hagar","hagar@gmail.com","1234",null, Gender.FEMALE,"egypt",null,"hii", Status.ONLINE,Mode.AVAILABLE);
+    FileDomain userImageFile = null;
     public UProfileController(){validation = new Validation();
 
     }
@@ -80,17 +85,22 @@ public class UProfileController implements Initializable {
                 }
             }
         }));
-//        if(userModel.getMode().equals("BUSY"))
-//        {
-//            busyBtn.pressedProperty();
-//        }
-//        else if(userModel.getMode().equals("AWAY"))
-//        {
-//            awayBtn.pressedProperty();
-//        }
-//        else {
-//            availableBtn.pressedProperty();
-//        }
+
+        choosePhoto.addEventHandler(ActionEvent.ACTION,(e)->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("image files","*.png"));
+            File userPhoto = fileChooser.showOpenDialog(choosePhoto.getScene().getWindow());
+            String extension = FilesUtilities.getFileExtension(userPhoto);
+            userImageFile = new FileDomain();
+            userImageFile.setFileBytes(FilesUtilities.convertFileToByteArray(userPhoto,extension));
+            userImageFile.setFileExtension(extension);
+            try {
+                userImage.setFill(new ImagePattern(new Image(new FileInputStream(userPhoto.getAbsoluteFile()))));
+                updateService.EditUserPhoto(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userImageFile,userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
+            } catch (FileNotFoundException | RemoteException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+        });
 
         editBtn.addEventHandler(ActionEvent.ACTION, (e) -> {
         nameTextField.setEditable(true);
@@ -113,11 +123,7 @@ public class UProfileController implements Initializable {
            else  if (validation.isempty(nameTextField)) {
                 nameTextField.setStyle("-fx-border-color: red;");
             }
-//            user.setCountry(countryTextField.getText());
-//            user.setBio(bioTextField.getText());
-//            user.setEmail(emailTextField.getText());
-//            user.setName(nameTextField.getText());
-//            userName.setText(nameTextField.getText());
+
             try {
 
                 String s=userModel.getBio()+" "+userModel.getEmail()+" "+userModel.getPhoneNumber()+userModel.getCountry();
