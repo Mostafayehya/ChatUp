@@ -198,6 +198,27 @@ public class StageCoordinator {
             changUserPassPopup.hide();
         }
     }
+    public void goToContactProfilePage() {
+
+
+            try {
+                System.out.println("Created New Scene");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/contactProfile.fxml"));
+                Parent contactprofileview = fxmlLoader.load();
+                parentContainer = new StackPane(contactprofileview);
+                Scene contactprofilescene = new Scene(parentContainer,759.0,626.0);
+                SceneData contactprofileSceneData = new SceneData(fxmlLoader, parentContainer, contactprofilescene);
+                scenes.put("contactProfile", contactprofileSceneData);
+                stage.setScene(contactprofilescene);
+            } catch (IOException e) {
+                System.out.println("IO Exception: Couldn't load 'contactProfile Page' FXML file");
+                e.printStackTrace();
+            }
+            System.out.println("Loaded Existing Scene");
+            SceneData contactprofileSceneData = scenes.get("contactProfile");
+            Scene contactprofileScene = contactprofileSceneData.getScene();
+            stage.setScene(contactprofileScene);
+        }
 
     public void closeApp(){
         if(stage==null){
