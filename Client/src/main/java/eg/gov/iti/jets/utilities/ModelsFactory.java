@@ -100,7 +100,9 @@ public class ModelsFactory {
         if (message != null) {
             System.out.println("Message received :" + message.getContent());
             currentUser.receiveMessage(message.getSenderPhoneNumber(), message);
-            messagesObservableList.add(message);
+
+            if (message.getSenderPhoneNumber().equals(selectedOnlineContactModel.getContactPhoneNumber()))
+                messagesObservableList.add(message);
 
         }
     }

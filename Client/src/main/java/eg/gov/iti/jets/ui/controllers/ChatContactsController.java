@@ -30,7 +30,6 @@ public class ChatContactsController implements Initializable {
                         modelsFactory.setSelectedOnlineContactModel(t1);
                         modelsFactory.updateMessagesObservableList(t1.getContactPhoneNumber());
 
-
             System.out.println(t1.nameProperty().get()+ " was clicked");
 
                 }

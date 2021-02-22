@@ -126,7 +126,7 @@ public class ChatPageController implements Initializable {
                 e.printStackTrace();
             }
             messagesObservableList.add(newMessage);
-            modelsFactory.getCurrentUser().receiveMessage(newMessage.getSenderPhoneNumber(),newMessage);
+            modelsFactory.getCurrentUser().receiveMessage(selectedOnlineContact.getContactPhoneNumber(),newMessage);
             chatListView.scrollTo(chatListView.getItems().size() - 1);
             // Use service to send it over RMI
             messgeTextField.clear();
