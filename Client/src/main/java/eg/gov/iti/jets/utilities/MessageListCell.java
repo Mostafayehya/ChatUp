@@ -37,7 +37,7 @@ public class MessageListCell extends ListCell<Message> {
         } else {
             //Handle File message
             if (message instanceof FileMessage) {
-                System.out.println("File message");
+                System.out.println("File added"+((FileMessage) message).getFile().getFilename());
                 FileMessageController fileMessageController = new FileMessageController((FileMessage) message);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FileMessage.fxml"));
                 fxmlLoader.setController(fileMessageController);
@@ -47,9 +47,8 @@ public class MessageListCell extends ListCell<Message> {
                     e.printStackTrace();
                 }
             } else {
-
                 // Client Message
-
+                System.out.println("text message"+message.getContent());
                 if (currentUser.getPhoneNumber().equals(message.getSenderPhoneNumber())) {
                     messageItemController.setSenderName(currentUser.getName());
                     messageItemController.setMessageContent(message.getContent());

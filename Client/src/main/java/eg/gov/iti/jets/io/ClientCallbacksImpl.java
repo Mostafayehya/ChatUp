@@ -18,12 +18,10 @@ public class ClientCallbacksImpl extends UnicastRemoteObject implements ClientCa
     @Override
     public void receiveMessage(Message message) throws RemoteException {
         System.out.println("Message recevied back from server and should be deliverd to" + message.getReceiverPhoneNumber());
-        ModelsFactory.getInstance().receiveMessage(message);
-    }
+        Platform.runLater(()->{
+            ModelsFactory.getInstance().receiveMessage(message);
+        });
 
-    @Override
-    public void receiveFileMessage(FileMessage fileMessage) throws RemoteException {
-        ModelsFactory.getInstance().receiveMessage(fileMessage);
     }
 
     @Override

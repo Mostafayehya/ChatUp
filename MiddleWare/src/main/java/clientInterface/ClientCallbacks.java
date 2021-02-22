@@ -10,8 +10,6 @@ public interface ClientCallbacks extends Remote {
     //interface for functions in client that can be called from server
     void receiveMessage(Message message) throws RemoteException;
 
-    void receiveFileMessage(FileMessage fileMessage) throws RemoteException;
-
     void closeApp() throws RemoteException;
 
 }

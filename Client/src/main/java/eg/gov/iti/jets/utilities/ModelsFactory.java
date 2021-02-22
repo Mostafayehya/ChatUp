@@ -94,6 +94,10 @@ public class ModelsFactory {
         if (message != null) {
             System.out.println("Message received :" + message.getContent());
             messagesObservableList.add(message);
+            for (int i=0;i<messagesObservableList.size();i++){
+                System.out.println("Message "+i);
+                System.out.println(messagesObservableList.get(i).getContent());
+            }
         }
 
     }

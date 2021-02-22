@@ -26,10 +26,4 @@ public class SingleChatServiceImpl extends UnicastRemoteObject implements Single
             client.receiveMessage(message);
     }
 
-    @Override
-    public void sendFileMessage(FileMessage fileMessage) throws RemoteException {
-        ClientCallbacks client = onlineUsers.get(fileMessage.getReceiverPhoneNumber());
-        if (client != null)
-            client.receiveMessage(fileMessage);
-    }
 }
