@@ -19,16 +19,7 @@ public class ContactModel {
     ObjectProperty<Mode> mode = new SimpleObjectProperty<>();
     ObjectProperty<Image> contactImage = new SimpleObjectProperty<>();
 
-    public ContactModel(String contactPhoneNumber,String name,String bio,String email,String image,Status status,Mode mode){
-        //this.userPhoneNumber.setValue(userPhoneNumber);
-        this.contactPhoneNumber.setValue(contactPhoneNumber);
-        this.name.setValue(name);
-        this.bio.setValue(bio);
-        this.email.setValue(email);
-        this.image.setValue(image);
-        this.status.setValue(status);
-        this.mode.setValue(mode);
-    }
+
 
     public ContactModel(String contactPhoneNumber, String name, String bio, String email, Status status, Mode mode, Image image){
         this.contactPhoneNumber.setValue(contactPhoneNumber);
@@ -71,6 +62,8 @@ public class ContactModel {
     public StringProperty nameProperty() {
         return name;
     }
+
+
 
     public void setName(String name) {
         this.name.set(name);
@@ -144,6 +137,7 @@ public class ContactModel {
         this.status.set(cm.getStatus());
         this.mode.set(cm.getMode());
         this.contactPhoneNumber.set(cm.getContactPhoneNumber());
+        this.contactImage.set(cm.getContactImage());
     }
 
 

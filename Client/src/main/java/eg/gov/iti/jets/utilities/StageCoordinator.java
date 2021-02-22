@@ -1,7 +1,8 @@
 package eg.gov.iti.jets.utilities;
 
-import javafx.animation.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -9,6 +10,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
+
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,10 +24,12 @@ public class StageCoordinator {
     Popup addNewContactPopup;
     Popup changUserPassPopup;
     private static StageCoordinator stageCoordinator;
+    ModelsFactory modelsFactory;
     private final Map<String, SceneData> scenes = new HashMap<>();
 
     private StageCoordinator() {
         stage = null;
+        modelsFactory = ModelsFactory.getInstance();
     }
 
     public void setStage(Stage stage) {
@@ -101,26 +107,36 @@ public class StageCoordinator {
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
         }
 
-        if (!scenes.containsKey("chat")) {
-            try {
-                System.out.println("Created New Scene");
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ChatPage.fxml"));
-                Parent chatView = fxmlLoader.load();
-                Scene chatScene = new Scene(chatView);
-                SceneData loginSceneData = new SceneData(fxmlLoader, chatView, chatScene);
-                scenes.put("chat", loginSceneData);
-                stage.setScene(chatScene);
-            } catch (IOException e) {
-                System.out.println("IO Exception: Couldn't load 'Chat Page' FXML file");
-                e.printStackTrace();
+        if(!modelsFactory.getCurrentUser().getContacts().isEmpty()) {
+            if (!scenes.containsKey("chat")) {
+                try {
+                    System.out.println("Created New Scene");
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ChatPage.fxml"));
+                    Parent chatView = fxmlLoader.load();
+                    Scene chatScene = new Scene(chatView);
+                    SceneData loginSceneData = new SceneData(fxmlLoader, chatView, chatScene);
+                    scenes.put("chat", loginSceneData);
+                    stage.setScene(chatScene);
+                } catch (IOException e) {
+                    System.out.println("IO Exception: Couldn't load 'Chat Page' FXML file");
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Loaded Existing Scene");
+                SceneData loginSceneData = scenes.get("chat");
+                Scene loginScene = loginSceneData.getScene();
+                stage.setScene(loginScene);
             }
-        } else {
-            System.out.println("Loaded Existing Scene");
-            SceneData loginSceneData = scenes.get("chat");
-            Scene loginScene = loginSceneData.getScene();
-            stage.setScene(loginScene);
-        }
+        }else { // user has no online contacts yet
+            Notifications.create()
+                    .title("Chats")
+                    .text("Please add contact to have access to chat service")
+                    .darkStyle()
+                    .position(Pos.CENTER)
+                    .hideAfter(Duration.seconds(1))
+                    .showWarning();
 
+        }
     }
 
     public void gotoContactsListPage(){

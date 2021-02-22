@@ -1,14 +1,15 @@
 package eg.gov.iti.jets.ui.models;
 
-import domains.Gender;
-import domains.Mode;
-import domains.Status;
-import domains.User;
+import domains.*;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class UserModel {
@@ -25,6 +26,8 @@ public class UserModel {
     ObjectProperty<Mode> mode = new SimpleObjectProperty<>();
     ObservableList<ContactModel> contacts;
     ObjectProperty<Image> userImage = new SimpleObjectProperty<>();
+    Map<String, ObservableList<Message>> messageMap = new HashMap<>();
+
 
     public UserModel(String phoneNumber, String name, String email, String password, Gender gender, String country, LocalDate dateOfBirth, String bio, Status status, Mode mode, Image image) {
         this.phoneNumber.setValue(phoneNumber);
@@ -38,12 +41,15 @@ public class UserModel {
         this.status.setValue(status);
         this.mode.setValue(mode);
         this.userImage.setValue(image);
+
+
     }
 
 
-    public UserModel(){
+    public UserModel() {
 
     }
+
     public UserModel(String phoneNumber, String name, String email) {
         this.phoneNumber.setValue(phoneNumber);
         this.name.setValue(name);
@@ -72,9 +78,9 @@ public class UserModel {
         this.mode.setValue(mode);
     }
 
-    public static User toUser(UserModel user){
-        return new User(user.getPhoneNumber(),user.getName(),user.getEmail(),user.getPassword(),user.getPicture()
-                ,user.getGender(),user.getCountry(),user.getDateOfBirth(),user.getBio(),user.getStatus(),user.getMode());
+    public static User toUser(UserModel user) {
+        return new User(user.getPhoneNumber(), user.getName(), user.getEmail(), user.getPassword(), user.getPicture()
+                , user.getGender(), user.getCountry(), user.getDateOfBirth(), user.getBio(), user.getStatus(), user.getMode());
     }
 
     public String getPhoneNumber() {
@@ -219,5 +225,31 @@ public class UserModel {
 
     public void setUserImage(Image userImage) {
         this.userImage.set(userImage);
+    }
+
+
+    public void receiveMessage(String from, Message message) {
+        var messageList = messageMap.get(from);
+        if (messageList == null) {
+            messageMap.put(from, FXCollections.observableArrayList());
+        }
+
+        messageMap.get(from).add(message);
+
+    }
+
+    public ObservableList<Message> getObservableMessageListForContact(String contact) {
+        return messageMap.get(contact);
+    }
+
+    public void addNewChatList(ContactModel contactModel) {
+        messageMap.put(contactModel.getContactPhoneNumber(), FXCollections.observableArrayList());
+
+    }
+
+    public void setMessagesList(List<ContactModel> contacts) {
+        for (ContactModel c : contacts) {
+            messageMap.put(c.contactPhoneNumber.get(), FXCollections.observableArrayList());
+        }
     }
 }
