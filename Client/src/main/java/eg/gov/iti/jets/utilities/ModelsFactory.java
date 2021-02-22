@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.rmi.RemoteException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,11 +29,7 @@ public class ModelsFactory {
     ContactModel selectedOnlineContactModel;
 
 
-
     // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact
-
-    private ModelsFactory() {
-    }
 
     public synchronized static ModelsFactory getInstance() {
         if (modelsFactory == null)
@@ -66,8 +63,11 @@ public class ModelsFactory {
         }
         if (currentUser.getContacts() == null || contacts.size() == 0) {
             currentUser.setContacts(FXCollections.observableList(contactListToContactModelList(contacts)));
+            currentUser.setMessagesList(contactListToContactModelList(contacts));
         } else { // todo This looks really ugly, use temp references to simplify this
             currentUser.getContacts().add(contactListToContactModelList(contacts).get(contacts.size() - 1));
+            // Todo this is a result of the horrible handling of adding Contacts, refactor to push based mechanism instead of pulling.
+            currentUser.addNewChatList(contactListToContactModelList(contacts).get(contacts.size() - 1));
         }
 
         getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
@@ -83,11 +83,15 @@ public class ModelsFactory {
         }
     }
 
-    public ObservableList<Message> getMessagesObservableList() {
+    public ObservableList<Message> updateMessagesObservableList(String contactPhoneNumber) {
         if (messagesObservableList == null) {
             messagesObservableList = FXCollections.observableArrayList();
+            messagesObservableList.setAll(currentUser.getObservableMessageListForContact(contactPhoneNumber));
             return messagesObservableList;
         }
+
+        messagesObservableList.setAll(currentUser.getObservableMessageListForContact(contactPhoneNumber));
+
         return messagesObservableList;
     }
 
@@ -95,6 +99,7 @@ public class ModelsFactory {
 
         if (message != null) {
             System.out.println("Message received :" + message.getContent());
+            currentUser.receiveMessage(message.getSenderPhoneNumber(), message);
             messagesObservableList.add(message);
 
         }

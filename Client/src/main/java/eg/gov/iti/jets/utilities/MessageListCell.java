@@ -3,6 +3,7 @@ package eg.gov.iti.jets.utilities;
 import domains.Message;
 import eg.gov.iti.jets.ui.controllers.MessageItemController;
 import eg.gov.iti.jets.ui.models.UserModel;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
@@ -12,11 +13,11 @@ import java.io.IOException;
 
 public class MessageListCell extends ListCell<Message> {
 
-    private  Node graphic;
+    private Node graphic;
     private final UserModel currentUser = ModelsFactory.getInstance().getCurrentUser();
     private final MessageItemController messageItemController;
 
-    public MessageListCell()   {
+    public MessageListCell() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ChatMessage.fxml"));
         try {
             graphic = loader.load();
@@ -36,14 +37,14 @@ public class MessageListCell extends ListCell<Message> {
 
             // Client Message
 
-            if (currentUser.getPhoneNumber().equals(message.getSenderPhoneNumber())){
+            if (currentUser.getPhoneNumber().equals(message.getSenderPhoneNumber())) {
                 messageItemController.setSenderName(currentUser.getName());
                 messageItemController.setMessageContent(message.getContent());
                 messageItemController.setTimeText(message.getTime());
                 messageItemController.setMessageOrientation(NodeOrientation.LEFT_TO_RIGHT);
                 messageItemController.setSenderCircleImage(currentUser.getUserImage());
                 //received Message
-            }else{
+            } else {
                 messageItemController.setSenderName(message.getSenderName());
                 messageItemController.setMessageContent(message.getContent());
                 messageItemController.setTimeText(message.getTime());
@@ -55,17 +56,18 @@ public class MessageListCell extends ListCell<Message> {
                 );*/
 
                 ModelsFactory.getInstance().currentUser.getContacts().forEach(contactModel -> {
-                    if (contactModel.getContactPhoneNumber().equals(message.getSenderPhoneNumber())){
+                    if (contactModel.getContactPhoneNumber().equals(message.getSenderPhoneNumber())) {
                         messageItemController.setSenderCircleImage(contactModel.getContactImage());
                     }
                 });
 
             }
 
+            Platform.runLater(() -> {
+                setText(null);
+                setGraphic(graphic);
 
-
-            setText(null);
-            setGraphic(graphic);
+            });
 
         }
 

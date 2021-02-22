@@ -6,7 +6,6 @@ import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.utilities.MessageListCell;
 import eg.gov.iti.jets.utilities.ModelsFactory;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,8 +16,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -103,7 +100,7 @@ public class ChatPageController implements Initializable {
 
         contactImage.imageProperty().bindBidirectional(selectedOnlineContact.contactImageProperty());
 
-        messagesObservableList = modelsFactory.getMessagesObservableList();
+        messagesObservableList = modelsFactory.updateMessagesObservableList(selectedOnlineContact.getContactPhoneNumber());
         chatListView.setItems(messagesObservableList);
 
         chatListView.setCellFactory(messageListView -> new MessageListCell());
@@ -129,6 +126,7 @@ public class ChatPageController implements Initializable {
                 e.printStackTrace();
             }
             messagesObservableList.add(newMessage);
+            modelsFactory.getCurrentUser().receiveMessage(newMessage.getSenderPhoneNumber(),newMessage);
             chatListView.scrollTo(chatListView.getItems().size() - 1);
             // Use service to send it over RMI
             messgeTextField.clear();
