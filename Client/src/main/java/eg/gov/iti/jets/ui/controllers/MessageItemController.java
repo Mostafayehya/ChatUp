@@ -41,7 +41,7 @@ public class MessageItemController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-        final Rectangle clip = new Rectangle(50, 50);
+        final Rectangle clip = new Rectangle(60, 60);
         clip.setArcWidth(180);
         clip.setArcHeight(180);
         senderCircleImage.setClip(clip);

@@ -12,6 +12,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Map;
 
 import static eg.gov.iti.jets.utilities.DomainModelConverter.contactListToContactModelList;
 import static eg.gov.iti.jets.utilities.DomainModelConverter.getContactModel;
@@ -25,6 +26,7 @@ public class ModelsFactory {
     ObservableList<Message> messagesObservableList;
 
     ContactModel selectedOnlineContactModel;
+
 
 
     // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact

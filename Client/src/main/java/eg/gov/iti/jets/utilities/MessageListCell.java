@@ -44,15 +44,21 @@ public class MessageListCell extends ListCell<Message> {
                 messageItemController.setSenderCircleImage(currentUser.getUserImage());
                 //received Message
             }else{
-                messageItemController.setSenderName(message.getSenderPhoneNumber());
+                messageItemController.setSenderName(message.getSenderName());
                 messageItemController.setMessageContent(message.getContent());
                 messageItemController.setTimeText(message.getTime());
                 messageItemController.setMessageOrientation(NodeOrientation.RIGHT_TO_LEFT);
 
                 // handling sender image
-                messageItemController.setSenderCircleImage(
+           /*     messageItemController.setSenderCircleImage(
                         ModelsFactory.getInstance().selectedOnlineContactModel.getContactImage()
-                );
+                );*/
+
+                ModelsFactory.getInstance().currentUser.getContacts().forEach(contactModel -> {
+                    if (contactModel.getContactPhoneNumber().equals(message.getSenderPhoneNumber())){
+                        messageItemController.setSenderCircleImage(contactModel.getContactImage());
+                    }
+                });
 
             }
 
