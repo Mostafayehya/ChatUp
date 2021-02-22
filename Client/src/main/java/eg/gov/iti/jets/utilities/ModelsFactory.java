@@ -4,9 +4,13 @@ import domains.*;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.ui.models.UserModel;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -98,7 +102,7 @@ public class ModelsFactory {
     public void receiveMessage(Message message) {
 
         if (message != null) {
-            System.out.println("Message received :" + message.getContent());
+
             currentUser.receiveMessage(message.getSenderPhoneNumber(), message);
 
             if (message.getSenderPhoneNumber().equals(selectedOnlineContactModel.getContactPhoneNumber()))

@@ -6,6 +6,7 @@ import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.utilities.MessageListCell;
 import eg.gov.iti.jets.utilities.ModelsFactory;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -101,6 +102,8 @@ public class ChatPageController implements Initializable {
         contactImage.imageProperty().bindBidirectional(selectedOnlineContact.contactImageProperty());
 
         messagesObservableList = modelsFactory.updateMessagesObservableList(selectedOnlineContact.getContactPhoneNumber());
+
+
         chatListView.setItems(messagesObservableList);
 
         chatListView.setCellFactory(messageListView -> new MessageListCell());

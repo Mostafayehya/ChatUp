@@ -10,10 +10,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.controlsfx.control.NotificationPane;
 import org.controlsfx.control.Notifications;
 
-import javax.swing.*;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
