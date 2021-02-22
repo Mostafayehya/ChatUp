@@ -73,7 +73,7 @@ public class UProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userModel=modelsFactory.getInstance().getCurrentUser();
-        System.out.println("user "+userModel.getName());
+
         bind();
         userImage.setFill(new ImagePattern(userModel.getUserImage()));
         updateService= RMIManager.getUpdateService();
@@ -112,9 +112,6 @@ public class UProfileController implements Initializable {
 
             try {
 
-                String s=userModel.getBio()+" "+userModel.getEmail()+" "+userModel.getPhoneNumber()+userModel.getCountry();
-                System.out.println(s);
-                System.out.println(updateService);
                updateService.EditUserData(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userModel.getPicture(),userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
 
             } catch (RemoteException ex) {

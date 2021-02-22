@@ -45,15 +45,15 @@ public class LoginPageController implements Initializable {
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
         userProperties = new UserProperties();
-        try {
-           phoneNum= userProperties.ReadUserPhone();
-           if(!phoneNum.equals(null))
-           {
-               phoneTextField.setText(phoneNum);
-           }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//           phoneNum= userProperties.ReadUserPhone();
+//           if(!phoneNum.equals(null))
+//           {
+//               phoneTextField.setText(phoneNum);
+//           }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         phoneTextField.addEventFilter(KeyEvent.KEY_TYPED, (e) -> {
             if (!new Validation().validatePhoneNumber(e.getCharacter()) || phoneTextField.getText().length() > 11) {
