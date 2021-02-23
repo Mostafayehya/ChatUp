@@ -8,6 +8,8 @@ public class Message implements Serializable {
     String content;
     String receiverPhoneNumber;
     String senderPhoneNumber;
+    String senderName;
+    String receiverName;
 
 
 
@@ -24,6 +26,15 @@ public class Message implements Serializable {
     public Message(String time, String content) {
         this.time = time;
         this.content = content;
+    }
+
+    public Message(String time, String content, String receiverPhoneNumber, String senderPhoneNumber, String senderName, String receiverName) {
+        this.time = time;
+        this.content = content;
+        this.receiverPhoneNumber = receiverPhoneNumber;
+        this.senderPhoneNumber = senderPhoneNumber;
+        this.senderName = senderName;
+        this.receiverName = receiverName;
     }
 
     public String getTime() {
@@ -58,5 +69,19 @@ public class Message implements Serializable {
         this.receiverPhoneNumber = receiverPhoneNumber;
     }
 
+    public String getSenderName() {
+        return senderName;
+    }
 
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
 }

@@ -62,7 +62,7 @@ public class NavigationbarControlller implements Initializable {
 
     @FXML
     void switchToUserProfilePage(MouseEvent event) {
-
+        stageCoordinator.goToUserProfilePage();
     }
 
     @FXML

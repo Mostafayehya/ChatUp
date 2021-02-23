@@ -19,11 +19,16 @@ public class ContactsListPageController implements Initializable {
     @FXML
     ListView<ContactModel> contactsListView;
     ObservableList<ContactModel> contactObservableList;
+    ModelsFactory modelsFactory = ModelsFactory.getInstance();
     @FXML
     Button addNewContact;
-
+    ContactModel contactModel;
+    StageCoordinator stageCoordinator;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        stageCoordinator= StageCoordinator.getInstance();
+        modelsFactory = ModelsFactory.getInstance();
+        contactObservableList = modelsFactory.getCurrentUser().getContacts();
         contactObservableList = ModelsFactory.getInstance().getCurrentUser().getContacts();
         contactsListView.setItems(contactObservableList);
         contactsListView.setCellFactory(contactListView -> new ContactListCell());
@@ -32,5 +37,14 @@ public class ContactsListPageController implements Initializable {
             StageCoordinator stageCoordinator = StageCoordinator.getInstance();
             stageCoordinator.getAddNewContactPopUp();
         });
+
+    }
+    @FXML
+    void listViewSelectedContact(){
+
+        contactModel = contactsListView.getSelectionModel().getSelectedItem();
+        modelsFactory.setSelectedOnlineContactModel(contactModel);
+        //System.out.println(modelsFactory.getCurrentSelectedOnlineContact().getName());
+        stageCoordinator.goToContactProfilePage(contactModel);
     }
 }

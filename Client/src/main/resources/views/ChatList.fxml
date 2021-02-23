@@ -5,7 +5,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <BorderPane prefHeight="626.0" prefWidth="111.0" BorderPane.alignment="CENTER" />
+      <fx:include source="NavigationBar.fxml" />
    </left>
    <center>
       <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
