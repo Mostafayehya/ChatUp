@@ -8,13 +8,19 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import eg.gov.iti.jets.utilities.ModelsFactory;
+
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import domains.Mode;
 
 
 public class contactProfileController implements Initializable {
@@ -29,8 +35,14 @@ public class contactProfileController implements Initializable {
     private Circle photo;
     @FXML
     private Circle mode;
+    @FXML
+    private ListView extranumber;
+    @FXML
+    private TextField firstname;
+    @FXML
+    private TextField email;
 
-    ModelsFactory modelsFactory= ModelsFactory.getInstance();
+    ModelsFactory modelsFactory = ModelsFactory.getInstance();
 
     ContactModel contactModel = new ContactModel();
 
@@ -39,18 +51,29 @@ public class contactProfileController implements Initializable {
 
         contactModel = modelsFactory.getCurrentSelectedOnlineContact();
 
-        name.setText(contactModel.getName()) ;
+        name.setText(contactModel.getName());
 
         Bio.setText(contactModel.getBio());
-///////////////////////////////////////////////////////////////////////////////////////////
-        Image image = null;
+
+        firstname.setText(contactModel.getName());
+
+        email.setText(contactModel.getEmail());
+
+        Image image;
         image = contactModel.getContactImage();
-        photo.setFill(new ImagePattern(image));
-        photo.setFill(new ImagePattern(contactModel.getContactImage()));
-       if(contactModel.getMode().equals(" BUSY") ){mode.setFill(Color.RED);}
-          else if(contactModel.getMode().equals(" AVAILABLE")){mode.setFill(Color.GREEN);}
-            else{mode.setFill(Color.WHITE);}
-///////////////////////////////////////////////////////////////////////////////////////////
+        if (image != null) {
+
+            photo.setFill(new ImagePattern(image));
+            photo.setFill(new ImagePattern(contactModel.getContactImage()));
+        }
+        System.out.println(image + "this is the image");
+        if (contactModel.getMode().name().equalsIgnoreCase("BUSY")) {
+            mode.setFill(Color.RED);
+        } else if (contactModel.getMode().name().equalsIgnoreCase("AVAILABLE")) {
+            mode.setFill(Color.GREEN);
+        } else {
+            mode.setFill(Color.WHITE);
+        }
 
     }
 
