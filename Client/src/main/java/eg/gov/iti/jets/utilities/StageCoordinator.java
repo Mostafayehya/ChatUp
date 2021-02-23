@@ -1,5 +1,6 @@
 package eg.gov.iti.jets.utilities;
 
+import eg.gov.iti.jets.ui.models.ContactModel;
 import javafx.animation.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,8 +43,8 @@ public class StageCoordinator {
         return stageCoordinator;
     }
 
-    public void goToLoginPage(){
-        if (stage ==null){
+    public void goToLoginPage() {
+        if (stage == null) {
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
         }
 
@@ -52,7 +54,7 @@ public class StageCoordinator {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/LoginPage.fxml"));
                 Parent loginView = fxmlLoader.load();
                 parentContainer = new StackPane(loginView);
-                Scene loginScene = new Scene(parentContainer,759.0,626.0);
+                Scene loginScene = new Scene(parentContainer, 759.0, 626.0);
                 SceneData loginSceneData = new SceneData(fxmlLoader, parentContainer, loginScene);
                 scenes.put("login", loginSceneData);
                 stage.setScene(loginScene);
@@ -68,9 +70,9 @@ public class StageCoordinator {
         }
     }
 
-    public void goToSignupPage(){
+    public void goToSignupPage() {
 
-        if (stage ==null){
+        if (stage == null) {
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
         }
 
@@ -97,7 +99,7 @@ public class StageCoordinator {
 
     public void switchToChatScreen() {
 
-        if (stage ==null){
+        if (stage == null) {
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
         }
 
@@ -123,10 +125,10 @@ public class StageCoordinator {
 
     }
 
-    public void gotoContactsListPage(){
+    public void gotoContactsListPage() {
 
 
-        if (stage ==null){
+        if (stage == null) {
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
         }
 
@@ -150,7 +152,8 @@ public class StageCoordinator {
             stage.setScene(contactsScene);
         }
     }
-    public void getAddNewContactPopUp(){
+
+    public void getAddNewContactPopUp() {
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("/views/AddNewContactPopup.fxml"));
@@ -186,42 +189,47 @@ public class StageCoordinator {
             e.printStackTrace();
         }
     }
-        public void hideNewContactPopup()
-        {
-            if (addNewContactPopup != null) {
-                addNewContactPopup.hide();
-            }
+
+    public void hideNewContactPopup() {
+        if (addNewContactPopup != null) {
+            addNewContactPopup.hide();
         }
-    public void hidePasswordPopup()
-    {
+    }
+
+    public void hidePasswordPopup() {
         if (changUserPassPopup != null) {
             changUserPassPopup.hide();
         }
     }
-    public void goToContactProfilePage() {
+
+    public void goToContactProfilePage(ContactModel c) {
+String name= c.getName();
+String phone= c.getContactPhoneNumber();
+String email= c.getEmail();
+
+        if (stage == null) {
+            throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
+        }
 
 
             try {
                 System.out.println("Created New Scene");
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/contactProfile.fxml"));
-                Parent contactprofileview = fxmlLoader.load();
-                parentContainer = new StackPane(contactprofileview);
-                Scene contactprofilescene = new Scene(parentContainer,759.0,626.0);
-                SceneData contactprofileSceneData = new SceneData(fxmlLoader, parentContainer, contactprofilescene);
-                scenes.put("contactProfile", contactprofileSceneData);
-                stage.setScene(contactprofilescene);
+                Parent chatView = fxmlLoader.load();
+                Scene chatScene = new Scene(chatView);
+                SceneData loginSceneData = new SceneData(fxmlLoader, chatView, chatScene);
+                scenes.put("chat", loginSceneData);
+                stage.setScene(chatScene);
             } catch (IOException e) {
-                System.out.println("IO Exception: Couldn't load 'contactProfile Page' FXML file");
+                System.out.println("IO Exception: Couldn't load 'Chat Page' FXML file");
                 e.printStackTrace();
             }
-            System.out.println("Loaded Existing Scene");
-            SceneData contactprofileSceneData = scenes.get("contactProfile");
-            Scene contactprofileScene = contactprofileSceneData.getScene();
-            stage.setScene(contactprofileScene);
-        }
+System.out.println("from the stage coordenator");
 
-    public void closeApp(){
-        if(stage==null){
+    }
+
+    public void closeApp() {
+        if (stage == null) {
             throw new RuntimeException("Stage must be initialized before trying to close");
         }
         stage.close();
