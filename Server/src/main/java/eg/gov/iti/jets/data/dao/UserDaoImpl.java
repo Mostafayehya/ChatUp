@@ -62,6 +62,21 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public int updateUserPhoto(User user) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set picture = ? where phoneNumber = ?");
+            preparedStatement.setString(1,user.getUserPhotoPath());
+            preparedStatement.setString(2,user.getPhoneNumber());
+            int result =  preparedStatement.executeUpdate();
+            preparedStatement.close();
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
     public User getUserByPhoneAndPassword(String phone, String password) {
         User user = null;
         try {
@@ -81,6 +96,8 @@ public class UserDaoImpl implements UserDao {
                 user.setDateOfBirth(today);
                 user.setBio(rs.getString(9));
                 user.setStatus(Status.valueOf(rs.getObject(10).toString().toUpperCase()));
+                System.out.println(Mode.valueOf(rs.getObject(11).toString().toUpperCase()));
+                System.out.println(rs.getObject(11).toString());
                 user.setMode(Mode.valueOf(rs.getObject(11).toString().toUpperCase()));
             }
             statement.close();
@@ -194,6 +211,8 @@ public class UserDaoImpl implements UserDao {
         }
         return -1;
     }
+
+
 
 
 }

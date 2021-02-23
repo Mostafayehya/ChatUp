@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -60,22 +61,37 @@ public class UProfileController implements Initializable {
     @FXML
     Circle userImage;
     @FXML
+    Circle userMode;
+    @FXML
     Button choosePhoto;
     UpdateService updateService;
     Validation validation;
     UserModel userModel;
     ModelsFactory modelsFactory;
     FileDomain userImageFile = null;
-
     public UProfileController(){validation = new Validation();
 
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userModel=modelsFactory.getInstance().getCurrentUser();
+        System.out.println(userModel.getMode().name());
+        if(userModel.getMode().name().equals("AVAILABLE")) {
+            userMode.setFill(Color.GREEN);
+        }
+        else  if(userModel.getMode().name().equals("BUSY")) {
+            userMode.setFill(Color.RED);
+        }
+        else {
+            userMode.setFill(Color.WHITE);
+
+        }
+
 
         bind();
         userImage.setFill(new ImagePattern(userModel.getUserImage()));
+         userName.setText(userModel.getName());
+
         updateService= RMIManager.getUpdateService();
         emailTextField.focusedProperty().addListener(((observable, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
@@ -87,6 +103,22 @@ public class UProfileController implements Initializable {
             }
         }));
 
+        choosePhoto.addEventHandler(ActionEvent.ACTION,(e)->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("image files","*.png"));
+            File userPhoto = fileChooser.showOpenDialog(choosePhoto.getScene().getWindow());
+            String extension = FilesUtilities.getFileExtension(userPhoto);
+            userImageFile = new FileDomain();
+            userImageFile.setFileBytes(FilesUtilities.convertFileToByteArray(userPhoto,extension));
+            userImageFile.setFileExtension(extension);
+            userImageFile.setFilename(phoneTextField.getText());
+            try {
+                userImage.setFill(new ImagePattern(new Image(new FileInputStream(userPhoto.getAbsoluteFile()))));
+                updateService.EditUserPhoto(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userImageFile,userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
+            } catch (FileNotFoundException | RemoteException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+        });
 
         editBtn.addEventHandler(ActionEvent.ACTION, (e) -> {
         nameTextField.setEditable(true);
@@ -111,7 +143,6 @@ public class UProfileController implements Initializable {
             }
 
             try {
-
                updateService.EditUserData(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userModel.getPicture(),userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
 
             } catch (RemoteException ex) {
@@ -127,6 +158,10 @@ public class UProfileController implements Initializable {
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }
+            availableBtn.setDisable(true);
+            busyBtn.setDisable(false);
+            awayBtn.setDisable(false);
+            userMode.setFill(Color.GREEN);
         });
         busyBtn.addEventHandler(ActionEvent.ACTION, (e) -> {
             userModel.setMode(Mode.BUSY);
@@ -135,6 +170,10 @@ public class UProfileController implements Initializable {
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }
+            availableBtn.setDisable(false);
+            busyBtn.setDisable(true);
+            awayBtn.setDisable(false);
+            userMode.setFill(Color.RED);
         });
         awayBtn.addEventHandler(ActionEvent.ACTION, (e) -> {
             userModel.setMode(Mode.AWAY);
@@ -143,26 +182,14 @@ public class UProfileController implements Initializable {
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }
+            availableBtn.setDisable(false);
+            busyBtn.setDisable(false);
+            awayBtn.setDisable(true);
+            userMode.setFill(Color.WHITE);
         });
         setting.addEventHandler(ActionEvent.ACTION,(e)->{
             StageCoordinator stageCoordinator = StageCoordinator.getInstance();
             stageCoordinator.ChangeUserPassword();
-        });
-        choosePhoto.addEventHandler(ActionEvent.ACTION,(e)->{
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("image files","*.png"));
-            File userPhoto = fileChooser.showOpenDialog(choosePhoto.getScene().getWindow());
-            String extension = FilesUtilities.getFileExtension(userPhoto);
-            userImageFile = new FileDomain();
-            userImageFile.setFileBytes(FilesUtilities.convertFileToByteArray(userPhoto,extension));
-            userImageFile.setFileExtension(extension);
-            userImageFile.setFilename(phoneTextField.getText());
-            try {
-                userImage.setFill(new ImagePattern(new Image(new FileInputStream(userPhoto.getAbsoluteFile()))));
-                updateService.EditUserPhoto(new User(userModel.getPhoneNumber(),userModel.getName(),userModel.getEmail(),userModel.getPassword(),userImageFile,userModel.getGender(),userModel.getCountry(),userModel.getDateOfBirth(),userModel.getBio(),userModel.getStatus(),userModel.getMode()));
-            } catch (FileNotFoundException | RemoteException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
         });
 
     }
@@ -172,7 +199,6 @@ public class UProfileController implements Initializable {
         countryTextField.textProperty().bindBidirectional(userModel.countryProperty());
         emailTextField.textProperty().bindBidirectional(userModel.emailProperty());
         bioTextField.textProperty().bindBidirectional(userModel.bioProperty());
-
 
         }
 }

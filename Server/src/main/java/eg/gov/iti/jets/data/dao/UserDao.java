@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 public interface UserDao {
     int insertUser(User user);
     User getUserByPhone(String phone);
+    int updateUserPhoto(User user);
     int updateUserData(User user);
     int updateUserMode(User user);
     int updateUserPass(User user);

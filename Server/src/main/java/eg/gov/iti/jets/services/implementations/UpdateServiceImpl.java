@@ -9,10 +9,9 @@ import services.UpdateService;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -43,20 +42,24 @@ public class UpdateServiceImpl extends UnicastRemoteObject implements UpdateServ
         user.setUserPhotoPath(saveUserprofilePhoto(user));
         return userDao.updateUserPhoto(user);
     }
+
     public String saveUserprofilePhoto(User user) {
         FileDomain userProfilePhoto = user.getUserPhoto();
-        String photoPath = null;
+        String photoPath;
         if (userProfilePhoto != null) {
-            Path target = Paths.get(getClass().getResource("/UserPhotos/"+userProfilePhoto.getFilename() + "." + userProfilePhoto.getFileExtension()) .getPath());
+            File file = new File("src/main/resources/UserPhotos/"+userProfilePhoto.getFilename() + "." + userProfilePhoto.getFileExtension());
 
             InputStream is = new ByteArrayInputStream(userProfilePhoto.getFileBytes());
             try {
                 BufferedImage bufferedImage = ImageIO.read(is);
-                ImageIO.write(bufferedImage, userProfilePhoto.getFileExtension(), target.toFile());
+                ImageIO.write(bufferedImage, userProfilePhoto.getFileExtension(), file);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            photoPath = target.toFile().getPath();
+            photoPath = file.getPath();
+        } else {
+            //default photo
+            photoPath = "src/main/resources/UserPhotos/user.jpg";
         }
         return photoPath;
     }

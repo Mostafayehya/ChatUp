@@ -61,7 +61,7 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
         FileDomain userProfilePhoto = user.getUserPhoto();
         String photoPath;
         if (userProfilePhoto != null) {
-            File file = new File(getClass().getResource("/UserPhotos/").getPath()+userProfilePhoto.getFilename() + "." + userProfilePhoto.getFileExtension());
+            File file = new File("src/main/resources/UserPhotos/"+userProfilePhoto.getFilename() + "." + userProfilePhoto.getFileExtension());
 
             InputStream is = new ByteArrayInputStream(userProfilePhoto.getFileBytes());
             try {

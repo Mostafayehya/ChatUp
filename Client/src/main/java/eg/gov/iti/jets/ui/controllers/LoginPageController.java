@@ -16,6 +16,7 @@ import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,7 +37,7 @@ public class LoginPageController implements Initializable {
     AuthenticationService authenticationService;
     ModelsFactory modelsFactory;
     UserProperties userProperties;
-    String phoneNum;
+    String [] data;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -45,16 +46,21 @@ public class LoginPageController implements Initializable {
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
         userProperties = new UserProperties();
-//        try {
-//           phoneNum= userProperties.ReadUserPhone();
-//           if(!phoneNum.equals(null))
-//           {
-//               phoneTextField.setText(phoneNum);
-//           }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        data=new String[2];
 
+        File file=new File("userProperties.txt");
+        if(file.exists()) {
+            try {
+                data = userProperties.ReadUserData();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            phoneTextField.setText(data[0]);
+            if (data.length == 2) {
+                passwordTextField.setText(data[1]);
+            }
+        }
         phoneTextField.addEventFilter(KeyEvent.KEY_TYPED, (e) -> {
             if (!new Validation().validatePhoneNumber(e.getCharacter()) || phoneTextField.getText().length() > 11) {
                 e.consume();

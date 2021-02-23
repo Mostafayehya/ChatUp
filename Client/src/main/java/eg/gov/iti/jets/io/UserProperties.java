@@ -29,20 +29,13 @@ public class UserProperties {
         fw.close();
         fr.close();
     }
-    public String ReadUserPhone() throws IOException {
-        FileReader fr = null;
-        try {
-             fr = new FileReader("userProperties.txt");
-        }
-        catch (FileNotFoundException e){
-            System.out.println("not found");
-            return null;
-        }
-        char [] a = new char[50];
-        fr.read(a);
-        String string = new String(a);
-       return string;
-    }
+//    public String ReadUserPhone() throws IOException {
+//        FileReader fr = new FileReader("userProperties.txt");
+//        char [] a = new char[50];
+//        fr.read(a);
+//        String string = new String(a);
+//       return string;
+//    }
     public String[] ReadUserData() throws IOException {
         FileReader fr = new FileReader("userProperties.txt");
         char [] a = new char[50];

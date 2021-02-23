@@ -14,7 +14,7 @@ import javafx.scene.control.Alert;
 public class ClientCallbacksImpl extends UnicastRemoteObject implements ClientCallbacks {
     public ClientCallbacksImpl() throws RemoteException {
     }
-
+UserProperties userProperties = new UserProperties();
     @Override
     public void receiveMessage(Message message) throws RemoteException {
         System.out.println("Message recevied back from server and should be deliverd to" + message.getReceiverPhoneNumber());
@@ -33,6 +33,7 @@ public class ClientCallbacksImpl extends UnicastRemoteObject implements ClientCa
             Alert alert = new Alert(Alert.AlertType.WARNING,"Server is stopped so the application must close");
             alert.show();
             stageCoordinator.closeApp();
+
         });
 
     }
