@@ -51,8 +51,12 @@ public class FileMessageController implements Initializable {
         downloadIcon.addEventHandler(MouseEvent.MOUSE_CLICKED,(e)->{
             DirectoryChooser directoryChooser = new DirectoryChooser();
             File chosenDirectory = directoryChooser.showDialog(downloadIcon.getScene().getWindow());
-            File messageFile = new File(chosenDirectory.getPath()+"/"+fileMessage.getFile().getFilename()+"."+fileMessage.getFile().getFileExtension());
-            FilesUtilities.writeByteArrayToFile(messageFile,fileMessage.getFile().getFileBytes());
+            Thread thread = new Thread(()->{
+                File messageFile = new File(chosenDirectory.getPath()+"/"+fileMessage.getFile().getFilename());
+                FilesUtilities.writeByteArrayToFile(messageFile,fileMessage.getFile().getFileBytes());
+            });
+            thread.start();
+
 
         });
     }
