@@ -1,8 +1,10 @@
 package eg.gov.iti.jets.services.implementations;
 
+import clientInterface.ClientCallbacks;
 import domains.Contact;
 import domains.Invitation;
 import eg.gov.iti.jets.data.dao.*;
+import eg.gov.iti.jets.io.Server;
 import services.HandleContactsService;
 import utilities.FilesUtilities;
 
@@ -10,21 +12,25 @@ import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+import java.util.Map;
 
 public class HandleContactServiceImpl extends UnicastRemoteObject implements HandleContactsService {
     ContactDao contactDao;
     UserDao userDao;
     InvitationDao invitationDao;
+    Map<String, ClientCallbacks> onlineUsers;
+
 
 
     public HandleContactServiceImpl() throws RemoteException {
         contactDao = new ContactDaoImpl();
         userDao = new UserDaoImpl();
         invitationDao=new InvitationDaoImpl();
+        onlineUsers = Server.getInstance().getOnlineClients();
     }
 
     @Override
-    public int addNewContact(Contact contact, Invitation invitation) {
+    public int addNewContact(Contact contact, Invitation invitation) throws RemoteException {
 
         if(userDao.getUserByPhone(contact.getContactPhoneNumber())==null){
             return -2;
@@ -32,7 +38,11 @@ public class HandleContactServiceImpl extends UnicastRemoteObject implements Han
         if(contactDao.getContact(contact.getUserPhoneNumber(),contact.getContactPhoneNumber())!=null){
             return -3;
         }
+        ClientCallbacks client = onlineUsers.get(invitation.getReceiverPhoneNumber());
+        if (client != null)
+            client.receiveInvetation(invitation);
         invitationDao.insertInvitation(invitation);
+
         return contactDao.insertContact(contact);
     }
 
@@ -51,5 +61,21 @@ public class HandleContactServiceImpl extends UnicastRemoteObject implements Han
             }
         }
         return contacts;
+    }
+
+    @Override
+    public List<Invitation> getUserInvitation(String userPhone) throws RemoteException {
+        List<Invitation>invitations =  invitationDao.getInvitations(userPhone);
+       for (int i=0; i<invitations.size();i++)
+       {
+           if(!invitations.get(i).getSenderimage().equals("")){
+               System.out.println("Contact has image");
+
+               File file = new File(invitations.get(i).getSenderimage());
+               byte[] contactImageBytes = FilesUtilities.convertFileToByteArray(file,FilesUtilities.getFileExtension(file));
+               invitations.get(i).setSenderrImage(contactImageBytes);
+           }
+       }
+    return invitations;
     }
 }

@@ -1,5 +1,6 @@
 package eg.gov.iti.jets.utilities;
 
+import eg.gov.iti.jets.io.UserProperties;
 import javafx.animation.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,10 +21,14 @@ public class StageCoordinator {
     Popup addNewContactPopup;
     Popup changUserPassPopup;
     private static StageCoordinator stageCoordinator;
+    UserProperties userProperties;
+    ModelsFactory modelsFactory;
     private final Map<String, SceneData> scenes = new HashMap<>();
 
     private StageCoordinator() {
         stage = null;
+        userProperties = new UserProperties();
+       // modelsFactory = ModelsFactory.getInstance();
     }
 
     public void setStage(Stage stage) {
@@ -199,11 +204,31 @@ public class StageCoordinator {
         }
     }
 
-    public void closeApp(){
+    public void closeApp() throws IOException {
         if(stage==null){
             throw new RuntimeException("Stage must be initialized before trying to close");
         }
-        stage.close();
+        goToLoginPage();
+        userProperties.RemovePassFrmFile();
+        try {
+            modelsFactory.deleteCurrentUser();
+        }catch (NullPointerException e)
+        {
+            System.out.println("current user deleted");
+        }
+        //stage.close();
 
+    }
+    public void gotoInvitationListPage() {
+
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/views/InvitationListPage.fxml"));
+            parentContainer = new StackPane(root);
+            stage.setScene(new Scene(parentContainer, 759.0, 626.0));
+            visibleRoot = (BorderPane) root;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

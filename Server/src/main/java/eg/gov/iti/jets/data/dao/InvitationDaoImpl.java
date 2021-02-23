@@ -1,9 +1,6 @@
 package eg.gov.iti.jets.data.dao;
 
-import domains.Contact;
-import domains.Invitation;
-import domains.Mode;
-import domains.Status;
+import domains.*;
 import eg.gov.iti.jets.data.DataBaseConnection;
 
 import java.sql.Connection;
@@ -34,19 +31,19 @@ public class InvitationDaoImpl implements InvitationDao{
     }
 
     @Override
-    public List<Invitation> getContacts(String userPhone) {
+    public List<Invitation> getInvitations(String userPhone) {
         List<Invitation> invitations = new ArrayList<>();
         PreparedStatement preparedStatement = null;
         System.out.println(userPhone);
         try {
-            preparedStatement = connection.prepareStatement("select ID,senderPhone from invitation " +
-                    "where receiverPhone = ?");
+            preparedStatement = connection.prepareStatement("select name,senderPhone,phoneNumber,picture from invitation,user " +
+                    "where phoneNumber = senderPhone and receiverPhone = ?");
             preparedStatement.setString(1,userPhone);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 System.out.println("has invitation");
-                Invitation invitation = new Invitation(resultSet.getInt("ID"),resultSet.getString("senderPhone"),userPhone);
-                invitations.add(invitation);
+                Invitation invitation = new Invitation(resultSet.getString("senderPhone"),userPhone,resultSet.getString("picture"),resultSet.getString("name"));
+               invitations.add(invitation);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,4 +51,6 @@ public class InvitationDaoImpl implements InvitationDao{
         System.out.println(invitations.size());
         return invitations;
     }
+
+
 }

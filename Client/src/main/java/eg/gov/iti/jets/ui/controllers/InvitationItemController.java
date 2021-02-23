@@ -1,6 +1,10 @@
 package eg.gov.iti.jets.ui.controllers;
 
+import domains.Invitation;
 import eg.gov.iti.jets.ui.models.ContactModel;
+import eg.gov.iti.jets.ui.models.InvitationModel;
+import eg.gov.iti.jets.ui.models.UserModel;
+import eg.gov.iti.jets.utilities.ModelsFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -18,26 +22,23 @@ public class InvitationItemController implements Initializable {
     @FXML
     Circle imageCircle;
     @FXML
-    Label contactNameLabel;
+    Label senderNameLabel;
     @FXML
     Label phoneLabel;
+    Invitation invitationModel;
 
+
+    public InvitationItemController(Invitation invitationModel) {
+
+        this.invitationModel = invitationModel;
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        File imgFile = new File("src/main/resources/images/img.png");
-        try {
-            Image image = new Image(new FileInputStream(imgFile.getAbsolutePath()));
-
-            imageCircle.setFill(new ImagePattern(image));
-            contactNameLabel.setText("Mostafa yehya");
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-    }
-    public void setSenderName(String senderName){
-        this.contactNameLabel.setText(senderName);
+        Image image = null;
+       // image = invitationModel.getSenderImage();
+        imageCircle.setFill(new ImagePattern(image));
+        senderNameLabel.setText(invitationModel.getSenderName());
+    phoneLabel.setText(invitationModel.getSenderPhoneNumber());
     }
 
 }

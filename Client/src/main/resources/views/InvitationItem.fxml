@@ -19,7 +19,7 @@
    <center>
       <VBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="166.0">
          <children>
-            <Label fx:id="contactNameLabel" text="Contact">
+            <Label fx:id="senderNameLabel" text="Contact">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

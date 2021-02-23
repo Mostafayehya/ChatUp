@@ -1,5 +1,6 @@
 package eg.gov.iti.jets.io;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import clientInterface.ClientCallbacks;
@@ -23,6 +24,7 @@ UserProperties userProperties = new UserProperties();
 
     @Override
     public void receiveInvetation(Invitation invitation) throws RemoteException {
+        ModelsFactory.getInstance().receiveInvitation(invitation);
 
     }
 
@@ -32,7 +34,11 @@ UserProperties userProperties = new UserProperties();
         Platform.runLater(()->{
             Alert alert = new Alert(Alert.AlertType.WARNING,"Server is stopped so the application must close");
             alert.show();
-            stageCoordinator.closeApp();
+            try {
+                stageCoordinator.closeApp();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         });
 

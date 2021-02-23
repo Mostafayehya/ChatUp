@@ -23,6 +23,7 @@ public class ModelsFactory {
 
     ContactModel selectedContact;
     ObservableList<Message> messagesObservableList;
+    ObservableList<Invitation> invitationObservableList;
     ContactModel selectedOnlineContactModel = new ContactModel();
 
     List<ContactModel> contactModelList;
@@ -52,6 +53,13 @@ public class ModelsFactory {
         }
         retrieveContacts();
     }
+
+    public void deleteCurrentUser()
+    {
+        currentUser=null;
+
+    }
+
 
     public void retrieveContacts() {
         List<Contact> contacts = null;
@@ -88,6 +96,13 @@ public class ModelsFactory {
         }
         return messagesObservableList;
     }
+    public ObservableList<Invitation> getInvitationObservableList() {
+        if (invitationObservableList == null) {
+            invitationObservableList = FXCollections.observableArrayList();
+            return invitationObservableList;
+        }
+        return invitationObservableList;
+    }
 
     public void receiveMessage(Message message) {
 
@@ -95,6 +110,11 @@ public class ModelsFactory {
             System.out.println("Message received :" + message.getContent());
             messagesObservableList.add(message);
 
+        }
+    }
+    public void receiveInvitation(Invitation invitation) {
+        if (invitation != null) {
+            invitationObservableList.add(invitation);
         }
     }
 
