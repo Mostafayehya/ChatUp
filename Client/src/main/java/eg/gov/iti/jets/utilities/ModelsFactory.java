@@ -30,7 +30,6 @@ public class ModelsFactory {
     UserModel currentUser;
 
     ObservableList<Message> messagesObservableList;
-
     ContactModel selectedOnlineContactModel;
 
 
@@ -75,9 +74,11 @@ public class ModelsFactory {
             // Todo this is a result of the horrible handling of adding Contacts, refactor to push based mechanism instead of pulling.
             currentUser.addNewChatList(contactListToContactModelList(contacts).get(contacts.size() - 1));
         }
-
         getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
     }
+
+
+
 
     public UserModel getCurrentUser() {
 
@@ -90,6 +91,7 @@ public class ModelsFactory {
     }
 
     public ObservableList<Message> updateMessagesObservableList(String contactPhoneNumber) {
+        System.out.println("update observable list");
         if (messagesObservableList == null) {
             messagesObservableList = FXCollections.observableArrayList();
             messagesObservableList.setAll(currentUser.getObservableMessageListForContact(contactPhoneNumber));
@@ -128,6 +130,7 @@ public class ModelsFactory {
 
         }
     }
+
 
 
     /*/////////////////////////////////////

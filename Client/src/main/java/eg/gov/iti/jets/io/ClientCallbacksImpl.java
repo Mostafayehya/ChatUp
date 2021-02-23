@@ -3,6 +3,7 @@ package eg.gov.iti.jets.io;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import clientInterface.ClientCallbacks;
+import domains.FileMessage;
 import domains.Message;
 import eg.gov.iti.jets.utilities.ModelsFactory;
 import eg.gov.iti.jets.utilities.StageCoordinator;
@@ -20,9 +21,12 @@ public class ClientCallbacksImpl extends UnicastRemoteObject implements ClientCa
     @Override
     public void receiveMessage(Message message) throws RemoteException {
         System.out.println("Message recevied back from server and should be deliverd to" + message.getReceiverPhoneNumber());
+        Platform.runLater(()->{
+            ModelsFactory.getInstance().receiveMessage(message);
+        });
 
-        ModelsFactory.getInstance().receiveMessage(message);
     }
+
     @Override
     public void closeApp() throws RemoteException {
         StageCoordinator stageCoordinator = StageCoordinator.getInstance();

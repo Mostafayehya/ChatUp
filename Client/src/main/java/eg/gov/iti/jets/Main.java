@@ -34,6 +34,7 @@ public class Main extends Application {
     public void stop() {
         // Terminate Database & Network Connection
         // RMIManager.releaseResrouce*(;
+        RMIManager.getInstance().stopRMIService();
 
     }
 
