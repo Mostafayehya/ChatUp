@@ -10,8 +10,6 @@ import eg.gov.iti.jets.utilities.JavaSqlTimeConverter;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserDaoImpl implements UserDao {
     Connection connection;

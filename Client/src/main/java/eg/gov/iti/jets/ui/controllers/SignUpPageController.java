@@ -177,7 +177,7 @@ public class SignUpPageController implements Initializable {
 
     private boolean validateFields() {
         boolean validated = true;
-        if (phoneTextField.getText().equals("") || phoneTextField.getText().length() < 11) {
+        if (phoneTextField.getText().equals("") || phoneTextField.getText().length() != 11) {
             phoneTextField.setStyle("-fx-border-color: red;");
             validated = false;
         } else {

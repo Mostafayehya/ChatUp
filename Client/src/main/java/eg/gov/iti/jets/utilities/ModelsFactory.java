@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -29,8 +30,8 @@ public class ModelsFactory {
     UserModel currentUser;
 
     ObservableList<Message> messagesObservableList;
-
     ContactModel selectedOnlineContactModel;
+
 
 
     // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact
@@ -74,9 +75,13 @@ public class ModelsFactory {
             currentUser.addNewChatList(contactListToContactModelList(contacts).get(contacts.size() - 1));
 
         }
+
         getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
 
     }
+
+
+
 
     public UserModel getCurrentUser() {
 
@@ -89,6 +94,7 @@ public class ModelsFactory {
     }
 
     public ObservableList<Message> updateMessagesObservableList(String contactPhoneNumber) {
+        System.out.println("update observable list");
         if (messagesObservableList == null) {
             messagesObservableList = FXCollections.observableArrayList();
             messagesObservableList.setAll(currentUser.getObservableMessageListForContact(contactPhoneNumber));
@@ -104,6 +110,22 @@ public class ModelsFactory {
 
         if (message != null) {
 
+
+            Stage stage = StageCoordinator.getInstance().getStage();
+            Platform.runLater(() -> {
+                if(!stage.isShowing() || !stage.isFocused()){
+
+                    stage.show();
+                    stage.requestFocus();
+                }
+                Notifications.create()
+                        .title("New Message")
+                        .text("You have new message from "+ message.getSenderName())
+                        .darkStyle()
+                        .position(Pos.BOTTOM_RIGHT)
+                        .hideAfter(Duration.seconds(1))
+                        .showWarning();
+            });
             currentUser.receiveMessage(message.getSenderPhoneNumber(), message);
 
             if (message.getSenderPhoneNumber().equals(selectedOnlineContactModel.getContactPhoneNumber()))
@@ -111,6 +133,7 @@ public class ModelsFactory {
 
         }
     }
+
 
 
     /*/////////////////////////////////////
