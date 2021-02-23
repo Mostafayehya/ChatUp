@@ -4,16 +4,23 @@ import domains.*;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.ui.models.UserModel;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.rmi.RemoteException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static eg.gov.iti.jets.utilities.DomainModelConverter.contactListToContactModelList;
+import static eg.gov.iti.jets.utilities.DomainModelConverter.getContactModel;
 
 public class ModelsFactory {
     private static ModelsFactory modelsFactory;
@@ -21,18 +28,14 @@ public class ModelsFactory {
     // todo) refactor this to have a public method to get it as the MVC demo
     UserModel currentUser;
 
-    ContactModel selectedContact;
     ObservableList<Message> messagesObservableList;
-    ContactModel selectedOnlineContactModel = new ContactModel();
+    ContactModel selectedOnlineContactModel;
 
-    List<ContactModel> contactModelList;
+
 
     // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact
 
-    private ModelsFactory() {
-    }
-
-    public synchronized static ModelsFactory getInstance(){
+    public synchronized static ModelsFactory getInstance() {
         if (modelsFactory == null)
             modelsFactory = new ModelsFactory();
         return modelsFactory;
@@ -58,17 +61,20 @@ public class ModelsFactory {
         try { // Todo) move the if inside the try, no point having it out side
             contacts = RMIManager.getHandleContactsService().getUserContacts(currentUser.getPhoneNumber());
             System.out.println("Current user's all contacts loaded successfully with size = " + contacts.size());
-            contactModelList=contactListToContactModelList(contacts);
 
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        if (currentUser.getContacts() == null) {
+        if (currentUser.getContacts() == null || contacts.size() == 0) {
             currentUser.setContacts(FXCollections.observableList(contactListToContactModelList(contacts)));
+            currentUser.setMessagesList(contactListToContactModelList(contacts));
         } else { // todo This looks really ugly, use temp references to simplify this
-            currentUser.getContacts().add(contactListToContactModelList(contacts).get(contacts.size()-1));
-
+            currentUser.getContacts().add(contactListToContactModelList(contacts).get(contacts.size() - 1));
+            // Todo this is a result of the horrible handling of adding Contacts, refactor to push based mechanism instead of pulling.
+            currentUser.addNewChatList(contactListToContactModelList(contacts).get(contacts.size() - 1));
         }
+
+        getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
     }
 
     public UserModel getCurrentUser() {
@@ -81,25 +87,28 @@ public class ModelsFactory {
         }
     }
 
-    public ObservableList<Message> getMessagesObservableList() {
+    public ObservableList<Message> updateMessagesObservableList(String contactPhoneNumber) {
         if (messagesObservableList == null) {
             messagesObservableList = FXCollections.observableArrayList();
+            messagesObservableList.setAll(currentUser.getObservableMessageListForContact(contactPhoneNumber));
             return messagesObservableList;
         }
+
+        messagesObservableList.setAll(currentUser.getObservableMessageListForContact(contactPhoneNumber));
+
         return messagesObservableList;
     }
 
     public void receiveMessage(Message message) {
 
         if (message != null) {
-            System.out.println("Message received :" + message.getContent());
-            messagesObservableList.add(message);
-            for (int i=0;i<messagesObservableList.size();i++){
-                System.out.println("Message "+i);
-                System.out.println(messagesObservableList.get(i).getContent());
-            }
-        }
 
+            currentUser.receiveMessage(message.getSenderPhoneNumber(), message);
+
+            if (message.getSenderPhoneNumber().equals(selectedOnlineContactModel.getContactPhoneNumber()))
+                messagesObservableList.add(message);
+
+        }
     }
 
 

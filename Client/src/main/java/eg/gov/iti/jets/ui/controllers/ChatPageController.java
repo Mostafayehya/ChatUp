@@ -9,18 +9,20 @@ import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.utilities.MessageListCell;
 import eg.gov.iti.jets.utilities.ModelsFactory;
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -57,7 +59,7 @@ public class ChatPageController implements Initializable {
     private HBox chatBarHBox;
 
     @FXML
-    private Circle contactImage;
+    private ImageView contactImage;
 
     @FXML
     private Text contactNameText;
@@ -92,16 +94,24 @@ public class ChatPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        modelsFactory = ModelsFactory.getInstance();
+        final Rectangle clip = new Rectangle(50, 50);
+        clip.setArcWidth(180);
+        clip.setArcHeight(180);
+        contactImage.setClip(clip);
 
+        modelsFactory = ModelsFactory.getInstance();
         selectedOnlineContact = modelsFactory.getCurrentSelectedOnlineContact();
 
-        contactNameText.textProperty().bindBidirectional(modelsFactory.getCurrentSelectedOnlineContact().nameProperty());
+        contactNameText.textProperty().bindBidirectional(selectedOnlineContact.nameProperty());
+
 
         // Todo 1 I should bind the messagelistView to the messages Map inside ModelsFactory Map<contactId,List<message>
-        // Todo 2 Binding the chat Image to the contact image, waiting to merge with Hadeer
 
-        messagesObservableList = modelsFactory.getMessagesObservableList();
+        contactImage.imageProperty().bindBidirectional(selectedOnlineContact.contactImageProperty());
+
+        messagesObservableList = modelsFactory.updateMessagesObservableList(selectedOnlineContact.getContactPhoneNumber());
+
+
         chatListView.setItems(messagesObservableList);
 
         chatListView.setCellFactory(messageListView -> new MessageListCell());
@@ -119,7 +129,11 @@ public class ChatPageController implements Initializable {
             // I need to store the currentContact inside models factory in order to specify the
             // receiver of the message
             Message newMessage = new Message(LocalDate.now().toString(), messgeTextField.getText(),
-                    selectedOnlineContact.getContactPhoneNumber(), modelsFactory.getCurrentUser().getPhoneNumber());
+                    selectedOnlineContact.getContactPhoneNumber(),
+                    modelsFactory.getCurrentUser().getPhoneNumber(),
+                    modelsFactory.getCurrentUser().getName(),
+                    selectedOnlineContact.getName()
+            );
 
             try {
                 RMIManager.getSingleChatService().sendMessage(newMessage);
@@ -127,6 +141,7 @@ public class ChatPageController implements Initializable {
                 e.printStackTrace();
             }
             messagesObservableList.add(newMessage);
+            modelsFactory.getCurrentUser().receiveMessage(selectedOnlineContact.getContactPhoneNumber(),newMessage);
             chatListView.scrollTo(chatListView.getItems().size() - 1);
             // Use service to send it over RMI
             messgeTextField.clear();
