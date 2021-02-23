@@ -30,6 +30,7 @@ public class RMIManager extends UnicastRemoteObject {
     //todo: refactor looking up of services into individual methods
     public void startRMIServices() {
         try {
+            //"192.168.8.101"
             reg = LocateRegistry.getRegistry("localhost", 8189);
             authenticationService = (AuthenticationService) reg.lookup("AuthenticationService");
             updateService = (UpdateService) reg.lookup("UpdateService");
