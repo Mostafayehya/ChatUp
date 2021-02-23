@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -153,7 +154,13 @@ public class ChatPageController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         File chosenFile = fileChooser.showOpenDialog(attachButton.getScene().getWindow());
         if(chosenFile!=null){
-            System.out.println(chosenFile.getTotalSpace());
+            double fileSize = (double)chosenFile.length() / (1024 * 1024);
+            System.out.println(fileSize);
+            if(fileSize>=14.5){
+                Alert alert = new Alert(Alert.AlertType.WARNING,"File too big to send");
+                alert.show();
+                return;
+            }
             // Sending message in other thread
             Thread thread = new Thread(()->{
                 String extension = FilesUtilities.getFileExtension(chosenFile);

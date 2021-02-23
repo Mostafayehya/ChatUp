@@ -8,20 +8,19 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import org.kordamp.ikonli.javafx.FontIcon;
 import utilities.FilesUtilities;
-
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FileMessageController implements Initializable {
     @FXML
-    BorderPane messageLayout;
+    HBox fileMessageLayout;
     @FXML
     FontIcon downloadIcon;
     @FXML
@@ -35,6 +34,8 @@ public class FileMessageController implements Initializable {
 
     FileMessage fileMessage;
 
+    public FileMessageController(){}
+
     public FileMessageController(FileMessage fileMessage){
         this.fileMessage = fileMessage;
     }
@@ -46,7 +47,7 @@ public class FileMessageController implements Initializable {
         clip.setArcHeight(180);
         senderImage.setClip(clip);
 
-        fileName.setText(fileMessage.getFile().getFilename());
+
         downloadIcon.addEventHandler(MouseEvent.MOUSE_CLICKED,(e)->{
             DirectoryChooser directoryChooser = new DirectoryChooser();
             File chosenDirectory = directoryChooser.showDialog(downloadIcon.getScene().getWindow());
@@ -57,7 +58,7 @@ public class FileMessageController implements Initializable {
     }
 
     public void setSenderName(String senderName){
-        this.senderNameText.setText(senderName);
+        senderNameText.setText(senderName);
     }
 
     public void setTimeText(String timeText){
@@ -65,10 +66,18 @@ public class FileMessageController implements Initializable {
     }
 
     public void setMessageOrientation(NodeOrientation orientation) {
-        messageLayout.setNodeOrientation(orientation);
+        fileMessageLayout.setNodeOrientation(orientation);
+        System.out.println(timeText.getText());
+        System.out.println(senderNameText.getText());
+        System.out.println(fileName.getText());
     }
 
     public void setSenderCircleImage(Image image){
         senderImage.setImage(image);
+    }
+
+    public void setFile(FileMessage fileMessage){
+        this.fileMessage = fileMessage;
+        fileName.setText(fileMessage.getFile().getFilename());
     }
 }

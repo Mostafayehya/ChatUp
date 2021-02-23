@@ -70,7 +70,7 @@ public class LoginPageController implements Initializable {
         String phone = phoneTextField.getText();
         String password = passwordTextField.getText();
         try {
-            user = authenticationService.login(phone, password, new ClientCallbacksImpl());
+            user = authenticationService.login(phone, password,RMIManager.getClientCallBack());
             if (user == null) {
                 failed.setText("Either phone or password is incorrect");
                 return;

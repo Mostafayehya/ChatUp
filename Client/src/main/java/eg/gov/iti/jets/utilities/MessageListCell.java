@@ -16,9 +16,10 @@ import java.io.IOException;
 public class MessageListCell extends ListCell<Message> {
 
     private Node graphic;
+    private Node fileMessageGraphic;
     private final UserModel currentUser = ModelsFactory.getInstance().getCurrentUser();
     private final MessageItemController messageItemController;
-
+    private final FileMessageController fileMessageController;
     public MessageListCell() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ChatMessage.fxml"));
         try {
@@ -27,27 +28,29 @@ public class MessageListCell extends ListCell<Message> {
             e.printStackTrace();
         }
         this.messageItemController = loader.getController();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FileMessage.fxml"));
+//                fxmlLoader.setController(fileMessageController);
+        try {
+            fileMessageGraphic = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        fileMessageController = fxmlLoader.getController();
+
     }
 
     @Override
     protected void updateItem(Message message, boolean empty) {
         super.updateItem(message, empty);
-        final FileMessageController fileMessageController;
         if (empty || message == null) {
             setText(null);
             setGraphic(null);
         } else {
             //Handle File message
             if (message instanceof FileMessage) {
-                System.out.println("File added" + ((FileMessage) message).getFile().getFilename());
-                fileMessageController = new FileMessageController((FileMessage) message);
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FileMessage.fxml"));
-                fxmlLoader.setController(fileMessageController);
-                try {
-                    graphic = fxmlLoader.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                System.out.println("file message from update item method: " + ((FileMessage) message).getFile().getFilename());
+                //fileMessageController = new FileMessageController((FileMessage) message);
+                fileMessageController.setFile((FileMessage) message);
                 if (currentUser.getPhoneNumber().equals(message.getSenderPhoneNumber())) {
                     fileMessageController.setSenderName(currentUser.getName());
                     fileMessageController.setTimeText(message.getTime());
@@ -63,9 +66,12 @@ public class MessageListCell extends ListCell<Message> {
                         }
                     });
                 }
+                System.out.println("jjj");
+                setText(null);
+                setGraphic(fileMessageGraphic);
             } else {
                 // Client Message
-                System.out.println("text message" + message.getContent());
+                System.out.println("text message " + message.getContent());
                 if (currentUser.getPhoneNumber().equals(message.getSenderPhoneNumber())) {
                     messageItemController.setSenderName(currentUser.getName());
                     messageItemController.setMessageContent(message.getContent());
@@ -84,17 +90,15 @@ public class MessageListCell extends ListCell<Message> {
                             messageItemController.setSenderCircleImage(contactModel.getContactImage());
                         }
                     });
+
+
                 }
-
-                //received Message
-
-                Platform.runLater(() -> {
-                    setText(null);
-                    setGraphic(graphic);
-
-                });
-
+                System.out.println("jjj");
+                setText(null);
+                setGraphic(graphic);
             }
+
+
 
         }
     }
