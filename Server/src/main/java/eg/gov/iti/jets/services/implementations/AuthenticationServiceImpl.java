@@ -42,6 +42,7 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
                 user.setUserPhoto(imageFileDomain);
             }
             Server.getInstance().addClient(phone, chatUpClient);
+
         }
 
         return user;

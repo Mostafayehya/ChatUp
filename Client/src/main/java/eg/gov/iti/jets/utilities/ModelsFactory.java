@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -31,6 +32,7 @@ public class ModelsFactory {
     ObservableList<Message> messagesObservableList;
 
     ContactModel selectedOnlineContactModel;
+
 
 
     // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact
@@ -103,6 +105,22 @@ public class ModelsFactory {
 
         if (message != null) {
 
+
+            Stage stage = StageCoordinator.getInstance().getStage();
+            Platform.runLater(() -> {
+                if(!stage.isShowing() || !stage.isFocused()){
+
+                    stage.show();
+                    stage.requestFocus();
+                }
+                Notifications.create()
+                        .title("New Message")
+                        .text("You have new message from "+ message.getSenderName())
+                        .darkStyle()
+                        .position(Pos.BOTTOM_RIGHT)
+                        .hideAfter(Duration.seconds(1))
+                        .showWarning();
+            });
             currentUser.receiveMessage(message.getSenderPhoneNumber(), message);
 
             if (message.getSenderPhoneNumber().equals(selectedOnlineContactModel.getContactPhoneNumber()))
