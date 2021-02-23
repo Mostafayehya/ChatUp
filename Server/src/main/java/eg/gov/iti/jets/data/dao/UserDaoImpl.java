@@ -180,5 +180,17 @@ public class UserDaoImpl implements UserDao {
         return -1;
     }
 
+public ResultSet getAllUsers(){
 
+    ResultSet rs = null;
+    try {
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        rs = statement.executeQuery("SELECT name, phoneNumber from user ");
+        //statement.close();
+        return rs;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return rs;
+}
 }

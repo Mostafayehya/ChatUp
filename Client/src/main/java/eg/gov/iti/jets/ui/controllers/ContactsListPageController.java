@@ -45,6 +45,6 @@ public class ContactsListPageController implements Initializable {
         contactModel = contactsListView.getSelectionModel().getSelectedItem();
         modelsFactory.setSelectedOnlineContactModel(contactModel);
         //System.out.println(modelsFactory.getCurrentSelectedOnlineContact().getName());
-        stageCoordinator.goToContactProfilePage(contactModel);
+        stageCoordinator.goToContactProfilePage();
     }
 }

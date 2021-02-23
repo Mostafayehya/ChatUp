@@ -218,10 +218,8 @@ public class StageCoordinator {
         }
     }
 
-    public void goToContactProfilePage(ContactModel c) {
-String name= c.getName();
-String phone= c.getContactPhoneNumber();
-String email= c.getEmail();
+    public void goToContactProfilePage() {
+
 
         if (stage == null) {
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
