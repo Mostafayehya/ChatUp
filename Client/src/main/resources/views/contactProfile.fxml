@@ -75,7 +75,7 @@
                                        <font>
                                           <Font size="11.5" />
                                        </font></Label>
-                                    <Button layoutX="207.0" layoutY="118.0" mnemonicParsing="false" onAction="#changePhoto" style="-fx-background-radius: 30; -fx-background-color: #009688;" textFill="#ebe4e4">
+                                    <Button fx:id="changephoto" layoutX="207.0" layoutY="118.0" mnemonicParsing="false" onAction="#changePhoto" style="-fx-background-radius: 30; -fx-background-color: #009688;" textFill="#ebe4e4">
                                        <effect>
                                           <DropShadow />
                                        </effect>
@@ -137,7 +137,7 @@
                               <TextField fx:id="email" prefHeight="25.0" prefWidth="261.0" promptText="Email" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
                               <TextField prefHeight="25.0" prefWidth="261.0" promptText="Category" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
                               <Pane prefHeight="36.0" prefWidth="194.0" />
-                              <Button mnemonicParsing="false" onAction="#save" style="-fx-background-radius: 30; -fx-background-color: #009688;" text="Save Changes" textFill="#ebe4e4">
+                              <Button fx:id="savechanges" mnemonicParsing="false" onAction="#save" style="-fx-background-radius: 30; -fx-background-color: #009688;" text="Save Changes" textFill="#ebe4e4">
                                  <effect>
                                     <DropShadow />
                                  </effect>

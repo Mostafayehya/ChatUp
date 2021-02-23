@@ -7,6 +7,7 @@ import eg.gov.iti.jets.utilities.StageCoordinator;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -46,8 +47,15 @@ public class contactProfileController implements Initializable {
 
     ContactModel contactModel = new ContactModel();
 
+    @FXML
+    private Button changephoto , savechanges;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        category.setDisable(true);
+        changephoto.setDisable(true);
+        savechanges.setDisable(true);
 
         contactModel = modelsFactory.getCurrentSelectedOnlineContact();
 
