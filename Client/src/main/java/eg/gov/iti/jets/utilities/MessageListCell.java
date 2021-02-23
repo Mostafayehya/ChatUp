@@ -32,6 +32,7 @@ public class MessageListCell extends ListCell<Message> {
     @Override
     protected void updateItem(Message message, boolean empty) {
         super.updateItem(message, empty);
+        final FileMessageController fileMessageController;
         if (empty || message == null) {
             setText(null);
             setGraphic(null);
@@ -39,13 +40,28 @@ public class MessageListCell extends ListCell<Message> {
             //Handle File message
             if (message instanceof FileMessage) {
                 System.out.println("File added" + ((FileMessage) message).getFile().getFilename());
-                FileMessageController fileMessageController = new FileMessageController((FileMessage) message);
+                fileMessageController = new FileMessageController((FileMessage) message);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FileMessage.fxml"));
                 fxmlLoader.setController(fileMessageController);
                 try {
                     graphic = fxmlLoader.load();
                 } catch (IOException e) {
                     e.printStackTrace();
+                }
+                if (currentUser.getPhoneNumber().equals(message.getSenderPhoneNumber())) {
+                    fileMessageController.setSenderName(currentUser.getName());
+                    fileMessageController.setTimeText(message.getTime());
+                    fileMessageController.setMessageOrientation(NodeOrientation.LEFT_TO_RIGHT);
+                } else {
+                    fileMessageController.setSenderName(message.getSenderPhoneNumber());
+                    fileMessageController.setTimeText(message.getTime());
+                    fileMessageController.setMessageOrientation(NodeOrientation.RIGHT_TO_LEFT);
+
+                    ModelsFactory.getInstance().currentUser.getContacts().forEach(contactModel -> {
+                        if (contactModel.getContactPhoneNumber().equals(message.getSenderPhoneNumber())) {
+                            fileMessageController.setSenderCircleImage(contactModel.getContactImage());
+                        }
+                    });
                 }
             } else {
                 // Client Message

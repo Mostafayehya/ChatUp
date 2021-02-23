@@ -169,6 +169,7 @@ public class ChatPageController implements Initializable {
                 Platform.runLater(()->{
                     System.out.println("run later");
                     messagesObservableList.add(fileMessage);
+                    modelsFactory.getCurrentUser().receiveMessage(selectedOnlineContact.getContactPhoneNumber(),fileMessage);
                     chatListView.scrollTo(chatListView.getItems().size() - 1);
                 });
 
