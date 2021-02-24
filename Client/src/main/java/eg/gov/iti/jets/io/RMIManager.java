@@ -31,7 +31,7 @@ public class RMIManager extends UnicastRemoteObject {
     public void startRMIServices() {
         try {
             //"192.168.8.101"
-            reg = LocateRegistry.getRegistry("192.168.8.101", 1099);
+            reg = LocateRegistry.getRegistry("192.168.8.103", 1099);
             authenticationService = (AuthenticationService) reg.lookup("AuthenticationService");
             updateService = (UpdateService) reg.lookup("UpdateService");
             handleContactsService = (HandleContactsService) reg.lookup("HandleContactService");

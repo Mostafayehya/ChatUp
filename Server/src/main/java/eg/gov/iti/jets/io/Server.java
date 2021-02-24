@@ -35,7 +35,7 @@ public class Server {
     private Server() {
         onlineClients = new HashMap<>();
         try {
-            System.setProperty("java.rmi.server.hostname", "192.168.8.101");
+            System.setProperty("java.rmi.server.hostname", "192.168.8.103");
             registry = LocateRegistry.createRegistry(1099);
 
         } catch (RemoteException e) {
