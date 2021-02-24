@@ -117,7 +117,7 @@ public class ChatPageController implements Initializable {
 
         chatListView.setCellFactory(messageListView -> new MessageListCell());
 
-        attachButton.addEventHandler(MouseEvent.MOUSE_CLICKED,(e)->{
+        attachButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             sendFile();
         });
 
@@ -142,7 +142,7 @@ public class ChatPageController implements Initializable {
                 e.printStackTrace();
             }
             messagesObservableList.add(newMessage);
-            modelsFactory.getCurrentUser().receiveMessage(selectedOnlineContact.getContactPhoneNumber(),newMessage);
+            modelsFactory.getCurrentUser().receiveMessage(selectedOnlineContact.getContactPhoneNumber(), newMessage);
             chatListView.scrollTo(chatListView.getItems().size() - 1);
             // Use service to send it over RMI
             messgeTextField.clear();
@@ -150,33 +150,36 @@ public class ChatPageController implements Initializable {
         }
     }
 
-    public void sendFile(){
+    public void sendFile() {
         FileChooser fileChooser = new FileChooser();
         File chosenFile = fileChooser.showOpenDialog(attachButton.getScene().getWindow());
-        if(chosenFile!=null){
-            double fileSize = (double)chosenFile.length() / (1024 * 1024);
+        if (chosenFile != null) {
+            double fileSize = (double) chosenFile.length() / (1024 * 1024);
             System.out.println(fileSize);
-            if(fileSize>=14.5){
-                Alert alert = new Alert(Alert.AlertType.WARNING,"File too big to send");
+            if (fileSize >= 14.5) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "File too big to send");
                 alert.show();
                 return;
             }
             // Sending message in other thread
-            Thread thread = new Thread(()->{
+            Thread thread = new Thread(() -> {
                 String extension = FilesUtilities.getFileExtension(chosenFile);
-                byte [] messageBytes = FilesUtilities.convertFileToByteArray(chosenFile,extension);
-                FileDomain fileDomain = new FileDomain(messageBytes,extension,chosenFile.getName());
-                FileMessage fileMessage = new FileMessage(LocalDate.now().toString(),"",
-                        selectedOnlineContact.getContactPhoneNumber(), modelsFactory.getCurrentUser().getPhoneNumber(),fileDomain);
+                byte[] messageBytes = FilesUtilities.convertFileToByteArray(chosenFile, extension);
+                FileDomain fileDomain = new FileDomain(messageBytes, extension, chosenFile.getName());
+                FileMessage fileMessage = new FileMessage(LocalDate.now().toString(), "",
+                        selectedOnlineContact.getContactPhoneNumber(),
+                        modelsFactory.getCurrentUser().getPhoneNumber(),
+                        modelsFactory.getCurrentUser().getName(),
+                        selectedOnlineContact.getName(), fileDomain);
                 try {
                     RMIManager.getSingleChatService().sendMessage(fileMessage);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
-                Platform.runLater(()->{
+                Platform.runLater(() -> {
                     System.out.println("run later");
                     messagesObservableList.add(fileMessage);
-                    modelsFactory.getCurrentUser().receiveMessage(selectedOnlineContact.getContactPhoneNumber(),fileMessage);
+                    modelsFactory.getCurrentUser().receiveMessage(selectedOnlineContact.getContactPhoneNumber(), fileMessage);
                     chatListView.scrollTo(chatListView.getItems().size() - 1);
                 });
 

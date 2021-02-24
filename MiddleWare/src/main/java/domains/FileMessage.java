@@ -6,6 +6,11 @@ public class FileMessage extends Message{
     public FileMessage(){
     }
 
+    public FileMessage(String time, String content, String receiverPhoneNumber, String senderPhoneNumber, String senderName, String receiverName, FileDomain file) {
+        super(time, content, receiverPhoneNumber, senderPhoneNumber, senderName, receiverName);
+        this.file = file;
+    }
+
     public FileMessage(FileDomain file) {
         this.file = file;
     }
