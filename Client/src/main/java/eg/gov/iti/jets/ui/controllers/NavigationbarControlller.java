@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -50,6 +51,7 @@ public class NavigationbarControlller implements Initializable {
 
     @FXML
     void switchToInvitationsPage(MouseEvent event) {
+        stageCoordinator.gotoInvitationListPage();
 
     }
 
@@ -64,12 +66,14 @@ public class NavigationbarControlller implements Initializable {
     }
 
     @FXML
-    void signout(MouseEvent event) {
-
+    void signout(MouseEvent event) throws IOException {
+        stageCoordinator.closeApp();
     }
 
     @FXML
     void switchToGroupChat(MouseEvent event) {
+
+        stageCoordinator.navigateToGroupChatListPage();
 
     }
 }

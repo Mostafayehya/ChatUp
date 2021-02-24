@@ -31,7 +31,7 @@ public class contactProfileController implements Initializable {
     @FXML
     private Label Bio;
     @FXML
-    private Label category;
+    private TextField category;
     @FXML
     private Circle photo;
     @FXML
@@ -42,20 +42,34 @@ public class contactProfileController implements Initializable {
     private TextField firstname;
     @FXML
     private TextField email;
+    @FXML
+    private Button editfirstname;
+    @FXML
+    private Button editemail;
+    @FXML
+    private Button editcategory;
+    @FXML
+    private Button addextranumber;
 
     ModelsFactory modelsFactory = ModelsFactory.getInstance();
 
     ContactModel contactModel = new ContactModel();
 
     @FXML
-    private Button changephoto , savechanges;
+    private Button changephoto, savechanges;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         category.setDisable(true);
+        extranumber.setDisable(true);
         changephoto.setDisable(true);
+        editemail.setVisible(false);
+        editcategory.setDisable(true);
+        addextranumber.setDisable(true);
+        editfirstname.setDisable(true);
         savechanges.setDisable(true);
+
 
         contactModel = modelsFactory.getCurrentSelectedOnlineContact();
 

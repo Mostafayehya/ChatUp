@@ -55,6 +55,7 @@ public class MessageListCell extends ListCell<Message> {
                     fileMessageController.setSenderName(currentUser.getName());
                     fileMessageController.setTimeText(message.getTime());
                     fileMessageController.setMessageOrientation(NodeOrientation.LEFT_TO_RIGHT);
+                    fileMessageController.setSenderCircleImage(currentUser.getUserImage());
                 } else {
                     fileMessageController.setSenderName(message.getSenderPhoneNumber());
                     fileMessageController.setTimeText(message.getTime());
@@ -77,10 +78,11 @@ public class MessageListCell extends ListCell<Message> {
                     messageItemController.setMessageContent(message.getContent());
                     messageItemController.setTimeText(message.getTime());
                     messageItemController.setMessageOrientation(NodeOrientation.LEFT_TO_RIGHT);
+                    messageItemController.setSenderCircleImage(currentUser.getUserImage());
 
 
                 } else {
-                    messageItemController.setSenderName(message.getSenderPhoneNumber());
+                    messageItemController.setSenderName(message.getSenderName());
                     messageItemController.setMessageContent(message.getContent());
                     messageItemController.setTimeText(message.getTime());
                     messageItemController.setMessageOrientation(NodeOrientation.RIGHT_TO_LEFT);

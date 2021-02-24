@@ -60,6 +60,21 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public int updateUserPhoto(User user) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set picture = ? where phoneNumber = ?");
+            preparedStatement.setString(1,user.getUserPhotoPath());
+            preparedStatement.setString(2,user.getPhoneNumber());
+            int result =  preparedStatement.executeUpdate();
+            preparedStatement.close();
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
     public User getUserByPhoneAndPassword(String phone, String password) {
         User user = null;
         try {
@@ -191,4 +206,8 @@ public ResultSet getAllUsers(){
     }
     return rs;
 }
+
+
+
+
 }

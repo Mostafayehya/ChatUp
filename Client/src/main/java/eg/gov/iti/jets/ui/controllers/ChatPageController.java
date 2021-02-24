@@ -6,6 +6,7 @@ import domains.FileMessage;
 import domains.Message;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
+import eg.gov.iti.jets.utilities.ChatSaver;
 import eg.gov.iti.jets.utilities.MessageListCell;
 import eg.gov.iti.jets.utilities.ModelsFactory;
 import javafx.application.Platform;
@@ -25,6 +26,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import org.kordamp.ikonli.javafx.FontIcon;
 import services.SingleChatService;
@@ -119,6 +121,16 @@ public class ChatPageController implements Initializable {
 
         attachButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             sendFile();
+        });
+
+        saveButton.addEventHandler(ActionEvent.ACTION,(e)->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("HTML files","*.html","*.htm"));
+            File chosenFile = fileChooser.showSaveDialog(saveButton.getScene().getWindow());
+            if(chosenFile==null){
+                return;
+            }
+            ChatSaver chatSaver = new ChatSaver(messagesObservableList.subList(0,messagesObservableList.size()),chosenFile);
         });
 
     }

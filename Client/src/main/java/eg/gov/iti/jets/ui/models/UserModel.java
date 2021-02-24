@@ -24,7 +24,8 @@ public class UserModel {
     StringProperty bio = new SimpleStringProperty();
     ObjectProperty<Status> status = new SimpleObjectProperty<>();
     ObjectProperty<Mode> mode = new SimpleObjectProperty<>();
-    ObservableList<ContactModel> contacts;
+    ObservableList<ContactModel> contacts = FXCollections.observableArrayList();
+    ObservableList<Invitation> invitations;
     ObjectProperty<Image> userImage = new SimpleObjectProperty<>();
     Map<String, ObservableList<Message>> messageMap = new HashMap<>();
 
@@ -57,11 +58,20 @@ public class UserModel {
     }
 
     public ObservableList<ContactModel> getContacts() {
+
         return contacts;
     }
 
     public void setContacts(ObservableList<ContactModel> contacts) {
         this.contacts = contacts;
+    }
+
+    public ObservableList<Invitation> getInvitations() {
+        return invitations;
+    }
+
+    public void setInvitations(ObservableList<Invitation> invitations) {
+        this.invitations = invitations;
     }
 
     public UserModel(String phoneNumber, String name, String email, String password, String picture, Gender gender, String country, LocalDate dateOfBirth, String bio, Status status, Mode mode) {
@@ -237,9 +247,22 @@ public class UserModel {
         messageMap.get(from).add(message);
 
     }
+    public void receiveInvitation(Invitation invitation) {
 
-    public ObservableList<Message> getObservableMessageListForContact(String contact) {
-        return messageMap.get(contact);
+        if (invitation == null) {
+        invitations.add(invitation)   ;
+        }
+
+    }
+
+
+    public ObservableList<Message> getObservableMessageListForContact(String contactPhone) {
+
+        var messageList = messageMap.get(contactPhone);
+        if (messageList == null) {
+            return messageMap.put(contactPhone, FXCollections.observableArrayList());
+        }
+        return messageMap.get(contactPhone);
     }
 
     public void addNewChatList(ContactModel contactModel) {
@@ -248,8 +271,13 @@ public class UserModel {
     }
 
     public void setMessagesList(List<ContactModel> contacts) {
-        for (ContactModel c : contacts) {
-            messageMap.put(c.contactPhoneNumber.get(), FXCollections.observableArrayList());
+
+        if (messageMap.isEmpty()) {
+            for (ContactModel c : contacts)
+                messageMap.put(c.getContactPhoneNumber(), FXCollections.observableArrayList());
+        } else {
+            ContactModel newContactModel = contacts.get(contacts.size() - 1);
+            messageMap.put(newContactModel.getContactPhoneNumber(), FXCollections.observableArrayList());
         }
     }
 }

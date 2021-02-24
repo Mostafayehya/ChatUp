@@ -10,6 +10,8 @@ public interface UserDao {
 
     User getUserByPhone(String phone);
 
+    int updateUserPhoto(User user);
+
     int updateUserData(User user);
 
     int updateUserMode(User user);

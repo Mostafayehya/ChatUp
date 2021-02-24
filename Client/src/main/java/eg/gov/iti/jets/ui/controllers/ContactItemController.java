@@ -25,7 +25,9 @@ public class ContactItemController implements Initializable {
     Label bioLabel;
     ContactModel contact;
 
+
     public ContactItemController(ContactModel contact) {
+
         this.contact = contact;
     }
 

@@ -16,10 +16,7 @@ import org.controlsfx.control.Notifications;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.rmi.RemoteException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import static eg.gov.iti.jets.utilities.DomainModelConverter.contactListToContactModelList;
 import static eg.gov.iti.jets.utilities.DomainModelConverter.getContactModel;
 
@@ -30,13 +27,19 @@ public class ModelsFactory {
     UserModel currentUser;
 
     ObservableList<Message> messagesObservableList;
-    ContactModel selectedOnlineContactModel;
+    ObservableList<Invitation> invitationObservableList;
+    //ContactModel selectedOnlineContactModel = new ContactModel();
 
+    ContactModel selectedOnlineContactModel;
 
 
     // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact
 
-    public synchronized static ModelsFactory getInstance() {
+    private ModelsFactory() {
+        invitationObservableList=FXCollections.observableArrayList();
+    }
+
+    public synchronized static ModelsFactory getInstance(){
         if (modelsFactory == null)
             modelsFactory = new ModelsFactory();
         return modelsFactory;
@@ -55,7 +58,15 @@ public class ModelsFactory {
 
         }
         retrieveContacts();
+        retrieveInvitations();
     }
+
+    public void deleteCurrentUser()
+    {
+        currentUser=null;
+
+    }
+
 
     public void retrieveContacts() {
         List<Contact> contacts = null;
@@ -63,26 +74,39 @@ public class ModelsFactory {
             contacts = RMIManager.getHandleContactsService().getUserContacts(currentUser.getPhoneNumber());
             System.out.println("Current user's all contacts loaded successfully with size = " + contacts.size());
 
+            currentUser.getContacts().setAll(contactListToContactModelList(contacts));
+            currentUser.setMessagesList(contactListToContactModelList(contacts));
+
+            if (!currentUser.getContacts().isEmpty())
+                getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        if (currentUser.getContacts() == null || contacts.size() == 0) {
-            currentUser.setContacts(FXCollections.observableList(contactListToContactModelList(contacts)));
+/*        if (currentUser.getContacts() == null || contacts.size() == 0) {
+            currentUser.getContacts().setAll(contactListToContactModelList(contacts));
             currentUser.setMessagesList(contactListToContactModelList(contacts));
         } else { // todo This looks really ugly, use temp references to simplify this
             currentUser.getContacts().add(contactListToContactModelList(contacts).get(contacts.size() - 1));
             // Todo this is a result of the horrible handling of adding Contacts, refactor to push based mechanism instead of pulling.
             currentUser.addNewChatList(contactListToContactModelList(contacts).get(contacts.size() - 1));
 
-        }
+            getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
 
-        getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
+
+        }*/
 
     }
 
+    public void retrieveInvitations() {
+        List<Invitation> invitations = null;
+        try { // Todo) move the if inside the try, no point having it out side
+            invitations = RMIManager.getHandleContactsService().getUserInvitation(currentUser.getPhoneNumber());
 
-
-
+            invitationObservableList=FXCollections.observableArrayList(invitations);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
     public UserModel getCurrentUser() {
 
         if (currentUser == null) {
@@ -94,7 +118,6 @@ public class ModelsFactory {
     }
 
     public ObservableList<Message> updateMessagesObservableList(String contactPhoneNumber) {
-        System.out.println("update observable list");
         if (messagesObservableList == null) {
             messagesObservableList = FXCollections.observableArrayList();
             messagesObservableList.setAll(currentUser.getObservableMessageListForContact(contactPhoneNumber));
@@ -105,6 +128,13 @@ public class ModelsFactory {
 
         return messagesObservableList;
     }
+    public ObservableList<Invitation> getInvitationObservableList() {
+        if (invitationObservableList == null) {
+            invitationObservableList = FXCollections.observableArrayList();
+            return invitationObservableList;
+        }
+        return invitationObservableList;
+    }
 
     public void receiveMessage(Message message) {
 
@@ -113,14 +143,14 @@ public class ModelsFactory {
 
             Stage stage = StageCoordinator.getInstance().getStage();
             Platform.runLater(() -> {
-                if(!stage.isShowing() || !stage.isFocused()){
+                if (!stage.isShowing() || !stage.isFocused()) {
 
                     stage.show();
                     stage.requestFocus();
                 }
                 Notifications.create()
                         .title("New Message")
-                        .text("You have new message from "+ message.getSenderName())
+                        .text("You have new message from " + message.getSenderName())
                         .darkStyle()
                         .position(Pos.BOTTOM_RIGHT)
                         .hideAfter(Duration.seconds(1))
@@ -133,8 +163,21 @@ public class ModelsFactory {
 
         }
     }
+    public void receiveInvitation(Invitation invitation) {
 
+        if (invitation != null) {
+            currentUser.receiveInvitation(invitation);
+            invitationObservableList.add(invitation);
+        }
+    }
 
+public void removeInvitation(Invitation invitation)
+{
+    if (invitation!=null)
+    {
+        invitationObservableList.remove(invitation);
+    }
+}
 
     /*/////////////////////////////////////
      *   Contacts inside chat Page Handling
@@ -143,7 +186,9 @@ public class ModelsFactory {
 
         if (selectedOnlineContactModel == null) {
             selectedOnlineContactModel = contactModel;
+
         }
+
         selectedOnlineContactModel.setContactModel(contactModel);
 
         System.out.println(contactModel.nameProperty().get() + " was set inside models factory");

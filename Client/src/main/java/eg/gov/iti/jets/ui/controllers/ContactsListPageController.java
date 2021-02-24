@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 public class ContactsListPageController implements Initializable {
     @FXML
     ListView<ContactModel> contactsListView;
+
     ObservableList<ContactModel> contactObservableList;
     ModelsFactory modelsFactory = ModelsFactory.getInstance();
     @FXML
@@ -26,9 +27,8 @@ public class ContactsListPageController implements Initializable {
     StageCoordinator stageCoordinator;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         stageCoordinator= StageCoordinator.getInstance();
-        modelsFactory = ModelsFactory.getInstance();
-        contactObservableList = modelsFactory.getCurrentUser().getContacts();
         contactObservableList = ModelsFactory.getInstance().getCurrentUser().getContacts();
         contactsListView.setItems(contactObservableList);
         contactsListView.setCellFactory(contactListView -> new ContactListCell());

@@ -72,6 +72,7 @@ public class ContactDaoImpl implements ContactDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 System.out.println("has contact");
+                System.out.println(resultSet.getString("name"));
                 Contact contact = new Contact(userPhone,resultSet.getString(1),resultSet.getString("name")
                         ,resultSet.getString("bio"),resultSet.getString("email")
                         ,resultSet.getString("picture"), Status.valueOf(resultSet.getString("status").toUpperCase())

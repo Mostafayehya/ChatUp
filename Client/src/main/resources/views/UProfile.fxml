@@ -33,18 +33,19 @@
                         <Pane prefHeight="94.0" prefWidth="124.0">
                             <children>
                                 <Circle fx:id="userImage" fill="WHITE" layoutX="62.0" layoutY="55.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
-                                <Button alignment="CENTER" layoutX="86.0" layoutY="67.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="10.0" style="-fx-background-radius: 100; -fx-background-color: #009688;">
+                                <Button fx:id="choosePhoto" alignment="CENTER" layoutX="86.0" layoutY="67.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="10.0" style="-fx-background-radius: 100; -fx-background-color: #009688;">
                                     <graphic>
                                         <FontIcon iconColor="#fffdfd" iconLiteral="mdi2c-camera" iconSize="20" wrappingWidth="20.0" />
                                     </graphic>
                                 </Button>
+                        <Circle fx:id="userMode" fill="green" layoutX="7.0" layoutY="97.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
                             </children>
                         </Pane>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="16.0" prefWidth="679.0" spacing="10.0">
                     <children>
-                        <Label fx:id="userName" prefHeight="11.0" prefWidth="98.0" style="-fx-font-size: 20;" text="User Name" />
+                        <Label fx:id="userName" alignment="CENTER" prefHeight="30.0" prefWidth="148.0" style="-fx-font-size: 20; -fx-text-fill: #009688;  -fx-font-weight: bold;" text="User Name" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="679.0" spacing="10.0">

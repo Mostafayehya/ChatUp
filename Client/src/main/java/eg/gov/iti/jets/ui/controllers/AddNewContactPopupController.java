@@ -1,6 +1,7 @@
 package eg.gov.iti.jets.ui.controllers;
 
 import domains.Contact;
+import domains.Invitation;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.utilities.ModelsFactory;
@@ -116,12 +117,13 @@ public class AddNewContactPopupController implements Initializable {
         addNewContactButton.addEventHandler(ActionEvent.ACTION, (e) -> {
             try {
                 ModelsFactory modelsFactory = ModelsFactory.getInstance();
-                String phone = modelsFactory.getCurrentUser().getPhoneNumber();
-                Contact contact = new Contact(phone, contactModel.getContactPhoneNumber());
+                String senderPhone = modelsFactory.getCurrentUser().getPhoneNumber();
+                Contact contact = new Contact(senderPhone, contactModel.getContactPhoneNumber());
+                Invitation invitation=new Invitation(senderPhone,contactModel.getContactPhoneNumber());
                 for (int i = 0; i < extraPhones.size(); i++) {
                     contact.getExtraNumbers().add(extraPhones.get(i).getValue());
                 }
-                int result = handleContactsService.addNewContact(contact);
+                int result = handleContactsService.addNewContact(contact,invitation);
                 if (result == -2) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("User not Found");
@@ -137,8 +139,9 @@ public class AddNewContactPopupController implements Initializable {
                     alert.setContentText("The contact you added already exists in your contacts list");
                     StageCoordinator.getInstance().hideNewContactPopup();
                     alert.showAndWait();
-                } else
-                    ModelsFactory.getInstance().retrieveContacts();
+                }
+                //else
+//                    ModelsFactory.getInstance().retrieveContacts();
                 StageCoordinator.getInstance().hideNewContactPopup();
             } catch (RemoteException ex) {
                 ex.printStackTrace();

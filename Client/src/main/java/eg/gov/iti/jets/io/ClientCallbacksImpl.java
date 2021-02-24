@@ -1,9 +1,11 @@
 package eg.gov.iti.jets.io;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import clientInterface.ClientCallbacks;
 import domains.FileMessage;
+import domains.Invitation;
 import domains.Message;
 import eg.gov.iti.jets.utilities.ModelsFactory;
 import eg.gov.iti.jets.utilities.StageCoordinator;
@@ -17,7 +19,7 @@ import org.controlsfx.control.Notifications;
 public class ClientCallbacksImpl extends UnicastRemoteObject implements ClientCallbacks {
     public ClientCallbacksImpl() throws RemoteException {
     }
-
+UserProperties userProperties = new UserProperties();
     @Override
     public void receiveMessage(Message message) throws RemoteException {
         System.out.println("Message recevied back from server and should be deliverd to" + message.getReceiverPhoneNumber());
@@ -26,6 +28,18 @@ public class ClientCallbacksImpl extends UnicastRemoteObject implements ClientCa
         });
 
     }
+
+    @Override
+    public void receiveInvetation(Invitation invitation) throws RemoteException {
+        ModelsFactory.getInstance().receiveInvitation(invitation);
+
+    }
+
+    @Override
+    public void acceptInvitation() throws RemoteException{
+        ModelsFactory.getInstance().retrieveContacts();
+    }
+
 
     @Override
     public void closeApp() throws RemoteException {
