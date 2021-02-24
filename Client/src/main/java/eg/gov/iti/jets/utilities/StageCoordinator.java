@@ -1,5 +1,8 @@
 package eg.gov.iti.jets.utilities;
 
+import domains.Mode;
+import eg.gov.iti.jets.ui.models.UserModel;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import javafx.animation.*;
@@ -17,6 +20,7 @@ import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class StageCoordinator {
@@ -251,6 +255,7 @@ public class StageCoordinator {
         if (stage == null) {
             throw new RuntimeException("Stage must be initialized before trying to close");
         }
+
         stage.close();
 
     }
