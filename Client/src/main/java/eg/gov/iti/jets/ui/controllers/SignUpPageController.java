@@ -69,6 +69,7 @@ public class SignUpPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         authenticationService = RMIManager.getAuthenticationService();
+        signUpButton.setDefaultButton(true);
         loginButton.addEventHandler(ActionEvent.ACTION, e -> {
             StageCoordinator stageCoordinator = StageCoordinator.getInstance();
             stageCoordinator.goToLoginPage();

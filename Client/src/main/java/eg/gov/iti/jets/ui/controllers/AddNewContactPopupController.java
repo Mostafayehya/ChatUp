@@ -56,6 +56,7 @@ public class AddNewContactPopupController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         validation = new Validation();
         bind();
+        addNewContactButton.setDefaultButton(true);
         contactNameTextField.setText("");
         contactNumberTextField.setText("");
         extraPhoneTextField.setText("");

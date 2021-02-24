@@ -41,6 +41,7 @@ public class LoginPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         modelsFactory = ModelsFactory.getInstance();
         authenticationService = RMIManager.getAuthenticationService();
+        loginButton.setDefaultButton(true);
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
         userProperties = new UserProperties();
