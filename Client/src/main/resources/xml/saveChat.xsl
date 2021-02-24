@@ -6,14 +6,17 @@
             <body>
                 <h2>Messages</h2>
                 <xsl:for-each select="Messages/Message">
-                    <section>
+                    <div>
                         <h3>
                             <xsl:value-of select="SenderName"/>
                         </h3>
                         <p>
                             <xsl:value-of select="MessageContent"/>
                         </p>
-                    </section>
+                        <p>
+                            <xsl:value-of select="Time"/>
+                        </p>
+                    </div>
                 </xsl:for-each>
             </body>
         </html>

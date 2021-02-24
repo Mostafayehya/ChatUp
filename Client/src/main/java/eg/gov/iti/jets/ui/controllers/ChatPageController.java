@@ -127,6 +127,9 @@ public class ChatPageController implements Initializable {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("HTML files","*.html","*.htm"));
             File chosenFile = fileChooser.showSaveDialog(saveButton.getScene().getWindow());
+            if(chosenFile==null){
+                return;
+            }
             ChatSaver chatSaver = new ChatSaver(messagesObservableList.subList(0,messagesObservableList.size()),chosenFile);
         });
 

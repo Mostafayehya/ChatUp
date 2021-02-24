@@ -46,8 +46,9 @@ public class ChatSaver {
         this.messages = messages;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
             builder = factory.newDocumentBuilder();
-            Document document = builder.newDocument();
+            document = builder.newDocument();
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -71,10 +72,13 @@ public class ChatSaver {
             Element messageContent = document.createElement("MessageContent");
             messageContent.setTextContent(messages.get(i).getContent());
             message.appendChild(messageContent);
-
+            Element time = document.createElement("Time");
+            time.setTextContent(messages.get(i).getTime());
+            message.appendChild(time);
             root.appendChild(message);
-            document.appendChild(root);
+
         }
+        document.appendChild(root);
     }
 
     public void saveDocument(){
@@ -93,7 +97,7 @@ public class ChatSaver {
     public void saveAsHTML(){
         Document instrDoc = null;
         try {
-            instrDoc = builder.parse(new File("src/main/resources/xml/saveChat.xsl"));
+            instrDoc = builder.parse(new File("C:\\Users\\Hadeer\\Desktop\\javaProject\\ChatUp\\Client\\src\\main\\resources\\xml\\saveChat.xsl"));
             DOMSource instrSource = new DOMSource(instrDoc);
 
             FileOutputStream fileOutputStream = new FileOutputStream(target);
