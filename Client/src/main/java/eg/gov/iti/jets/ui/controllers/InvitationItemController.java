@@ -3,6 +3,7 @@ package eg.gov.iti.jets.ui.controllers;
 import domains.Invitation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -19,6 +20,10 @@ public class InvitationItemController implements Initializable {
     Label senderNameLabel;
     @FXML
     Label phoneLabel;
+    @FXML
+    Button accBtn;
+    @FXML
+    Button rejBtn;
     Invitation invitationModel;
 
     public InvitationItemController(Invitation invitationModel) {

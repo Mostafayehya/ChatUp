@@ -344,4 +344,29 @@ public class StageCoordinator {
         stage.close();
 
     }
+
+    public void gotoInvitationListPage() {
+        if (stage == null) {
+            throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
+        }
+        if (!scenes.containsKey("invitations")) {
+            try {
+                System.out.println("Created New Scene");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/InvitationListPage.fxml"));
+                Parent invitationView = fxmlLoader.load();
+                Scene invitationScene = new Scene(invitationView,759.0, 626.0);
+                SceneData loginSceneData = new SceneData(fxmlLoader, invitationView, invitationScene);
+                scenes.put("invitations", loginSceneData);
+                stage.setScene(invitationScene);
+            } catch (IOException e) {
+                System.out.println("IO Exception: Couldn't load 'contacts Page' FXML file");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Loaded Existing Scene");
+            SceneData invitationSceneData = scenes.get("invitations");
+            Scene invitationScene = invitationSceneData.getScene();
+            stage.setScene(invitationScene);
+        }
+    }
 }

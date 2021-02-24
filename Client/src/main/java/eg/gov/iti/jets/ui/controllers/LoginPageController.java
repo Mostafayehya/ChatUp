@@ -92,7 +92,7 @@ public class LoginPageController implements Initializable {
             System.out.println(password);
             userProperties.saveUserProperties(phone, password);
 
-            StageCoordinator.getInstance().gotoContactsListPage();
+            StageCoordinator.getInstance().goToUserProfilePage();
 
         } catch (Exception ex) {
             ex.printStackTrace();
