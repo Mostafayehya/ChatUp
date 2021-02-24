@@ -71,5 +71,7 @@ public class NavigationbarControlller implements Initializable {
     @FXML
     void switchToGroupChat(MouseEvent event) {
 
+        stageCoordinator.navigateToGroupChatListPage();
+
     }
 }

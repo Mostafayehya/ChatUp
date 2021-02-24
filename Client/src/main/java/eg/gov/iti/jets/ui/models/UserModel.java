@@ -24,7 +24,7 @@ public class UserModel {
     StringProperty bio = new SimpleStringProperty();
     ObjectProperty<Status> status = new SimpleObjectProperty<>();
     ObjectProperty<Mode> mode = new SimpleObjectProperty<>();
-    ObservableList<ContactModel> contacts;
+    ObservableList<ContactModel> contacts = FXCollections.observableArrayList();
     ObjectProperty<Image> userImage = new SimpleObjectProperty<>();
     Map<String, ObservableList<Message>> messageMap = new HashMap<>();
 
@@ -57,6 +57,7 @@ public class UserModel {
     }
 
     public ObservableList<ContactModel> getContacts() {
+
         return contacts;
     }
 
@@ -238,8 +239,13 @@ public class UserModel {
 
     }
 
-    public ObservableList<Message> getObservableMessageListForContact(String contact) {
-        return messageMap.get(contact);
+    public ObservableList<Message> getObservableMessageListForContact(String contactPhone) {
+
+        var messageList = messageMap.get(contactPhone);
+        if (messageList == null) {
+            return messageMap.put(contactPhone, FXCollections.observableArrayList());
+        }
+        return messageMap.get(contactPhone);
     }
 
     public void addNewChatList(ContactModel contactModel) {
@@ -248,8 +254,13 @@ public class UserModel {
     }
 
     public void setMessagesList(List<ContactModel> contacts) {
-        for (ContactModel c : contacts) {
-            messageMap.put(c.contactPhoneNumber.get(), FXCollections.observableArrayList());
+
+        if (messageMap.isEmpty()) {
+            for (ContactModel c : contacts)
+                messageMap.put(c.contactPhoneNumber.get(), FXCollections.observableArrayList());
+        } else {
+            ContactModel newContactModel = contacts.get(contacts.size() - 1);
+            messageMap.put(newContactModel.getContactPhoneNumber(), FXCollections.observableArrayList());
         }
     }
 }

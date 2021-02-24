@@ -80,7 +80,7 @@ public class MessageListCell extends ListCell<Message> {
 
 
                 } else {
-                    messageItemController.setSenderName(message.getSenderPhoneNumber());
+                    messageItemController.setSenderName(message.getSenderName());
                     messageItemController.setMessageContent(message.getContent());
                     messageItemController.setTimeText(message.getTime());
                     messageItemController.setMessageOrientation(NodeOrientation.RIGHT_TO_LEFT);
