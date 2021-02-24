@@ -6,6 +6,7 @@ import domains.FileMessage;
 import domains.Message;
 import eg.gov.iti.jets.io.RMIManager;
 import eg.gov.iti.jets.ui.models.ContactModel;
+import eg.gov.iti.jets.utilities.ChatSaver;
 import eg.gov.iti.jets.utilities.MessageListCell;
 import eg.gov.iti.jets.utilities.ModelsFactory;
 import javafx.application.Platform;
@@ -119,6 +120,10 @@ public class ChatPageController implements Initializable {
 
         attachButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             sendFile();
+        });
+
+        saveButton.addEventHandler(ActionEvent.ACTION,(e)->{
+            ChatSaver chatSaver = new ChatSaver(messagesObservableList.subList(0,messagesObservableList.size()));
         });
 
     }
