@@ -75,6 +75,7 @@ public class ChatSaver {
             Element time = document.createElement("Time");
             time.setTextContent(messages.get(i).getTime());
             message.appendChild(time);
+
             root.appendChild(message);
 
         }
@@ -97,7 +98,7 @@ public class ChatSaver {
     public void saveAsHTML(){
         Document instrDoc = null;
         try {
-            instrDoc = builder.parse(new File("C:\\Users\\Hadeer\\Desktop\\javaProject\\ChatUp\\Client\\src\\main\\resources\\xml\\saveChat.xsl"));
+            instrDoc = builder.parse(new File("src/main/resources/xml/saveChat.xsl"));
             DOMSource instrSource = new DOMSource(instrDoc);
 
             FileOutputStream fileOutputStream = new FileOutputStream(target);
