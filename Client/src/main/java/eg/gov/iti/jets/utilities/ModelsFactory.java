@@ -16,10 +16,7 @@ import org.controlsfx.control.Notifications;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.rmi.RemoteException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import static eg.gov.iti.jets.utilities.DomainModelConverter.contactListToContactModelList;
 import static eg.gov.iti.jets.utilities.DomainModelConverter.getContactModel;
 
