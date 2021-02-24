@@ -19,6 +19,7 @@ public class GroupchatDaoImpl implements GroupchatDao{
             preparedStatement.setString(1, groupChat.getId());
             preparedStatement.setString(2, groupChat.getGroupName());
 
+            System.out.println("Too long for coloumn path " + groupChat.getGroupImagePath());
             preparedStatement.setString(3, groupChat.getGroupImagePath());
             int result = preparedStatement.executeUpdate();
             preparedStatement.close();

@@ -1,10 +1,7 @@
 package eg.gov.iti.jets.io;
 
 import clientInterface.ClientCallbacks;
-import services.AuthenticationService;
-import services.HandleContactsService;
-import services.SingleChatService;
-import services.UpdateService;
+import services.*;
 
 import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
@@ -22,6 +19,7 @@ public class RMIManager extends UnicastRemoteObject {
     private static SingleChatService singleChatService;
     private static RMIManager rmiManager;
     private static ClientCallbacks clientCallbacks;
+    private static GroupChatService groupChatService;
 
     private RMIManager() throws RemoteException {
         startRMIServices();
@@ -37,6 +35,7 @@ public class RMIManager extends UnicastRemoteObject {
             handleContactsService = (HandleContactsService) reg.lookup("HandleContactService");
             singleChatService = (SingleChatService) reg.lookup("SingleChatService");
             clientCallbacks = new ClientCallbacksImpl();
+            groupChatService = (GroupChatService) reg.lookup("GroupChatService");
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
@@ -82,5 +81,7 @@ public class RMIManager extends UnicastRemoteObject {
     public static ClientCallbacks getClientCallBack() {
         return clientCallbacks;
     }
+
+    public static GroupChatService getGroupChatService() { return groupChatService; }
 
 }

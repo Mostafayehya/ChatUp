@@ -24,6 +24,8 @@ public class GroupChat implements Serializable {
         this.groupImage = groupImage;
     }
 
+
+
     public String getAbout() {
         return about;
     }

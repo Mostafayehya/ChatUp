@@ -62,7 +62,6 @@ public class SignUpPageController implements Initializable {
 
     public SignUpPageController() {
         validation = new Validation();
-        File defaultUserImage = new File(getClass().getResource("/photos/user.jpg").getPath());
     }
 
 

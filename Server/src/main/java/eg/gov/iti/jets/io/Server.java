@@ -44,15 +44,6 @@ public class Server {
         return server;
     }
 
-    public AuthenticationService getnewAuthService() {
-        try {
-            authenticationService = new AuthenticationServiceImpl();
-            return authenticationService;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     //use in login
     public void addClient(String phoneNumber, ClientCallbacks clientImpl) {
