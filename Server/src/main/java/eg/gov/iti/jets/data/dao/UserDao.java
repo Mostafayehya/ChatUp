@@ -7,13 +7,22 @@ import java.sql.ResultSet;
 
 public interface UserDao {
     int insertUser(User user);
+
     User getUserByPhone(String phone);
+
     int updateUserData(User user);
+
     int updateUserMode(User user);
+
     int updateUserPass(User user);
+
     User getUserByPhoneAndPassword(String phone, String password);
+
     ResultSet getAllByCountry();
+
     ResultSet getAllByGender();
+
     ResultSet getAllOnOff();
 
+    ResultSet getAllUsers();
 }
