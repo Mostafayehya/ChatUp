@@ -189,6 +189,7 @@ public class StageCoordinator {
                     .position(Pos.CENTER)
                     .hideAfter(Duration.seconds(1))
                     .showWarning();
+            gotoContactsListPage();
 
         }
     }
