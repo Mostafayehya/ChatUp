@@ -52,6 +52,7 @@ public class InvitationDaoImpl implements InvitationDao{
     @Override
     public Invitation getSenderInfo(String userPhone,String recieverPhone) {
         Invitation invitation=null;
+
         try {
 
                 Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -69,6 +70,24 @@ public class InvitationDaoImpl implements InvitationDao{
             e.printStackTrace();
         }
         return invitation;
+    }
+
+    @Override
+    public int deleteinvitation(Invitation invitation) {
+
+            PreparedStatement preparedStatement = null;
+            try {
+                preparedStatement = connection.prepareStatement("delete  from invitation where senderphone=? and receiverPhone=?");
+                preparedStatement.setString(1,invitation.getSenderPhoneNumber());
+                preparedStatement.setString(2,invitation.getReceiverPhoneNumber());
+                preparedStatement.executeUpdate();
+                preparedStatement.close();
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return 0;
+
     }
 
 

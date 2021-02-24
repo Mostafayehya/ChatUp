@@ -35,6 +35,11 @@ UserProperties userProperties = new UserProperties();
 
     }
 
+    @Override
+    public void acceptInvitation() throws RemoteException{
+        ModelsFactory.getInstance().retrieveContacts();
+    }
+
 
     @Override
     public void closeApp() throws RemoteException {

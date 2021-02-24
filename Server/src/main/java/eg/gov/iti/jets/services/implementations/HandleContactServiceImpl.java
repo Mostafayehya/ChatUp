@@ -38,19 +38,49 @@ public class HandleContactServiceImpl extends UnicastRemoteObject implements Han
         if(contactDao.getContact(contact.getUserPhoneNumber(),contact.getContactPhoneNumber())!=null){
             return -3;
         }
-        System.out.println(    invitationDao.insertInvitation(invitation));
+
         ClientCallbacks client = onlineUsers.get(invitation.getReceiverPhoneNumber());
         if (client != null) {
-            System.out.println("user online");
             Invitation invitationWithSenderInfo= invitationDao.getSenderInfo(invitation.getSenderPhoneNumber(), invitation.getReceiverPhoneNumber());
             File file = new File(invitationWithSenderInfo.getSenderimage());
             System.out.println(invitationWithSenderInfo.getSenderimage());
             byte[] senderImageBytes = FilesUtilities.convertFileToByteArray(file,FilesUtilities.getFileExtension(file));
-           invitationWithSenderInfo.setSenderrImage(senderImageBytes);
+            invitationWithSenderInfo.setSenderrImage(senderImageBytes);
             client.receiveInvetation(invitationWithSenderInfo);
         }
-        return contactDao.insertContact(contact);
+        return invitationDao.insertInvitation(invitation);
+
     }
+    @Override
+    public void acceptInvitation(Invitation invitation)
+    {
+        Contact contact=new Contact();
+        contact.setContactPhoneNumber(invitation.getSenderPhoneNumber());
+        contact.setUserPhoneNumber(invitation.getReceiverPhoneNumber());
+          contactDao.insertContact(contact);
+        contact.setContactPhoneNumber(invitation.getReceiverPhoneNumber());
+        contact.setUserPhoneNumber(invitation.getSenderPhoneNumber());
+        contactDao.insertContact(contact);
+        invitationDao.deleteinvitation(invitation);
+       ClientCallbacks c= onlineUsers.get(invitation.getSenderPhoneNumber());
+       if(c!= null){
+           try {
+              c.acceptInvitation();
+           }catch (RemoteException e)
+           {
+               e.printStackTrace();
+           }
+
+       }
+
+
+    }
+    @Override
+    public void rejectInvitation(Invitation invitation)
+    {
+        invitationDao.deleteinvitation(invitation);
+    }
+
 
     @Override
     public List<Contact> getUserContacts(String userPhone)

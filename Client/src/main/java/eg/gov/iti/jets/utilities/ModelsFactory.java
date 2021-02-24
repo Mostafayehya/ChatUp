@@ -171,7 +171,13 @@ public class ModelsFactory {
         }
     }
 
-
+public void removeInvitation(Invitation invitation)
+{
+    if (invitation!=null)
+    {
+        invitationObservableList.remove(invitation);
+    }
+}
 
     /*/////////////////////////////////////
      *   Contacts inside chat Page Handling

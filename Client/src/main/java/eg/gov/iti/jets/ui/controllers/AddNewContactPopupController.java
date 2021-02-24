@@ -139,8 +139,9 @@ public class AddNewContactPopupController implements Initializable {
                     alert.setContentText("The contact you added already exists in your contacts list");
                     StageCoordinator.getInstance().hideNewContactPopup();
                     alert.showAndWait();
-                } else
-                    ModelsFactory.getInstance().retrieveContacts();
+                }
+                //else
+//                    ModelsFactory.getInstance().retrieveContacts();
                 StageCoordinator.getInstance().hideNewContactPopup();
             } catch (RemoteException ex) {
                 ex.printStackTrace();
