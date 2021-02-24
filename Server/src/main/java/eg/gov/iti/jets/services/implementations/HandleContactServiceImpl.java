@@ -38,11 +38,17 @@ public class HandleContactServiceImpl extends UnicastRemoteObject implements Han
         if(contactDao.getContact(contact.getUserPhoneNumber(),contact.getContactPhoneNumber())!=null){
             return -3;
         }
+        System.out.println(    invitationDao.insertInvitation(invitation));
         ClientCallbacks client = onlineUsers.get(invitation.getReceiverPhoneNumber());
-        if (client != null)
-            client.receiveInvetation(invitation);
-        invitationDao.insertInvitation(invitation);
-
+        if (client != null) {
+            System.out.println("user online");
+            Invitation invitationWithSenderInfo= invitationDao.getSenderInfo(invitation.getSenderPhoneNumber(), invitation.getReceiverPhoneNumber());
+            File file = new File(invitationWithSenderInfo.getSenderimage());
+            System.out.println(invitationWithSenderInfo.getSenderimage());
+            byte[] senderImageBytes = FilesUtilities.convertFileToByteArray(file,FilesUtilities.getFileExtension(file));
+           invitationWithSenderInfo.setSenderrImage(senderImageBytes);
+            client.receiveInvetation(invitationWithSenderInfo);
+        }
         return contactDao.insertContact(contact);
     }
 

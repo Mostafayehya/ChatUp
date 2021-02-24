@@ -25,6 +25,7 @@ public class UserModel {
     ObjectProperty<Status> status = new SimpleObjectProperty<>();
     ObjectProperty<Mode> mode = new SimpleObjectProperty<>();
     ObservableList<ContactModel> contacts;
+    ObservableList<Invitation> invitations;
     ObjectProperty<Image> userImage = new SimpleObjectProperty<>();
     Map<String, ObservableList<Message>> messageMap = new HashMap<>();
 
@@ -62,6 +63,14 @@ public class UserModel {
 
     public void setContacts(ObservableList<ContactModel> contacts) {
         this.contacts = contacts;
+    }
+
+    public ObservableList<Invitation> getInvitations() {
+        return invitations;
+    }
+
+    public void setInvitations(ObservableList<Invitation> invitations) {
+        this.invitations = invitations;
     }
 
     public UserModel(String phoneNumber, String name, String email, String password, String picture, Gender gender, String country, LocalDate dateOfBirth, String bio, Status status, Mode mode) {
@@ -237,6 +246,16 @@ public class UserModel {
         messageMap.get(from).add(message);
 
     }
+    public void receiveInvitation(Invitation invitation) {
+
+        if (invitation == null) {
+        invitations.add(invitation)   ;
+        }
+
+
+
+    }
+
 
     public ObservableList<Message> getObservableMessageListForContact(String contact) {
         return messageMap.get(contact);

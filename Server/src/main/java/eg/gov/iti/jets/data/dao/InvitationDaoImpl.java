@@ -3,10 +3,7 @@ package eg.gov.iti.jets.data.dao;
 import domains.*;
 import eg.gov.iti.jets.data.DataBaseConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +47,28 @@ public class InvitationDaoImpl implements InvitationDao{
         }
         System.out.println(invitations.size());
         return invitations;
+    }
+
+    @Override
+    public Invitation getSenderInfo(String userPhone,String recieverPhone) {
+        Invitation invitation=null;
+        try {
+
+                Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                ResultSet rs = statement.executeQuery("select name,picture from user where phoneNumber = " + userPhone);
+            if (rs.next()) {
+                invitation=new Invitation();
+                System.out.println(userPhone);
+                invitation.setSenderPhoneNumber(userPhone);
+                invitation.setReceiverPhoneNumber(recieverPhone);
+                invitation.setSenderName(rs.getString("name"));
+                invitation.setSenderimage(rs.getString("picture"));
+            }
+            statement.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return invitation;
     }
 
 

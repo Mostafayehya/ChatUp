@@ -116,9 +116,9 @@ public class AddNewContactPopupController implements Initializable {
         addNewContactButton.addEventHandler(ActionEvent.ACTION, (e) -> {
             try {
                 ModelsFactory modelsFactory = ModelsFactory.getInstance();
-                String phone = modelsFactory.getCurrentUser().getPhoneNumber();
-                Contact contact = new Contact(phone, contactModel.getContactPhoneNumber());
-                Invitation invitation=new Invitation(phone,contactModel.getContactPhoneNumber());
+                String senderPhone = modelsFactory.getCurrentUser().getPhoneNumber();
+                Contact contact = new Contact(senderPhone, contactModel.getContactPhoneNumber());
+                Invitation invitation=new Invitation(senderPhone,contactModel.getContactPhoneNumber());
                 for (int i = 0; i < extraPhones.size(); i++) {
                     contact.getExtraNumbers().add(extraPhones.get(i).getValue());
                 }

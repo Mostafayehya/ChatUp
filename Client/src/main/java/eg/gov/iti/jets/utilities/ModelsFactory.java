@@ -38,6 +38,7 @@ public class ModelsFactory {
     // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact
 
     private ModelsFactory() {
+        invitationObservableList=FXCollections.observableArrayList();
     }
 
     public synchronized static ModelsFactory getInstance(){
@@ -59,6 +60,7 @@ public class ModelsFactory {
 
         }
         retrieveContacts();
+        retrieveInvitations();
     }
 
     public void deleteCurrentUser()
@@ -87,9 +89,19 @@ public class ModelsFactory {
             currentUser.addNewChatList(contactListToContactModelList(contacts).get(contacts.size() - 1));
         }
 
-        getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
+        //getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
     }
 
+    public void retrieveInvitations() {
+        List<Invitation> invitations = null;
+        try { // Todo) move the if inside the try, no point having it out side
+            invitations = RMIManager.getHandleContactsService().getUserInvitation(currentUser.getPhoneNumber());
+
+            invitationObservableList=FXCollections.observableArrayList(invitations);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
     public UserModel getCurrentUser() {
 
         if (currentUser == null) {
@@ -131,7 +143,9 @@ public class ModelsFactory {
         }
     }
     public void receiveInvitation(Invitation invitation) {
+
         if (invitation != null) {
+            currentUser.receiveInvitation(invitation);
             invitationObservableList.add(invitation);
         }
     }
