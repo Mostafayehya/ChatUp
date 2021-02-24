@@ -31,7 +31,6 @@ public class ModelsFactory {
     ContactModel selectedOnlineContactModel;
 
 
-
     // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact
 
     public synchronized static ModelsFactory getInstance() {
@@ -61,11 +60,16 @@ public class ModelsFactory {
             contacts = RMIManager.getHandleContactsService().getUserContacts(currentUser.getPhoneNumber());
             System.out.println("Current user's all contacts loaded successfully with size = " + contacts.size());
 
+            currentUser.getContacts().setAll(contactListToContactModelList(contacts));
+            currentUser.setMessagesList(contactListToContactModelList(contacts));
+
+            if (!currentUser.getContacts().isEmpty())
+                getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        if (currentUser.getContacts() == null || contacts.size() == 0) {
-            currentUser.setContacts(FXCollections.observableList(contactListToContactModelList(contacts)));
+/*        if (currentUser.getContacts() == null || contacts.size() == 0) {
+            currentUser.getContacts().setAll(contactListToContactModelList(contacts));
             currentUser.setMessagesList(contactListToContactModelList(contacts));
         } else { // todo This looks really ugly, use temp references to simplify this
             currentUser.getContacts().add(contactListToContactModelList(contacts).get(contacts.size() - 1));
@@ -74,7 +78,8 @@ public class ModelsFactory {
 
             getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
 
-        }
+
+        }*/
 
     }
 
@@ -107,14 +112,14 @@ public class ModelsFactory {
 
             Stage stage = StageCoordinator.getInstance().getStage();
             Platform.runLater(() -> {
-                if(!stage.isShowing() || !stage.isFocused()){
+                if (!stage.isShowing() || !stage.isFocused()) {
 
                     stage.show();
                     stage.requestFocus();
                 }
                 Notifications.create()
                         .title("New Message")
-                        .text("You have new message from "+ message.getSenderName())
+                        .text("You have new message from " + message.getSenderName())
                         .darkStyle()
                         .position(Pos.BOTTOM_RIGHT)
                         .hideAfter(Duration.seconds(1))

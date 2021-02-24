@@ -2,14 +2,8 @@ package eg.gov.iti.jets.io;
 
 import clientInterface.ClientCallbacks;
 import eg.gov.iti.jets.data.DataBaseConnection;
-import eg.gov.iti.jets.services.implementations.AuthenticationServiceImpl;
-import eg.gov.iti.jets.services.implementations.SingleChatServiceImpl;
-import eg.gov.iti.jets.services.implementations.UpdateServiceImpl;
-import eg.gov.iti.jets.services.implementations.HandleContactServiceImpl;
-import services.AuthenticationService;
-import services.UpdateService;
-import services.HandleContactsService;
-import services.SingleChatService;
+import eg.gov.iti.jets.services.implementations.*;
+import services.*;
 
 
 import java.rmi.AlreadyBoundException;
@@ -28,6 +22,7 @@ public class Server {
     UpdateService updateService;
     HandleContactsService handleContactsService;
     SingleChatService singleChatService;
+    GroupChatService groupChatService;
     //list of onlineClients
     Map<String, ClientCallbacks> onlineClients;
     DataBaseConnection databaseConnection;
@@ -85,10 +80,12 @@ public class Server {
             registry.unbind("HandleContactService");
             registry.unbind("SingleChatService");
             registry.unbind("UpdateService");
+            registry.unbind("GroupChatService");
             UnicastRemoteObject.unexportObject(updateService, true);
             UnicastRemoteObject.unexportObject(authenticationService, true);
             UnicastRemoteObject.unexportObject(handleContactsService, true);
             UnicastRemoteObject.unexportObject(singleChatService, true);
+            UnicastRemoteObject.unexportObject(groupChatService, true);
 
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -109,11 +106,13 @@ public class Server {
             handleContactsService = new HandleContactServiceImpl();
             singleChatService = new SingleChatServiceImpl();
             updateService = new UpdateServiceImpl();
+            groupChatService = new GroupChatServiceImpl();
             registry = LocateRegistry.getRegistry(8189);
             registry.bind("SingleChatService", singleChatService);
             registry.bind("AuthenticationService", authenticationService);
             registry.bind("HandleContactService", handleContactsService);
             registry.bind("UpdateService", updateService);
+            registry.bind("GroupChatService",groupChatService);
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (AlreadyBoundException e) {
