@@ -74,9 +74,11 @@ public class ModelsFactory {
             currentUser.getContacts().add(contactListToContactModelList(contacts).get(contacts.size() - 1));
             // Todo this is a result of the horrible handling of adding Contacts, refactor to push based mechanism instead of pulling.
             currentUser.addNewChatList(contactListToContactModelList(contacts).get(contacts.size() - 1));
+
+            getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
+
         }
 
-        getCurrentSelectedOnlineContact().setContactModel(getContactModel(contacts.get(0)));
     }
 
     public UserModel getCurrentUser() {
