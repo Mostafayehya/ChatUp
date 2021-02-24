@@ -274,7 +274,7 @@ public class UserModel {
 
         if (messageMap.isEmpty()) {
             for (ContactModel c : contacts)
-                messageMap.put(c.contactPhoneNumber.get(), FXCollections.observableArrayList());
+                messageMap.put(c.getContactPhoneNumber(), FXCollections.observableArrayList());
         } else {
             ContactModel newContactModel = contacts.get(contacts.size() - 1);
             messageMap.put(newContactModel.getContactPhoneNumber(), FXCollections.observableArrayList());
