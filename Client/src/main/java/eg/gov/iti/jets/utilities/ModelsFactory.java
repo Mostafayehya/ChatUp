@@ -30,9 +30,9 @@ public class ModelsFactory {
 
     ObservableList<Message> messagesObservableList;
     ObservableList<Invitation> invitationObservableList;
-    ContactModel selectedOnlineContactModel = new ContactModel();
+    //ContactModel selectedOnlineContactModel = new ContactModel();
 
- //   ContactModel selectedOnlineContactModel;
+    ContactModel selectedOnlineContactModel;
 
 
     // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact
