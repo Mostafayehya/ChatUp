@@ -77,6 +77,7 @@ public class MessageListCell extends ListCell<Message> {
                     messageItemController.setMessageContent(message.getContent());
                     messageItemController.setTimeText(message.getTime());
                     messageItemController.setMessageOrientation(NodeOrientation.LEFT_TO_RIGHT);
+                    messageItemController.setSenderCircleImage(currentUser.getUserImage());
 
 
                 } else {

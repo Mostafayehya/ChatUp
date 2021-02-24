@@ -44,10 +44,9 @@ public class CreateChatGroupController implements Initializable {
 
     }
 
-    public void cancelCreate(MouseEvent mouseEvent) {
-
-
+    @FXML
+    void cancel(MouseEvent event) {
         stageCoordinator.navigateToGroupChatListPage();
-
     }
+
 }

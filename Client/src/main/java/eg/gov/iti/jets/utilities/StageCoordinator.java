@@ -94,7 +94,7 @@ public class StageCoordinator {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Loaded Existing Scene");
+            System.out.println("Loaded Existing Scene: groupChatListPage " );
             SceneData groupChatListSceneData = scenes.get("groupChatListPage");
             Scene groupChatListScene = groupChatListSceneData.getScene();
             stage.setScene(groupChatListScene);
@@ -111,10 +111,9 @@ public class StageCoordinator {
                 System.out.println("Created New Scene");
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/CreateChatGroupPage.fxml"));
                 Parent createGroupChatPageView = fxmlLoader.load();
-                parentContainer = new StackPane(createGroupChatPageView);
-                Scene createGroupChatScene = new Scene(parentContainer, 759.0, 626.0);
-                SceneData createGroupChatSceneData = new SceneData(fxmlLoader, parentContainer, createGroupChatScene);
-                scenes.put("groupChatListPage", createGroupChatSceneData);
+                Scene createGroupChatScene = new Scene(createGroupChatPageView);
+                SceneData createGroupChatSceneData = new SceneData(fxmlLoader, createGroupChatPageView, createGroupChatScene);
+                scenes.put("CreateGroupChatPage", createGroupChatSceneData);
                 stage.setScene(createGroupChatScene);
             } catch (IOException e) {
                 System.out.println("IO Exception: Couldn't load 'CreateChatGroup' FXML file");
@@ -122,7 +121,7 @@ public class StageCoordinator {
             }
         } else {
             System.out.println("Loaded Existing Scene");
-            SceneData createGroupChatSceneData = scenes.get("groupChatListPage");
+            SceneData createGroupChatSceneData = scenes.get("CreateGroupChatPage");
             Scene createGroupChatScene = createGroupChatSceneData.getScene();
             stage.setScene(createGroupChatScene);
         }
@@ -271,15 +270,6 @@ public class StageCoordinator {
             Scene contactsScene = contactsSceneData.getScene();
             stage.setScene(contactsScene);
         }
-
-       /* try {
-            Parent root = FXMLLoader.load(getClass().getResource("/views/UProfile.fxml"));
-            parentContainer = new StackPane(root);
-            stage.setScene(new Scene(parentContainer, 759.0, 626.0));
-            visibleRoot = (BorderPane) root;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     }
 
     public void hideNewContactPopup() {

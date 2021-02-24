@@ -31,7 +31,6 @@ public class GroupChatListController implements Initializable {
     @FXML
     void groupChatListClicked(MouseEvent event) {
 
-
     }
 
     @FXML

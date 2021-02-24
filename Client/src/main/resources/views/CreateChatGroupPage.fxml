@@ -14,68 +14,77 @@
 <?import org.controlsfx.control.textfield.CustomTextField?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane prefHeight="626.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eg.gov.iti.jets.ui.controllers.CreateChatGroupController">
+<BorderPane prefHeight="626.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/15.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="eg.gov.iti.jets.ui.controllers.CreateChatGroupController">
     <stylesheets>
-        <URL value="@../css/loginStyle.css" />
+        <URL value="@../css/loginStyle.css"/>
     </stylesheets>
+
+    <left>
+        <fx:include source="NavigationBar.fxml"/>
+    </left>
+
     <center>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
-            
+
             <children>
-            <HBox fx:id="ImagePickerContainer" alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
-                <children>
-                    <Pane prefHeight="112.0" prefWidth="150.0">
-                        <children>
-                            <Circle fx:id="imageCircle" fill="WHITE" layoutX="73.0" layoutY="57.0" radius="57.0" stroke="BLACK" strokeType="INSIDE" />
-                            <Button fx:id="choosePhoto" layoutX="96.0" layoutY="75.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="28.0" style="-fx-background-radius: 100; -fx-background-color: #009688;">
-                                <graphic>
-                                    <FontIcon iconColor="#fffdfd" iconLiteral="mdi2c-camera" iconSize="20" text="󰄀" wrappingWidth="20.0" />
-                                </graphic>
-                            </Button>
-                        </children>
-                    </Pane>
-                </children>
-            </HBox>
-            <Region prefHeight="70.0" prefWidth="719.0" />
+                <Label styleClass="blackHeader" text="Creat New Group Chat"/>
+                <HBox fx:id="ImagePickerContainer" alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Pane prefHeight="112.0" prefWidth="150.0">
+                            <children>
+                                <Circle fx:id="imageCircle" fill="WHITE" layoutX="73.0" layoutY="57.0" radius="57.0"
+                                        stroke="BLACK" strokeType="INSIDE"/>
+                                <Button fx:id="choosePhoto" layoutX="96.0" layoutY="75.0" mnemonicParsing="false"
+                                        prefHeight="29.0" prefWidth="28.0"
+                                        style="-fx-background-radius: 100; -fx-background-color: #009688;">
+                                    <graphic>
+                                        <FontIcon iconColor="#fffdfd" iconLiteral="mdi2c-camera" iconSize="20" text="󰄀"
+                                                  wrappingWidth="20.0"/>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </Pane>
+                    </children>
+                </HBox>
+                <Region prefHeight="70.0" prefWidth="719.0"/>
                 <CustomTextField fx:id="groupNameTextField" promptText="Group Name" styleClass="textField">
                     <left>
-                        <FontIcon iconColor="gray" iconLiteral="mdi2r-rename-box" />
+                        <FontIcon iconColor="gray" iconLiteral="mdi2r-rename-box"/>
                     </left>
-               <font>
-                  <Font size="22.0" />
-               </font>
+                    <font>
+                        <Font size="22.0"/>
+                    </font>
                 </CustomTextField>
                 <CustomTextField fx:id="groupInfoTextField" promptText="Info" styleClass="textField">
                     <left>
-                        <FontIcon iconColor="gray" iconLiteral="fas-info-circle" />
+                        <FontIcon iconColor="gray" iconLiteral="fas-info-circle"/>
                     </left>
-               <font>
-                  <Font size="22.0" />
-               </font>
+                    <font>
+                        <Font size="22.0"/>
+                    </font>
                 </CustomTextField>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                     <children>
-                        <Button fx:id="createGroupButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="107.0" styleClass="cyanButton" text="Create Group">
-                     <font>
-                        <Font size="22.0" />
-                     </font></Button>
-                        <Button fx:id="cancelButton" mnemonicParsing="false" onMouseClicked="#cancelCreate" prefHeight="47.0" prefWidth="117.0" styleClass="cyanButton" text="Cancel">
-                     <font>
-                        <Font size="22.0" />
-                     </font></Button>
+                        <Button fx:id="createGroupButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="107.0"
+                                styleClass="cyanButton" text="Create Group">
+                            <font>
+                                <Font size="22.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="cancelButton" mnemonicParsing="false" onMouseClicked="#cancel" prefHeight="47.0"
+                                prefWidth="117.0" styleClass="cyanButton" text="Cancel">
+                            <font>
+                                <Font size="22.0"/>
+                            </font>
+                        </Button>
                     </children>
                 </HBox>
             </children>
             <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                <Insets bottom="20.0" left="20.0" right="20.0"/>
             </padding>
         </VBox>
     </center>
-   <top>
-          <Label styleClass="blackHeader" text="Creat New Group Chat" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets top="20.0" />
-         </BorderPane.margin>
-      </Label>
-   </top>
 </BorderPane>
