@@ -186,7 +186,9 @@ public void removeInvitation(Invitation invitation)
 
         if (selectedOnlineContactModel == null) {
             selectedOnlineContactModel = contactModel;
+
         }
+
         selectedOnlineContactModel.setContactModel(contactModel);
 
         System.out.println(contactModel.nameProperty().get() + " was set inside models factory");
