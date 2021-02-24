@@ -12,5 +12,6 @@ public interface ClientCallbacks extends Remote {
 
     void closeApp() throws RemoteException;
 
+    void notifiySignout(String phoneNumber);
 }
 

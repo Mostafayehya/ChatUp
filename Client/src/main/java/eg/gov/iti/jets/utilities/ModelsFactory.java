@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -158,5 +159,33 @@ public class ModelsFactory {
 
         }
 
+    }
+
+    public void notifySignout(String phoneNumber) {
+
+        final String[] contactName = new String[1];
+        currentUser.getContacts().forEach(contactModel -> {
+            if (contactModel.getContactPhoneNumber().equals(phoneNumber))
+                contactName[0] =contactModel.getName();
+        });
+                System.out.println("signout nofication recieved in models factory ");
+
+        Stage stage = StageCoordinator.getInstance().getStage();
+        Platform.runLater(() -> {
+            if (!stage.isShowing() || !stage.isFocused()) {
+
+                stage.show();
+                stage.requestFocus();
+            }
+            Notifications.create()
+                    .title("Notification")
+                    .text("User  " + contactName[0] +"Signed out")
+                    .darkStyle()
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(1))
+                    .showWarning();
+        });
+        // TODO remove password from cache .
+        StageCoordinator.getInstance().goToLoginPage();
     }
 }

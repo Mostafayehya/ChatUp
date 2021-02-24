@@ -37,4 +37,11 @@ public class ClientCallbacksImpl extends UnicastRemoteObject implements ClientCa
         });
 
     }
+
+    @Override
+    public void notifiySignout(String phoneNumber) {
+        System.out.println("signout notification received in client side");
+
+        ModelsFactory.getInstance().notifySignout(phoneNumber);
+    }
 }

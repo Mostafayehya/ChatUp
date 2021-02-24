@@ -1,5 +1,9 @@
 package eg.gov.iti.jets.utilities;
 
+import eg.gov.iti.jets.io.RMIManager;
+import eg.gov.iti.jets.ui.models.ContactModel;
+import eg.gov.iti.jets.ui.models.UserModel;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -10,6 +14,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import services.AuthenticationService;
 
 
 import java.io.IOException;
@@ -25,11 +30,13 @@ public class StageCoordinator {
     Popup changUserPassPopup;
     private static StageCoordinator stageCoordinator;
     ModelsFactory modelsFactory;
+    AuthenticationService authenticationService;
     private final Map<String, SceneData> scenes = new HashMap<>();
 
     private StageCoordinator() {
         stage = null;
         modelsFactory = ModelsFactory.getInstance();
+        authenticationService = RMIManager.getAuthenticationService();
     }
 
     public void setStage(Stage stage) {
@@ -257,7 +264,7 @@ public class StageCoordinator {
                 System.out.println("Created New Scene");
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/UProfile.fxml"));
                 Parent contactsView = fxmlLoader.load();
-                Scene contactsScene = new Scene(contactsView,759.0, 626.0);
+                Scene contactsScene = new Scene(contactsView, 759.0, 626.0);
                 SceneData loginSceneData = new SceneData(fxmlLoader, contactsView, contactsScene);
                 scenes.put("UProfile", loginSceneData);
                 stage.setScene(contactsScene);
@@ -331,6 +338,11 @@ public class StageCoordinator {
     public void closeApp() {
         if (stage == null) {
             throw new RuntimeException("Stage must be initialized before trying to close");
+        }
+        try {
+            authenticationService.signout(modelsFactory.getCurrentUser().getPhoneNumber());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         stage.close();
