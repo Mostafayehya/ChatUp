@@ -35,8 +35,8 @@ public class Server {
     private Server() {
         onlineClients = new HashMap<>();
         try {
-
-            registry = LocateRegistry.createRegistry(8189);
+            System.setProperty("java.rmi.server.hostname", "192.168.8.101");
+            registry = LocateRegistry.createRegistry(1099);
 
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -109,7 +109,7 @@ public class Server {
             handleContactsService = new HandleContactServiceImpl();
             singleChatService = new SingleChatServiceImpl();
             updateService = new UpdateServiceImpl();
-            registry = LocateRegistry.getRegistry(8189);
+            registry = LocateRegistry.getRegistry(1099);
             registry.bind("SingleChatService", singleChatService);
             registry.bind("AuthenticationService", authenticationService);
             registry.bind("HandleContactService", handleContactsService);
