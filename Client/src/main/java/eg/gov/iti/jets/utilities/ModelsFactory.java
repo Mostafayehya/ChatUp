@@ -32,7 +32,7 @@ public class ModelsFactory {
     ObservableList<Invitation> invitationObservableList;
     ContactModel selectedOnlineContactModel = new ContactModel();
 
-    ContactModel selectedOnlineContactModel;
+ //   ContactModel selectedOnlineContactModel;
 
 
     // todo) create map of obervableChatLists to have the chat's data with different contacts, changes when clicking a contact
@@ -73,7 +73,7 @@ public class ModelsFactory {
         try { // Todo) move the if inside the try, no point having it out side
             contacts = RMIManager.getHandleContactsService().getUserContacts(currentUser.getPhoneNumber());
             System.out.println("Current user's all contacts loaded successfully with size = " + contacts.size());
-            contactModelList=contactListToContactModelList(contacts);
+           // contactModelList=contactListToContactModelList(contacts);
 
         } catch (RemoteException e) {
             e.printStackTrace();
