@@ -1,6 +1,7 @@
 package clientInterface;
 
 import domains.Invitation;
+import domains.FileMessage;
 import domains.Message;
 
 import java.rmi.Remote;
@@ -12,5 +13,6 @@ public interface ClientCallbacks extends Remote {
     void receiveInvetation(Invitation invitation) throws RemoteException;
 
     void closeApp() throws RemoteException;
+
 }
 

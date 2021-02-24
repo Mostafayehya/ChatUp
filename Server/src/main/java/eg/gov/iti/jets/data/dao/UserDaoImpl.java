@@ -10,8 +10,6 @@ import eg.gov.iti.jets.utilities.JavaSqlTimeConverter;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserDaoImpl implements UserDao {
     Connection connection;
@@ -96,8 +94,6 @@ public class UserDaoImpl implements UserDao {
                 user.setDateOfBirth(today);
                 user.setBio(rs.getString(9));
                 user.setStatus(Status.valueOf(rs.getObject(10).toString().toUpperCase()));
-                System.out.println(Mode.valueOf(rs.getObject(11).toString().toUpperCase()));
-                System.out.println(rs.getObject(11).toString());
                 user.setMode(Mode.valueOf(rs.getObject(11).toString().toUpperCase()));
             }
             statement.close();
@@ -197,7 +193,19 @@ public class UserDaoImpl implements UserDao {
         return -1;
     }
 
+public ResultSet getAllUsers(){
 
+    ResultSet rs = null;
+    try {
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        rs = statement.executeQuery("SELECT name, phoneNumber from user ");
+        //statement.close();
+        return rs;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return rs;
+}
 
 
 

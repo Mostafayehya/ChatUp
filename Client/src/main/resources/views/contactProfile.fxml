@@ -75,7 +75,7 @@
                                        <font>
                                           <Font size="11.5" />
                                        </font></Label>
-                                    <Button layoutX="207.0" layoutY="118.0" mnemonicParsing="false" onAction="#changePhoto" style="-fx-background-radius: 30; -fx-background-color: #009688;" textFill="#ebe4e4">
+                                    <Button fx:id="changephoto" layoutX="207.0" layoutY="118.0" mnemonicParsing="false" onAction="#changePhoto" style="-fx-background-radius: 30; -fx-background-color: #009688;" textFill="#ebe4e4">
                                        <effect>
                                           <DropShadow />
                                        </effect>
@@ -83,7 +83,7 @@
                                           <FontIcon iconColor="#393740" iconLiteral="fas-camera" />
                                        </graphic>
                                     </Button>
-                                    <Circle fx:id="status" fill="#1f52ff" layoutX="123.0" layoutY="128.0" radius="14.0" stroke="BLACK" strokeType="INSIDE">
+                                    <Circle fx:id="mode" fill="#1f52ff" layoutX="123.0" layoutY="128.0" radius="14.0" stroke="BLACK" strokeType="INSIDE">
                                        <effect>
                                           <DropShadow />
                                        </effect>
@@ -132,12 +132,12 @@
                         <Line endX="99.39263916015625" endY="-305.029296875" startX="99.51251220703125" startY="-503.32220458984375" stroke="#c9c3c3" />
                         <VBox spacing="10.0">
                            <children>
-                              <TextField prefHeight="25.0" prefWidth="261.0" promptText="First name" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
-                              <ListView prefHeight="25.0" prefWidth="261.0" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
-                              <TextField prefHeight="25.0" prefWidth="261.0" promptText="Email" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
-                              <TextField prefHeight="25.0" prefWidth="261.0" promptText="Category" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
+                              <TextField fx:id="firstname" prefHeight="25.0" prefWidth="261.0" promptText="First name" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
+                              <ListView fx:id="extranumber" prefHeight="25.0" prefWidth="261.0" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
+                              <TextField fx:id="email" prefHeight="25.0" prefWidth="261.0" promptText="Email" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
+                              <TextField fx:id="category" prefHeight="25.0" prefWidth="261.0" promptText="Category" style="-fx-border-color: #c9c3c3; -fx-border-width: 0 0 1 0; -fx-border-radius: 30;" />
                               <Pane prefHeight="36.0" prefWidth="194.0" />
-                              <Button mnemonicParsing="false" onAction="#save" style="-fx-background-radius: 30; -fx-background-color: #009688;" text="Save Changes" textFill="#ebe4e4">
+                              <Button fx:id="savechanges" mnemonicParsing="false" onAction="#save" style="-fx-background-radius: 30; -fx-background-color: #009688;" text="Save Changes" textFill="#ebe4e4">
                                  <effect>
                                     <DropShadow />
                                  </effect>
@@ -146,7 +146,7 @@
                         </VBox>
                         <VBox prefHeight="272.0" prefWidth="0.0" spacing="12.0">
                            <children>
-                              <Button minWidth="7.0" mnemonicParsing="false" onAction="#changeFirstName" prefHeight="25.0" prefWidth="33.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
+                              <Button fx:id="editfirstname" minWidth="7.0" mnemonicParsing="false" onAction="#changeFirstName" prefHeight="25.0" prefWidth="33.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
                                  <effect>
                                     <DropShadow>
                                        <color>
@@ -160,7 +160,7 @@
                                     <FontIcon iconColor="#393740" iconLiteral="fas-pen" wrappingWidth="13.0" />
                                  </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#addPhone" prefHeight="25.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
+                              <Button fx:id="addextranumber" layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#addPhone" prefHeight="25.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
                                  <effect>
                                     <DropShadow>
                                        <color>
@@ -172,7 +172,7 @@
                                     <FontIcon iconColor="#393740" iconLiteral="fas-pen" />
                                  </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
+                              <Button fx:id="editemail" layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#000">
                                  <effect>
                                     <DropShadow>
                                        <color>
@@ -184,7 +184,7 @@
                                     <FontIcon iconColor="#393740" iconLiteral="fas-pen" onDragDetected="#changeEmail" />
                                  </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#changeCategory" prefHeight="25.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#6f6d6d">
+                              <Button fx:id="editcategory" layoutX="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#changeCategory" prefHeight="25.0" style="-fx-background-radius: 50; -fx-background-color: #009688;" textFill="#6f6d6d">
                                  <effect>
                                     <DropShadow>
                                        <color>

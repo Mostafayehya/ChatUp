@@ -1,5 +1,6 @@
 package services;
 
+import domains.FileMessage;
 import domains.Message;
 
 import java.rmi.Remote;

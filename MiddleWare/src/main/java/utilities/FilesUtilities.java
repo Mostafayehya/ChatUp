@@ -1,9 +1,6 @@
 package utilities;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
-import javafx.scene.image.Image;
 import org.apache.commons.io.FileUtils;
 
 public class FilesUtilities {
@@ -17,18 +14,12 @@ public class FilesUtilities {
         return bytes;
     }
 
-    public static BufferedImage convertImageByteArrayToBufferedImage(byte[] imageBytes) {
-        InputStream is = new ByteArrayInputStream(imageBytes);
+    public static void writeByteArrayToFile(File file,byte[]fileBytes){
         try {
-            return ImageIO.read(is);
+            FileUtils.writeByteArrayToFile(file,fileBytes);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
-    }
-    public static Image convertByteArrayToImage(byte[]imageBytes){
-        InputStream is =new ByteArrayInputStream(imageBytes);
-        return new Image(is);
     }
 
     public static String getFileExtension(File file){

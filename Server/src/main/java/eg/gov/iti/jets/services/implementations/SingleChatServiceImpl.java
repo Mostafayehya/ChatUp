@@ -1,6 +1,7 @@
 package eg.gov.iti.jets.services.implementations;
 
 import clientInterface.ClientCallbacks;
+import domains.FileMessage;
 import domains.Message;
 import eg.gov.iti.jets.io.Server;
 import services.SingleChatService;
@@ -24,4 +25,5 @@ public class SingleChatServiceImpl extends UnicastRemoteObject implements Single
         if (client != null)
             client.receiveMessage(message);
     }
+
 }

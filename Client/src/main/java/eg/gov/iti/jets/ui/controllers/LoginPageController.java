@@ -43,6 +43,7 @@ public class LoginPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         modelsFactory = ModelsFactory.getInstance();
         authenticationService = RMIManager.getAuthenticationService();
+        loginButton.setDefaultButton(true);
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
         userProperties = new UserProperties();
@@ -62,7 +63,7 @@ public class LoginPageController implements Initializable {
             }
         }
         phoneTextField.addEventFilter(KeyEvent.KEY_TYPED, (e) -> {
-            if (!new Validation().validatePhoneNumber(e.getCharacter()) || phoneTextField.getText().length() > 11) {
+            if (!new Validation().validatePhoneNumber(e.getCharacter()) || phoneTextField.getText().length() >= 11) {
                 e.consume();
             }
         });
@@ -81,7 +82,7 @@ public class LoginPageController implements Initializable {
         String phone = phoneTextField.getText();
         String password = passwordTextField.getText();
         try {
-            user = authenticationService.login(phone, password, new ClientCallbacksImpl());
+            user = authenticationService.login(phone, password,RMIManager.getClientCallBack());
             if (user == null) {
                 failed.setText("Either phone or password is incorrect");
                 return;
@@ -91,7 +92,7 @@ public class LoginPageController implements Initializable {
             System.out.println(password);
             userProperties.saveUserProperties(phone, password);
 
-            StageCoordinator.getInstance().goToUserProfilePage();
+            StageCoordinator.getInstance().gotoContactsListPage();
 
         } catch (Exception ex) {
             ex.printStackTrace();

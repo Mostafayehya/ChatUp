@@ -69,6 +69,7 @@ public class SignUpPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         authenticationService = RMIManager.getAuthenticationService();
+        signUpButton.setDefaultButton(true);
         loginButton.addEventHandler(ActionEvent.ACTION, e -> {
             StageCoordinator stageCoordinator = StageCoordinator.getInstance();
             stageCoordinator.goToLoginPage();
@@ -177,7 +178,7 @@ public class SignUpPageController implements Initializable {
 
     private boolean validateFields() {
         boolean validated = true;
-        if (phoneTextField.getText().equals("") || phoneTextField.getText().length() < 11) {
+        if (phoneTextField.getText().equals("") || phoneTextField.getText().length() != 11) {
             phoneTextField.setStyle("-fx-border-color: red;");
             validated = false;
         } else {
