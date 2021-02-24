@@ -96,7 +96,7 @@ public class ChatSaver {
             instrDoc = builder.parse(new File("src/main/resources/xml/saveChat.xsl"));
             DOMSource instrSource = new DOMSource(instrDoc);
 
-            FileOutputStream fileOutputStream = new FileOutputStream(new File("src/main/resources/xml/transform.html"));
+            FileOutputStream fileOutputStream = new FileOutputStream(target);
             StreamResult result = new StreamResult(fileOutputStream);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();

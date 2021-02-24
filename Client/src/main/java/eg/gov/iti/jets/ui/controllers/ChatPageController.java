@@ -26,6 +26,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import org.kordamp.ikonli.javafx.FontIcon;
 import services.SingleChatService;
@@ -123,7 +124,10 @@ public class ChatPageController implements Initializable {
         });
 
         saveButton.addEventHandler(ActionEvent.ACTION,(e)->{
-            ChatSaver chatSaver = new ChatSaver(messagesObservableList.subList(0,messagesObservableList.size()));
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("HTML files","*.html","*.htm"));
+            File chosenFile = fileChooser.showSaveDialog(saveButton.getScene().getWindow());
+            ChatSaver chatSaver = new ChatSaver(messagesObservableList.subList(0,messagesObservableList.size()),chosenFile);
         });
 
     }
