@@ -37,7 +37,7 @@ public class LoginPageController implements Initializable {
     AuthenticationService authenticationService;
     ModelsFactory modelsFactory;
     UserProperties userProperties;
-    String [] data;
+    String[] data;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,10 +47,10 @@ public class LoginPageController implements Initializable {
         loginButton.setOnAction(this::login);
         SignUpButton.setOnAction(this::goToSignUp);
         userProperties = new UserProperties();
-        data=new String[2];
+        data = new String[2];
 
-        File file=new File("userProperties.txt");
-        if(file.exists()) {
+        File file = new File("userProperties.txt");
+        if (file.exists()) {
             try {
                 data = userProperties.ReadUserData();
             } catch (IOException e) {
@@ -60,6 +60,8 @@ public class LoginPageController implements Initializable {
             phoneTextField.setText(data[0]);
             if (data.length == 2) {
                 passwordTextField.setText(data[1]);
+            }else{
+                passwordTextField.setText("");
             }
         }
         phoneTextField.addEventFilter(KeyEvent.KEY_TYPED, (e) -> {
@@ -72,6 +74,8 @@ public class LoginPageController implements Initializable {
 
     private void login(Event e) {
         User user = null;
+
+
         failed.setText("");
         if (phoneTextField.getText().equals("") || phoneTextField.getText().length() != 11) {
             phoneTextField.setStyle("-fx-border-color: #D32F2F;");
@@ -81,8 +85,9 @@ public class LoginPageController implements Initializable {
         }
         String phone = phoneTextField.getText();
         String password = passwordTextField.getText();
+        System.out.println("password " + password);
         try {
-            user = authenticationService.login(phone, password,RMIManager.getClientCallBack());
+            user = authenticationService.login(phone, password, RMIManager.getClientCallBack());
             if (user == null) {
                 failed.setText("Either phone or password is incorrect");
                 return;
