@@ -79,8 +79,6 @@ public class NavigationbarControlller implements Initializable {
 
         try {
             authenticationService.signout(modelsFactory.getCurrentUser().getPhoneNumber());
-
-
             StageCoordinator.getInstance().goToLoginPage();
             userProperties.RemovePassFrmFile();
             ModelsFactory.getInstance().resetData();
