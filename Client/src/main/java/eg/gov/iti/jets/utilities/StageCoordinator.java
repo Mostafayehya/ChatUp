@@ -1,13 +1,6 @@
 package eg.gov.iti.jets.utilities;
 
 import eg.gov.iti.jets.io.RMIManager;
-import eg.gov.iti.jets.ui.models.ContactModel;
-import eg.gov.iti.jets.ui.models.UserModel;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import eg.gov.iti.jets.ui.models.ContactModel;
-import eg.gov.iti.jets.io.UserProperties;
-import javafx.animation.*;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -20,10 +13,8 @@ import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import services.AuthenticationService;
 
-
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class StageCoordinator {
@@ -271,7 +262,7 @@ public class StageCoordinator {
                 System.out.println("Created New Scene");
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/UProfile.fxml"));
                 Parent contactsView = fxmlLoader.load();
-                Scene contactsScene = new Scene(contactsView,759.0, 626.0);
+                Scene contactsScene = new Scene(contactsView, 759.0, 626.0);
                 SceneData loginSceneData = new SceneData(fxmlLoader, contactsView, contactsScene);
                 scenes.put("UProfile", loginSceneData);
                 stage.setScene(contactsScene);
@@ -360,7 +351,7 @@ public class StageCoordinator {
                 System.out.println("Created New Scene");
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/InvitationListPage.fxml"));
                 Parent invitationView = fxmlLoader.load();
-                Scene invitationScene = new Scene(invitationView,759.0, 626.0);
+                Scene invitationScene = new Scene(invitationView, 759.0, 626.0);
                 SceneData loginSceneData = new SceneData(fxmlLoader, invitationView, invitationScene);
                 scenes.put("invitations", loginSceneData);
                 stage.setScene(invitationScene);
@@ -374,5 +365,9 @@ public class StageCoordinator {
             Scene invitationScene = invitationSceneData.getScene();
             stage.setScene(invitationScene);
         }
+    }
+
+    public void resetCache() {
+        scenes.clear();
     }
 }

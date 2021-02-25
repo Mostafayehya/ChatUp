@@ -241,6 +241,8 @@ public void removeInvitation(Invitation invitation)
     }
 
     public void resetData() {
+
         currentUser = null;
+        StageCoordinator.getInstance().resetCache();
     }
 }
