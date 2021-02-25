@@ -20,12 +20,6 @@
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
             <children>
                 <Label styleClass="blackHeader" text="Add new contact"/>
-                <CustomTextField prefHeight="25.0" prefWidth="219.0" promptText="Contact name" styleClass="textField"
-                                 fx:id="contactNameTextField">
-                    <left>
-                        <FontIcon iconColor="gray" iconLiteral="mdi2r-rename-box"/>
-                    </left>
-                </CustomTextField>
                 <CustomTextField promptText="Contact phone number" styleClass="textField"
                                  fx:id="contactNumberTextField">
                     <left>

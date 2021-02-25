@@ -13,7 +13,7 @@
             <Insets bottom="20" left="20" right="20" top="20" />
          </padding>
          <children>
-            <Label styleClass="whiteHeader" text="Hey, Friend!" />
+            <Label alignment="CENTER" styleClass="whiteHeader" prefHeight="36.0" prefWidth="195.0" text="Hey, Friend!" />
              <Label prefHeight="34.0" prefWidth="193.0" style="-fx-text-fill: white" text="Enter your personal details to get started" textAlignment="CENTER" wrapText="true" />
             <Button fx:id="SignUpButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" styleClass="transparentButton" text="SignUp" />
          </children></VBox>
@@ -24,7 +24,7 @@
             <Insets bottom="20" left="20" right="20" top="20" />
          </padding>
          <children>
-            <Label style="-fx-font-size: 25; -fx-font-weight: bold; -fx-text-fill: #009688" text="Login to Chat up" />
+            <Label prefHeight="36.0" prefWidth="202.0" style="-fx-font-size: 25; -fx-font-weight: bold; -fx-text-fill: #009688" text="Login to Chat up" />
             <CustomTextField fx:id="phoneTextField" prefHeight="27.0" prefWidth="286.0" promptText="Phone Number" styleClass="textField">
                 <left>
                     <FontIcon iconColor="gray" iconLiteral="mdi2p-phone" />

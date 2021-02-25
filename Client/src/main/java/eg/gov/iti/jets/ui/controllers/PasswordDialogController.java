@@ -70,6 +70,7 @@ public class PasswordDialogController implements Initializable {
                     newConfirmPassField.requestFocus();
                 } else if (!newConfirmPassField.getText().equals(newPassTextField.getText())) {
                     newConfirmPassField.requestFocus();
+                    newConfirmPassField.setStyle("-fx-border-color: red;");
                 } else {
                     newConfirmPassField.setStyle("-fx-border-color: transparent;");
                 }
@@ -82,6 +83,10 @@ public class PasswordDialogController implements Initializable {
 
         });
         changeBtn.addEventHandler(ActionEvent.ACTION,(e)->{
+            if (!newConfirmPassField.getText().equals(newPassTextField.getText())) {
+                newConfirmPassField.setStyle("-fx-border-color: red;");
+                return;
+            }
             try {
                 System.out.println("change");
                 System.out.println(updateService.EditUserPass(new User(userModel.getPhoneNumber(), userModel.getName(), userModel.getEmail(), newPassTextField.getText(), userModel.getPicture(), userModel.getGender(), userModel.getCountry(), userModel.getDateOfBirth(), userModel.getBio(), userModel.getStatus(), userModel.getMode())));

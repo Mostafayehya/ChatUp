@@ -130,7 +130,7 @@ public class ContactModel {
     }
 
     public void setContactModel(ContactModel cm){
-        this.name.set(cm.name.get());
+        this.name.set(cm.getName());
         this.bio.set(cm.getBio());
         this.email.set(cm.getEmail());
         this.image.set(cm.getImage());

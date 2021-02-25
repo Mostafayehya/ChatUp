@@ -126,6 +126,7 @@ public class SignUpPageController implements Initializable {
                     confirmPasswordField.requestFocus();
                 } else if (!confirmPasswordField.getText().equals(passwordTextField.getText())) {
                     confirmPasswordField.requestFocus();
+                    confirmPasswordField.setStyle("-fx-border-color: red;");
                 } else {
                     confirmPasswordField.setStyle("-fx-border-color: transparent;");
                 }
