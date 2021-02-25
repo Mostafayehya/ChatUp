@@ -35,8 +35,6 @@ public class AddNewContactPopupController implements Initializable {
     @FXML
     Button addExtraPhone;
     @FXML
-    CustomTextField contactNameTextField;
-    @FXML
     CustomTextField contactNumberTextField;
     @FXML
     CustomTextField extraPhoneTextField;
@@ -58,21 +56,9 @@ public class AddNewContactPopupController implements Initializable {
         validation = new Validation();
         bind();
         addNewContactButton.setDefaultButton(true);
-        contactNameTextField.setText("");
         contactNumberTextField.setText("");
         extraPhoneTextField.setText("");
         handleContactsService = RMIManager.getHandleContactsService();
-        contactNameTextField.focusedProperty().addListener((observable, wasFocused, isFocused) -> {
-            if (!isFocused) {
-                System.out.println(contactModel);
-                System.out.println(contactModel.getName());
-                if (contactModel.getName().equals("")) {
-                    contactNameTextField.setStyle("-fx-border-color: red");
-                } else {
-                    contactNameTextField.setStyle("-fx-border-color: transparent;");
-                }
-            }
-        });
         contactNumberTextField.addEventFilter(KeyEvent.KEY_TYPED, (e) -> {
             if (!validation.validatePhoneNumber(e.getCharacter()) || contactNumberTextField.getText().length() >= 11) {
                 e.consume();
@@ -151,7 +137,6 @@ public class AddNewContactPopupController implements Initializable {
 
     private void bind() {
         contactNumberTextField.textProperty().bindBidirectional(contactModel.contactPhoneNumberProperty());
-        contactNameTextField.textProperty().bindBidirectional(contactModel.nameProperty());
         StringProperty newExtraPhone = new SimpleStringProperty();
         extraPhoneTextField.textProperty().bindBidirectional(newExtraPhone);
         extraPhones.add(newExtraPhone);
