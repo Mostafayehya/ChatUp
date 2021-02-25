@@ -152,7 +152,7 @@ public class ModelsFactory {
                     stage.show();
                     stage.requestFocus();
                 }
-                Notifications.create()
+              Notifications.create()
                         .title("New Message")
                         .text("You have new message from " + message.getSenderName())
                         .darkStyle()
