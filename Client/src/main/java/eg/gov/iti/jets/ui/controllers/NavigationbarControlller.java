@@ -1,6 +1,7 @@
 package eg.gov.iti.jets.ui.controllers;
 
 import eg.gov.iti.jets.io.RMIManager;
+import eg.gov.iti.jets.io.UserProperties;
 import eg.gov.iti.jets.utilities.ModelsFactory;
 import eg.gov.iti.jets.utilities.StageCoordinator;
 import javafx.fxml.FXML;
@@ -36,14 +37,15 @@ public class NavigationbarControlller implements Initializable {
     AuthenticationService authenticationService;
     ModelsFactory modelsFactory;
 
+    UserProperties userProperties = new UserProperties();
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         stageCoordinator = StageCoordinator.getInstance();
         authenticationService = RMIManager.getAuthenticationService();
-        modelsFactory=ModelsFactory.getInstance();
+        modelsFactory = ModelsFactory.getInstance();
     }
-
-
 
 
     @FXML
@@ -77,6 +79,13 @@ public class NavigationbarControlller implements Initializable {
 
         try {
             authenticationService.signout(modelsFactory.getCurrentUser().getPhoneNumber());
+
+
+            StageCoordinator.getInstance().goToLoginPage();
+            userProperties.RemovePassFrmFile();
+            ModelsFactory.getInstance().resetData();
+
+
         } catch (RemoteException e) {
             e.printStackTrace();
         }

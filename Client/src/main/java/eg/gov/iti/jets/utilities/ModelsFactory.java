@@ -2,6 +2,7 @@ package eg.gov.iti.jets.utilities;
 
 import domains.*;
 import eg.gov.iti.jets.io.RMIManager;
+import eg.gov.iti.jets.io.UserProperties;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.ui.models.UserModel;
 import javafx.application.Platform;
@@ -15,9 +16,11 @@ import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.rmi.RemoteException;
 import java.util.List;
+
 import static eg.gov.iti.jets.utilities.DomainModelConverter.contactListToContactModelList;
 import static eg.gov.iti.jets.utilities.DomainModelConverter.getContactModel;
 
@@ -166,9 +169,9 @@ public class ModelsFactory {
         final String[] contactName = new String[1];
         currentUser.getContacts().forEach(contactModel -> {
             if (contactModel.getContactPhoneNumber().equals(phoneNumber))
-                contactName[0] =contactModel.getName();
+                contactName[0] = contactModel.getName();
         });
-                System.out.println("signout nofication recieved in models factory ");
+        System.out.println("signout nofication recieved in models factory ");
 
         Stage stage = StageCoordinator.getInstance().getStage();
         Platform.runLater(() -> {
@@ -179,13 +182,18 @@ public class ModelsFactory {
             }
             Notifications.create()
                     .title("Notification")
-                    .text("User  " + contactName[0] +"Signed out")
+                    .text("User  " + contactName[0] + "Signed out")
                     .darkStyle()
                     .position(Pos.BOTTOM_RIGHT)
                     .hideAfter(Duration.seconds(1))
                     .showWarning();
+
+
         });
         // TODO remove password from cache .
-        StageCoordinator.getInstance().goToLoginPage();
+    }
+
+    public void resetData() {
+        currentUser = null;
     }
 }

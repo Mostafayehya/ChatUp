@@ -15,6 +15,7 @@ import org.controlsfx.control.Notifications;
 
 
 public class ClientCallbacksImpl extends UnicastRemoteObject implements ClientCallbacks {
+
     public ClientCallbacksImpl() throws RemoteException {
     }
 
@@ -39,8 +40,9 @@ public class ClientCallbacksImpl extends UnicastRemoteObject implements ClientCa
     }
 
     @Override
-    public void notifiySignout(String phoneNumber) {
+    public void notifiySignout(String phoneNumber) throws RemoteException {
         System.out.println("signout notification received in client side");
+
 
         ModelsFactory.getInstance().notifySignout(phoneNumber);
     }
