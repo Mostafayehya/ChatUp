@@ -19,7 +19,7 @@ public class DataBaseConnection {
 
     private DataBaseConnection(){
         try {
-            inputStream=new FileInputStream("src/main/resources/db.properties");
+            inputStream=new FileInputStream("db.properties");
             //System.out.println(getClass().getResource("/db.properties").getPath());
             MysqlDataSource mysqlDataSource = new MysqlDataSource();
             properties.load(inputStream);
