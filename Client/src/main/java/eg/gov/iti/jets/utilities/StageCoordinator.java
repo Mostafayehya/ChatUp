@@ -1,5 +1,9 @@
 package eg.gov.iti.jets.utilities;
 
+import eg.gov.iti.jets.io.RMIManager;
+import eg.gov.iti.jets.ui.models.ContactModel;
+import eg.gov.iti.jets.ui.models.UserModel;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import eg.gov.iti.jets.ui.models.ContactModel;
 import eg.gov.iti.jets.io.UserProperties;
@@ -14,6 +18,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import services.AuthenticationService;
 
 
 import java.io.IOException;
@@ -29,15 +34,15 @@ public class StageCoordinator {
     Popup changUserPassPopup;
     private static StageCoordinator stageCoordinator;
     ModelsFactory modelsFactory;
-    UserProperties userProperties;
 
+
+    AuthenticationService authenticationService;
     private final Map<String, SceneData> scenes = new HashMap<>();
 
     private StageCoordinator() {
         stage = null;
         modelsFactory = ModelsFactory.getInstance();
-        userProperties = new UserProperties();
-       // modelsFactory = ModelsFactory.getInstance();
+        authenticationService = RMIManager.getAuthenticationService();
     }
 
     public void setStage(Stage stage) {
@@ -165,7 +170,7 @@ public class StageCoordinator {
 
     public void switchToChatScreen() {
 
-        if (stage ==null){
+        if (stage == null) {
             throw new RuntimeException("Stage Coordinator must be assigned a stage before being able to use it");
         }
 

@@ -18,16 +18,26 @@ public class UserProperties {
 
         fw.close();
     }
-    public void RemovePassFrmFile() throws IOException {
-        FileReader fr = new FileReader("userProperties.txt");
-        char [] a = new char[50];
-        fr.read(a);
-        String string = new String(a);
-        String lines[] = string.split("\\r?\\n");
-        FileWriter fw = new FileWriter("userProperties.txt");
-        fw.write(lines[0]);
-        fw.close();
-        fr.close();
+    public void RemovePassFrmFile()  {
+        FileReader fr = null;
+        FileWriter fw = null;
+        try {
+            fr = new FileReader("userProperties.txt");
+            char [] a = new char[50];
+            fr.read(a);
+            String string = new String(a);
+            String lines[] = string.split("\\r?\\n");
+             fw = new FileWriter("userProperties.txt");
+            fw.write(lines[0]);
+            fw.close();
+            fr.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 //    public String ReadUserPhone() throws IOException {
 //        FileReader fr = new FileReader("userProperties.txt");

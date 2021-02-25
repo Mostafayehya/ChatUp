@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -22,6 +23,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import domains.Mode;
+import javafx.scene.shape.Rectangle;
 
 
 public class contactProfileController implements Initializable {
@@ -57,6 +59,8 @@ public class contactProfileController implements Initializable {
 
     @FXML
     private Button changephoto, savechanges;
+    @FXML
+    private ImageView myimageview;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -71,22 +75,25 @@ public class contactProfileController implements Initializable {
         savechanges.setDisable(true);
 
 
+        final Rectangle clip = new Rectangle(102,102);
+        clip.setArcHeight(180);
+        clip.setArcWidth(180);
+        //clip.setLayoutX(170);
+        //clip.setLayoutY(75);
+        myimageview.setClip(clip);
         contactModel = modelsFactory.getCurrentSelectedOnlineContact();
-
-        name.setText(contactModel.getName());
-
-        Bio.setText(contactModel.getBio());
-
-        firstname.setText(contactModel.getName());
-
-        email.setText(contactModel.getEmail());
+        name.textProperty().bindBidirectional(contactModel.nameProperty());
+        myimageview.imageProperty().bindBidirectional(contactModel.contactImageProperty());
+        Bio.textProperty().bindBidirectional(contactModel.bioProperty());
+        firstname.textProperty().bindBidirectional(contactModel.nameProperty());
+        email.textProperty().bindBidirectional(contactModel.emailProperty());
 
         Image image;
         image = contactModel.getContactImage();
-        if (image != null) {
+        if (myimageview.getImage() != null) {
 
-            photo.setFill(new ImagePattern(image));
-            photo.setFill(new ImagePattern(contactModel.getContactImage()));
+            // photo.setFill(new ImagePattern(hiddenimage.getImage()));
+            //photo.setFill(new ImagePattern(contactModel.getContactImage()));
         }
         System.out.println(image + "this is the image");
         if (contactModel.getMode().name().equalsIgnoreCase("BUSY")) {

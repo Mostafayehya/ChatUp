@@ -1,8 +1,11 @@
 package eg.gov.iti.jets.services.implementations;
 
 import clientInterface.ClientCallbacks;
+import domains.Contact;
 import domains.FileDomain;
 import domains.User;
+import eg.gov.iti.jets.data.dao.ContactDao;
+import eg.gov.iti.jets.data.dao.ContactDaoImpl;
 import eg.gov.iti.jets.data.dao.UserDao;
 import eg.gov.iti.jets.data.dao.UserDaoImpl;
 import eg.gov.iti.jets.io.Server;
@@ -20,12 +23,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
+import java.util.Map;
 
 public class AuthenticationServiceImpl extends UnicastRemoteObject implements AuthenticationService {
     UserDao userDao;
-
+    ContactDao contactDao;
+    Map<String,
+            ClientCallbacks> onlineUsers;
     public AuthenticationServiceImpl() throws RemoteException {
         userDao = new UserDaoImpl();
+        contactDao = new ContactDaoImpl();
+        onlineUsers = Server.getInstance().getOnlineClients();
+
     }
 
     @Override
@@ -58,6 +68,21 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
         return userDao.insertUser(user);
     }
 
+    @Override
+    public void signout(String phoneNumber)  throws RemoteException{
+
+       List<Contact> allContacts =contactDao.getContacts(phoneNumber);
+
+        for (int i = 0; i <allContacts.size() ; i++) {
+            String phone=allContacts.get(i).getContactPhoneNumber();
+            if(onlineUsers.containsKey(phone)){
+                onlineUsers.get(phone).notifiySignout(phoneNumber);
+            }
+        }
+        Server.getInstance().removeClient(phoneNumber);
+
+    }
+
     public String saveUserprofilePhoto(User user) {
         FileDomain userProfilePhoto = user.getUserPhoto();
         String photoPath;
@@ -74,7 +99,7 @@ public class AuthenticationServiceImpl extends UnicastRemoteObject implements Au
             photoPath = file.getPath();
         } else {
             //default photo
-            photoPath = "D:\\yaraaab\\ChatUp\\Server\\src\\main\\resources\\UserPhotos\\user.jpg";
+            photoPath = "src/main/resources/UserPhotos/user.jpg";
         }
         return photoPath;
     }

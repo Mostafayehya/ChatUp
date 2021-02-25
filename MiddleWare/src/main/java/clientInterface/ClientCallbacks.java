@@ -14,5 +14,6 @@ public interface ClientCallbacks extends Remote {
     void acceptInvitation() throws RemoteException;
     void closeApp() throws RemoteException;
 
+    void notifiySignout(String phoneNumber) throws RemoteException;
 }
 

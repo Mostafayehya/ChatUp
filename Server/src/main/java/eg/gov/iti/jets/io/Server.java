@@ -96,6 +96,7 @@ public class Server {
 
     public Map<String, ClientCallbacks> getOnlineClients() {
         return onlineClients;
+
     }
 
     public void startServer() {
