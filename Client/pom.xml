@@ -34,7 +34,7 @@
                 <configuration>
                     <launcher>hellofx</launcher>
                     <jlinkImageName>hello</jlinkImageName>
-                    <mainClass>Client/eg.gov.iti.jets.Main</mainClass>
+                    <mainClass>Client/eg.gov.iti.jets.Launcher</mainClass>
                 </configuration>
             </plugin>
 
@@ -50,8 +50,9 @@
                         <configuration>
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>eg.gov.iti.jets.Main</mainClass>
+                                    <mainClass>eg.gov.iti.jets.Launcher</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
